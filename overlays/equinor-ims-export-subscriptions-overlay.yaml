@@ -1,0 +1,90 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Equinor IMS Export Subscriptions API
+  version: 1.0.0
+extends: ../openapi/_original/equinor-ims-export-subscriptions-openapi.yml
+actions:
+- target: $.info
+  description: API Evangelist provenance metadata
+  update:
+    x-apievangelist-provider: equinor
+    x-apievangelist-profiled: '2026-10-09'
+- target: $
+  description: Declare derived tags
+  update:
+    tags:
+    - name: root
+      description: Operations on the API root
+    - name: realtime
+      description: Operations under /realtime
+    - name: uid
+      description: Operations under /uid
+    - name: timeseriesid
+      description: Operations under /timeseriesid
+    - name: create
+      description: Operations under /create
+- target: $.paths['/'].post
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - root
+- target: $.paths['/'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - root
+- target: $.paths['/realtime'].post
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - realtime
+- target: $.paths['/realtime'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - realtime
+- target: $.paths['/realtime/timeseriesid/{timeseriesId}'].delete
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - realtime
+- target: $.paths['/realtime/timeseriesid/{timeseriesId}'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - realtime
+- target: $.paths['/realtime/uid/{uId}'].delete
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - realtime
+- target: $.paths['/uid'].post
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - uid
+- target: $.paths['/timeseriesid/{timeseriesId}'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - timeseriesid
+- target: $.paths['/uid/{uId}'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - uid
+- target: $.paths['/create'].post
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - create
+- target: $.paths['/{systemId}'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - root
+- target: $.paths['/realtime/destination'].post
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - realtime

@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/equinor/main/json-schema/equinor-facet-response-schema.json",
+  "title": "FacetResponse",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/equinor-ims-metadata-openapi.yml#/components/schemas/FacetResponse",
+  "type": "object",
+  "properties": {
+    "data": {
+      "$ref": "#/$defs/FacetList"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "FacetItem": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "FacetList": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/$defs/FacetItem"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

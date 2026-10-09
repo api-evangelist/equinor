@@ -1,0 +1,12 @@
+generated: '2026-10-09'
+method: none
+source: https://api.equinor.com/
+name: Equinor Plans
+audience: unclear
+pricing_basis: none
+published: false
+plan_count: 0
+plans: []
+delivery:
+  mode: managed
+note: No pricing or plans are published. Access to the Omnia APIs is granted on request by the Omnia Ind IoT team (OmniaIndIoT@equinor.com / ServiceNow) per https://github.com/equinor/OmniaPlant/wiki/Authentication-&-Authorization; the api.equinor.com portal's public products listing returned an empty list (GET /developer/products?api-version=2022-04-01-preview -> 200, {"value":[]}) on 2026-10-09.

@@ -1,0 +1,517 @@
+openapi: 3.2.0
+info:
+  title: Equinor Locations API
+  version: v1
+  description: 'Operations tagged Locations across 2 of this provider''s published API definitions: equinor-stormgeo-api-contract.yaml, equinor-stormgeo-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.gateway.equinor.com/stormgeo/v1
+tags:
+- name: Locations
+paths:
+  /locations:
+    get:
+      tags:
+      - Locations
+      summary: Returns a list of available locations
+      description: Returns a list of available locations.
+      operationId: get-locations
+      parameters:
+      - name: Filters
+        in: query
+        description: "Filters is a comma-delimited list of {Name}{Operator}{Value} where \n- {Name} is the name of the property. Multiple names (logial OR) can be entered pipe delimited, eg. \"(value1|value2)>10\" will filter items where value1 or value2 is greater than 10.\n- {Value} is the value used for filtering. Multiple values (logial OR) can be entered pipe delimited, eg. \"value@=foo|bar\" will filter items where value contains either \"foo\" or \"bar\".\n- {Operator} is one of the following operators:\n\n| Operator | Name |\n|-|---|\n| == | Equals | \n| != | Not equal | \n| > | Greater than | \n| < | Less than | \n| >= | Greater than or equal to | \n| <= | Less than or equal to | \n| @= | Contains | \n| _= | Starts with | \n| !@= | Does not contain | \n| !_= | Does not start with |"
+        schema:
+          type: string
+      - name: Sorts
+        in: query
+        description: Sorts is a comma delimited ordered list of proprty names to sort by. Prefix with "-" to sort descending.
+        schema:
+          type: string
+      - name: PageSize
+        in: query
+        description: Format - int32. Format - int32. Number of items per page. Default no limit.
+        schema:
+          type: integer
+          format: int32
+      - name: Page
+        in: query
+        description: Format - int32. Format - int32. Number of page to return. Default 1.
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Point'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Point'
+              example:
+              - id: 0
+                customerId: 0
+                name: string
+                longitude: 0
+                latitude: 0
+                timeZone: string
+                expiry: string
+                timeResolution: string
+                lastUpdatedForecast: string
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Point'
+              example:
+              - id: 0
+                customerId: 0
+                name: string
+                longitude: 0
+                latitude: 0
+                timeZone: string
+                expiry: string
+                timeResolution: string
+                lastUpdatedForecast: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+    servers:
+    - url: https://api.gateway.equinor.com/stormgeo/v1
+  /locations/{id}:
+    get:
+      tags:
+      - Locations
+      summary: Returns information on a specific location
+      description: Returns information on a specific location.
+      operationId: get-locations-id
+      parameters:
+      - name: id
+        in: path
+        description: Format - int32. Format - int32. The id of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Point'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Point'
+              example:
+                id: 0
+                customerId: 0
+                name: string
+                longitude: 0
+                latitude: 0
+                timeZone: string
+                expiry: string
+                timeResolution: string
+                lastUpdatedForecast: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Point'
+              example:
+                id: 0
+                customerId: 0
+                name: string
+                longitude: 0
+                latitude: 0
+                timeZone: string
+                expiry: string
+                timeResolution: string
+                lastUpdatedForecast: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: string
+                title: string
+                status: 0
+                detail: string
+                instance: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: string
+                title: string
+                status: 0
+                detail: string
+                instance: string
+    servers:
+    - url: https://api.gateway.equinor.com/stormgeo/v1
+  /locations/{id}/forecasts:
+    get:
+      tags:
+      - Locations
+      summary: Returns all forecasts for a specific location
+      description: Returns all forecasts for a specific location.
+      operationId: get-locations-id-forecasts
+      parameters:
+      - name: id
+        in: path
+        description: Format - int32. Format - int32. The id of the location
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: parameterSetId
+        in: query
+        description: Format - int32. Format - int32. The id of the parameter set to use. Default temperature and wind speed and dirction.
+        schema:
+          type: integer
+          format: int32
+      - name: unitProfileId
+        in: query
+        description: Format - int32. Format - int32. The id of the unit profile to use. Default metric units.
+        schema:
+          type: integer
+          format: int32
+      - name: timeResolution
+        in: query
+        description: Timeresoltion for the forecast. Defines how many timesteps of each duration is returned. Eg. "1=48,3=24" means 48 x 1 hour steps, then 24 x 3 hour steps. Available step sizes are 1,3,6,12 and 24. Just 1 means 1 hour timesteps until 66 hours, just 3 means then 3 hour timesteps until 120 hours, just 6 means then 6 hour timesteps until 168 hours. Eg. "3=24,6" means 24 x 3 hour timesteps, then 16 x 6 hour timesteps (total 168 hours).
+        schema:
+          type: string
+          default: 1,3,6
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Forecast'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Forecast'
+              example:
+              - data: {}
+                type: string
+                timeResolution: string
+                latitude: 0
+                longitude: 0
+                issueTime: string
+                units: {}
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Forecast'
+              example:
+              - data: {}
+                type: string
+                timeResolution: string
+                latitude: 0
+                longitude: 0
+                issueTime: string
+                units: {}
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: string
+                title: string
+                status: 0
+                detail: string
+                instance: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: string
+                title: string
+                status: 0
+                detail: string
+                instance: string
+    servers:
+    - url: https://api.gateway.equinor.com/stormgeo/v1
+  /locations/{id}/forecasts/{forecastType}:
+    get:
+      tags:
+      - Locations
+      summary: Returns a specific forecast for a specific location
+      description: Returns a specific forecast for a specific location.
+      operationId: get-locations-id-forecasts-forecasttype
+      parameters:
+      - name: id
+        in: path
+        description: Format - int32. Format - int32. The id of the location
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: forecastType
+        in: path
+        description: 'The type forecast. Available types: "model", "corrected".'
+        required: true
+        schema:
+          type: string
+      - name: parameterSetId
+        in: query
+        description: Format - int32. Format - int32. The id of the parameter set to use. Default temperature and wind speed and dirction.
+        schema:
+          type: integer
+          format: int32
+      - name: unitProfileId
+        in: query
+        description: Format - int32. Format - int32. The id of the unit profile to use. Default metric units.
+        schema:
+          type: integer
+          format: int32
+      - name: timeResolution
+        in: query
+        description: Timeresoltion for the forecast. Defines how many timesteps of each duration is returned. Eg. "1=48,3=24" means 48 x 1 hour steps, then 24 x 3 hour steps. Available step sizes are 1,3,6,12 and 24. Just 1 means 1 hour timesteps until 66 hours, just 3 means then 3 hour timesteps until 120 hours, just 6 means then 6 hour timesteps until 168 hours. Eg. "3=24,6" means 24 x 3 hour timesteps, then 16 x 6 hour timesteps (total 168 hours).
+        schema:
+          type: string
+          default: 1,3,6
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Forecast'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forecast'
+              example:
+                data: {}
+                type: string
+                timeResolution: string
+                latitude: 0
+                longitude: 0
+                issueTime: string
+                units: {}
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Forecast'
+              example:
+                data: {}
+                type: string
+                timeResolution: string
+                latitude: 0
+                longitude: 0
+                issueTime: string
+                units: {}
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: string
+                title: string
+                status: 0
+                detail: string
+                instance: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: string
+                title: string
+                status: 0
+                detail: string
+                instance: string
+    servers:
+    - url: https://api.gateway.equinor.com/stormgeo/v1
+  /locations/{id}/threshold/{thresholdId}:
+    get:
+      tags:
+      - Locations
+      summary: Returns asset state based on location and threshold
+      operationId: get-locations-id-threshold-thresholdid
+      parameters:
+      - name: id
+        in: path
+        description: Format - int32. Format - int32. The id of the location
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: thresholdId
+        in: path
+        description: Format - int32. Format - int32. The id of the threshold
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: thresholdColors
+        in: query
+        description: Hexacode string, representing the threshold levels, if not empty it will overwrite default colours.
+        schema:
+          type: string
+      - name: timeResolution
+        in: query
+        description: Timeresolution for the forecast. Defines how many timesteps of each duration is returned. Eg. "1=48,3=24" means 48 x 1 hour steps, then 24 x 3 hour steps. Available step sizes are 1,3,6,12 and 24. Just 1 means 1 hour timesteps until 66 hours, just 3 means then 3 hour timesteps until 120 hours, just 6 means then 6 hour timesteps until 168 hours. Eg. "3=24,6" means 24 x 3 hour timesteps, then 16 x 6 hour timesteps (total 168 hours).
+        schema:
+          type: string
+          default: 1,3,6
+      responses:
+        '200':
+          description: Success
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+    servers:
+    - url: https://api.gateway.equinor.com/stormgeo/v1
+components:
+  schemas:
+    Forecast:
+      type: object
+      properties:
+        data: {}
+        type:
+          type:
+          - string
+          - 'null'
+        timeResolution:
+          type:
+          - string
+          - 'null'
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        issueTime:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        units:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+      additionalProperties: false
+    Point:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        customerId:
+          type: integer
+          format: int32
+        name:
+          type:
+          - string
+          - 'null'
+        longitude:
+          type: number
+          format: double
+        latitude:
+          type: number
+          format: double
+        timeZone:
+          type:
+          - string
+          - 'null'
+        expiry:
+          type: string
+          format: date-time
+        timeResolution:
+          type:
+          - string
+          - 'null'
+        lastUpdatedForecast:
+          type:
+          - string
+          - 'null'
+          format: date-time
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+x-refined-from:
+- equinor-stormgeo-api-contract.yaml
+- equinor-stormgeo-openapi.yml

@@ -1,0 +1,419 @@
+openapi: 3.2.0
+info:
+  title: BlueBook Public Table A1s API
+  description: Public read-only endpoints for BlueBook Table A1.
+  version: v1
+servers:
+- url: https://api.gateway.equinor.com/bluebook
+- url: https://api-ncc.gateway.equinor.com/bluebook
+security:
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: Table A1s
+paths:
+  /table-a1s:
+    get:
+      operationId: GetTableA1Versions
+      summary: /table-a1s
+      description: Returns a list of available Table A1 versions (summary view).
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableA1SummaryResponseTableA1ListResponse'
+              example:
+                items:
+                - version: FINAL V16.0_2025-09-15
+                  date: '2025-09-15'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: string
+                title: string
+                status: 0
+                detail: string
+                instance: string
+      x-source: https://api.equinor.com/developer/apis/recap-bluebook-v1/operations/GetTableA1Versions?api-version=2022-04-01-preview
+      tags:
+      - Table A1s
+  /table-a1s/{version}:
+    get:
+      operationId: GetTableA1
+      summary: /table-a1s/{version}
+      description: Returns full details for a specific Table A1 version.
+      parameters:
+      - name: version
+        in: path
+        required: true
+        description: The version identifier of the Table A1 to retrieve.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableA1Response'
+              example:
+                version: FINAL V16.0_2025-09-15
+                date: '2025-09-15'
+                datasets:
+                - datasetId: '01.01'
+                  npdRequirement: Mandatory
+                  dataset: Composite
+                  definition: "\n            The Composite Log should contain all the primary measurements made in a given well/wellbore. \n            A primary measurement may be composed of data taken from different physical tools (e.g. a combination of wireline and MWD measurements).\n            "
+                  unloadFilePath: WELL_qqqq_bb-i-nn/WB_sRrYyHTt_xxxx-Pz/COMPOSITE
+                  title:
+                  - string
+                  exampleOfFilenames:
+                  - string
+                  explanationOrExamples: 'Where: # is used for ordering the data files sequentially.'
+                  infoItemGroupType: WELL LOG
+                  infoItemType: COMPOSITE
+                  description: <WBN> Composite Log Data. where WBN = Wellbore Name
+                  logTitle: WLC_COMPOSITE
+                  creationProcess: PAP
+                  dataDomain:
+                  - WL.LOG
+                  dataOrganisation: DATA
+                  publicAccess: 2 years
+                  publicCalculationBasedOn: WB Completed Date
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: string
+                title: string
+                status: 0
+                detail: string
+                instance: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: string
+                title: string
+                status: 0
+                detail: string
+                instance: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: string
+                title: string
+                status: 0
+                detail: string
+                instance: string
+      x-source: https://api.equinor.com/developer/apis/recap-bluebook-v1/operations/GetTableA1?api-version=2022-04-01-preview
+      tags:
+      - Table A1s
+  /table-a1s/latest:
+    get:
+      operationId: GetLatestTableA1
+      summary: /table-a1s/latest
+      description: Returns the latest Table A1 version based on the most recent date.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableA1Response'
+              example:
+                version: FINAL V16.0_2025-09-15
+                date: '2025-09-15'
+                datasets:
+                - datasetId: '01.01'
+                  npdRequirement: Mandatory
+                  dataset: Composite
+                  definition: "\n            The Composite Log should contain all the primary measurements made in a given well/wellbore. \n            A primary measurement may be composed of data taken from different physical tools (e.g. a combination of wireline and MWD measurements).\n            "
+                  unloadFilePath: WELL_qqqq_bb-i-nn/WB_sRrYyHTt_xxxx-Pz/COMPOSITE
+                  title:
+                  - string
+                  exampleOfFilenames:
+                  - string
+                  explanationOrExamples: 'Where: # is used for ordering the data files sequentially.'
+                  infoItemGroupType: WELL LOG
+                  infoItemType: COMPOSITE
+                  description: <WBN> Composite Log Data. where WBN = Wellbore Name
+                  logTitle: WLC_COMPOSITE
+                  creationProcess: PAP
+                  dataDomain:
+                  - WL.LOG
+                  dataOrganisation: DATA
+                  publicAccess: 2 years
+                  publicCalculationBasedOn: WB Completed Date
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: string
+                title: string
+                status: 0
+                detail: string
+                instance: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: string
+                title: string
+                status: 0
+                detail: string
+                instance: string
+      x-source: https://api.equinor.com/developer/apis/recap-bluebook-v1/operations/GetLatestTableA1?api-version=2022-04-01-preview
+      tags:
+      - Table A1s
+components:
+  schemas:
+    DatasetResponse:
+      required:
+      - dataset
+      - datasetId
+      - unloadFilePath
+      type: object
+      properties:
+        datasetId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier for the dataset as defined in Blue Book Table A-1 (e.g., "01.01", "02.03").
+          example: '01.01'
+        npdRequirement:
+          type:
+          - string
+          - 'null'
+          description: Indicates whether this dataset is "Mandatory" or "Optional" per NPD regulations.
+          example: Mandatory
+        dataset:
+          type:
+          - string
+          - 'null'
+          description: The short name of the dataset type (e.g., "Composite", "Raw Core (Conventional)").
+          example: Composite
+        definition:
+          type:
+          - string
+          - 'null'
+          description: A description of what the dataset contains and its purpose within the Diskos NDR.
+          example: "\n            The Composite Log should contain all the primary measurements made in a given well/wellbore. \n            A primary measurement may be composed of data taken from different physical tools (e.g. a combination of wireline and MWD measurements).\n            "
+        unloadFilePath:
+          type:
+          - string
+          - 'null'
+          description: The folder path template used when uploading to Diskos.
+          example: WELL_qqqq_bb-i-nn/WB_sRrYyHTt_xxxx-Pz/COMPOSITE
+        title:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: 'Accepted file name patterns and formats for this dataset.
+
+            NPD prioritizes the first listed format; other formats will not be checked for readability.'
+        exampleOfFilenames:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Concrete examples of valid filenames for this dataset.
+        explanationOrExamples:
+          type:
+          - string
+          - 'null'
+          description: 'Additional explanation or examples clarifying naming conventions, depth references,
+
+            units, or special conditions.'
+          example: 'Where: # is used for ordering the data files sequentially.'
+        infoItemGroupType:
+          type:
+          - string
+          - 'null'
+          description: The Diskos INFO ITEM GROUP TYPE.
+          example: WELL LOG
+        infoItemType:
+          type:
+          - string
+          - 'null'
+          description: The Diskos INFO ITEM TYPE.
+          example: COMPOSITE
+        description:
+          type:
+          - string
+          - 'null'
+          description: 'The dataset description template as it appears in the Diskos NDR, typically including
+
+            a wellbore name placeholder.'
+          example: <WBN> Composite Log Data. where WBN = Wellbore Name
+        logTitle:
+          type:
+          - string
+          - 'null'
+          description: 'The log curve title used for live "ONLINE" logs in Diskos.
+
+            Only applicable for log-type datasets.'
+          example: WLC_COMPOSITE
+        creationProcess:
+          type:
+          - string
+          - 'null'
+          description: The dataset creation process code in Diskos.
+          example: PAP
+        dataDomain:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: The Diskos data domain classification.
+          example:
+          - WL.LOG
+        dataOrganisation:
+          type:
+          - string
+          - 'null'
+          description: The data organisation type in Diskos.
+          example: DATA
+        publicAccess:
+          type:
+          - string
+          - 'null'
+          description: The public access confidentiality period after which NOD releases the data (e.g., "2 years", "5 years").
+          example: 2 years
+        publicCalculationBasedOn:
+          type:
+          - string
+          - 'null'
+          description: The reference date used to calculate when the dataset becomes public.
+          example: WB Completed Date
+      additionalProperties: false
+      description: "Represents a dataset entry from the Norwegian Offshore Directorate (NOD) Blue Book Table A-1,\ndescribing attributes for digital well data reporting to the Diskos National Data Repository (NDR).\n            \nEach dataset corresponds to a specific type of well data deliverable and defines how it should be named, \nstructured, and reported to Diskos."
+    TableA1Response:
+      required:
+      - version
+      type: object
+      properties:
+        version:
+          type:
+          - string
+          - 'null'
+          description: The version number of this Table A-1 release (e.g., "16.0").
+          example: FINAL V16.0_2025-09-15
+        date:
+          type: string
+          description: The release date of this version, and the date from which it is applicable for well data reporting.
+          format: date
+          example: '2025-09-15'
+        datasets:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DatasetResponse'
+          description: 'The list of dataset definitions included in this version of Table A-1.
+
+            Each entry describes a specific well data deliverable, its Diskos naming conventions,
+
+            file formats, and NPD requirements.'
+      additionalProperties: false
+      description: 'Represents a versioned snapshot of Blue Book Table A-1, containing all dataset definitions
+
+        for digital well data reporting to the Diskos National Data Repository (NDR).'
+    TableA1SummaryResponseTableA1ListResponse:
+      required:
+      - items
+      type: object
+      properties:
+        items:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/TableA1SummaryResponse'
+          description: The list of items returned by the API.
+      additionalProperties: false
+      description: A generic wrapper for list responses returned by the Blue Book API.
+    TableA1SummaryResponse:
+      required:
+      - version
+      type: object
+      properties:
+        version:
+          type:
+          - string
+          - 'null'
+          description: The version number of this Table A-1 release (e.g., "16.0").
+          example: FINAL V16.0_2025-09-15
+        date:
+          type: string
+          description: The release date of this version, and the date from which it is applicable for well data reporting.
+          format: date
+          example: '2025-09-15'
+      additionalProperties: false
+      description: 'A lightweight summary of a Blue Book Table A-1 version, used when listing available versions
+
+        without returning the full dataset definitions.'
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      name: Ocp-Apim-Subscription-Key
+      in: header
+    apiKeyQuery:
+      type: apiKey
+      name: subscription-key
+      in: query
+x-generated-from: apim-developer-portal-data
+x-source: https://api.equinor.com/api-details#api=recap-bluebook-v1
+x-generated-note: The anonymous APIM export at https://api.equinor.com/developer/apis/recap-bluebook-v1?export=true&format=openapi%2Bjson returns this document with empty paths; paths were assembled verbatim (by script) from the same portal's anonymous operations and schemas endpoints, saved in openapi/_original/.

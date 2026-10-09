@@ -1,0 +1,1945 @@
+{
+ "api": {
+  "id": "iiot-ae-api-v1",
+  "name": "Alarm & Events API",
+  "description": "API for Alarm and Events",
+  "subscriptionRequired": false,
+  "path": "iiot/ae",
+  "protocols": [
+   "https"
+  ],
+  "tagDescriptions": [],
+  "authenticationSettings": {
+   "oAuth2AuthenticationSettings": [
+    {
+     "authorizationServerId": "iiot-public-client-ae",
+     "scope": "",
+     "authorizationServer": {
+      "id": "iiot-public-client-ae",
+      "name": "iiot-public-client-ae",
+      "description": "Public client for Omnia IIoT ",
+      "clientRegistrationEndpoint": "https://localhost",
+      "authorizationEndpoint": "https://login.microsoftonline.com/3aa4a235-b6e2-48d5-9195-7fcf05b459b0/oauth2/v2.0/authorize",
+      "authorizationMethods": [
+       "GET"
+      ],
+      "clientAuthenticationMethod": [
+       "Body"
+      ],
+      "tokenBodyParameters": null,
+      "tokenEndpoint": "https://login.microsoftonline.com/3aa4a235-b6e2-48d5-9195-7fcf05b459b0/oauth2/v2.0/token",
+      "useInTestConsole": true,
+      "useInApiDocumentation": false,
+      "supportState": false,
+      "defaultScope": "6df18f43-f499-4470-9d94-52b01698620d/user_impersonation",
+      "grantTypes": [
+       "implicit"
+      ],
+      "bearerTokenSendingMethods": [
+       "authorizationHeader"
+      ],
+      "clientId": "67da184b-6bde-43fd-a155-30ed4ff162d2"
+     }
+    }
+   ],
+   "openidAuthenticationSettings": [],
+   "subscriptionKeyRequired": false
+  },
+  "subscriptionKeyParameterNames": {
+   "header": "Ocp-Apim-Subscription-Key",
+   "query": "subscription-key",
+   "bearer": null
+  },
+  "contact": {
+   "name": "Omnia Industrial IoT team",
+   "url": null,
+   "email": "OmniaIndIoT@equinor.com"
+  },
+  "apiVersion": "v1",
+  "apiVersionSetId": "iiot-ae-api"
+ },
+ "operations": [
+  {
+   "id": "CreateSubscriptions",
+   "name": "Creates stream subscriptions",
+   "method": "POST",
+   "urlTemplate": "/streaming/subscriptions/{facility}",
+   "templateParameters": [
+    {
+     "name": "facility",
+     "description": "Format - string. Facility of AE to create streaming subscription",
+     "type": "string",
+     "required": true,
+     "values": [],
+     "schemaId": "672388efbe411409a43eea66",
+     "typeName": "StreamingSubscriptions-facility-PostRequest"
+    }
+   ],
+   "description": "Creates stream subscriptions",
+   "request": {
+    "queryParameters": [],
+    "headers": [],
+    "representations": []
+   },
+   "responses": [
+    {
+     "statusCode": 200,
+     "description": "OK",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 400,
+     "description": "Bad Request",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 401,
+     "description": "Unauthorized",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 403,
+     "description": "Forbidden",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 404,
+     "description": "Not Found",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 500,
+     "description": "Internal Server Error",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 504,
+     "description": "Gateway Timeout",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    }
+   ]
+  },
+  {
+   "id": "DeleteSubscription",
+   "name": "Delete a streaming subscription.",
+   "method": "DELETE",
+   "urlTemplate": "/streaming/subscriptions/{facility}",
+   "templateParameters": [
+    {
+     "name": "facility",
+     "description": "Format - string. Facility of AE to delete streaming subscription",
+     "type": "string",
+     "required": true,
+     "values": [],
+     "schemaId": "672388efbe411409a43eea66",
+     "typeName": "StreamingSubscriptions-facility-DeleteRequest"
+    }
+   ],
+   "description": "Delete a streaming subscription.",
+   "request": {
+    "queryParameters": [],
+    "headers": [],
+    "representations": []
+   },
+   "responses": [
+    {
+     "statusCode": 200,
+     "description": "OK",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 400,
+     "description": "Bad Request",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 401,
+     "description": "Unauthorized",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 403,
+     "description": "Forbidden",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 404,
+     "description": "Not Found",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 500,
+     "description": "Internal Server Error",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 504,
+     "description": "Gateway Timeout",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    }
+   ]
+  },
+  {
+   "id": "GetEvents",
+   "name": "Retrieves a list of all events. Parameters can be used to select a subset of events. Note that maximum result set size is 100.000 items.",
+   "method": "GET",
+   "urlTemplate": "/events/{facility}?sourceName={sourceName}",
+   "templateParameters": [
+    {
+     "name": "facility",
+     "description": "Name of the facility which to retrieve data.",
+     "type": "string",
+     "required": true,
+     "values": [],
+     "schemaId": "672388efbe411409a43eea66",
+     "typeName": "Events-facility-GetRequest"
+    },
+    {
+     "name": "sourceName",
+     "description": "Source name of event from which to retrieve data.",
+     "type": "string",
+     "required": true,
+     "values": [],
+     "schemaId": "672388efbe411409a43eea66",
+     "typeName": "Events-facility-GetRequest-1"
+    }
+   ],
+   "description": "Retrieves a list of all events. Parameters can be used to select a subset of events. Note that maximum result set size is 100.000 items.",
+   "request": {
+    "queryParameters": [
+     {
+      "name": "startTime",
+      "description": "Format - date-time (as date-time in RFC3339). Start of data window. Defaults to 1970.",
+      "type": "string",
+      "values": [],
+      "schemaId": "672388efbe411409a43eea66",
+      "typeName": "Events-facility-GetRequest-2"
+     },
+     {
+      "name": "endTime",
+      "description": "Format - date-time (as date-time in RFC3339). End of data window. Defaults to now.",
+      "type": "string",
+      "values": [],
+      "schemaId": "672388efbe411409a43eea66",
+      "typeName": "Events-facility-GetRequest-3"
+     },
+     {
+      "name": "sort",
+      "description": "Defaults to asc",
+      "type": "string",
+      "values": [
+       "Asc",
+       "Desc"
+      ],
+      "schemaId": "672388efbe411409a43eea66",
+      "typeName": "Sort"
+     },
+     {
+      "name": "includeOtherFields",
+      "description": "Determines whether or not to include other fields.",
+      "type": "boolean",
+      "defaultValue": "false",
+      "values": [],
+      "schemaId": "672388efbe411409a43eea66",
+      "typeName": "Events-facility-GetRequest-4"
+     },
+     {
+      "name": "description",
+      "description": "Filters the tag result on the 'description' field. Can be specified multiple times to include more matches.",
+      "type": "string",
+      "values": [],
+      "schemaId": "672388efbe411409a43eea66",
+      "typeName": "Events-facility-GetRequest-5"
+     },
+     {
+      "name": "eventType",
+      "description": "Filters the tag result on the 'eventType' field. Can be specified multiple times to include more matches.",
+      "type": "string",
+      "values": [],
+      "schemaId": "672388efbe411409a43eea66",
+      "typeName": "Events-facility-GetRequest-6"
+     },
+     {
+      "name": "eventCategory",
+      "description": "Filters the tag result on the 'eventCategory' field. Can be specified multiple times to include more matches.",
+      "type": "string",
+      "values": [],
+      "schemaId": "672388efbe411409a43eea66",
+      "typeName": "Events-facility-GetRequest-7"
+     },
+     {
+      "name": "message",
+      "description": "Filters the tag result on the 'message' field. Can be specified multiple times to include more matches.",
+      "type": "string",
+      "values": [],
+      "schemaId": "672388efbe411409a43eea66",
+      "typeName": "Events-facility-GetRequest-8"
+     },
+     {
+      "name": "severity",
+      "description": "Format - int32. Filters the tag result on the 'severity' field. Can be specified multiple times to include more matches.",
+      "type": "integer",
+      "values": [],
+      "schemaId": "672388efbe411409a43eea66",
+      "typeName": "Events-facility-GetRequest-9"
+     },
+     {
+      "name": "priority",
+      "description": "Format - int32. Filters the tag result on the 'priority' field. Can be specified multiple times to include more matches.",
+      "type": "integer",
+      "values": [],
+      "schemaId": "672388efbe411409a43eea66",
+      "typeName": "Events-facility-GetRequest-10"
+     },
+     {
+      "name": "condition",
+      "description": "Filters the tag result on the 'condition' field. Can be specified multiple times to include more matches.",
+      "type": "string",
+      "values": [],
+      "schemaId": "672388efbe411409a43eea66",
+      "typeName": "Events-facility-GetRequest-11"
+     },
+     {
+      "name": "alarmState",
+      "description": "Filters the tag result on the 'alarmState' field. Can be specified multiple times to include more matches.",
+      "type": "string",
+      "values": [],
+      "schemaId": "672388efbe411409a43eea66",
+      "typeName": "Events-facility-GetRequest-12"
+     },
+     {
+      "name": "ackedState",
+      "description": "Filters the tag result on the 'ackedState' field. Can be specified multiple times to include more matches.",
+      "type": "boolean",
+      "values": [],
+      "schemaId": "672388efbe411409a43eea66",
+      "typeName": "Events-facility-GetRequest-13"
+     },
+     {
+      "name": "activeState",
+      "description": "Filters the tag result on the 'activeState' field. Can be specified multiple times to include more matches.",
+      "type": "boolean",
+      "values": [],
+      "schemaId": "672388efbe411409a43eea66",
+      "typeName": "Events-facility-GetRequest-14"
+     },
+     {
+      "name": "suppressedOrShelved",
+      "description": "Filters the tag result on the 'suppressedOrShelved' field. Can be specified multiple times to include more matches.",
+      "type": "boolean",
+      "values": [],
+      "schemaId": "672388efbe411409a43eea66",
+      "typeName": "Events-facility-GetRequest-15"
+     },
+     {
+      "name": "node",
+      "description": "Filters the tag result on the 'node' field. Can be specified multiple times to include more matches.",
+      "type": "string",
+      "values": [],
+      "schemaId": "672388efbe411409a43eea66",
+      "typeName": "Events-facility-GetRequest-16"
+     },
+     {
+      "name": "processArea",
+      "description": "Filters the tag result on the 'processArea' field. Can be specified multiple times to include more matches.",
+      "type": "string",
+      "values": [],
+      "schemaId": "672388efbe411409a43eea66",
+      "typeName": "Events-facility-GetRequest-17"
+     },
+     {
+      "name": "actiontime",
+      "description": "Format - date-time (as date-time in RFC3339). Filters the tag result on the 'actiontime' field. Can be specified multiple times to include more matches.",
+      "type": "string",
+      "values": [],
+      "schemaId": "672388efbe411409a43eea66",
+      "typeName": "Events-facility-GetRequest-18"
+     },
+     {
+      "name": "limit",
+      "description": "Specifies how many records you want returned. Cannot be more than 100000.",
+      "type": "number",
+      "values": [],
+      "schemaId": "672388efbe411409a43eea66",
+      "typeName": "Events-facility-GetRequest-19"
+     },
+     {
+      "name": "continuationToken",
+      "description": "Can be passed to retrieve the next page of results if there are any.",
+      "type": "string",
+      "values": [],
+      "schemaId": "672388efbe411409a43eea66",
+      "typeName": "Events-facility-GetRequest-20"
+     }
+    ],
+    "headers": [],
+    "representations": []
+   },
+   "responses": [
+    {
+     "statusCode": 200,
+     "description": "OK",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string",
+          "items": [
+           {
+            "timestamp": "string",
+            "sourceName": "string",
+            "description": "string",
+            "eventType": "string",
+            "eventCategory": "string",
+            "message": "string",
+            "severity": 0,
+            "priority": 0,
+            "condition": "string",
+            "alarmState": "string",
+            "ackedState": true,
+            "activeState": true,
+            "suppressedOrShelved": true,
+            "node": "string",
+            "processArea": "string",
+            "actiontime": "string",
+            "otherFields": {}
+           }
+          ],
+          "totalCount": 0,
+          "continuationToken": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "EventDto"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 400,
+     "description": "Bad Request",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 401,
+     "description": "Unauthorized",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 403,
+     "description": "Forbidden",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 404,
+     "description": "Not Found",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 429,
+     "description": "Too Many Requests",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 500,
+     "description": "Internal Server Error",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 504,
+     "description": "Gateway Timeout",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    }
+   ]
+  },
+  {
+   "id": "GetSources",
+   "name": "Retrieves a list of all facilies enabled for Alarm and Events.",
+   "method": "GET",
+   "urlTemplate": "/sources",
+   "templateParameters": [],
+   "description": "Retrieves a list of all facilies enabled for Alarm and Events.",
+   "request": {
+    "queryParameters": [],
+    "headers": [],
+    "representations": []
+   },
+   "responses": [
+    {
+     "statusCode": 200,
+     "description": "OK",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "items": [
+           {
+            "facility": "string"
+           }
+          ]
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "SourceModelDto"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 400,
+     "description": "Bad Request",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 401,
+     "description": "Unauthorized",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 403,
+     "description": "Forbidden",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 404,
+     "description": "Not Found",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 429,
+     "description": "Too Many Requests",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 500,
+     "description": "Internal Server Error",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 504,
+     "description": "Gateway Timeout",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    }
+   ]
+  },
+  {
+   "id": "GetSubscriptions",
+   "name": "Retrieves a list of all streaming subscriptions.",
+   "method": "GET",
+   "urlTemplate": "/streaming/subscriptions",
+   "templateParameters": [],
+   "description": "Retrieves a list of all streaming subscriptions.",
+   "request": {
+    "queryParameters": [],
+    "headers": [],
+    "representations": []
+   },
+   "responses": [
+    {
+     "statusCode": 200,
+     "description": "OK",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "data": {
+           "items": [
+            {
+             "facility": "string"
+            }
+           ]
+          }
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "SubscriptionListResponse"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 400,
+     "description": "Bad Request",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 401,
+     "description": "Unauthorized",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 403,
+     "description": "Forbidden",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 404,
+     "description": "Not Found",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 500,
+     "description": "Internal Server Error",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 504,
+     "description": "Gateway Timeout",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    }
+   ]
+  },
+  {
+   "id": "GetCounts",
+   "name": "Retrieves a list of count for events by priority. Parameters can be used to select a subset of events. Max 6 months timewindow.",
+   "method": "GET",
+   "urlTemplate": "/events/{facility}/count",
+   "templateParameters": [
+    {
+     "name": "facility",
+     "description": "Name of the facility which to retrieve data.",
+     "type": "string",
+     "required": true,
+     "values": [],
+     "schemaId": "672388efbe411409a43eea66",
+     "typeName": "Events-facility-CountGetRequest"
+    }
+   ],
+   "description": "Retrieves a list of count for events by priority. Parameters can be used to select a subset of events. Max 6 months timewindow.",
+   "request": {
+    "queryParameters": [
+     {
+      "name": "startTime",
+      "description": "Format - date-time (as date-time in RFC3339). Start of data window. Defaults to 1970. Rounded down to nearest interval.",
+      "type": "string",
+      "values": [],
+      "schemaId": "672388efbe411409a43eea66",
+      "typeName": "Events-facility-CountGetRequest-1"
+     },
+     {
+      "name": "endTime",
+      "description": "Format - date-time (as date-time in RFC3339). End of data window. Defaults to now. Rounded up to nearest interval.",
+      "type": "string",
+      "values": [],
+      "schemaId": "672388efbe411409a43eea66",
+      "typeName": "Events-facility-CountGetRequest-2"
+     }
+    ],
+    "headers": [],
+    "representations": []
+   },
+   "responses": [
+    {
+     "statusCode": 200,
+     "description": "OK",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string",
+          "items": [
+           {
+            "timestamp": "string",
+            "count": 0,
+            "priority": 0
+           }
+          ]
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "CountDto"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 400,
+     "description": "Bad Request",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 401,
+     "description": "Unauthorized",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 403,
+     "description": "Forbidden",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 404,
+     "description": "Not Found",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 429,
+     "description": "Too Many Requests",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 500,
+     "description": "Internal Server Error",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 504,
+     "description": "Gateway Timeout",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    }
+   ]
+  },
+  {
+   "id": "SetRealTimeDestination",
+   "name": "Set stream destination (Azure EventHub only)",
+   "method": "POST",
+   "urlTemplate": "/streaming/destination",
+   "templateParameters": [],
+   "description": "Set stream destination (Azure EventHub only)",
+   "request": {
+    "description": "Azure EventHub connection string.",
+    "queryParameters": [],
+    "headers": [],
+    "representations": [
+     {
+      "contentType": "application/json",
+      "examples": {
+       "default": {
+        "value": {
+         "connectionString": "string"
+        }
+       }
+      },
+      "schemaId": "672388efbe411409a43eea66",
+      "typeName": "DestinationSetModel"
+     },
+     {
+      "contentType": "text/json",
+      "examples": {
+       "default": {
+        "value": {
+         "connectionString": "string"
+        }
+       }
+      },
+      "schemaId": "672388efbe411409a43eea66",
+      "typeName": "DestinationSetModel"
+     },
+     {
+      "contentType": "application/*+json",
+      "examples": {
+       "default": {
+        "value": {
+         "connectionString": "string"
+        }
+       }
+      },
+      "schemaId": "672388efbe411409a43eea66",
+      "typeName": "DestinationSetModel"
+     }
+    ]
+   },
+   "responses": [
+    {
+     "statusCode": 200,
+     "description": "OK",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 400,
+     "description": "Bad Request",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 401,
+     "description": "Unauthorized",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 403,
+     "description": "Forbidden",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 404,
+     "description": "Not Found",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 500,
+     "description": "Internal Server Error",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 504,
+     "description": "Gateway Timeout",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "672388efbe411409a43eea66",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    }
+   ]
+  }
+ ],
+ "schemas": [
+  {
+   "id": "672388efbe411409a43eea66",
+   "contentType": "application/vnd.oai.openapi.components+json",
+   "document": {
+    "components": {
+     "schemas": {
+      "CountDto": {
+       "type": "object",
+       "properties": {
+        "statusCode": {
+         "type": "integer",
+         "format": "int32",
+         "nullable": true
+        },
+        "message": {
+         "type": "string",
+         "nullable": true
+        },
+        "traceId": {
+         "type": "string",
+         "nullable": true
+        },
+        "items": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/CountModel"
+         },
+         "nullable": true
+        }
+       },
+       "additionalProperties": false
+      },
+      "CountModel": {
+       "type": "object",
+       "properties": {
+        "timestamp": {
+         "type": "string",
+         "format": "date-time",
+         "nullable": true
+        },
+        "count": {
+         "type": "integer",
+         "format": "int32",
+         "nullable": true
+        },
+        "priority": {
+         "type": "integer",
+         "format": "int32",
+         "nullable": true
+        }
+       },
+       "additionalProperties": false
+      },
+      "DestinationSetModel": {
+       "required": [
+        "connectionString"
+       ],
+       "type": "object",
+       "properties": {
+        "connectionString": {
+         "minLength": 1,
+         "type": "string"
+        }
+       },
+       "additionalProperties": false
+      },
+      "EventDto": {
+       "type": "object",
+       "properties": {
+        "statusCode": {
+         "type": "integer",
+         "format": "int32",
+         "nullable": true
+        },
+        "message": {
+         "type": "string",
+         "nullable": true
+        },
+        "traceId": {
+         "type": "string",
+         "nullable": true
+        },
+        "items": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/EventModel"
+         },
+         "nullable": true
+        },
+        "totalCount": {
+         "type": "integer",
+         "format": "int64",
+         "nullable": true
+        },
+        "continuationToken": {
+         "type": "string",
+         "nullable": true
+        }
+       },
+       "additionalProperties": false
+      },
+      "EventModel": {
+       "type": "object",
+       "properties": {
+        "timestamp": {
+         "type": "string",
+         "format": "date-time",
+         "nullable": true
+        },
+        "sourceName": {
+         "type": "string",
+         "nullable": true
+        },
+        "description": {
+         "type": "string",
+         "nullable": true
+        },
+        "eventType": {
+         "type": "string",
+         "nullable": true
+        },
+        "eventCategory": {
+         "type": "string",
+         "nullable": true
+        },
+        "message": {
+         "type": "string",
+         "nullable": true
+        },
+        "severity": {
+         "type": "integer",
+         "format": "int32",
+         "nullable": true
+        },
+        "priority": {
+         "type": "integer",
+         "format": "int32",
+         "nullable": true
+        },
+        "condition": {
+         "type": "string",
+         "nullable": true
+        },
+        "alarmState": {
+         "type": "string",
+         "nullable": true
+        },
+        "ackedState": {
+         "type": "boolean",
+         "nullable": true
+        },
+        "activeState": {
+         "type": "boolean",
+         "nullable": true
+        },
+        "suppressedOrShelved": {
+         "type": "boolean",
+         "nullable": true
+        },
+        "node": {
+         "type": "string",
+         "nullable": true
+        },
+        "processArea": {
+         "type": "string",
+         "nullable": true
+        },
+        "actiontime": {
+         "type": "string",
+         "format": "date-time",
+         "nullable": true
+        },
+        "otherFields": {
+         "type": "object",
+         "additionalProperties": {},
+         "nullable": true
+        }
+       },
+       "additionalProperties": false
+      },
+      "MessageModel": {
+       "type": "object",
+       "properties": {
+        "statusCode": {
+         "type": "integer",
+         "format": "int32"
+        },
+        "message": {
+         "type": "string",
+         "nullable": true
+        },
+        "traceId": {
+         "type": "string",
+         "nullable": true
+        }
+       },
+       "additionalProperties": false
+      },
+      "Sort": {
+       "enum": [
+        "Asc",
+        "Desc"
+       ],
+       "type": "string"
+      },
+      "SourceModel": {
+       "type": "object",
+       "properties": {
+        "facility": {
+         "type": "string",
+         "nullable": true
+        }
+       },
+       "additionalProperties": false
+      },
+      "SourceModelDto": {
+       "type": "object",
+       "properties": {
+        "items": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/SourceModel"
+         },
+         "nullable": true
+        }
+       },
+       "additionalProperties": false
+      },
+      "SubscriptionItem": {
+       "type": "object",
+       "properties": {
+        "facility": {
+         "type": "string",
+         "nullable": true
+        }
+       },
+       "additionalProperties": false
+      },
+      "SubscriptionList": {
+       "type": "object",
+       "properties": {
+        "items": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/SubscriptionItem"
+         },
+         "nullable": true
+        }
+       },
+       "additionalProperties": false
+      },
+      "SubscriptionListResponse": {
+       "type": "object",
+       "properties": {
+        "data": {
+         "$ref": "#/components/schemas/SubscriptionList"
+        }
+       },
+       "additionalProperties": false
+      },
+      "Events-facility-CountGetRequest": {
+       "type": "string",
+       "x-apim-inline": true
+      },
+      "Events-facility-CountGetRequest-1": {
+       "type": "string",
+       "format": "date-time",
+       "x-apim-inline": true
+      },
+      "Events-facility-CountGetRequest-2": {
+       "type": "string",
+       "format": "date-time",
+       "x-apim-inline": true
+      },
+      "StreamingSubscriptions-facility-PostRequest": {
+       "type": "string",
+       "x-apim-inline": true
+      },
+      "StreamingSubscriptions-facility-DeleteRequest": {
+       "type": "string",
+       "x-apim-inline": true
+      },
+      "Events-facility-GetRequest": {
+       "type": "string",
+       "x-apim-inline": true
+      },
+      "Events-facility-GetRequest-1": {
+       "type": "string",
+       "x-apim-inline": true
+      },
+      "Events-facility-GetRequest-2": {
+       "type": "string",
+       "format": "date-time",
+       "x-apim-inline": true
+      },
+      "Events-facility-GetRequest-3": {
+       "type": "string",
+       "format": "date-time",
+       "x-apim-inline": true
+      },
+      "Events-facility-GetRequest-4": {
+       "type": "boolean",
+       "default": false,
+       "x-apim-inline": true
+      },
+      "Events-facility-GetRequest-5": {
+       "type": "string",
+       "x-apim-inline": true
+      },
+      "Events-facility-GetRequest-6": {
+       "type": "string",
+       "x-apim-inline": true
+      },
+      "Events-facility-GetRequest-7": {
+       "type": "string",
+       "x-apim-inline": true
+      },
+      "Events-facility-GetRequest-8": {
+       "type": "string",
+       "x-apim-inline": true
+      },
+      "Events-facility-GetRequest-9": {
+       "type": "integer",
+       "format": "int32",
+       "x-apim-inline": true
+      },
+      "Events-facility-GetRequest-10": {
+       "type": "integer",
+       "format": "int32",
+       "x-apim-inline": true
+      },
+      "Events-facility-GetRequest-11": {
+       "type": "string",
+       "x-apim-inline": true
+      },
+      "Events-facility-GetRequest-12": {
+       "type": "string",
+       "x-apim-inline": true
+      },
+      "Events-facility-GetRequest-13": {
+       "type": "boolean",
+       "x-apim-inline": true
+      },
+      "Events-facility-GetRequest-14": {
+       "type": "boolean",
+       "x-apim-inline": true
+      },
+      "Events-facility-GetRequest-15": {
+       "type": "boolean",
+       "x-apim-inline": true
+      },
+      "Events-facility-GetRequest-16": {
+       "type": "string",
+       "x-apim-inline": true
+      },
+      "Events-facility-GetRequest-17": {
+       "type": "string",
+       "x-apim-inline": true
+      },
+      "Events-facility-GetRequest-18": {
+       "type": "string",
+       "format": "date-time",
+       "x-apim-inline": true
+      },
+      "Events-facility-GetRequest-19": {
+       "maximum": 100000,
+       "minimum": 1,
+       "type": "number",
+       "x-apim-inline": true
+      },
+      "Events-facility-GetRequest-20": {
+       "type": "string",
+       "x-apim-inline": true
+      }
+     }
+    }
+   }
+  }
+ ]
+}

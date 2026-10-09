@@ -1,0 +1,169 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/equinor/main/json-schema/equinor-event-dto-schema.json",
+  "title": "EventDto",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/equinor-alarm-events-openapi.yml#/components/schemas/EventDto",
+  "type": "object",
+  "properties": {
+    "statusCode": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "format": "int32"
+    },
+    "message": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "traceId": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "items": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/$defs/EventModel"
+      }
+    },
+    "totalCount": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "format": "int64"
+    },
+    "continuationToken": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "EventModel": {
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "sourceName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "eventType": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "eventCategory": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "message": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "severity": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "int32"
+        },
+        "priority": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "int32"
+        },
+        "condition": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "alarmState": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "ackedState": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "activeState": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "suppressedOrShelved": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "node": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "processArea": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "actiontime": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "otherFields": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": {}
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

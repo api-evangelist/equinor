@@ -1,0 +1,57 @@
+generated: '2026-10-09'
+method: generated
+source: Packaged Agent Skills generated from the Equinor OpenAPI files under openapi/. No provider-published skills or AGENTS.md
+  were found (api.equinor.com/AGENTS.md returned 404; the equinor GitHub org search found none). Every operationId was verified
+  against its spec.
+skills:
+- file: equinor-read-timeseries-data.md
+  name: Read timeseries data
+  api: openapi/equinor-timeseries-openapi.yml
+  operations:
+  - GetSearch
+  - getTimeseriesById
+  - GetData
+  - GetLatest
+  - GetAggregatedData
+- file: equinor-write-timeseries-data.md
+  name: Create a timeseries and write datapoints
+  api: openapi/equinor-timeseries-openapi.yml
+  operations:
+  - GetOrAddTimeseries
+  - writeData
+  - GetLatest
+- file: equinor-query-alarms-and-events.md
+  name: Query alarms and events for a facility
+  api: openapi/equinor-alarm-events-openapi.yml
+  operations:
+  - GetSources
+  - GetCounts
+  - GetEvents
+- file: equinor-lookup-ims-tag.md
+  name: Look up an IMS sensor tag
+  api: openapi/equinor-ims-metadata-openapi.yml
+  operations:
+  - get-plant-search-tag
+  - get-plant-tag
+- file: equinor-ims-realtime-subscription.md
+  name: Manage IMS real-time data subscriptions
+  api: openapi/equinor-ims-export-subscriptions-openapi.yml
+  operations:
+  - SetRealTimeDestination
+  - CreateRealTimeSubscription
+  - ListRealTimeSubscriptions
+  - DeleteRealTimeSubscription
+- file: equinor-stormgeo-location-forecast.md
+  name: Get a StormGeo weather forecast for a location
+  api: openapi/equinor-stormgeo-openapi.yml
+  operations:
+  - get-locations
+  - get-parameters
+  - get-locations-id-forecasts-forecasttype
+- file: equinor-bluebook-table-a1.md
+  name: Read BlueBook Table A1
+  api: openapi/equinor-bluebook-openapi.yml
+  operations:
+  - GetTableA1Versions
+  - GetLatestTableA1
+  - GetTableA1

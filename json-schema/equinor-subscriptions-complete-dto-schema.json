@@ -1,0 +1,191 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/equinor/main/json-schema/equinor-subscriptions-complete-dto-schema.json",
+  "title": "SubscriptionsCompleteDto",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/equinor-ims-export-subscriptions-openapi.yml#/components/schemas/SubscriptionsCompleteDto",
+  "type": "object",
+  "properties": {
+    "data": {
+      "$ref": "#/$defs/SubscriptionCompleteItems"
+    },
+    "errors": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "continuationToken": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "SubscriptionCompleteItems": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/$defs/SubscriptionCompleteModel"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "SubscriptionCompleteModel": {
+      "type": "object",
+      "properties": {
+        "uId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "timeseriesId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "plantSapCode": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "int32"
+        },
+        "plantStidCode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "terminal": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fieldId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "createdBy": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "tsdbExportEnabled": {
+          "type": "boolean"
+        },
+        "tsdbBackfilled": {
+          "type": "boolean"
+        },
+        "tsdbEventsExported": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "tsdbFirstExportedTime": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "tsdbLastExportedTime": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "dlExportEnabled": {
+          "type": "boolean"
+        },
+        "dlBackfilled": {
+          "type": "boolean"
+        },
+        "dlEventsExported": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "dlFirstExportedTime": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "dlLastExportedTime": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "dlParquetFirstExportedTime": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "dlParquetLastExportedTime": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "sourceFirstCountedTime": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "sourceLastCountedTime": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "rtLastExpirationDate": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

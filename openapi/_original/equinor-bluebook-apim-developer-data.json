@@ -1,0 +1,575 @@
+{
+ "api": {
+  "id": "recap-bluebook-v1",
+  "name": "BlueBook Public API",
+  "description": "Public read-only endpoints for BlueBook Table A1.",
+  "subscriptionRequired": false,
+  "path": "bluebook",
+  "protocols": [
+   "https"
+  ],
+  "tagDescriptions": [],
+  "authenticationSettings": {
+   "oAuth2AuthenticationSettings": [],
+   "openidAuthenticationSettings": [],
+   "subscriptionKeyRequired": false
+  },
+  "subscriptionKeyParameterNames": {
+   "header": "Ocp-Apim-Subscription-Key",
+   "query": "subscription-key",
+   "bearer": null
+  },
+  "apiVersion": "v1",
+  "apiVersionSetId": "recap-bluebook"
+ },
+ "operations": [
+  {
+   "id": "GetTableA1Versions",
+   "name": "/table-a1s",
+   "method": "GET",
+   "urlTemplate": "/table-a1s",
+   "templateParameters": [],
+   "description": "Returns a list of available Table A1 versions (summary view).",
+   "request": {
+    "queryParameters": [],
+    "headers": [],
+    "representations": []
+   },
+   "responses": [
+    {
+     "statusCode": 200,
+     "description": "OK",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "items": [
+           {
+            "version": "FINAL V16.0_2025-09-15",
+            "date": "2025-09-15"
+           }
+          ]
+         }
+        }
+       },
+       "schemaId": "69e8806b2e81781148145f1c",
+       "typeName": "TableA1SummaryResponseTableA1ListResponse"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 403,
+     "description": "Forbidden",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "type": "string",
+          "title": "string",
+          "status": 0,
+          "detail": "string",
+          "instance": "string"
+         }
+        }
+       },
+       "schemaId": "69e8806b2e81781148145f1c",
+       "typeName": "ProblemDetails"
+      }
+     ],
+     "headers": []
+    }
+   ]
+  },
+  {
+   "id": "GetTableA1",
+   "name": "/table-a1s/{version}",
+   "method": "GET",
+   "urlTemplate": "/table-a1s/{version}",
+   "templateParameters": [
+    {
+     "name": "version",
+     "description": "The version identifier of the Table A1 to retrieve.",
+     "type": "string",
+     "required": true,
+     "values": [],
+     "schemaId": "69e8806b2e81781148145f1c",
+     "typeName": "Table-a1s-version-GetRequest"
+    }
+   ],
+   "description": "Returns full details for a specific Table A1 version.",
+   "request": {
+    "queryParameters": [],
+    "headers": [],
+    "representations": []
+   },
+   "responses": [
+    {
+     "statusCode": 200,
+     "description": "OK",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "version": "FINAL V16.0_2025-09-15",
+          "date": "2025-09-15",
+          "datasets": [
+           {
+            "datasetId": "01.01",
+            "npdRequirement": "Mandatory",
+            "dataset": "Composite",
+            "definition": "\n            The Composite Log should contain all the primary measurements made in a given well/wellbore. \n            A primary measurement may be composed of data taken from different physical tools (e.g. a combination of wireline and MWD measurements).\n            ",
+            "unloadFilePath": "WELL_qqqq_bb-i-nn/WB_sRrYyHTt_xxxx-Pz/COMPOSITE",
+            "title": [
+             "string"
+            ],
+            "exampleOfFilenames": [
+             "string"
+            ],
+            "explanationOrExamples": "Where: # is used for ordering the data files sequentially.",
+            "infoItemGroupType": "WELL LOG",
+            "infoItemType": "COMPOSITE",
+            "description": "<WBN> Composite Log Data. where WBN = Wellbore Name",
+            "logTitle": "WLC_COMPOSITE",
+            "creationProcess": "PAP",
+            "dataDomain": [
+             "WL.LOG"
+            ],
+            "dataOrganisation": "DATA",
+            "publicAccess": "2 years",
+            "publicCalculationBasedOn": "WB Completed Date"
+           }
+          ]
+         }
+        }
+       },
+       "schemaId": "69e8806b2e81781148145f1c",
+       "typeName": "TableA1Response"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 400,
+     "description": "Bad Request",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "type": "string",
+          "title": "string",
+          "status": 0,
+          "detail": "string",
+          "instance": "string"
+         }
+        }
+       },
+       "schemaId": "69e8806b2e81781148145f1c",
+       "typeName": "ProblemDetails"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 403,
+     "description": "Forbidden",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "type": "string",
+          "title": "string",
+          "status": 0,
+          "detail": "string",
+          "instance": "string"
+         }
+        }
+       },
+       "schemaId": "69e8806b2e81781148145f1c",
+       "typeName": "ProblemDetails"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 404,
+     "description": "Not Found",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "type": "string",
+          "title": "string",
+          "status": 0,
+          "detail": "string",
+          "instance": "string"
+         }
+        }
+       },
+       "schemaId": "69e8806b2e81781148145f1c",
+       "typeName": "ProblemDetails"
+      }
+     ],
+     "headers": []
+    }
+   ]
+  },
+  {
+   "id": "GetLatestTableA1",
+   "name": "/table-a1s/latest",
+   "method": "GET",
+   "urlTemplate": "/table-a1s/latest",
+   "templateParameters": [],
+   "description": "Returns the latest Table A1 version based on the most recent date.",
+   "request": {
+    "queryParameters": [],
+    "headers": [],
+    "representations": []
+   },
+   "responses": [
+    {
+     "statusCode": 200,
+     "description": "OK",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "version": "FINAL V16.0_2025-09-15",
+          "date": "2025-09-15",
+          "datasets": [
+           {
+            "datasetId": "01.01",
+            "npdRequirement": "Mandatory",
+            "dataset": "Composite",
+            "definition": "\n            The Composite Log should contain all the primary measurements made in a given well/wellbore. \n            A primary measurement may be composed of data taken from different physical tools (e.g. a combination of wireline and MWD measurements).\n            ",
+            "unloadFilePath": "WELL_qqqq_bb-i-nn/WB_sRrYyHTt_xxxx-Pz/COMPOSITE",
+            "title": [
+             "string"
+            ],
+            "exampleOfFilenames": [
+             "string"
+            ],
+            "explanationOrExamples": "Where: # is used for ordering the data files sequentially.",
+            "infoItemGroupType": "WELL LOG",
+            "infoItemType": "COMPOSITE",
+            "description": "<WBN> Composite Log Data. where WBN = Wellbore Name",
+            "logTitle": "WLC_COMPOSITE",
+            "creationProcess": "PAP",
+            "dataDomain": [
+             "WL.LOG"
+            ],
+            "dataOrganisation": "DATA",
+            "publicAccess": "2 years",
+            "publicCalculationBasedOn": "WB Completed Date"
+           }
+          ]
+         }
+        }
+       },
+       "schemaId": "69e8806b2e81781148145f1c",
+       "typeName": "TableA1Response"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 403,
+     "description": "Forbidden",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "type": "string",
+          "title": "string",
+          "status": 0,
+          "detail": "string",
+          "instance": "string"
+         }
+        }
+       },
+       "schemaId": "69e8806b2e81781148145f1c",
+       "typeName": "ProblemDetails"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 404,
+     "description": "Not Found",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "type": "string",
+          "title": "string",
+          "status": 0,
+          "detail": "string",
+          "instance": "string"
+         }
+        }
+       },
+       "schemaId": "69e8806b2e81781148145f1c",
+       "typeName": "ProblemDetails"
+      }
+     ],
+     "headers": []
+    }
+   ]
+  }
+ ],
+ "schemas": [
+  {
+   "id": "69e8806b2e81781148145f1c",
+   "contentType": "application/vnd.oai.openapi.components+json",
+   "document": {
+    "components": {
+     "schemas": {
+      "DatasetResponse": {
+       "required": [
+        "dataset",
+        "datasetId",
+        "unloadFilePath"
+       ],
+       "type": "object",
+       "properties": {
+        "datasetId": {
+         "type": "string",
+         "description": "Unique identifier for the dataset as defined in Blue Book Table A-1 (e.g., \"01.01\", \"02.03\").",
+         "nullable": true,
+         "example": "01.01"
+        },
+        "npdRequirement": {
+         "type": "string",
+         "description": "Indicates whether this dataset is \"Mandatory\" or \"Optional\" per NPD regulations.",
+         "nullable": true,
+         "example": "Mandatory"
+        },
+        "dataset": {
+         "type": "string",
+         "description": "The short name of the dataset type (e.g., \"Composite\", \"Raw Core (Conventional)\").",
+         "nullable": true,
+         "example": "Composite"
+        },
+        "definition": {
+         "type": "string",
+         "description": "A description of what the dataset contains and its purpose within the Diskos NDR.",
+         "nullable": true,
+         "example": "\n            The Composite Log should contain all the primary measurements made in a given well/wellbore. \n            A primary measurement may be composed of data taken from different physical tools (e.g. a combination of wireline and MWD measurements).\n            "
+        },
+        "unloadFilePath": {
+         "type": "string",
+         "description": "The folder path template used when uploading to Diskos.",
+         "nullable": true,
+         "example": "WELL_qqqq_bb-i-nn/WB_sRrYyHTt_xxxx-Pz/COMPOSITE"
+        },
+        "title": {
+         "type": "array",
+         "items": {
+          "type": "string"
+         },
+         "description": "Accepted file name patterns and formats for this dataset.\nNPD prioritizes the first listed format; other formats will not be checked for readability.",
+         "nullable": true
+        },
+        "exampleOfFilenames": {
+         "type": "array",
+         "items": {
+          "type": "string"
+         },
+         "description": "Concrete examples of valid filenames for this dataset.",
+         "nullable": true
+        },
+        "explanationOrExamples": {
+         "type": "string",
+         "description": "Additional explanation or examples clarifying naming conventions, depth references,\nunits, or special conditions.",
+         "nullable": true,
+         "example": "Where: # is used for ordering the data files sequentially."
+        },
+        "infoItemGroupType": {
+         "type": "string",
+         "description": "The Diskos INFO ITEM GROUP TYPE.",
+         "nullable": true,
+         "example": "WELL LOG"
+        },
+        "infoItemType": {
+         "type": "string",
+         "description": "The Diskos INFO ITEM TYPE.",
+         "nullable": true,
+         "example": "COMPOSITE"
+        },
+        "description": {
+         "type": "string",
+         "description": "The dataset description template as it appears in the Diskos NDR, typically including\na wellbore name placeholder.",
+         "nullable": true,
+         "example": "<WBN> Composite Log Data. where WBN = Wellbore Name"
+        },
+        "logTitle": {
+         "type": "string",
+         "description": "The log curve title used for live \"ONLINE\" logs in Diskos.\nOnly applicable for log-type datasets.",
+         "nullable": true,
+         "example": "WLC_COMPOSITE"
+        },
+        "creationProcess": {
+         "type": "string",
+         "description": "The dataset creation process code in Diskos.",
+         "nullable": true,
+         "example": "PAP"
+        },
+        "dataDomain": {
+         "type": "array",
+         "items": {
+          "type": "string"
+         },
+         "description": "The Diskos data domain classification.",
+         "nullable": true,
+         "example": [
+          "WL.LOG"
+         ]
+        },
+        "dataOrganisation": {
+         "type": "string",
+         "description": "The data organisation type in Diskos.",
+         "nullable": true,
+         "example": "DATA"
+        },
+        "publicAccess": {
+         "type": "string",
+         "description": "The public access confidentiality period after which NOD releases the data (e.g., \"2 years\", \"5 years\").",
+         "nullable": true,
+         "example": "2 years"
+        },
+        "publicCalculationBasedOn": {
+         "type": "string",
+         "description": "The reference date used to calculate when the dataset becomes public.",
+         "nullable": true,
+         "example": "WB Completed Date"
+        }
+       },
+       "additionalProperties": false,
+       "description": "Represents a dataset entry from the Norwegian Offshore Directorate (NOD) Blue Book Table A-1,\ndescribing attributes for digital well data reporting to the Diskos National Data Repository (NDR).\n            \nEach dataset corresponds to a specific type of well data deliverable and defines how it should be named, \nstructured, and reported to Diskos."
+      },
+      "ProblemDetails": {
+       "type": "object",
+       "properties": {
+        "type": {
+         "type": "string",
+         "nullable": true
+        },
+        "title": {
+         "type": "string",
+         "nullable": true
+        },
+        "status": {
+         "type": "integer",
+         "format": "int32",
+         "nullable": true
+        },
+        "detail": {
+         "type": "string",
+         "nullable": true
+        },
+        "instance": {
+         "type": "string",
+         "nullable": true
+        }
+       },
+       "additionalProperties": {}
+      },
+      "TableA1Response": {
+       "required": [
+        "version"
+       ],
+       "type": "object",
+       "properties": {
+        "version": {
+         "type": "string",
+         "description": "The version number of this Table A-1 release (e.g., \"16.0\").",
+         "nullable": true,
+         "example": "FINAL V16.0_2025-09-15"
+        },
+        "date": {
+         "type": "string",
+         "description": "The release date of this version, and the date from which it is applicable for well data reporting.",
+         "format": "date",
+         "example": "2025-09-15"
+        },
+        "datasets": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/DatasetResponse"
+         },
+         "description": "The list of dataset definitions included in this version of Table A-1.\nEach entry describes a specific well data deliverable, its Diskos naming conventions,\nfile formats, and NPD requirements.",
+         "nullable": true
+        }
+       },
+       "additionalProperties": false,
+       "description": "Represents a versioned snapshot of Blue Book Table A-1, containing all dataset definitions\nfor digital well data reporting to the Diskos National Data Repository (NDR)."
+      },
+      "TableA1SummaryResponse": {
+       "required": [
+        "version"
+       ],
+       "type": "object",
+       "properties": {
+        "version": {
+         "type": "string",
+         "description": "The version number of this Table A-1 release (e.g., \"16.0\").",
+         "nullable": true,
+         "example": "FINAL V16.0_2025-09-15"
+        },
+        "date": {
+         "type": "string",
+         "description": "The release date of this version, and the date from which it is applicable for well data reporting.",
+         "format": "date",
+         "example": "2025-09-15"
+        }
+       },
+       "additionalProperties": false,
+       "description": "A lightweight summary of a Blue Book Table A-1 version, used when listing available versions\nwithout returning the full dataset definitions."
+      },
+      "TableA1SummaryResponseTableA1ListResponse": {
+       "required": [
+        "items"
+       ],
+       "type": "object",
+       "properties": {
+        "items": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/TableA1SummaryResponse"
+         },
+         "description": "The list of items returned by the API.",
+         "nullable": true
+        }
+       },
+       "additionalProperties": false,
+       "description": "A generic wrapper for list responses returned by the Blue Book API."
+      },
+      "Table-a1s-version-GetRequest": {
+       "minLength": 1,
+       "type": "string",
+       "x-apim-inline": true
+      }
+     }
+    }
+   }
+  }
+ ]
+}

@@ -1,0 +1,305 @@
+openapi: 3.2.0
+info:
+  title: Timeseries History API
+  description: This API returns information about Timeseries metadata and datapoints.
+  contact:
+    name: Omnia industrial IOT team
+    email: OmniaIndIoT@equinor.com
+  version: v1.7
+servers:
+- url: https://api.gateway.equinor.com/plant/timeseries
+- url: https://api-ncc.gateway.equinor.com/plant/timeseries
+security:
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: History
+paths:
+  /{id}/history:
+    get:
+      operationId: HistoryTimeseries
+      summary: Retrieves the history details of an existing timeseries given the unique…
+      description: Retrieves the history details of an existing timeseries given the unique timeseries id generated when the timeseries was created.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Format - uuid.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetadataChangesResponse'
+              example:
+                data:
+                  items:
+                  - id: string
+                    changedBy: string
+                    changedTime: string
+                    changes: {}
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/Timeseries-api-v1-7/operations/HistoryTimeseries?api-version=2022-04-01-preview
+      tags:
+      - History
+  /history:
+    get:
+      operationId: HistoryAllTimeseries
+      summary: Retrieves the history details of existing timeseries and name changes.
+      description: Retrieves the history details of existing timeseries and name changes. Parameters can be used to select a subset of timeseries. Note that maximum result set size is 100.000 items.
+      parameters:
+      - name: source
+        in: query
+        required: true
+        description: The source facility
+        schema:
+          type: string
+      - name: fromDateTime
+        in: query
+        required: true
+        description: Format - date-time (as date-time in RFC3339). The start date and time of changedTime property
+        schema:
+          type: string
+      - name: toDateTime
+        in: query
+        required: true
+        description: Format - date-time (as date-time in RFC3339). The end date and time of changedTime property
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetadataChangesResponse'
+              example:
+                data:
+                  items:
+                  - id: string
+                    changedBy: string
+                    changedTime: string
+                    changes: {}
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/Timeseries-api-v1-7/operations/HistoryAllTimeseries?api-version=2022-04-01-preview
+      tags:
+      - History
+components:
+  schemas:
+    MetadataChangesItem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        changedBy:
+          type: string
+          format: uuid
+        changedTime:
+          type: string
+          format: date-time
+        changes:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            $ref: '#/components/schemas/DocumentPropertyChange'
+      additionalProperties: false
+    MessageModel:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+        message:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    DocumentPropertyChange:
+      required:
+      - from
+      - to
+      type: object
+      properties:
+        from:
+          minLength: 1
+          type: string
+        to:
+          minLength: 1
+          type: string
+      additionalProperties: false
+    MetadataChangesResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/MetadataChangesData'
+      additionalProperties: false
+    MetadataChangesData:
+      type: object
+      properties:
+        items:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/MetadataChangesItem'
+      additionalProperties: false
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      name: sub
+      in: header
+    apiKeyQuery:
+      type: apiKey
+      name: sub
+      in: query
+x-generated-from: apim-developer-portal-data
+x-source: https://api.equinor.com/api-details#api=Timeseries-api-v1-7
+x-generated-note: The anonymous APIM export at https://api.equinor.com/developer/apis/Timeseries-api-v1-7?export=true&format=openapi%2Bjson returns this document with empty paths; paths were assembled verbatim (by script) from the same portal's anonymous operations and schemas endpoints, saved in openapi/_original/.

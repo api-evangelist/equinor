@@ -1,0 +1,16 @@
+# harvested from https://github.com/equinor/stormgeo-api-docs/blob/232483b73728eff43a7f46ad40e485222bc8212c/openapi-linter/.spectral.yml on 2026-10-09 — a Spectral ruleset published in the provider's own GitHub repository (equinor/stormgeo-api-docs); found by GitHub code search, fetched verbatim
+x-method: harvested
+x-stamped: 2026-10-09
+x-source-url: https://github.com/equinor/stormgeo-api-docs/blob/232483b73728eff43a7f46ad40e485222bc8212c/openapi-linter/.spectral.yml
+extends: spectral:oas
+rules:
+  operation-tag-defined: error
+  operation-description: error  
+  oas3-valid-oas-content-example: error
+  patch-post-must-have-examples:
+    description: Patch and Post endpoints must have examples
+    given: $.paths[*][?( @property === 'patch' || @property === 'post')]
+    severity: error
+    then:
+      field: requestBody.content.application/json.examples
+      function: truthy

@@ -1,0 +1,82 @@
+generated: '2026-10-09'
+method: searched
+probe: true
+source: https://www.equinor.com/about-us/privacy-policy
+scope_note: >-
+  Equinor (Equinor ASA) is an energy company; these pages govern equinor.com and its group-wide
+  personal-data processing, not a commercial API product. The developer portal api.equinor.com
+  publishes no separate legal or trust pages that were found. The dossier carried no legal_pages;
+  the privacy policy, terms and accessibility statement were located from the equinor.com footer.
+signals:
+  data_subject_request:
+    url: https://www.equinor.com/about-us/privacy-policy
+    section: '5. How to exercise your rights as a data subject and DPO contact information'
+    channel: gm_dataprotection@equinor.com
+    rights_named: [access, rectification, erasure, restriction, objection, information about recipients]
+    escalation: Norwegian or local Data Protection Authority
+    evidence:
+    - source: https://www.equinor.com/about-us/privacy-policy
+      http_status: 200
+      fetched: '2026-10-09'
+      quote: >-
+        The data subjects have, under some circumstances and subject to the laws of the particular
+        jurisdiction, the right to request access, rectification, erasure and/or restriction to processing
+        of their data, or object to processing.
+    - source: https://www.equinor.com/about-us/privacy-policy
+      http_status: 200
+      fetched: '2026-10-09'
+      quote: >-
+        If you have questions or want to exercise your rights as a data subject, please contact the Data
+        Protection Officer in Equinor (email address: gm_dataprotection@equinor.com).
+    note: >-
+      A published data-subject-request channel (DPO email) with the GDPR rights named. No response period
+      is stated and no request API exists. Separate California and Brazil notices are linked as PDFs.
+  data_retention:
+    url: https://www.equinor.com/about-us/privacy-policy
+    section: '2.1. General'
+    stated_period: 'only for the period that is required to serve the legitimate purpose or as required by law'
+    evidence:
+    - source: https://www.equinor.com/about-us/privacy-policy
+      http_status: 200
+      fetched: '2026-10-09'
+      quote: >-
+        Personal data will be retained only for the period that is required to serve the legitimate purpose
+        or as required by law. If you want more detailed information on specific retention time, please
+        contact Equinor’s Data Protection Officer (DPO) at the email address provided in section 5.
+    - source: https://www.equinor.com/about-us/privacy-policy
+      http_status: 200
+      fetched: '2026-10-09'
+      quote: >-
+        IDD records follow a procedure with different retention periods, ranging from 1 to 10 years, based
+        on the IDD category.
+    note: >-
+      A general purpose-limitation retention statement; the only concrete period published is the 1-10 year
+      range for Integrity Due Diligence records (section 2.3). Other periods are available on request only.
+  accessibility_conformance:
+    url: https://www.equinor.com/about-us/accessibility-statement
+    section: 'Objectives'
+    standard: [WCAG 2.1 AA]
+    conformance_claimed: false
+    evidence:
+    - source: https://www.equinor.com/about-us/accessibility-statement
+      http_status: 200
+      fetched: '2026-10-09'
+      quote: >-
+        Our goal is to achieve, at a minimum, Level AA compliance with the Web Content Accessibility
+        Guidelines (WCAG) 2.1.
+    - source: https://www.equinor.com/about-us/accessibility-statement
+      http_status: 200
+      fetched: '2026-10-09'
+      quote: 'Certain PDF documents may not be fully compatible with screen readers.'
+    note: >-
+      An accessibility statement (last updated 27 June 2025) covering equinor.com only, stating WCAG 2.1 AA
+      as a goal, not a claimed conformance, and listing known gaps (PDFs, uncaptioned videos, missing alt text).
+      It is not a VPAT/ACR and says nothing about the API portal.
+not_found:
+  subprocessors: >-
+    No subprocessor list. Section 4 says only that processor DPAs cover "sub‑processor controls" and
+    "breach notification"; that is a contract term, not a published list or a notification SLA.
+  checked:
+  - {url: https://www.equinor.com/about-us/terms-and-conditions, http_status: 200, note: website terms; disclaimers and securities notices only}
+  - {url: https://www.equinor.com/accessibility, http_status: 200, note: not-found shell (253 chars of text)}
+  - {url: https://www.equinor.com/about-us/cookies, http_status: 200, note: not-found shell (253 chars of text)}

@@ -1,0 +1,27 @@
+generated: '2026-10-09'
+method: searched
+source: https://github.com/equinor/OmniaPlant/wiki/Authentication-&-Authorization
+standards:
+- id: oauth2
+  conforms: true
+  evidence: '"The Omnia Timeseries API uses OAuth 2.0 and Azure AD as identity provider." (https://github.com/equinor/OmniaPlant/wiki/Authentication-&-Authorization)'
+- id: openapi
+  conforms: true
+  evidence: All six saved contracts are OpenAPI 3.0.1 (openapi/*.yml); the OmniaPlant README states "All data sharing will happen through open,
+    well-documented (using OpenAPI) and versioned APIs."
+- id: pagination
+  conforms: true
+  evidence: Cursor pagination via limit + continuationToken documented at https://github.com/equinor/OmniaPlant/wiki/Timeseries-Data and https://github.com/equinor/OmniaPlant/wiki/API-examples.
+- id: idempotency
+  conforms: false
+  evidence: No idempotency key or replay mechanism documented; see conventions/equinor-conventions.yml.
+- id: rfc8594
+  conforms: claimed
+  evidence: Equinor REST API Guidelines say endpoints with deprecated elements "should return" Deprecation and Sunset (RFC 8594) headers (https://github.com/equinor/api-strategy/blob/master/docs/rest_guidelines.md#deprecation);
+    an org-wide guideline, not observed on these APIs.
+- id: openapi-3.0
+  conforms: true
+  evidence: the document declares 3.0.1
+- id: rfc9457
+  conforms: false
+  evidence: no response declares application/problem+json

@@ -1,0 +1,68 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Equinor IMS Metadata API
+  version: 1.0.0
+extends: ../openapi/_original/equinor-ims-metadata-openapi.yml
+actions:
+- target: $.info
+  description: API Evangelist provenance metadata
+  update:
+    x-apievangelist-provider: equinor
+    x-apievangelist-profiled: '2026-10-09'
+- target: $
+  description: Declare derived tags
+  update:
+    tags:
+    - name: facets
+      description: Operations under /facets
+    - name: root
+      description: Operations on the API root
+    - name: uid
+      description: Operations under /uid
+    - name: search
+      description: Operations under /search
+- target: $.paths['/facets/{facet}'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - facets
+- target: $.paths['/{plant}/{tag}'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - root
+- target: $.paths['/uid/{uid}'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - uid
+- target: $.paths['/{plant}'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - root
+- target: $.paths['/'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - root
+- target: $.paths['/'].post
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - root
+- target: $.paths['/search/{tag}'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - search
+- target: $.paths['/search'].post
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - search
+- target: $.paths['/{plant}/search/{tag}'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - search

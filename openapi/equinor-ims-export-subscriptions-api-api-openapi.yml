@@ -1,0 +1,590 @@
+openapi: 3.2.0
+info:
+  title: IMS Export Subscriptions API
+  description: API for viewing and creating subscriptions. Subscriptions deliver data from plant IMS's to Omnia TSDB
+  contact:
+    name: PlantTeam
+    email: OmniaIndIoT@equinor.com
+  version: v1.2
+servers:
+- url: https://api.gateway.equinor.com/plant/ims-subscriptions
+- url: https://api-ncc.gateway.equinor.com/plant/ims-subscriptions
+security:
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: IMS Export Subscriptions API
+paths:
+  /:
+    post:
+      operationId: CreateSubscription
+      summary: Create a new subscription
+      description: Create a new subscription.
+      parameters:
+      - name: destination
+        in: query
+        required: false
+        description: The destination for subscription. Default is timeseries DB. (tsdb, datalake, all). Choosing tsdb as destination will create a subscription for datalake as well. The converse however, does not apply.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubscriptionCreateModel'
+            example:
+              uId: string
+              name: string
+              systemId: string
+              terminal: string
+              backfillTo: string
+          text/json:
+            schema:
+              $ref: '#/components/schemas/SubscriptionCreateModel'
+            example:
+              uId: string
+              name: string
+              systemId: string
+              terminal: string
+              backfillTo: string
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/SubscriptionCreateModel'
+            example:
+              uId: string
+              name: string
+              systemId: string
+              terminal: string
+              backfillTo: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionsCompleteDto'
+              example:
+                data:
+                  items:
+                  - uId: string
+                    timeseriesId: string
+                    name: string
+                    plantSapCode: 0
+                    plantStidCode: string
+                    terminal: string
+                    fieldId: string
+                    createdBy: string
+                    created: string
+                    tsdbExportEnabled: true
+                    tsdbBackfilled: true
+                    tsdbEventsExported: 0
+                    tsdbFirstExportedTime: string
+                    tsdbLastExportedTime: string
+                    dlExportEnabled: true
+                    dlBackfilled: true
+                    dlEventsExported: 0
+                    dlFirstExportedTime: string
+                    dlLastExportedTime: string
+                    dlParquetFirstExportedTime: string
+                    dlParquetLastExportedTime: string
+                    sourceFirstCountedTime: string
+                    sourceLastCountedTime: string
+                    rtLastExpirationDate: string
+                errors: {}
+                continuationToken: string
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionsCompleteDto'
+              example:
+                data:
+                  items:
+                  - uId: string
+                    timeseriesId: string
+                    name: string
+                    plantSapCode: 0
+                    plantStidCode: string
+                    terminal: string
+                    fieldId: string
+                    createdBy: string
+                    created: string
+                    tsdbExportEnabled: true
+                    tsdbBackfilled: true
+                    tsdbEventsExported: 0
+                    tsdbFirstExportedTime: string
+                    tsdbLastExportedTime: string
+                    dlExportEnabled: true
+                    dlBackfilled: true
+                    dlEventsExported: 0
+                    dlFirstExportedTime: string
+                    dlLastExportedTime: string
+                    dlParquetFirstExportedTime: string
+                    dlParquetLastExportedTime: string
+                    sourceFirstCountedTime: string
+                    sourceLastCountedTime: string
+                    rtLastExpirationDate: string
+                errors: {}
+                continuationToken: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/ims-export-subscriptions-v1-2/operations/CreateSubscription?api-version=2022-04-01-preview
+      tags:
+      - IMS Export Subscriptions API
+    get:
+      operationId: ListSubscriptions
+      summary: List all subscriptions
+      description: List all subscriptions.
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        description: Format - int32. Maximum number of subscriptions to return in a single response.
+        schema:
+          type: integer
+      - name: continuationToken
+        in: query
+        required: false
+        description: Token used for getting the continuation of a response.
+        schema:
+          type: string
+      - name: destination
+        in: query
+        required: false
+        description: The destination filter for subscriptions, default is all. (tsdb, datalake, all).
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionsCompleteDto'
+              example:
+                data:
+                  items:
+                  - uId: string
+                    timeseriesId: string
+                    name: string
+                    plantSapCode: 0
+                    plantStidCode: string
+                    terminal: string
+                    fieldId: string
+                    createdBy: string
+                    created: string
+                    tsdbExportEnabled: true
+                    tsdbBackfilled: true
+                    tsdbEventsExported: 0
+                    tsdbFirstExportedTime: string
+                    tsdbLastExportedTime: string
+                    dlExportEnabled: true
+                    dlBackfilled: true
+                    dlEventsExported: 0
+                    dlFirstExportedTime: string
+                    dlLastExportedTime: string
+                    dlParquetFirstExportedTime: string
+                    dlParquetLastExportedTime: string
+                    sourceFirstCountedTime: string
+                    sourceLastCountedTime: string
+                    rtLastExpirationDate: string
+                errors: {}
+                continuationToken: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/ims-export-subscriptions-v1-2/operations/ListSubscriptions?api-version=2022-04-01-preview
+      tags:
+      - IMS Export Subscriptions API
+  /{systemId}:
+    get:
+      operationId: ListSubscriptionsBySystem
+      summary: List all subscriptions on a specified IMS system, or retrieve specific…
+      description: List all subscriptions on a specified IMS system, or retrieve specific subscription from system by name.
+      parameters:
+      - name: systemId
+        in: path
+        required: true
+        description: System id of the IMS where the data is located. E.g. ONO-IMS, GRA...
+        schema:
+          type: string
+      - name: name
+        in: query
+        required: false
+        description: Optional parameter for finding a specific subscription by name
+        schema:
+          type: string
+      - name: limit
+        in: query
+        required: false
+        description: Format - int32. Maximum number of subscriptions to return in a single response.
+        schema:
+          type: integer
+      - name: destination
+        in: query
+        required: false
+        description: The destination filter for subscriptions, default is all. (tsdb, datalake, all).
+        schema:
+          type: string
+      - name: continuationToken
+        in: query
+        required: false
+        description: Token used for getting the continuation of a response.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionsCompleteDto'
+              example:
+                data:
+                  items:
+                  - uId: string
+                    timeseriesId: string
+                    name: string
+                    plantSapCode: 0
+                    plantStidCode: string
+                    terminal: string
+                    fieldId: string
+                    createdBy: string
+                    created: string
+                    tsdbExportEnabled: true
+                    tsdbBackfilled: true
+                    tsdbEventsExported: 0
+                    tsdbFirstExportedTime: string
+                    tsdbLastExportedTime: string
+                    dlExportEnabled: true
+                    dlBackfilled: true
+                    dlEventsExported: 0
+                    dlFirstExportedTime: string
+                    dlLastExportedTime: string
+                    dlParquetFirstExportedTime: string
+                    dlParquetLastExportedTime: string
+                    sourceFirstCountedTime: string
+                    sourceLastCountedTime: string
+                    rtLastExpirationDate: string
+                errors: {}
+                continuationToken: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/ims-export-subscriptions-v1-2/operations/ListSubscriptionsBySystem?api-version=2022-04-01-preview
+      tags:
+      - IMS Export Subscriptions API
+components:
+  schemas:
+    SubscriptionCompleteItems:
+      type: object
+      properties:
+        items:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SubscriptionCompleteModel'
+      additionalProperties: false
+    MessageModel:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+        message:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    SubscriptionCreateModel:
+      type: object
+      properties:
+        uId:
+          type:
+          - string
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+        systemId:
+          type:
+          - string
+          - 'null'
+        terminal:
+          type:
+          - string
+          - 'null'
+        backfillTo:
+          type:
+          - string
+          - 'null'
+          format: date-time
+      additionalProperties: false
+    SubscriptionsCompleteDto:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/SubscriptionCompleteItems'
+        errors:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+        continuationToken:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    SubscriptionCompleteModel:
+      type: object
+      properties:
+        uId:
+          type:
+          - string
+          - 'null'
+        timeseriesId:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        plantSapCode:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        plantStidCode:
+          type:
+          - string
+          - 'null'
+        terminal:
+          type:
+          - string
+          - 'null'
+        fieldId:
+          type:
+          - string
+          - 'null'
+        createdBy:
+          type:
+          - string
+          - 'null'
+        created:
+          type: string
+          format: date-time
+        tsdbExportEnabled:
+          type: boolean
+        tsdbBackfilled:
+          type: boolean
+        tsdbEventsExported:
+          type: integer
+          format: int64
+        tsdbFirstExportedTime:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        tsdbLastExportedTime:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dlExportEnabled:
+          type: boolean
+        dlBackfilled:
+          type: boolean
+        dlEventsExported:
+          type: integer
+          format: int64
+        dlFirstExportedTime:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dlLastExportedTime:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dlParquetFirstExportedTime:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dlParquetLastExportedTime:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        sourceFirstCountedTime:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        sourceLastCountedTime:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        rtLastExpirationDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+      additionalProperties: false
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      name: sub
+      in: header
+    apiKeyQuery:
+      type: apiKey
+      name: sub
+      in: query
+x-generated-from: apim-developer-portal-data
+x-source: https://api.equinor.com/api-details#api=ims-export-subscriptions-v1-2
+x-generated-note: The anonymous APIM export at https://api.equinor.com/developer/apis/ims-export-subscriptions-v1-2?export=true&format=openapi%2Bjson returns this document with empty paths; paths were assembled verbatim (by script) from the same portal's anonymous operations and schemas endpoints, saved in openapi/_original/.

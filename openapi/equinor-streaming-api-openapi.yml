@@ -1,0 +1,706 @@
+openapi: 3.2.0
+info:
+  title: Equinor Streaming API
+  version: '1.0'
+  description: 'Operations tagged Streaming across 2 of this provider''s published API definitions: equinor-alarm-events-openapi.yml, equinor-timeseries-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.gateway.equinor.com/iiot/ae
+- url: https://api-ncc.gateway.equinor.com/iiot/ae
+- url: https://api.gateway.equinor.com/plant/timeseries
+- url: https://api-ncc.gateway.equinor.com/plant/timeseries
+security:
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: Streaming
+paths:
+  /streaming/subscriptions/{facility}:
+    post:
+      operationId: CreateSubscriptions
+      summary: Creates stream subscriptions
+      parameters:
+      - name: facility
+        in: path
+        required: true
+        description: Format - string. Facility of AE to create streaming subscription
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/iiot-ae-api-v1/operations/CreateSubscriptions?api-version=2022-04-01-preview
+      tags:
+      - Streaming
+    delete:
+      operationId: DeleteSubscription
+      summary: Delete a streaming subscription
+      description: Delete a streaming subscription.
+      parameters:
+      - name: facility
+        in: path
+        required: true
+        description: Format - string. Facility of AE to delete streaming subscription
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/iiot-ae-api-v1/operations/DeleteSubscription?api-version=2022-04-01-preview
+      tags:
+      - Streaming
+    servers:
+    - url: https://api.gateway.equinor.com/iiot/ae
+    - url: https://api-ncc.gateway.equinor.com/iiot/ae
+  /streaming/subscriptions:
+    get:
+      operationId: GetSubscriptions
+      summary: Retrieves a list of all streaming subscriptions
+      description: Retrieves a list of all streaming subscriptions.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionListResponse'
+              example:
+                data:
+                  items:
+                  - facility: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/iiot-ae-api-v1/operations/GetSubscriptions?api-version=2022-04-01-preview
+      tags:
+      - Streaming
+    post:
+      operationId: postStreamingSubscriptions
+      summary: Creates stream subscriptions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StreamingSubscriptionsPostRequest'
+            example:
+            - id: string
+              contentFormat: Json
+              contentSchema: DatapointsV2
+              contentCompression: None
+          text/json:
+            schema:
+              $ref: '#/components/schemas/StreamingSubscriptionsPostRequest-1'
+            example:
+            - id: string
+              contentFormat: Json
+              contentSchema: DatapointsV2
+              contentCompression: None
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/StreamingSubscriptionsPostRequest-2'
+            example:
+            - id: string
+              contentFormat: Json
+              contentSchema: DatapointsV2
+              contentCompression: None
+          application/x-protobuf:
+            schema:
+              $ref: '#/components/schemas/StreamingSubscriptionsPostRequest-3'
+          application/protobuf:
+            schema:
+              $ref: '#/components/schemas/StreamingSubscriptionsPostRequest-4'
+          application/x-google-protobuf:
+            schema:
+              $ref: '#/components/schemas/StreamingSubscriptionsPostRequest-5'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/Timeseries-api-v1-7/operations/CreateSubscriptions?api-version=2022-04-01-preview
+      tags:
+      - Streaming
+      x-operation-id-source: normalized
+      x-operation-id-original: CreateSubscriptions
+    servers:
+    - url: https://api.gateway.equinor.com/iiot/ae
+    - url: https://api-ncc.gateway.equinor.com/iiot/ae
+  /streaming/destination:
+    post:
+      operationId: SetRealTimeDestination
+      summary: Set stream destination (Azure EventHub only)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DestinationSetModel'
+            example:
+              connectionString: string
+          text/json:
+            schema:
+              $ref: '#/components/schemas/DestinationSetModel'
+            example:
+              connectionString: string
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/DestinationSetModel'
+            example:
+              connectionString: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/iiot-ae-api-v1/operations/SetRealTimeDestination?api-version=2022-04-01-preview
+      tags:
+      - Streaming
+    servers:
+    - url: https://api.gateway.equinor.com/iiot/ae
+    - url: https://api-ncc.gateway.equinor.com/iiot/ae
+  /streaming/subscriptions/{id}:
+    delete:
+      operationId: DeleteSubscriptions
+      summary: Delete a streaming subscription
+      description: Delete a streaming subscription.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Format - uuid. Id of timeseries to delete streaming subscription
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/Timeseries-api-v1-7/operations/DeleteSubscriptions?api-version=2022-04-01-preview
+      tags:
+      - Streaming
+    servers:
+    - url: https://api.gateway.equinor.com/plant/timeseries
+    - url: https://api-ncc.gateway.equinor.com/plant/timeseries
+components:
+  schemas:
+    SubscriptionItem:
+      type: object
+      properties:
+        facility:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    MessageModel:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+        message:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    SubscriptionListResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/SubscriptionList'
+      additionalProperties: false
+    DestinationSetModel:
+      required:
+      - connectionString
+      type: object
+      properties:
+        connectionString:
+          minLength: 1
+          type: string
+      additionalProperties: false
+    SubscriptionList:
+      type: object
+      properties:
+        items:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SubscriptionItem'
+      additionalProperties: false
+    SubscriptionItem_2:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        customerId:
+          type: string
+          format: uuid
+      additionalProperties: false
+    StreamingSubscriptionsPostRequest-5:
+      type: array
+      items:
+        $ref: '#/components/schemas/SubscriptionRequestModel'
+      x-apim-inline: true
+    StreamingSubscriptionsPostRequest:
+      type: array
+      items:
+        $ref: '#/components/schemas/SubscriptionRequestModel'
+      x-apim-inline: true
+    StreamingSubscriptionsPostRequest-4:
+      type: array
+      items:
+        $ref: '#/components/schemas/SubscriptionRequestModel'
+      x-apim-inline: true
+    StreamingSubscriptionsPostRequest-1:
+      type: array
+      items:
+        $ref: '#/components/schemas/SubscriptionRequestModel'
+      x-apim-inline: true
+    StreamingSubscriptionsPostRequest-3:
+      type: array
+      items:
+        $ref: '#/components/schemas/SubscriptionRequestModel'
+      x-apim-inline: true
+    StreamingSubscriptionsPostRequest-2:
+      type: array
+      items:
+        $ref: '#/components/schemas/SubscriptionRequestModel'
+      x-apim-inline: true
+    DestinationSetModel_2:
+      type: object
+      properties:
+        connectionString:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    SubscriptionRequestModel:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        contentFormat:
+          enum:
+          - Json
+          - MessagePack
+          type: string
+        contentSchema:
+          enum:
+          - DatapointsV2
+          - DatapointsV3
+          - DatapointsV4
+          type: string
+        contentCompression:
+          enum:
+          - None
+          - Gzip
+          type: string
+      additionalProperties: false
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      name: Ocp-Apim-Subscription-Key
+      in: header
+    apiKeyQuery:
+      type: apiKey
+      name: subscription-key
+      in: query
+x-refined-from:
+- equinor-alarm-events-openapi.yml
+- equinor-timeseries-openapi.yml

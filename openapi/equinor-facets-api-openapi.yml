@@ -1,0 +1,183 @@
+openapi: 3.2.0
+info:
+  title: Equinor Facets API
+  version: '1.0'
+  description: 'Operations tagged Facets across 2 of this provider''s published API definitions: equinor-ims-metadata-openapi.yml, equinor-timeseries-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.gateway.equinor.com/plant/ims-metadata
+- url: https://api-ncc.gateway.equinor.com/plant/ims-metadata
+- url: https://api.gateway.equinor.com/plant/timeseries
+- url: https://api-ncc.gateway.equinor.com/plant/timeseries
+security:
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: Facets
+paths:
+  /facets/{facet}:
+    get:
+      operationId: get-facets-facet
+      summary: Get tags count specified by facet (plantSapCode or plantStidCode)
+      description: Get tags count specified by facet (plantSapCode or plantStidCode).
+      parameters:
+      - name: facet
+        in: path
+        required: true
+        description: Searches for tags matching this facet.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FacetResponse'
+              example:
+                data:
+                  items:
+                  - count: 0
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: string
+                title: string
+                status: 0
+                detail: string
+                instance: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: string
+                title: string
+                status: 0
+                detail: string
+                instance: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: string
+                title: string
+                status: 0
+                detail: string
+                instance: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: string
+                title: string
+                status: 0
+                detail: string
+                instance: string
+      x-source: https://api.equinor.com/developer/apis/ims-metadata-api-v1-3/operations/get-facets-facet?api-version=2022-04-01-preview
+      tags:
+      - Facets
+    servers:
+    - url: https://api.gateway.equinor.com/plant/ims-metadata
+    - url: https://api-ncc.gateway.equinor.com/plant/ims-metadata
+components:
+  schemas:
+    FacetItem:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int64
+          readOnly: true
+      additionalProperties: false
+    FacetResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/FacetList'
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    FacetList:
+      type: object
+      properties:
+        items:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/FacetItem'
+      additionalProperties: false
+    FacetItem_2:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int64
+        source:
+          type: string
+        facility:
+          type: string
+      additionalProperties: false
+    MessageModel:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+        message:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      name: Ocp-Apim-Subscription-Key
+      in: header
+    apiKeyQuery:
+      type: apiKey
+      name: subscription-key
+      in: query
+x-refined-from:
+- equinor-ims-metadata-openapi.yml
+- equinor-timeseries-openapi.yml

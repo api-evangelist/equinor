@@ -1,0 +1,1660 @@
+openapi: 3.2.0
+info:
+  title: Timeseries Data API
+  description: This API returns information about Timeseries metadata and datapoints.
+  contact:
+    name: Omnia industrial IOT team
+    email: OmniaIndIoT@equinor.com
+  version: v1.7
+servers:
+- url: https://api.gateway.equinor.com/plant/timeseries
+- url: https://api-ncc.gateway.equinor.com/plant/timeseries
+security:
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: Data
+paths:
+  /{id}/data:
+    post:
+      operationId: writeData
+      summary: Adds or updates a timeseries' datapoints
+      description: Adds or updates a timeseries' datapoints.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Format - uuid. Id of timeseries for which to add or update datapoints
+        schema:
+          type: string
+      - name: async
+        in: query
+        required: false
+        description: "Determines whether the datapoints should be written asynchronoulsy. \n            If you set this to false, the request will not be returned until the changes are fully committed.\n            If you set this to true or do not supply it, the write will be enqueued and the request will return 202 Accepted."
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DatapointsWriteRequestModel'
+            example:
+              datapoints:
+              - time: string
+                value: 10.3
+                status: 192
+          text/json:
+            schema:
+              $ref: '#/components/schemas/DatapointsWriteRequestModel'
+            example:
+              datapoints:
+              - time: string
+                value: 10.3
+                status: 192
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/DatapointsWriteRequestModel'
+            example:
+              datapoints:
+              - time: string
+                value: 10.3
+                status: 192
+          application/x-protobuf:
+            schema:
+              $ref: '#/components/schemas/DatapointsWriteRequestModel'
+          application/protobuf:
+            schema:
+              $ref: '#/components/schemas/DatapointsWriteRequestModel'
+          application/x-google-protobuf:
+            schema:
+              $ref: '#/components/schemas/DatapointsWriteRequestModel'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/Timeseries-api-v1-7/operations/writeData?api-version=2022-04-01-preview
+      tags:
+      - Data
+    delete:
+      operationId: deleteData
+      summary: Delete timeseries datapoints by id from a given time window
+      description: Delete timeseries datapoints by id from a given time window.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Format - uuid. Id of timeseries for which to delete data.
+        schema:
+          type: string
+      - name: startTime
+        in: query
+        required: false
+        description: Format - date-time (as date-time in RFC3339). Inclusive start bound of deletion window.
+        schema:
+          type: string
+      - name: endTime
+        in: query
+        required: false
+        description: Format - date-time (as date-time in RFC3339). Non-inclusive end bound of deletion window.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/Timeseries-api-v1-7/operations/deleteData?api-version=2022-04-01-preview
+      tags:
+      - Data
+    get:
+      operationId: GetData
+      summary: Retrieves datapoints by id from a given time window, according to applied…
+      description: Retrieves datapoints by id from a given time window, according to applied parameters.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Format - uuid. Id of timeseries from which to retrieve data.
+        schema:
+          type: string
+      - name: startTime
+        in: query
+        required: false
+        description: Format - date-time (as date-time in RFC3339). Start of data window
+        schema:
+          type: string
+      - name: endTime
+        in: query
+        required: false
+        description: Format - date-time (as date-time in RFC3339). End of data window
+        schema:
+          type: string
+      - name: status
+        in: query
+        required: false
+        description: Filters on status value(s) if given.Should only be used when necessary due to performance penalty.Documentation of status codes https://github.com/equinor/OmniaPlant/wiki/Timeseries-Data
+        schema:
+          type: array
+      - name: limit
+        in: query
+        required: false
+        description: Format - int32. Limit of datapoints pr page in the result set. Between 1-100 000. For next page use continuationToken.
+        schema:
+          type: integer
+      - name: includeOutsidePoints
+        in: query
+        required: false
+        description: Determines whether or not the points immediately prior to and following the time window should be included in result.
+        schema:
+          type: boolean
+      - name: continuationToken
+        in: query
+        required: false
+        description: The continuationToken for next result set.
+        schema:
+          type: string
+      - name: federationSource
+        in: query
+        required: false
+        description: Determines whether or not the request should use federation as data source.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RawDatapointsResponseDto'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+                data:
+                  items:
+                  - id: string
+                    facility: string
+                    name: string
+                    terminal: string
+                    datapoints:
+                    - time: string
+                      value: 10.3
+                      status: 192
+                    totalCount: 0
+                    error: string
+                    statusCode: 0
+                continuationToken: string
+            application/protobuf:
+              schema:
+                $ref: '#/components/schemas/RawDatapointsResponseDto'
+            application/x-protobuf:
+              schema:
+                $ref: '#/components/schemas/RawDatapointsResponseDto'
+            application/x-google-protobuf:
+              schema:
+                $ref: '#/components/schemas/RawDatapointsResponseDto'
+            application/vnd.omnia.tsapi.compact.1.6+json:
+              schema:
+                $ref: '#/components/schemas/RawDatapointsResponseDto'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+                data:
+                  items:
+                  - id: string
+                    facility: string
+                    name: string
+                    terminal: string
+                    datapoints:
+                    - time: string
+                      value: 10.3
+                      status: 192
+                    totalCount: 0
+                    error: string
+                    statusCode: 0
+                continuationToken: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+            application/protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-google-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/vnd.omnia.tsapi.compact.1.6+json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+            application/protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-google-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/vnd.omnia.tsapi.compact.1.6+json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+            application/protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-google-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/vnd.omnia.tsapi.compact.1.6+json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+            application/protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-google-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/vnd.omnia.tsapi.compact.1.6+json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+            application/protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-google-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/vnd.omnia.tsapi.compact.1.6+json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+            application/protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-google-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/vnd.omnia.tsapi.compact.1.6+json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/Timeseries-api-v1-7/operations/GetData?api-version=2022-04-01-preview
+      tags:
+      - Data
+  /data:
+    post:
+      operationId: writeMultipleData
+      summary: Adds or updates multiple timeseries' datapoints
+      description: Adds or updates multiple timeseries' datapoints.
+      parameters:
+      - name: async
+        in: query
+        required: false
+        description: "Determines whether the datapoints should be written asynchronoulsy. \n            If you set this to false, the request will not be returned until the changes are fully committed.\n            If you set this to true or do not supply it, the write will be enqueued and the request will return 202 Accepted."
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DatapointItemsWriteRequestModel'
+            example:
+              items:
+              - id: string
+                datapoints:
+                - time: string
+                  value: 10.3
+                  status: 192
+          text/json:
+            schema:
+              $ref: '#/components/schemas/DatapointItemsWriteRequestModel'
+            example:
+              items:
+              - id: string
+                datapoints:
+                - time: string
+                  value: 10.3
+                  status: 192
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/DatapointItemsWriteRequestModel'
+            example:
+              items:
+              - id: string
+                datapoints:
+                - time: string
+                  value: 10.3
+                  status: 192
+          application/x-protobuf:
+            schema:
+              $ref: '#/components/schemas/DatapointItemsWriteRequestModel'
+          application/protobuf:
+            schema:
+              $ref: '#/components/schemas/DatapointItemsWriteRequestModel'
+          application/x-google-protobuf:
+            schema:
+              $ref: '#/components/schemas/DatapointItemsWriteRequestModel'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/Timeseries-api-v1-7/operations/writeMultipleData?api-version=2022-04-01-preview
+      tags:
+      - Data
+  /{id}/data/aggregates:
+    get:
+      operationId: GetAggregatedData
+      summary: Retrieves aggregated datapoints by id from a given time window and applied…
+      description: Retrieves aggregated datapoints by id from a given time window and applied parameters.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Format - uuid. Id of timeseries from which to retrieve data.
+        schema:
+          type: string
+      - name: aggregateFunction
+        in: query
+        required: true
+        description: 'Aggregation to apply to processing bins. Multiple simultaneous functions supported. Available values: [avg, min, max, sum, stddev, count, first, last, median]'
+        schema:
+          type: array
+      - name: processingInterval
+        in: query
+        required: false
+        description: The binning-interval for the aggregation. Must be smaller than total window size. If not given, then the aggregations are performed acrosss the entire time window. E.g. 1s, 5m, 10h, 20d.
+        schema:
+          type: string
+      - name: startTime
+        in: query
+        required: false
+        description: Format - date-time (as date-time in RFC3339). Start of data window
+        schema:
+          type: string
+      - name: endTime
+        in: query
+        required: false
+        description: Format - date-time (as date-time in RFC3339). End of data window
+        schema:
+          type: string
+      - name: status
+        in: query
+        required: false
+        description: Filters on status value(s) if given.Should only be used when necessary due to performance penalty.Documentation of status codes https://github.com/equinor/OmniaPlant/wiki/Timeseries-Data
+        schema:
+          type: array
+      - name: fill
+        in: query
+        required: false
+        description: 'Determines how to fill empty bins. Available values: [null, none, forward, linear]. Default is none.'
+        schema:
+          type: string
+      - name: limit
+        in: query
+        required: false
+        description: Format - int32. Limit of datapoints pr page in the result set. Between 1-100 000. For next page use continuationToken.
+        schema:
+          type: integer
+      - name: continuationToken
+        in: query
+        required: false
+        description: The continuationToken for next result set.
+        schema:
+          type: string
+      - name: federationSource
+        in: query
+        required: false
+        description: Determines whether or not the request should use federation as data source.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatapointsResponseDto'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+                data:
+                  items:
+                  - id: string
+                    facility: string
+                    name: string
+                    terminal: string
+                    datapoints:
+                    - time: string
+                      value: 0
+                      status: 0
+                      count: 0
+                      avg: 0
+                      min: 0
+                      max: 0
+                      sum: 0
+                      first: 0
+                      last: 0
+                      stddev: 0
+                      median: 0
+                    totalCount: 0
+                    error: string
+                    statusCode: 0
+                continuationToken: string
+            application/protobuf:
+              schema:
+                $ref: '#/components/schemas/DatapointsResponseDto'
+            application/x-protobuf:
+              schema:
+                $ref: '#/components/schemas/DatapointsResponseDto'
+            application/x-google-protobuf:
+              schema:
+                $ref: '#/components/schemas/DatapointsResponseDto'
+            application/vnd.omnia.tsapi.compact.1.6+json:
+              schema:
+                $ref: '#/components/schemas/DatapointsResponseDto'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+                data:
+                  items:
+                  - id: string
+                    facility: string
+                    name: string
+                    terminal: string
+                    datapoints:
+                    - time: string
+                      value: 0
+                      status: 0
+                      count: 0
+                      avg: 0
+                      min: 0
+                      max: 0
+                      sum: 0
+                      first: 0
+                      last: 0
+                      stddev: 0
+                      median: 0
+                    totalCount: 0
+                    error: string
+                    statusCode: 0
+                continuationToken: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+            application/protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-google-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/vnd.omnia.tsapi.compact.1.6+json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+            application/protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-google-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/vnd.omnia.tsapi.compact.1.6+json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+            application/protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-google-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/vnd.omnia.tsapi.compact.1.6+json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+            application/protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-google-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/vnd.omnia.tsapi.compact.1.6+json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+            application/protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-google-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/vnd.omnia.tsapi.compact.1.6+json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+            application/protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-google-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/vnd.omnia.tsapi.compact.1.6+json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/Timeseries-api-v1-7/operations/GetAggregatedData?api-version=2022-04-01-preview
+      tags:
+      - Data
+  /{id}/data/first:
+    get:
+      operationId: GetFirst
+      summary: Retrieves the first datapoint of a timeseries.
+      description: Retrieves the first datapoint of a timeseries. When parameter 'afterTime' is included the first point immediately following this time is returned.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Format - uuid. Id of timeseries from which to retrieve data.
+        schema:
+          type: string
+      - name: afterTime
+        in: query
+        required: false
+        description: Format - date-time(as date-time in RFC3339). Only look for points after this time(inclusive).
+        schema:
+          type: string
+      - name: beforeTime
+        in: query
+        required: false
+        description: Format - date-time (as date-time in RFC3339). Only look for points before this time (exclusive).
+        schema:
+          type: string
+      - name: status
+        in: query
+        required: false
+        description: Filters on status value(s) if given.Should only be used when necessary due to performance penalty.Documentation of status codes https://github.com/equinor/OmniaPlant/wiki/Timeseries-Data
+        schema:
+          type: array
+      - name: federationSource
+        in: query
+        required: false
+        description: Determines whether or not the request should use federation as data source.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RawDatapointsResponseDto'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+                data:
+                  items:
+                  - id: string
+                    facility: string
+                    name: string
+                    terminal: string
+                    datapoints:
+                    - time: string
+                      value: 10.3
+                      status: 192
+                    totalCount: 0
+                    error: string
+                    statusCode: 0
+                continuationToken: string
+            application/protobuf:
+              schema:
+                $ref: '#/components/schemas/RawDatapointsResponseDto'
+            application/x-protobuf:
+              schema:
+                $ref: '#/components/schemas/RawDatapointsResponseDto'
+            application/x-google-protobuf:
+              schema:
+                $ref: '#/components/schemas/RawDatapointsResponseDto'
+            application/vnd.omnia.tsapi.compact.1.6+json:
+              schema:
+                $ref: '#/components/schemas/RawDatapointsResponseDto'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+                data:
+                  items:
+                  - id: string
+                    facility: string
+                    name: string
+                    terminal: string
+                    datapoints:
+                    - time: string
+                      value: 10.3
+                      status: 192
+                    totalCount: 0
+                    error: string
+                    statusCode: 0
+                continuationToken: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+            application/protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-google-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/vnd.omnia.tsapi.compact.1.6+json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+            application/protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-google-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/vnd.omnia.tsapi.compact.1.6+json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+            application/protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-google-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/vnd.omnia.tsapi.compact.1.6+json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+            application/protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-google-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/vnd.omnia.tsapi.compact.1.6+json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+            application/protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-google-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/vnd.omnia.tsapi.compact.1.6+json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+            application/protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-google-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/vnd.omnia.tsapi.compact.1.6+json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/Timeseries-api-v1-7/operations/GetFirst?api-version=2022-04-01-preview
+      tags:
+      - Data
+  /{id}/data/latest:
+    get:
+      operationId: GetLatest
+      summary: Retrieves the last datapoint of a timeseries.
+      description: Retrieves the last datapoint of a timeseries. When parameter 'beforeTime' is included the last point immediately prior to this time is returned.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Format - uuid. Id of timeseries from which to retrieve data.
+        schema:
+          type: string
+      - name: afterTime
+        in: query
+        required: false
+        description: Format - date-time(as date-time in RFC3339). Only look for points after this time(inclusive).
+        schema:
+          type: string
+      - name: beforeTime
+        in: query
+        required: false
+        description: Format - date-time (as date-time in RFC3339). Only look for points before this time (exclusive).
+        schema:
+          type: string
+      - name: status
+        in: query
+        required: false
+        description: Filters on status value(s) if given.Should only be used when necessary due to performance penalty.Documentation of status codes https://github.com/equinor/OmniaPlant/wiki/Timeseries-Data
+        schema:
+          type: array
+      - name: federationSource
+        in: query
+        required: false
+        description: Determines whether or not the request should use federation as data source.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RawDatapointsResponseDto'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+                data:
+                  items:
+                  - id: string
+                    facility: string
+                    name: string
+                    terminal: string
+                    datapoints:
+                    - time: string
+                      value: 10.3
+                      status: 192
+                    totalCount: 0
+                    error: string
+                    statusCode: 0
+                continuationToken: string
+            application/protobuf:
+              schema:
+                $ref: '#/components/schemas/RawDatapointsResponseDto'
+            application/x-protobuf:
+              schema:
+                $ref: '#/components/schemas/RawDatapointsResponseDto'
+            application/x-google-protobuf:
+              schema:
+                $ref: '#/components/schemas/RawDatapointsResponseDto'
+            application/vnd.omnia.tsapi.compact.1.6+json:
+              schema:
+                $ref: '#/components/schemas/RawDatapointsResponseDto'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+                data:
+                  items:
+                  - id: string
+                    facility: string
+                    name: string
+                    terminal: string
+                    datapoints:
+                    - time: string
+                      value: 10.3
+                      status: 192
+                    totalCount: 0
+                    error: string
+                    statusCode: 0
+                continuationToken: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+            application/protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-google-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/vnd.omnia.tsapi.compact.1.6+json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+            application/protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-google-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/vnd.omnia.tsapi.compact.1.6+json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+            application/protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-google-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/vnd.omnia.tsapi.compact.1.6+json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+            application/protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-google-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/vnd.omnia.tsapi.compact.1.6+json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+            application/protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-google-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/vnd.omnia.tsapi.compact.1.6+json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+            application/protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-google-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/vnd.omnia.tsapi.compact.1.6+json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/Timeseries-api-v1-7/operations/GetLatest?api-version=2022-04-01-preview
+      tags:
+      - Data
+components:
+  schemas:
+    RawDatapointsResponseItem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        facility:
+          type:
+          - string
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+        terminal:
+          type:
+          - string
+          - 'null'
+        datapoints:
+          type: array
+          items:
+            $ref: '#/components/schemas/RawDatapoint'
+        totalCount:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        error:
+          type:
+          - string
+          - 'null'
+        statusCode:
+          type:
+          - integer
+          - 'null'
+          format: int32
+      additionalProperties: false
+    RawDatapointsResponseItems:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/RawDatapointsResponseItem'
+      additionalProperties: false
+    DatapointsResponseItems:
+      type: object
+      properties:
+        items:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DatapointsResponseItem'
+      additionalProperties: false
+    DatapointsWriteRequestModel:
+      type: object
+      properties:
+        datapoints:
+          type: array
+          items:
+            $ref: '#/components/schemas/RawDatapoint'
+      additionalProperties: false
+    DatapointsResponseItem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        facility:
+          type:
+          - string
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+        terminal:
+          type:
+          - string
+          - 'null'
+        datapoints:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Datapoint'
+        totalCount:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        error:
+          type:
+          - string
+          - 'null'
+        statusCode:
+          type:
+          - integer
+          - 'null'
+          format: int32
+      additionalProperties: false
+    MessageModel:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+        message:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    DatapointsResponseDto:
+      type: object
+      properties:
+        statusCode:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        message:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        data:
+          $ref: '#/components/schemas/DatapointsResponseItems'
+        continuationToken:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+      description: Datapoints return model
+    RawDatapoint:
+      type: object
+      properties:
+        time:
+          type: string
+          format: date-time
+        value:
+          type: number
+          format: double
+          example: 10.3
+        status:
+          type: integer
+          description: 'Status codes: https://github.com/equinor/OmniaPlant/wiki/Timeseries-Data#status-codes'
+          format: int32
+          example: 192
+      additionalProperties: false
+    WriteDatapointsItem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        datapoints:
+          type: array
+          items:
+            $ref: '#/components/schemas/RawDatapoint'
+      additionalProperties: false
+    DatapointItemsWriteRequestModel:
+      type: object
+      properties:
+        items:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/WriteDatapointsItem'
+      additionalProperties: false
+    Datapoint:
+      type: object
+      properties:
+        time:
+          type: string
+          format: date-time
+        value:
+          type: number
+          format: double
+        status:
+          type: integer
+          format: int32
+        count:
+          type: integer
+          format: int64
+        avg:
+          type: number
+          format: double
+        min:
+          type: number
+          format: double
+        max:
+          type: number
+          format: double
+        sum:
+          type: number
+          format: double
+        first:
+          type: number
+          format: double
+        last:
+          type: number
+          format: double
+        stddev:
+          type: number
+          format: double
+        median:
+          type: number
+          format: double
+      additionalProperties: false
+    RawDatapointsResponseDto:
+      type: object
+      properties:
+        statusCode:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        message:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        data:
+          $ref: '#/components/schemas/RawDatapointsResponseItems'
+        continuationToken:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+      description: Datapoints return model
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      name: sub
+      in: header
+    apiKeyQuery:
+      type: apiKey
+      name: sub
+      in: query
+x-generated-from: apim-developer-portal-data
+x-source: https://api.equinor.com/api-details#api=Timeseries-api-v1-7
+x-generated-note: The anonymous APIM export at https://api.equinor.com/developer/apis/Timeseries-api-v1-7?export=true&format=openapi%2Bjson returns this document with empty paths; paths were assembled verbatim (by script) from the same portal's anonymous operations and schemas endpoints, saved in openapi/_original/.

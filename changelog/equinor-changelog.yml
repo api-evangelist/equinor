@@ -1,0 +1,64 @@
+generated: '2026-10-09'
+method: searched
+source: https://github.com/equinor/OmniaPlant/blob/master/Omnia%20Timeseries%20API/CHANGELOG.md
+api: Equinor Timeseries API
+scheme: Keep a Changelog, major.minor[.patch]
+current_version: v1.7.7
+note: The changelog carries no per-release dates (only v1.6 is annotated "SUNSET (REMOVED) Aug 2022."), so date is null. breaking is false for v1.7.x patch entries per the major.minor policy (minor releases
+  have no breaking changes).
+entries:
+- version: v1.7.7
+  date: null
+  breaking: false
+  highlights:
+  - New StandardUnit returned in metadata payload, where dialects of UoM (Unit of Measurement) are translated to standardized unit ref Equinor "common library".
+  - General improvements and error corrections
+- version: v1.7.6
+  date: null
+  breaking: false
+  highlights:
+  - Federation, support messagepack on raw anda ggregated
+  - Federation, improved time limit support on calls federated to Data Lake
+  - Federation to Data Lake, enable fill, limit and status filter
+  - Optimize first and lates on federation
+  - improved metrics
+- version: v1.7.5
+  date: null
+  breaking: false
+  highlights:
+  - Multiple aggregates in Data Lake federation
+  - Rate limiting
+  - General improvements and error corrections
+- version: v1.7.4
+  date: null
+  breaking: false
+  highlights:
+  - Improved metrics logging
+- version: v1.7.3
+  date: null
+  breaking: false
+  highlights:
+  - Search on datetime
+  - Optimized getlatest when status filter used
+  - General improvements and error corrections
+- version: v1.7.2
+  date: null
+  breaking: false
+  highlights:
+  - Improved caching
+  - General improvements and error corrections
+- version: v1.7.1
+  date: null
+  breaking: false
+  highlights:
+  - Federation, black / white listing consept included
+  - Federation, general improvements and error corrections
+- version: v1.7
+  date: null
+  breaking: false
+  highlights:
+  - ' Federation, new concept, new optional parameter federationSource on some endpoints'
+  - ' Federation, new endpoint:'
+  - New endpoints for streaming subscriptions
+  - New endpoint to read metadata change history
+  - General improvements and error corrections

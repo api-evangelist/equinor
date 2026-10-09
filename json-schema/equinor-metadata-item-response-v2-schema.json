@@ -1,0 +1,236 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/equinor/main/json-schema/equinor-metadata-item-response-v2-schema.json",
+  "title": "MetadataItemResponse_v2",
+  "description": "Metadata list response model",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/equinor-ims-metadata-openapi.yml#/components/schemas/MetadataItemResponse_v2",
+  "type": "object",
+  "properties": {
+    "links": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/$defs/Hyperlink"
+      },
+      "description": "Links that can be used to get related resources"
+    },
+    "data": {
+      "$ref": "#/$defs/MetadataItem_v2"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "Hyperlink": {
+      "type": "object",
+      "properties": {
+        "relationship": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The relationship the current resource has to the reference resource"
+        },
+        "reference": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The reference resource hyperlink",
+          "format": "uri"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Holds a hyperlink to a resource and what relationship the current resource has to it"
+    },
+    "MetadataItem_v2": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "SHA1 hash of the UId"
+        },
+        "uid": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "A unique id of the tag (plant + a counter)"
+        },
+        "imsType": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The type of this IMS tag"
+        },
+        "systemCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The name of the IMS System"
+        },
+        "recordID": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The ID of the record from the IMS system"
+        },
+        "plantSAPCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The SAP code of the plant"
+        },
+        "plantSTIDCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The STID code of the plant"
+        },
+        "denyDataShare": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Reason for denied access where null means access allowed"
+        },
+        "tag": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The name of the tag"
+        },
+        "terminal": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The name of the terminal"
+        },
+        "isDefaultTerminal": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "Is the terminal default"
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The description of the tag"
+        },
+        "engUnits": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The measurement unit of the tag in English"
+        },
+        "standardUnit": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The standard unit of measurement from commonlib"
+        },
+        "source": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The source of the data"
+        },
+        "type": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The type of the signal data"
+        },
+        "sourceTag": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The original tag name if the signal data comes from another tag"
+        },
+        "stepped": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "Whether or not the signal data is stepped or raw"
+        },
+        "changeDate": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The date/time when this tag was last changed",
+          "format": "date-time"
+        },
+        "creationDate": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The date/time when this tag was created",
+          "format": "date-time"
+        },
+        "currentValueDate": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The date/time of the last/current value of the tag",
+          "format": "date-time"
+        },
+        "plantArea": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The area of the plant"
+        },
+        "significantDigit": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "A string specifying the significant digits of the data-points"
+        },
+        "maxTimeInterval": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The maximum time interval in which the data-points are valid"
+        },
+        "fieldId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The field ID"
+        }
+      },
+      "additionalProperties": false,
+      "description": "The metadata information of a tag"
+    }
+  }
+}

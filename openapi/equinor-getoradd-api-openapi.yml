@@ -1,0 +1,370 @@
+openapi: 3.2.0
+info:
+  title: Timeseries Getoradd API
+  description: This API returns information about Timeseries metadata and datapoints.
+  contact:
+    name: Omnia industrial IOT team
+    email: OmniaIndIoT@equinor.com
+  version: v1.7
+servers:
+- url: https://api.gateway.equinor.com/plant/timeseries
+- url: https://api-ncc.gateway.equinor.com/plant/timeseries
+security:
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: Getoradd
+paths:
+  /getoradd:
+    post:
+      operationId: GetOrAddTimeseries
+      summary: Get or create timeseries metadata.
+      description: Get or create timeseries metadata. Note that maximum result set size is 100.000 items.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetoraddPostRequest'
+            example:
+            - name: string
+              description: string
+              unit: string
+              step: true
+              externalId: string
+              assetId: string
+              facility: string
+              metadata: {}
+          text/json:
+            schema:
+              $ref: '#/components/schemas/GetoraddPostRequest-1'
+            example:
+            - name: string
+              description: string
+              unit: string
+              step: true
+              externalId: string
+              assetId: string
+              facility: string
+              metadata: {}
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/GetoraddPostRequest-2'
+            example:
+            - name: string
+              description: string
+              unit: string
+              step: true
+              externalId: string
+              assetId: string
+              facility: string
+              metadata: {}
+          application/x-protobuf:
+            schema:
+              $ref: '#/components/schemas/GetoraddPostRequest-3'
+          application/protobuf:
+            schema:
+              $ref: '#/components/schemas/GetoraddPostRequest-4'
+          application/x-google-protobuf:
+            schema:
+              $ref: '#/components/schemas/GetoraddPostRequest-5'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeseriesResponse'
+              example:
+                data:
+                  items:
+                  - id: string
+                    name: string
+                    description: string
+                    step: true
+                    unit: string
+                    standardUnit: string
+                    assetId: string
+                    facility: string
+                    externalId: string
+                    source: string
+                    changedTime: string
+                    createdTime: string
+                    metadata: {}
+                links:
+                - rel: string
+                  href: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/Timeseries-api-v1-7/operations/GetOrAddTimeseries?api-version=2022-04-01-preview
+      tags:
+      - Getoradd
+components:
+  schemas:
+    TimeseriesItem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        step:
+          type:
+          - boolean
+          - 'null'
+        unit:
+          type:
+          - string
+          - 'null'
+        standardUnit:
+          type:
+          - string
+          - 'null'
+        assetId:
+          type:
+          - string
+          - 'null'
+        facility:
+          type:
+          - string
+          - 'null'
+        externalId:
+          type:
+          - string
+          - 'null'
+        source:
+          type:
+          - string
+          - 'null'
+        changedTime:
+          type: string
+          format: date-time
+        createdTime:
+          type: string
+          format: date-time
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      additionalProperties: false
+    TimeseriesRequestModel:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        unit:
+          type:
+          - string
+          - 'null'
+        step:
+          type:
+          - boolean
+          - 'null'
+        externalId:
+          type:
+          - string
+          - 'null'
+        assetId:
+          type:
+          - string
+          - 'null'
+        facility:
+          type:
+          - string
+          - 'null'
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      additionalProperties: false
+    MessageModel:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+        message:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    TimeseriesResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/TimeseriesList'
+        links:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Hyperlink'
+      additionalProperties: false
+    GetoraddPostRequest-5:
+      type: array
+      items:
+        $ref: '#/components/schemas/TimeseriesRequestModel'
+      x-apim-inline: true
+    GetoraddPostRequest-3:
+      type: array
+      items:
+        $ref: '#/components/schemas/TimeseriesRequestModel'
+      x-apim-inline: true
+    TimeseriesList:
+      type: object
+      properties:
+        items:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/TimeseriesItem'
+      additionalProperties: false
+    GetoraddPostRequest-1:
+      type: array
+      items:
+        $ref: '#/components/schemas/TimeseriesRequestModel'
+      x-apim-inline: true
+    GetoraddPostRequest-2:
+      type: array
+      items:
+        $ref: '#/components/schemas/TimeseriesRequestModel'
+      x-apim-inline: true
+    Hyperlink:
+      type: object
+      properties:
+        rel:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+          format: uri
+      additionalProperties: false
+    GetoraddPostRequest-4:
+      type: array
+      items:
+        $ref: '#/components/schemas/TimeseriesRequestModel'
+      x-apim-inline: true
+    GetoraddPostRequest:
+      type: array
+      items:
+        $ref: '#/components/schemas/TimeseriesRequestModel'
+      x-apim-inline: true
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      name: sub
+      in: header
+    apiKeyQuery:
+      type: apiKey
+      name: sub
+      in: query
+x-generated-from: apim-developer-portal-data
+x-source: https://api.equinor.com/api-details#api=Timeseries-api-v1-7
+x-generated-note: The anonymous APIM export at https://api.equinor.com/developer/apis/Timeseries-api-v1-7?export=true&format=openapi%2Bjson returns this document with empty paths; paths were assembled verbatim (by script) from the same portal's anonymous operations and schemas endpoints, saved in openapi/_original/.

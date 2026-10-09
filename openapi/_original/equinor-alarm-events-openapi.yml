@@ -1,0 +1,1080 @@
+# x-archived-from: equinor-alarm-events-openapi.yml
+# x-archived-on: 2026-10-09
+openapi: 3.0.1
+info:
+  title: Alarm & Events API
+  description: API for Alarm and Events
+  contact:
+    name: Omnia Industrial IoT team
+    email: OmniaIndIoT@equinor.com
+  version: v1
+servers:
+- url: https://api.gateway.equinor.com/iiot/ae
+- url: https://api-ncc.gateway.equinor.com/iiot/ae
+paths:
+  /streaming/subscriptions/{facility}:
+    post:
+      operationId: CreateSubscriptions
+      summary: Creates stream subscriptions
+      description: Creates stream subscriptions
+      parameters:
+      - name: facility
+        in: path
+        required: true
+        description: Format - string. Facility of AE to create streaming subscription
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/iiot-ae-api-v1/operations/CreateSubscriptions?api-version=2022-04-01-preview
+    delete:
+      operationId: DeleteSubscription
+      summary: Delete a streaming subscription.
+      description: Delete a streaming subscription.
+      parameters:
+      - name: facility
+        in: path
+        required: true
+        description: Format - string. Facility of AE to delete streaming subscription
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/iiot-ae-api-v1/operations/DeleteSubscription?api-version=2022-04-01-preview
+  /events/{facility}:
+    get:
+      operationId: GetEvents
+      summary: Retrieves a list of all events. Parameters can be used to select a subset of events. Note that maximum result set size is 100.000 items.
+      description: Retrieves a list of all events. Parameters can be used to select a subset of events. Note that maximum result set size is 100.000 items.
+      parameters:
+      - name: facility
+        in: path
+        required: true
+        description: Name of the facility which to retrieve data.
+        schema:
+          type: string
+      - name: sourceName
+        in: query
+        required: true
+        description: Source name of event from which to retrieve data.
+        schema:
+          type: string
+      - name: startTime
+        in: query
+        required: false
+        description: Format - date-time (as date-time in RFC3339). Start of data window. Defaults to 1970.
+        schema:
+          type: string
+      - name: endTime
+        in: query
+        required: false
+        description: Format - date-time (as date-time in RFC3339). End of data window. Defaults to now.
+        schema:
+          type: string
+      - name: sort
+        in: query
+        required: false
+        description: Defaults to asc
+        schema:
+          type: string
+      - name: includeOtherFields
+        in: query
+        required: false
+        description: Determines whether or not to include other fields.
+        schema:
+          type: boolean
+      - name: description
+        in: query
+        required: false
+        description: Filters the tag result on the 'description' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: eventType
+        in: query
+        required: false
+        description: Filters the tag result on the 'eventType' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: eventCategory
+        in: query
+        required: false
+        description: Filters the tag result on the 'eventCategory' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: message
+        in: query
+        required: false
+        description: Filters the tag result on the 'message' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: severity
+        in: query
+        required: false
+        description: Format - int32. Filters the tag result on the 'severity' field. Can be specified multiple times to include more matches.
+        schema:
+          type: integer
+      - name: priority
+        in: query
+        required: false
+        description: Format - int32. Filters the tag result on the 'priority' field. Can be specified multiple times to include more matches.
+        schema:
+          type: integer
+      - name: condition
+        in: query
+        required: false
+        description: Filters the tag result on the 'condition' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: alarmState
+        in: query
+        required: false
+        description: Filters the tag result on the 'alarmState' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: ackedState
+        in: query
+        required: false
+        description: Filters the tag result on the 'ackedState' field. Can be specified multiple times to include more matches.
+        schema:
+          type: boolean
+      - name: activeState
+        in: query
+        required: false
+        description: Filters the tag result on the 'activeState' field. Can be specified multiple times to include more matches.
+        schema:
+          type: boolean
+      - name: suppressedOrShelved
+        in: query
+        required: false
+        description: Filters the tag result on the 'suppressedOrShelved' field. Can be specified multiple times to include more matches.
+        schema:
+          type: boolean
+      - name: node
+        in: query
+        required: false
+        description: Filters the tag result on the 'node' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: processArea
+        in: query
+        required: false
+        description: Filters the tag result on the 'processArea' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: actiontime
+        in: query
+        required: false
+        description: Format - date-time (as date-time in RFC3339). Filters the tag result on the 'actiontime' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        required: false
+        description: Specifies how many records you want returned. Cannot be more than 100000.
+        schema:
+          type: number
+      - name: continuationToken
+        in: query
+        required: false
+        description: Can be passed to retrieve the next page of results if there are any.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventDto'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+                items:
+                - timestamp: string
+                  sourceName: string
+                  description: string
+                  eventType: string
+                  eventCategory: string
+                  message: string
+                  severity: 0
+                  priority: 0
+                  condition: string
+                  alarmState: string
+                  ackedState: true
+                  activeState: true
+                  suppressedOrShelved: true
+                  node: string
+                  processArea: string
+                  actiontime: string
+                  otherFields: {}
+                totalCount: 0
+                continuationToken: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/iiot-ae-api-v1/operations/GetEvents?api-version=2022-04-01-preview
+  /sources:
+    get:
+      operationId: GetSources
+      summary: Retrieves a list of all facilies enabled for Alarm and Events.
+      description: Retrieves a list of all facilies enabled for Alarm and Events.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SourceModelDto'
+              example:
+                items:
+                - facility: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/iiot-ae-api-v1/operations/GetSources?api-version=2022-04-01-preview
+  /streaming/subscriptions:
+    get:
+      operationId: GetSubscriptions
+      summary: Retrieves a list of all streaming subscriptions.
+      description: Retrieves a list of all streaming subscriptions.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionListResponse'
+              example:
+                data:
+                  items:
+                  - facility: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/iiot-ae-api-v1/operations/GetSubscriptions?api-version=2022-04-01-preview
+  /events/{facility}/count:
+    get:
+      operationId: GetCounts
+      summary: Retrieves a list of count for events by priority. Parameters can be used to select a subset of events. Max 6 months timewindow.
+      description: Retrieves a list of count for events by priority. Parameters can be used to select a subset of events. Max 6 months timewindow.
+      parameters:
+      - name: facility
+        in: path
+        required: true
+        description: Name of the facility which to retrieve data.
+        schema:
+          type: string
+      - name: startTime
+        in: query
+        required: false
+        description: Format - date-time (as date-time in RFC3339). Start of data window. Defaults to 1970. Rounded down to nearest interval.
+        schema:
+          type: string
+      - name: endTime
+        in: query
+        required: false
+        description: Format - date-time (as date-time in RFC3339). End of data window. Defaults to now. Rounded up to nearest interval.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CountDto'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+                items:
+                - timestamp: string
+                  count: 0
+                  priority: 0
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/iiot-ae-api-v1/operations/GetCounts?api-version=2022-04-01-preview
+  /streaming/destination:
+    post:
+      operationId: SetRealTimeDestination
+      summary: Set stream destination (Azure EventHub only)
+      description: Set stream destination (Azure EventHub only)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DestinationSetModel'
+            example:
+              connectionString: string
+          text/json:
+            schema:
+              $ref: '#/components/schemas/DestinationSetModel'
+            example:
+              connectionString: string
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/DestinationSetModel'
+            example:
+              connectionString: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/iiot-ae-api-v1/operations/SetRealTimeDestination?api-version=2022-04-01-preview
+components:
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      name: Ocp-Apim-Subscription-Key
+      in: header
+    apiKeyQuery:
+      type: apiKey
+      name: subscription-key
+      in: query
+  schemas:
+    CountDto:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+          nullable: true
+        message:
+          type: string
+          nullable: true
+        traceId:
+          type: string
+          nullable: true
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/CountModel'
+          nullable: true
+      additionalProperties: false
+    CountModel:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          nullable: true
+        count:
+          type: integer
+          format: int32
+          nullable: true
+        priority:
+          type: integer
+          format: int32
+          nullable: true
+      additionalProperties: false
+    DestinationSetModel:
+      required:
+      - connectionString
+      type: object
+      properties:
+        connectionString:
+          minLength: 1
+          type: string
+      additionalProperties: false
+    EventDto:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+          nullable: true
+        message:
+          type: string
+          nullable: true
+        traceId:
+          type: string
+          nullable: true
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventModel'
+          nullable: true
+        totalCount:
+          type: integer
+          format: int64
+          nullable: true
+        continuationToken:
+          type: string
+          nullable: true
+      additionalProperties: false
+    EventModel:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          nullable: true
+        sourceName:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        eventType:
+          type: string
+          nullable: true
+        eventCategory:
+          type: string
+          nullable: true
+        message:
+          type: string
+          nullable: true
+        severity:
+          type: integer
+          format: int32
+          nullable: true
+        priority:
+          type: integer
+          format: int32
+          nullable: true
+        condition:
+          type: string
+          nullable: true
+        alarmState:
+          type: string
+          nullable: true
+        ackedState:
+          type: boolean
+          nullable: true
+        activeState:
+          type: boolean
+          nullable: true
+        suppressedOrShelved:
+          type: boolean
+          nullable: true
+        node:
+          type: string
+          nullable: true
+        processArea:
+          type: string
+          nullable: true
+        actiontime:
+          type: string
+          format: date-time
+          nullable: true
+        otherFields:
+          type: object
+          additionalProperties: {}
+          nullable: true
+      additionalProperties: false
+    MessageModel:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+        message:
+          type: string
+          nullable: true
+        traceId:
+          type: string
+          nullable: true
+      additionalProperties: false
+    Sort:
+      enum:
+      - Asc
+      - Desc
+      type: string
+    SourceModel:
+      type: object
+      properties:
+        facility:
+          type: string
+          nullable: true
+      additionalProperties: false
+    SourceModelDto:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceModel'
+          nullable: true
+      additionalProperties: false
+    SubscriptionItem:
+      type: object
+      properties:
+        facility:
+          type: string
+          nullable: true
+      additionalProperties: false
+    SubscriptionList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscriptionItem'
+          nullable: true
+      additionalProperties: false
+    SubscriptionListResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/SubscriptionList'
+      additionalProperties: false
+    Events-facility-CountGetRequest:
+      type: string
+      x-apim-inline: true
+    Events-facility-CountGetRequest-1:
+      type: string
+      format: date-time
+      x-apim-inline: true
+    Events-facility-CountGetRequest-2:
+      type: string
+      format: date-time
+      x-apim-inline: true
+    StreamingSubscriptions-facility-PostRequest:
+      type: string
+      x-apim-inline: true
+    StreamingSubscriptions-facility-DeleteRequest:
+      type: string
+      x-apim-inline: true
+    Events-facility-GetRequest:
+      type: string
+      x-apim-inline: true
+    Events-facility-GetRequest-1:
+      type: string
+      x-apim-inline: true
+    Events-facility-GetRequest-2:
+      type: string
+      format: date-time
+      x-apim-inline: true
+    Events-facility-GetRequest-3:
+      type: string
+      format: date-time
+      x-apim-inline: true
+    Events-facility-GetRequest-4:
+      type: boolean
+      default: false
+      x-apim-inline: true
+    Events-facility-GetRequest-5:
+      type: string
+      x-apim-inline: true
+    Events-facility-GetRequest-6:
+      type: string
+      x-apim-inline: true
+    Events-facility-GetRequest-7:
+      type: string
+      x-apim-inline: true
+    Events-facility-GetRequest-8:
+      type: string
+      x-apim-inline: true
+    Events-facility-GetRequest-9:
+      type: integer
+      format: int32
+      x-apim-inline: true
+    Events-facility-GetRequest-10:
+      type: integer
+      format: int32
+      x-apim-inline: true
+    Events-facility-GetRequest-11:
+      type: string
+      x-apim-inline: true
+    Events-facility-GetRequest-12:
+      type: string
+      x-apim-inline: true
+    Events-facility-GetRequest-13:
+      type: boolean
+      x-apim-inline: true
+    Events-facility-GetRequest-14:
+      type: boolean
+      x-apim-inline: true
+    Events-facility-GetRequest-15:
+      type: boolean
+      x-apim-inline: true
+    Events-facility-GetRequest-16:
+      type: string
+      x-apim-inline: true
+    Events-facility-GetRequest-17:
+      type: string
+      x-apim-inline: true
+    Events-facility-GetRequest-18:
+      type: string
+      format: date-time
+      x-apim-inline: true
+    Events-facility-GetRequest-19:
+      maximum: 100000
+      minimum: 1
+      type: number
+      x-apim-inline: true
+    Events-facility-GetRequest-20:
+      type: string
+      x-apim-inline: true
+security:
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+x-generated-from: apim-developer-portal-data
+x-source: https://api.equinor.com/api-details#api=iiot-ae-api-v1
+x-generated-note: The anonymous APIM export at https://api.equinor.com/developer/apis/iiot-ae-api-v1?export=true&format=openapi%2Bjson returns this document with empty paths; paths were assembled verbatim (by script) from the same portal's anonymous operations and schemas endpoints, saved in openapi/_original/.

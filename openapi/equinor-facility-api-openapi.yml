@@ -1,0 +1,256 @@
+openapi: 3.2.0
+info:
+  title: Timeseries Facility API
+  description: This API returns information about Timeseries metadata and datapoints.
+  contact:
+    name: Omnia industrial IOT team
+    email: OmniaIndIoT@equinor.com
+  version: v1.7
+servers:
+- url: https://api.gateway.equinor.com/plant/timeseries
+- url: https://api-ncc.gateway.equinor.com/plant/timeseries
+security:
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: Facility
+paths:
+  /facility/counters:
+    get:
+      operationId: GetAllFacilities
+      summary: Retrieves a list of all facilities
+      description: Retrieves a list of all facilities.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FacilityResponse'
+              example:
+                data:
+                  items:
+                  - facility: string
+                    tsdbExportEnabled: 0
+                    dlExportEnabled: 0
+                    totalImsSubscriptions: 0
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/Timeseries-api-v1-7/operations/GetAllFacilities?api-version=2022-04-01-preview
+      tags:
+      - Facility
+  /facility/{name}/counters:
+    get:
+      operationId: getFacilityByName
+      summary: Retrieves the details of an existing facility given the unique facility name
+      parameters:
+      - name: name
+        in: path
+        required: true
+        description: Name of facility from which to retrieve data.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FacilityResponse'
+              example:
+                data:
+                  items:
+                  - facility: string
+                    tsdbExportEnabled: 0
+                    dlExportEnabled: 0
+                    totalImsSubscriptions: 0
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/Timeseries-api-v1-7/operations/getFacilityByName?api-version=2022-04-01-preview
+      tags:
+      - Facility
+components:
+  schemas:
+    FacilityItem:
+      type: object
+      properties:
+        facility:
+          type:
+          - string
+          - 'null'
+        tsdbExportEnabled:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        dlExportEnabled:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        totalImsSubscriptions:
+          type:
+          - integer
+          - 'null'
+          format: int32
+      additionalProperties: false
+    FacilityResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/FacilityList'
+      additionalProperties: false
+    FacilityList:
+      type: object
+      properties:
+        items:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/FacilityItem'
+      additionalProperties: false
+    MessageModel:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+        message:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      name: sub
+      in: header
+    apiKeyQuery:
+      type: apiKey
+      name: sub
+      in: query
+x-generated-from: apim-developer-portal-data
+x-source: https://api.equinor.com/api-details#api=Timeseries-api-v1-7
+x-generated-note: The anonymous APIM export at https://api.equinor.com/developer/apis/Timeseries-api-v1-7?export=true&format=openapi%2Bjson returns this document with empty paths; paths were assembled verbatim (by script) from the same portal's anonymous operations and schemas endpoints, saved in openapi/_original/.

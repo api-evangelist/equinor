@@ -1,0 +1,1386 @@
+# x-archived-from: equinor-stormgeo-openapi.yml
+# x-archived-on: 2026-10-09
+openapi: 3.0.1
+info:
+  title: StormGeo
+  description: |
+    # Introduction
+    The StormGeo API exposes functionality related to the weather of predefined locations, or given coordinates. The API is available to Equinor users, and certain vendors.
+    
+    The API functions as a gateway to StormGeo's own weather API, creating a unified way for Equinor users and vendors to access this resource.
+    
+    A simple way to test the API is through [Postman](https://www.postman.com/) which is accessible through AccessIT.
+    
+    # Getting access to the API
+    ## Equinor Users
+    In order to call the StormGeo API, a client application needs to be configured with API permissions for the StormGeo API. This can be done by performing the following steps:
+    
+    1. Create a client app registration in [Equinors Azure portal](https://portal.azure.com). This step requires the [Application Developer role](https://accessit.equinor.com/Search/Search?term=Application+Developer+%28AZURE+ACTIVE+DIRECTORY%29) in Access IT. See Omnia documentation [Application Management in AAD](https://docs.omnia.equinor.com/governance/iam/App-General-Info/) for more information.
+    
+    2. Add an API permission for the app registrations towards the [StormGeo API prod (client ID = 81707c90-2ec8-4b00-8447-5a5fbbceb3e8)](https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/~/Overview/appId/81707c90-2ec8-4b00-8447-5a5fbbceb3e8/isMSAApp~/false). There are two types of permissions that can be added to the app registration in Azure:<br/><br/>**Delegated permission**: If you want to call the StormGeo API on behalf of the signed-in user in Equinor Entra ID.<br/><br/>**Application permission:** If you want to call the API without a signed-in end user. Select the app role named Equinor.
+    
+    3. Create a client secret for your client app registrations that can be used for authenticating.
+    
+    4. The last step is to get admin consent for your API access. For delegated permissions this is done by triggering an authentication request, e.g via Postman, which will trigger the consent process.<br/><br/>For application permissions, see the [Omnia docs](https://docs.omnia.equinor.com/governance/iam/App-Admin-Consent/) for more information.<br/><br/>See [Authentication and Authorization Overview section](#Authentication-and-Authorization-Overview) for information on how to authenticate.
+    
+    ## External vendors
+    External vendors need to have their Equinor contact person request access via [this](https://equinor.service-now.com/selfservice?id=sc_cat_item&table=sc_cat_item&sys_id=99b2610ac39b8a100090dadf05013171&searchTerm=Access%20to%20the%20StormGeo%20API) ServiceNow form.
+
+    **Please note that no SLA is provided on this service from Equinor, hence it cannot be used for critical applications.**
+    
+    For every vendor we will setup a an app registration in Equinors Azure tenant and provide the vendor with the client ID. In addition to the client ID, the vendor will need to create a self-signed certificate (maximum 1 year validity) that can be used for authentication, and provide us the public key via the above mentioned ServiceNow request. The same [ServiceNow request form](https://equinor.service-now.com/selfservice?id=sc_cat_item&table=sc_cat_item&sys_id=99b2610ac39b8a100090dadf05013171&searchTerm=Access%20to%20the%20StormGeo%20API) can also be used for renewal of certificate.
+    
+    There are several ways to generate a certificate. If you are using Azure this can be done via the Keyvault:
+    
+    1. Navigate to the *Keyvault* service in Azure. Select the *Certificates* section in the left hand menu and press the *Generate/Import* button<br/>![certificate create button](https://github.com/equinor/stormgeo-api-docs/blob/main/openapi-contract/img/keyvault-overview.png?raw=true)
+    
+    2. Fill out the fields, similar to this:<br/>![certificate create fields](https://github.com/equinor/stormgeo-api-docs/blob/main/openapi-contract/img/certificate-create.png?raw=true)<br/><br/>Note the following:<br/><br/>**CertificateName:** Can be whatever you want.<br/>**Subject:** Value is not taken into account when authenticating with a self-signed certificate, but a good practice is to have it match the company name.<br/>**Validity Period (in months):** Must not be more than 12 months - otherwise we will reject your certificate.<br/>**Content Type:** Can be either PKCS #12 or PEM. PEM is a simpler format and might be easier to deal with.<br/>**Lifetime Action Type:** Default choice is *Automatically renew at a given percentage lifetime*. Make sure to change this to one of the notification options instead, so that you can take neccessary steps to have the certificate renewed and send us the new one.
+    
+    3. Navigate to the certificate in the keyvault, press the *Download in CER format* button and include the downloaded certificate in the ServiceNow request.
+    
+    4. Make sure to keep the private key (part of the PFX/PEM-file) of the certificate safe, prefferably in the Keyvault itself. Also remember that it is the vendors responsibility to renew the certificate in due time. We don't accept certificates with a lifetime longer than 1 year.
+    
+    # Authentication and Authorization Overview
+    Use below details for the OAuth 2.0 authentication:
+    
+    **Permission Type:** Delegated<br/>
+    **Grant Type:** authorization_code<br/>
+    **Scope:** api://81707c90-2ec8-4b00-8447-5a5fbbceb3e8/weatherforecast<br/>
+    
+    **Permission Type:** Application<br/>
+    **Grant Type:** client_credentials<br/>
+    **Scope:** 81707c90-2ec8-4b00-8447-5a5fbbceb3e8/.default<br/>
+    
+    # Support
+    Support is provided via the *#stormgeo-api-support* channel on Slack
+    
+    ## HTTP Response codes
+    HTTP response codes will follow established best practice for REST services and will be documented in the OpenAPI specification.
+    
+    Below is a list of status codes used in the API which the client should handle. Common:
+    * 400 Bad Request - The request is invalid. For example missing parameters in the query string
+    * 401 Unauthorized - The request did not include an authentication token or the authentication token was expired or invalid
+    * 403 Forbidden - User does not have sufficient permissions
+    * 404 Not Found - The resource does not exist or an non-existing endpoint has been called
+    
+    Read - HTTP GET:
+    * 200 OK - The request completed successfully
+  version: v1
+servers:
+  - url: https://api.gateway.equinor.com/stormgeo/v1
+paths:
+  /locations:
+    get:
+      tags:
+        - Locations
+      summary: Returns a list of available locations.
+      description: Returns a list of available locations.
+      operationId: get-locations
+      parameters:
+        - name: Filters
+          in: query
+          description: "Filters is a comma-delimited list of {Name}{Operator}{Value} where \r\n- {Name} is the name of the property. Multiple names (logial OR) can be entered pipe delimited, eg. \"(value1|value2)>10\" will filter items where value1 or value2 is greater than 10.\r\n- {Value} is the value used for filtering. Multiple values (logial OR) can be entered pipe delimited, eg. \"value@=foo|bar\" will filter items where value contains either \"foo\" or \"bar\".\r\n- {Operator} is one of the following operators:\r\n\r\n| Operator | Name |\r\n|-|---|\r\n| == | Equals | \r\n| != | Not equal | \r\n| > | Greater than | \r\n| < | Less than | \r\n| >= | Greater than or equal to | \r\n| <= | Less than or equal to | \r\n| @= | Contains | \r\n| _= | Starts with | \r\n| !@= | Does not contain | \r\n| !_= | Does not start with |"
+          schema:
+            type: string
+        - name: Sorts
+          in: query
+          description: Sorts is a comma delimited ordered list of proprty names to sort by. Prefix with "-" to sort descending.
+          schema:
+            type: string
+        - name: PageSize
+          in: query
+          description: Format - int32. Format - int32. Number of items per page. Default no limit.
+          schema:
+            type: integer
+            format: int32
+        - name: Page
+          in: query
+          description: Format - int32. Format - int32. Number of page to return. Default 1.
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Point'
+              examples:
+                default:
+                  value: 
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Point'
+              example:
+                - id: 0
+                  customerId: 0
+                  name: string
+                  longitude: 0
+                  latitude: 0
+                  timeZone: string
+                  expiry: string
+                  timeResolution: string
+                  lastUpdatedForecast: string
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Point'
+              example:
+                - id: 0
+                  customerId: 0
+                  name: string
+                  longitude: 0
+                  latitude: 0
+                  timeZone: string
+                  expiry: string
+                  timeResolution: string
+                  lastUpdatedForecast: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  '/locations/{id}':
+    get:
+      tags:
+        - Locations
+      summary: Returns  information on a specific location.
+      description: Returns  information on a specific location.
+      operationId: get-locations-id
+      parameters:
+        - name: id
+          in: path
+          description: Format - int32. Format - int32. The id of the location.
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Point'
+              examples:
+                default:
+                  value: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Point'
+              example:
+                id: 0
+                customerId: 0
+                name: string
+                longitude: 0
+                latitude: 0
+                timeZone: string
+                expiry: string
+                timeResolution: string
+                lastUpdatedForecast: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Point'
+              example:
+                id: 0
+                customerId: 0
+                name: string
+                longitude: 0
+                latitude: 0
+                timeZone: string
+                expiry: string
+                timeResolution: string
+                lastUpdatedForecast: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              examples:
+                default:
+                  value: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: string
+                title: string
+                status: 0
+                detail: string
+                instance: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: string
+                title: string
+                status: 0
+                detail: string
+                instance: string
+  '/locations/{id}/forecasts':
+    get:
+      tags:
+        - Locations
+      summary: Returns all forecasts for a specific location.
+      description: Returns all forecasts for a specific location.
+      operationId: get-locations-id-forecasts
+      parameters:
+        - name: id
+          in: path
+          description: Format - int32. Format - int32. The id of the location
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: parameterSetId
+          in: query
+          description: Format - int32. Format - int32. The id of the parameter set to use. Default temperature and wind speed and dirction.
+          schema:
+            type: integer
+            format: int32
+        - name: unitProfileId
+          in: query
+          description: Format - int32. Format - int32. The id of the unit profile to use. Default metric units.
+          schema:
+            type: integer
+            format: int32
+        - name: timeResolution
+          in: query
+          description: 'Timeresoltion for the forecast. Defines how many timesteps of each duration is returned. Eg. "1=48,3=24" means 48 x 1 hour steps, then 24 x 3 hour steps. Available step sizes are 1,3,6,12 and 24. Just 1 means 1 hour timesteps until 66 hours, just 3 means then 3 hour timesteps until 120 hours, just 6 means then 6 hour timesteps until 168 hours. Eg. "3=24,6" means 24 x 3 hour timesteps, then 16 x 6 hour timesteps (total 168 hours).'
+          schema:
+            type: string
+            default: '1,3,6'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Forecast'
+              examples:
+                default:
+                  value: 
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Forecast'
+              example:
+                - data: { }
+                  type: string
+                  timeResolution: string
+                  latitude: 0
+                  longitude: 0
+                  issueTime: string
+                  units: { }
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Forecast'
+              example:
+                - data: { }
+                  type: string
+                  timeResolution: string
+                  latitude: 0
+                  longitude: 0
+                  issueTime: string
+                  units: { }
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              examples:
+                default:
+                  value: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: string
+                title: string
+                status: 0
+                detail: string
+                instance: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: string
+                title: string
+                status: 0
+                detail: string
+                instance: string
+  '/locations/{id}/forecasts/{forecastType}':
+    get:
+      tags:
+        - Locations
+      summary: Returns a specific forecast for a specific location.
+      description: Returns a specific forecast for a specific location.
+      operationId: get-locations-id-forecasts-forecasttype
+      parameters:
+        - name: id
+          in: path
+          description: Format - int32. Format - int32. The id of the location
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: forecastType
+          in: path
+          description: 'The type forecast. Available types: "model", "corrected".'
+          required: true
+          schema:
+            type: string
+        - name: parameterSetId
+          in: query
+          description: Format - int32. Format - int32. The id of the parameter set to use. Default temperature and wind speed and dirction.
+          schema:
+            type: integer
+            format: int32
+        - name: unitProfileId
+          in: query
+          description: Format - int32. Format - int32. The id of the unit profile to use. Default metric units.
+          schema:
+            type: integer
+            format: int32
+        - name: timeResolution
+          in: query
+          description: 'Timeresoltion for the forecast. Defines how many timesteps of each duration is returned. Eg. "1=48,3=24" means 48 x 1 hour steps, then 24 x 3 hour steps. Available step sizes are 1,3,6,12 and 24. Just 1 means 1 hour timesteps until 66 hours, just 3 means then 3 hour timesteps until 120 hours, just 6 means then 6 hour timesteps until 168 hours. Eg. "3=24,6" means 24 x 3 hour timesteps, then 16 x 6 hour timesteps (total 168 hours).'
+          schema:
+            type: string
+            default: '1,3,6'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Forecast'
+              examples:
+                default:
+                  value: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forecast'
+              example:
+                data: { }
+                type: string
+                timeResolution: string
+                latitude: 0
+                longitude: 0
+                issueTime: string
+                units: { }
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Forecast'
+              example:
+                data: { }
+                type: string
+                timeResolution: string
+                latitude: 0
+                longitude: 0
+                issueTime: string
+                units: { }
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              examples:
+                default:
+                  value: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: string
+                title: string
+                status: 0
+                detail: string
+                instance: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: string
+                title: string
+                status: 0
+                detail: string
+                instance: string
+  '/locations/{id}/threshold/{thresholdId}':
+    get:
+      tags:
+        - Locations
+      summary: Returns asset state based on location and threshold
+      description: Returns asset state based on location and threshold
+      operationId: get-locations-id-threshold-thresholdid
+      parameters:
+        - name: id
+          in: path
+          description: Format - int32. Format - int32. The id of the location
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: thresholdId
+          in: path
+          description: Format - int32. Format - int32. The id of the threshold
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: thresholdColors
+          in: query
+          description: 'Hexacode string, representing the threshold levels, if not empty it will overwrite default colours.'
+          schema:
+            type: string
+        - name: timeResolution
+          in: query
+          description: 'Timeresolution for the forecast. Defines how many timesteps of each duration is returned. Eg. "1=48,3=24" means 48 x 1 hour steps, then 24 x 3 hour steps. Available step sizes are 1,3,6,12 and 24. Just 1 means 1 hour timesteps until 66 hours, just 3 means then 3 hour timesteps until 120 hours, just 6 means then 6 hour timesteps until 168 hours. Eg. "3=24,6" means 24 x 3 hour timesteps, then 16 x 6 hour timesteps (total 168 hours).'
+          schema:
+            type: string
+            default: '1,3,6'
+      responses:
+        '200':
+          description: Success
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /forecasts:
+    get:
+      tags:
+        - Weather
+      summary: Returns all forecasts for a specific location.
+      description: Returns all forecasts for a specific location.
+      operationId: get-forecasts
+      parameters:
+        - name: longitude
+          in: query
+          required: true
+          description: Format - double. Format - double. The longitude of the location
+          schema:
+            type: number
+            format: double
+        - name: latitude
+          in: query
+          required: true
+          description: Format - double. Format - double. The latitude of the location
+          schema:
+            type: number
+            format: double
+        - name: parameterSetId
+          in: query
+          description: Format - int32. Format - int32. The id of the parameter set to use. Default temperature and wind speed and dirction.
+          schema:
+            type: integer
+            format: int32
+        - name: unitProfileId
+          in: query
+          description: Format - int32. Format - int32. The id of the unit profile to use. Default metric units.
+          schema:
+            type: integer
+            format: int32
+        - name: timeResolution
+          in: query
+          description: 'Timeresoltion for the forecast. Defines how many timesteps of each duration is returned. Eg. "1=48,3=24" means 48 x 1 hour steps, then 24 x 3 hour steps. Available step sizes are 1,3,6,12 and 24. Just 1 means 1 hour timesteps until 66 hours, just 3 means then 3 hour timesteps until 120 hours, just 6 means then 6 hour timesteps until 168 hours. Eg. "3=24,6" means 24 x 3 hour timesteps, then 16 x 6 hour timesteps (total 168 hours).'
+          schema:
+            type: string
+            default: '1,3,6'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Forecast'
+              examples:
+                default:
+                  value: 
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Forecast'
+              example:
+                - data: { }
+                  type: string
+                  timeResolution: string
+                  latitude: 0
+                  longitude: 0
+                  issueTime: string
+                  units: { }
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Forecast'
+              example:
+                - data: { }
+                  type: string
+                  timeResolution: string
+                  latitude: 0
+                  longitude: 0
+                  issueTime: string
+                  units: { }
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              examples:
+                default:
+                  value: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: string
+                title: string
+                status: 0
+                detail: string
+                instance: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: string
+                title: string
+                status: 0
+                detail: string
+                instance: string
+  '/forecasts/{forecastType}':
+    get:
+      tags:
+        - Weather
+      summary: Returns all forecasts for a specific location.
+      description: Returns all forecasts for a specific location.
+      operationId: get-weather-api-forecasts-forecasttype
+      parameters:
+        - name: forecastType
+          in: path
+          description: 'The type forecast. Available types: "model".'
+          required: true
+          schema:
+            type: string
+        - name: longitude
+          in: query
+          description: Format - double. Format - double. The longitude of the location
+          required: true
+          schema:
+            type: number
+            format: double
+        - name: latitude
+          in: query
+          description: Format - double. Format - double. The latitude of the location
+          required: true
+          schema:
+            type: number
+            format: double
+        - name: parameterSetId
+          in: query
+          description: Format - int32. Format - int32. The id of the parameter set to use. Default temperature and wind speed and dirction.
+          schema:
+            type: integer
+            format: int32
+        - name: unitProfileId
+          in: query
+          description: Format - int32. Format - int32. The id of the unit profile to use. Default metric units.
+          schema:
+            type: integer
+            format: int32
+        - name: timeResolution
+          in: query
+          description: 'Timeresolution for the forecast. Defines how many timesteps of each duration is returned. Eg. "1=48,3=24" means 48 x 1 hour steps, then 24 x 3 hour steps. Available step sizes are 1,3,6,12 and 24. Just 1 means 1 hour timesteps until 66 hours, just 3 means then 3 hour timesteps until 120 hours, just 6 means then 6 hour timesteps until 168 hours. Eg. "3=24,6" means 24 x 3 hour timesteps, then 16 x 6 hour timesteps (total 168 hours).'
+          schema:
+            type: string
+            default: '1,3,6'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Forecast'
+              examples:
+                default:
+                  value: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forecast'
+              example:
+                data: { }
+                type: string
+                timeResolution: string
+                latitude: 0
+                longitude: 0
+                issueTime: string
+                units: { }
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Forecast'
+              example:
+                data: { }
+                type: string
+                timeResolution: string
+                latitude: 0
+                longitude: 0
+                issueTime: string
+                units: { }
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              examples:
+                default:
+                  value: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: string
+                title: string
+                status: 0
+                detail: string
+                instance: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: string
+                title: string
+                status: 0
+                detail: string
+                instance: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              examples:
+                default:
+                  value: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: string
+                title: string
+                status: 0
+                detail: string
+                instance: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: string
+                title: string
+                status: 0
+                detail: string
+                instance: string
+  /threshold:
+    get:
+      summary: /threshold - get
+      description: /threshold - get
+      operationId: get-threshold
+      parameters:
+        - name: Filters
+          in: query
+          description: "Filters is a comma-delimited list of {Name}{Operator}{Value} where \r\n- {Name} is the name of the property. Multiple names (logial OR) can be entered pipe delimited, eg. \"(value1|value2)>10\" will filter items where value1 or value2 is greater than 10.\r\n- {Value} is the value used for filtering. Multiple values (logial OR) can be entered pipe delimited, eg. \"value@=foo|bar\" will filter items where value contains either \"foo\" or \"bar\".\r\n- {Operator} is one of the following operators:\r\n\r\n| Operator | Name |\r\n|-|---|\r\n| == | Equals | \r\n| != | Not equal | \r\n| > | Greater than | \r\n| < | Less than | \r\n| >= | Greater than or equal to | \r\n| <= | Less than or equal to | \r\n| @= | Contains | \r\n| _= | Starts with | \r\n| !@= | Does not contain | \r\n| !_= | Does not start with |"
+          schema:
+            type: string
+        - name: Sorts
+          in: query
+          description: Sorts is a comma delimited ordered list of proprty names to sort by. Prefix with "-" to sort descending.
+          schema:
+            type: string
+        - name: PageSize
+          in: query
+          description: Number of items per page. Default no limit.
+          schema:
+            type: string
+        - name: Page
+          in: query
+          description: Number of page to return. Default 1.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /parameters:
+    get:
+      summary: Returns a list of available parameters to use with parameter sets.
+      description: Returns a list of available parameters to use with parameter sets.
+      operationId: get-parameters
+      parameters:
+        - name: Filters
+          in: query
+          description: "Filters is a comma-delimited list of {Name}{Operator}{Value} where \r\n- {Name} is the name of the property. Multiple names (logial OR) can be entered pipe delimited, eg. \"(value1|value2)>10\" will filter items where value1 or value2 is greater than 10.\r\n- {Value} is the value used for filtering. Multiple values (logial OR) can be entered pipe delimited, eg. \"value@=foo|bar\" will filter items where value contains either \"foo\" or \"bar\".\r\n- {Operator} is one of the following operators:\r\n\r\n| Operator | Name |\r\n|-|---|\r\n| == | Equals | \r\n| != | Not equal | \r\n| > | Greater than | \r\n| < | Less than | \r\n| >= | Greater than or equal to | \r\n| <= | Less than or equal to | \r\n| @= | Contains | \r\n| _= | Starts with | \r\n| !@= | Does not contain | \r\n| !_= | Does not start with |"
+          schema:
+            type: string
+        - name: Sorts
+          in: query
+          description: Sorts is a comma delimited ordered list of proprty names to sort by. Prefix with "-" to sort descending.
+          schema:
+            type: string
+        - name: PageSize
+          in: query
+          description: Number of items per page. Default no limit.
+          schema:
+            type: string
+        - name: Page
+          in: query
+          description: Number of page to return. Default 1.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  '/parameters/{name}':
+    get:
+      summary: Retruns information on a specific parameter
+      description: Retruns information on a specific parameter
+      operationId: get-parameters-name
+      parameters:
+        - name: name
+          in: path
+          description: The name of the parameter
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /parameter-sets:
+    get:
+      summary: Retruns available parameter sets
+      description: Retruns available parameter sets
+      operationId: get-parameter-sets
+      parameters:
+        - name: Filters
+          in: query
+          description: "Filters is a comma-delimited list of {Name}{Operator}{Value} where \r\n- {Name} is the name of the property. Multiple names (logial OR) can be entered pipe delimited, eg. \"(value1|value2)>10\" will filter items where value1 or value2 is greater than 10.\r\n- {Value} is the value used for filtering. Multiple values (logial OR) can be entered pipe delimited, eg. \"value@=foo|bar\" will filter items where value contains either \"foo\" or \"bar\".\r\n- {Operator} is one of the following operators:\r\n\r\n| Operator | Name |\r\n|-|---|\r\n| == | Equals | \r\n| != | Not equal | \r\n| > | Greater than | \r\n| < | Less than | \r\n| >= | Greater than or equal to | \r\n| <= | Less than or equal to | \r\n| @= | Contains | \r\n| _= | Starts with | \r\n| !@= | Does not contain | \r\n| !_= | Does not start with |"
+          schema:
+            type: string
+        - name: Sorts
+          in: query
+          description: Sorts is a comma delimited ordered list of proprty names to sort by. Prefix with "-" to sort descending.
+          schema:
+            type: string
+        - name: PageSize
+          in: query
+          description: Number of items per page. Default no limit.
+          schema:
+            type: string
+        - name: Page
+          in: query
+          description: Number of page to return. Default 1.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  '/parameter-sets/{id}':
+    get:
+      summary: Retruns information on a specific parameter set
+      description: Retruns information on a specific parameter set
+      operationId: get-parameter-sets-id
+      parameters:
+        - name: id
+          in: path
+          description: The id of the parameter set
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /unit-profiles:
+    get:
+      summary: Retruns available unit profiles
+      description: Retruns available unit profiles
+      operationId: get-unit-profiles
+      parameters:
+        - name: Filters
+          in: query
+          description: "Filters is a comma-delimited list of {Name}{Operator}{Value} where \r\n- {Name} is the name of the property. Multiple names (logial OR) can be entered pipe delimited, eg. \"(value1|value2)>10\" will filter items where value1 or value2 is greater than 10.\r\n- {Value} is the value used for filtering. Multiple values (logial OR) can be entered pipe delimited, eg. \"value@=foo|bar\" will filter items where value contains either \"foo\" or \"bar\".\r\n- {Operator} is one of the following operators:\r\n\r\n| Operator | Name |\r\n|-|---|\r\n| == | Equals | \r\n| != | Not equal | \r\n| > | Greater than | \r\n| < | Less than | \r\n| >= | Greater than or equal to | \r\n| <= | Less than or equal to | \r\n| @= | Contains | \r\n| _= | Starts with | \r\n| !@= | Does not contain | \r\n| !_= | Does not start with |"
+          schema:
+            type: string
+        - name: Sorts
+          in: query
+          description: Sorts is a comma delimited ordered list of proprty names to sort by. Prefix with "-" to sort descending.
+          schema:
+            type: string
+        - name: PageSize
+          in: query
+          description: Number of items per page. Default no limit.
+          schema:
+            type: string
+        - name: Page
+          in: query
+          description: Number of page to return. Default 1.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  '/unit-profiles/{id}':
+    get:
+      summary: Returns a specific unit profile
+      description: Returns a specific unit profile
+      operationId: get-unit-profiles-id
+      parameters:
+        - name: id
+          in: path
+          description: The id of the unit profile
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /units:
+    get:
+      summary: Retruns available units
+      description: Retruns available units
+      operationId: get-units
+      parameters:
+        - name: Filters
+          in: query
+          description: "Filters is a comma-delimited list of {Name}{Operator}{Value} where \r\n- {Name} is the name of the property. Multiple names (logial OR) can be entered pipe delimited, eg. \"(value1|value2)>10\" will filter items where value1 or value2 is greater than 10.\r\n- {Value} is the value used for filtering. Multiple values (logial OR) can be entered pipe delimited, eg. \"value@=foo|bar\" will filter items where value contains either \"foo\" or \"bar\".\r\n- {Operator} is one of the following operators:\r\n\r\n| Operator | Name |\r\n|-|---|\r\n| == | Equals | \r\n| != | Not equal | \r\n| > | Greater than | \r\n| < | Less than | \r\n| >= | Greater than or equal to | \r\n| <= | Less than or equal to | \r\n| @= | Contains | \r\n| _= | Starts with | \r\n| !@= | Does not contain | \r\n| !_= | Does not start with |"
+          schema:
+            type: string
+        - name: Sorts
+          in: query
+          description: Sorts is a comma delimited ordered list of proprty names to sort by. Prefix with "-" to sort descending.
+          schema:
+            type: string
+        - name: PageSize
+          in: query
+          description: Number of items per page. Default no limit.
+          schema:
+            type: string
+        - name: Page
+          in: query
+          description: Number of page to return. Default 1.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  '/units/{name}':
+    get:
+      summary: Returns a specific unit
+      description: Returns a specific unit
+      operationId: get-units-name
+      parameters:
+        - name: name
+          in: path
+          description: The name of the unit
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  '/threshold/{id}':
+    get:
+      summary: '/threshold/{id} - get'
+      description: '/threshold/{id} - get'
+      operationId: get-threshold-id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: format
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  '/allowed-locations':
+    get:
+      summary: Returns a list of locations for a specific vendor
+      description: Returns a list of locations for a specific vendor
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items: 
+                $ref: '#/components/schemas/Allowedlocations'
+              examples:
+                default:
+                  value:
+                    vendorname:
+                    - LocationId: 0
+                      Description: string
+            application/json:
+              schema:
+                type: array
+                items:
+                $ref: '#/components/schemas/Allowedlocations'
+              example:
+                 vendorname:
+                 - LocationId: 0
+                   Description: string
+            text/json:
+              schema:
+                type: array
+                items:
+                $ref: '#/components/schemas/Allowedlocations'
+              example:
+                 vendorname: 
+                 - LocationId: 0
+                   Description: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+components:
+  schemas:
+    Forecast:
+      type: object
+      properties:
+        data:
+          nullable: true
+        type:
+          type: string
+          nullable: true
+        timeResolution:
+          type: string
+          nullable: true
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        issueTime:
+          type: string
+          format: date-time
+          nullable: true
+        units:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+      additionalProperties: false
+    Point:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        customerId:
+          type: integer
+          format: int32
+        name:
+          type: string
+          nullable: true
+        longitude:
+          type: number
+          format: double
+        latitude:
+          type: number
+          format: double
+        timeZone:
+          type: string
+          nullable: true
+        expiry:
+          type: string
+          format: date-time
+        timeResolution:
+          type: string
+          nullable: true
+        lastUpdatedForecast:
+          type: string
+          format: date-time
+          nullable: true
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        status:
+          type: integer
+          format: int32
+          nullable: true
+        detail:
+          type: string
+          nullable: true
+        instance:
+          type: string
+          nullable: true
+      additionalProperties: { }
+    ParameterDto:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        unit:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ParameterSetDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          nullable: true
+        name:
+          type: string
+          nullable: true
+          example: Parameter set name
+        description:
+          type: string
+          nullable: true
+          example: A description of the parameter set (Optional).
+        parameters:
+          type: array
+          items:
+            type: string
+          nullable: true
+          example:
+            - windspeed
+            - winddirection
+            - temperature
+      additionalProperties: false
+    ParameterSetPostDto:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+          example: Parameter set name
+        description:
+          type: string
+          nullable: true
+          example: A description of the parameter set (Optional).
+        parameters:
+          type: array
+          items:
+            type: string
+          nullable: true
+          example:
+            - windspeed
+            - winddirection
+            - temperature
+      additionalProperties: false
+    UnitDto:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        baseUnit:
+          type: string
+          nullable: true
+      additionalProperties: false
+    UnitProfileDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          nullable: true
+          example: Unit profile name
+        parameterUnits:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+          example:
+            windspeed: knots
+            temperature: fahrenheit
+      additionalProperties: false
+    UnitProfilePostDto:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+          example: Unit profile name
+        parameterUnits:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+          example:
+            windspeed: knots
+            temperature: fahrenheit
+      additionalProperties: false
+    Parameter:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          nullable: true
+        unit:
+          $ref: '#/components/schemas/Unit'
+      additionalProperties: false
+    Threshold:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        customerId:
+          type: integer
+          format: int32
+        name:
+          type: string
+          nullable: true
+        levels:
+          type: array
+          items:
+            $ref: '#/components/schemas/ThresholdLevel'
+          nullable: true
+      additionalProperties: false
+    ThresholdItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        parameter:
+          $ref: '#/components/schemas/Parameter'
+        operator:
+          type: string
+          nullable: true
+        value:
+          type: number
+          format: double
+        valueEnd:
+          type: number
+          format: double
+          nullable: true
+        unit:
+          $ref: '#/components/schemas/Unit'
+      additionalProperties: false
+    ThresholdItemPostDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        parameter:
+          type: string
+          nullable: true
+        operator:
+          type: string
+          description: 'choose one of the values: "BETWEEN","<","<=",">",">=","==","="'
+          nullable: true
+          example: '>='
+        value:
+          type: number
+          format: double
+        valueEnd:
+          type: number
+          description: use only for "between" operator
+          format: double
+          nullable: true
+        unit:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ThresholdLevel:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        severity:
+          type: integer
+          format: int32
+        description:
+          type: string
+          nullable: true
+        thresholdId:
+          type: integer
+          format: int32
+        colour:
+          type: string
+          nullable: true
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/ThresholdLevelGroup'
+          nullable: true
+      additionalProperties: false
+    ThresholdLevelGroup:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          nullable: true
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ThresholdItem'
+          nullable: true
+      additionalProperties: false
+    ThresholdLevelGroupPostDto:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ThresholdItemPostDto'
+          nullable: true
+      additionalProperties: false
+    ThresholdLevelPostDto:
+      type: object
+      properties:
+        severity:
+          type: integer
+          format: int32
+        description:
+          type: string
+          nullable: true
+        colour:
+          pattern: '^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$'
+          type: string
+          description: Hexadecimal color code
+          nullable: true
+          example: '#000000'
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/ThresholdLevelGroupPostDto'
+          nullable: true
+      additionalProperties: false
+    ThresholdPostDto:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+          example: Threshold name
+        levels:
+          type: array
+          items:
+            $ref: '#/components/schemas/ThresholdLevelPostDto'
+          nullable: true
+      additionalProperties: false
+    Unit:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          nullable: true
+      additionalProperties: false
+    Allowedlocations:
+      type: object
+      properties:
+        LocationId:
+          type: integer
+          format: int32
+        Description:
+          type: string
+          nullable: false
+      additionalProperties: false

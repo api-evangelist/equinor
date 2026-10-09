@@ -1,0 +1,158 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/equinor/main/json-schema/equinor-timeseries-paged-response-schema.json",
+  "title": "TimeseriesPagedResponse",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/equinor-timeseries-openapi.yml#/components/schemas/TimeseriesPagedResponse",
+  "type": "object",
+  "properties": {
+    "data": {
+      "$ref": "#/$defs/TimeseriesList"
+    },
+    "links": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/$defs/Hyperlink"
+      }
+    },
+    "count": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "format": "int64"
+    },
+    "continuationToken": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "Hyperlink": {
+      "type": "object",
+      "properties": {
+        "rel": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "href": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uri"
+        }
+      },
+      "additionalProperties": false
+    },
+    "TimeseriesItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "step": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "unit": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "standardUnit": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "assetId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "facility": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "externalId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "changedTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "metadata": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "TimeseriesList": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/$defs/TimeseriesItem"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

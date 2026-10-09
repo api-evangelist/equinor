@@ -1,23 +1,1795 @@
 aid: equinor
+
 name: Equinor
-description: 'Equinor is a company surfaced via the API Evangelist harvest backlog (source: spectral-ruleset-github)
-  and added to the network as a stub for full-pipeline profiling.'
+
+description: Equinor ASA is an international energy company headquartered in Norway, with around 25,000 employees and offices in more than 20
+  countries (per equinor.com). It operates oil, gas, renewables and low-carbon businesses, runs a public Equinor API portal at api.equinor.com
+  (built on Azure API Management) listing its APIs and products, publishes REST API guidelines in its api-strategy GitHub repository, shares open
+  energy data, and maintains a large open-source presence at github.com/equinor.
+
 url: https://raw.githubusercontent.com/api-evangelist/equinor/refs/heads/main/apis.yml
+
 x-type: company
+
 x-source: harvest:spectral-ruleset-github
-x-tier: stub
-x-tier-reason: harvest
+
+x-tier: profiled
+x-tier-reason: enrichment pass 2026-10-09 (modular-v1; was harvest)
+
 specificationVersion: '0.20'
+
 created: '2026-10-09'
+
 modified: '2026-10-09'
+
+image: https://cdn.equinor.com/images/h61q9gi9/global/a8acf96481d898337d1a0ac4374880b88e3afb75-6489x4326.jpg?rect=0,468,6489,3391&w=1200&h=627&fit=crop&auto=format
+
 tags:
 - Company
-apis: []
+- Energy
+- Oil and Gas
+- Renewables
+- Norway
+- Open Data
+- Open Source
+
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+
 common:
+- type: AgenticAccess
+  url: agentic-access/equinor-agentic-access.yml
+- type: Spectral
+  url: rules/equinor-stormgeo-api-docs-spectral-rules.yml
+- type: Spectral
+  url: rules/equinor-rules.yml
+- type: JSONLD
+  url: json-ld/equinor-context.jsonld
+- type: Vocabulary
+  url: vocabulary/equinor-vocabulary.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: DataModel
+  url: data-model/equinor-data-model.yml
+- type: ChangeLog
+  url: changelog/equinor-changelog.yml
+- type: Conventions
+  url: conventions/equinor-conventions.yml
+- type: Sandbox
+  url: sandbox/equinor-sandbox.yml
+- type: Security
+  url: security/equinor-vulnerability-disclosure.yml
+- type: OAuthScopes
+  url: scopes/equinor-scopes.yml
+- type: Deprecation
+  url: lifecycle/equinor-lifecycle.yml
+- type: Lifecycle
+  url: lifecycle/equinor-lifecycle.yml
+- type: ErrorCatalog
+  url: errors/equinor-problem-types.yml
+- type: Conformance
+  url: conformance/equinor-conformance.yml
+- type: Overlay
+  url: overlays/equinor-alarm-events-overlay.yaml
+- type: SecurityTxt
+  url: well-known/equinor-security.txt
+- type: SecurityTxt
+  url: well-known/equinor-data-security.txt
+- type: WellKnown
+  url: well-known/equinor-well-known.yml
+- type: Hosts
+  url: hosts/equinor-hosts.yml
+- type: Vendors
+  url: vendors/equinor-vendors.yml
+- type: SDKs
+  url: packages/equinor-packages.yml
+- type: Packages
+  url: packages/equinor-packages.yml
+- type: Documentation
+  url: https://docs.equinor.com/
+- type: Authentication
+  url: authentication/equinor-authentication.yml
+- type: VulnerabilityDisclosure
+  url: security/equinor-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/equinor-domain-security.yml
 - type: Website
   url: https://www.equinor.com/
+- type: DeveloperPortal
+  url: https://api.equinor.com/
+- type: APIReference
+  url: https://api.equinor.com/apis
+- type: Login
+  url: https://api.equinor.com/signin
+- type: APIDesignGuidelines
+  url: https://github.com/equinor/api-strategy/blob/master/docs/rest_guidelines.md
+- type: GitHubOrganization
+  url: https://github.com/equinor
+- type: News
+  url: https://www.equinor.com/news
+- type: Support
+  url: https://www.equinor.com/about-us/contact-us
+- type: OpenData
+  url: https://www.equinor.com/energy/data-sharing
+- type: TermsOfService
+  url: https://www.equinor.com/about-us/terms-and-conditions
+- type: PrivacyPolicy
+  url: https://www.equinor.com/about-us/privacy-policy
+- type: SpectralRules
+  url: https://github.com/equinor/stormgeo-api-docs/blob/232483b73728eff43a7f46ad40e485222bc8212c/openapi-linter/.spectral.yml
+
+apis:
+- aid: equinor:equinor-allowed-locations-api
+  name: Equinor Allowed Locations API
+  description: The Allowed Locations API from Equinor — 1 operation(s) for allowed locations.
+  humanURL: https://api.equinor.com/api-details#api=iiot-ae-api-v1
+  baseURL: https://api.gateway.equinor.com/iiot/ae
+  tags:
+  - Allowed Locations
+  properties:
+  - type: OpenAPI
+    url: openapi/equinor-allowed-locations-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/equinor-event-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-count-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-message-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-source-model-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-destination-set-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-summary-response-table-a1-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-create-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscriptions-complete-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-rt-subscriptions-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-uid-post-request-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-paged-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-item-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-facet-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-27-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-28-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-29-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-put-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-patch-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-raw-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-paged-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-point-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-forecast-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-allowedlocations-schema.json
+- aid: equinor:equinor-create-api
+  name: Equinor Create API
+  description: The Create API from Equinor — 1 operation(s) for create.
+  humanURL: https://api.equinor.com/api-details#api=iiot-ae-api-v1
+  baseURL: https://api.gateway.equinor.com/iiot/ae
+  tags:
+  - Create
+  properties:
+  - type: OpenAPI
+    url: openapi/equinor-create-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/equinor-event-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-count-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-message-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-source-model-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-destination-set-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-summary-response-table-a1-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-create-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscriptions-complete-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-rt-subscriptions-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-uid-post-request-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-paged-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-item-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-facet-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-27-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-28-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-29-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-put-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-patch-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-raw-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-paged-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-point-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-forecast-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-allowedlocations-schema.json
+- aid: equinor:equinor-data-api
+  name: Equinor Data API
+  description: The Data API from Equinor — 5 operation(s) for data.
+  humanURL: https://api.equinor.com/api-details#api=iiot-ae-api-v1
+  baseURL: https://api.gateway.equinor.com/iiot/ae
+  tags:
+  - Data
+  properties:
+  - type: OpenAPI
+    url: openapi/equinor-data-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/equinor-event-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-count-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-message-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-source-model-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-destination-set-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-summary-response-table-a1-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-create-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscriptions-complete-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-rt-subscriptions-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-uid-post-request-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-paged-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-item-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-facet-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-27-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-28-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-29-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-put-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-patch-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-raw-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-paged-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-point-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-forecast-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-allowedlocations-schema.json
+- aid: equinor:equinor-events-api
+  name: Equinor Events API
+  description: The Events API from Equinor — 2 operation(s) for events.
+  humanURL: https://api.equinor.com/api-details#api=iiot-ae-api-v1
+  baseURL: https://api.gateway.equinor.com/iiot/ae
+  tags:
+  - Events
+  properties:
+  - type: OpenAPI
+    url: openapi/equinor-events-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/equinor-event-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-count-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-message-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-source-model-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-destination-set-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-summary-response-table-a1-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-create-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscriptions-complete-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-rt-subscriptions-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-uid-post-request-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-paged-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-item-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-facet-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-27-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-28-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-29-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-put-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-patch-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-raw-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-paged-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-point-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-forecast-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-allowedlocations-schema.json
+- aid: equinor:equinor-facets-api
+  name: Equinor Facets API
+  description: The Facets API from Equinor — 1 operation(s) for facets.
+  humanURL: https://api.equinor.com/api-details#api=iiot-ae-api-v1
+  baseURL: https://api.gateway.equinor.com/iiot/ae
+  tags:
+  - Facets
+  properties:
+  - type: OpenAPI
+    url: openapi/equinor-facets-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/equinor-event-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-count-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-message-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-source-model-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-destination-set-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-summary-response-table-a1-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-create-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscriptions-complete-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-rt-subscriptions-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-uid-post-request-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-paged-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-item-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-facet-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-27-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-28-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-29-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-put-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-patch-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-raw-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-paged-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-point-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-forecast-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-allowedlocations-schema.json
+- aid: equinor:equinor-facility-api
+  name: Equinor Facility API
+  description: The Facility API from Equinor — 2 operation(s) for facility.
+  humanURL: https://api.equinor.com/api-details#api=iiot-ae-api-v1
+  baseURL: https://api.gateway.equinor.com/iiot/ae
+  tags:
+  - Facility
+  properties:
+  - type: OpenAPI
+    url: openapi/equinor-facility-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/equinor-event-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-count-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-message-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-source-model-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-destination-set-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-summary-response-table-a1-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-create-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscriptions-complete-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-rt-subscriptions-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-uid-post-request-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-paged-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-item-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-facet-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-27-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-28-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-29-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-put-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-patch-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-raw-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-paged-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-point-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-forecast-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-allowedlocations-schema.json
+- aid: equinor:equinor-getoradd-api
+  name: Equinor Getoradd API
+  description: The Getoradd API from Equinor — 1 operation(s) for getoradd.
+  humanURL: https://api.equinor.com/api-details#api=iiot-ae-api-v1
+  baseURL: https://api.gateway.equinor.com/iiot/ae
+  tags:
+  - Getoradd
+  properties:
+  - type: OpenAPI
+    url: openapi/equinor-getoradd-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/equinor-event-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-count-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-message-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-source-model-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-destination-set-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-summary-response-table-a1-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-create-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscriptions-complete-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-rt-subscriptions-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-uid-post-request-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-paged-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-item-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-facet-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-27-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-28-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-29-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-put-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-patch-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-raw-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-paged-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-point-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-forecast-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-allowedlocations-schema.json
+- aid: equinor:equinor-history-api
+  name: Equinor History API
+  description: The History API from Equinor — 2 operation(s) for history.
+  humanURL: https://api.equinor.com/api-details#api=iiot-ae-api-v1
+  baseURL: https://api.gateway.equinor.com/iiot/ae
+  tags:
+  - History
+  properties:
+  - type: OpenAPI
+    url: openapi/equinor-history-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/equinor-event-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-count-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-message-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-source-model-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-destination-set-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-summary-response-table-a1-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-create-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscriptions-complete-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-rt-subscriptions-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-uid-post-request-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-paged-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-item-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-facet-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-27-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-28-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-29-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-put-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-patch-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-raw-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-paged-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-point-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-forecast-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-allowedlocations-schema.json
+- aid: equinor:equinor-ims-export-subscriptions-api-api
+  name: Equinor IMS Export Subscriptions API
+  description: >-
+    The IMS Export Subscriptions API API from Equinor — 2 operation(s) for ims export subscriptions api.
+  humanURL: https://api.equinor.com/api-details#api=iiot-ae-api-v1
+  baseURL: https://api.gateway.equinor.com/iiot/ae
+  tags:
+  - IMS Export Subscriptions API
+  properties:
+  - type: OpenAPI
+    url: openapi/equinor-ims-export-subscriptions-api-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/equinor-event-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-count-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-message-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-source-model-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-destination-set-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-summary-response-table-a1-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-create-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscriptions-complete-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-rt-subscriptions-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-uid-post-request-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-paged-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-item-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-facet-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-27-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-28-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-29-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-put-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-patch-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-raw-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-paged-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-point-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-forecast-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-allowedlocations-schema.json
+- aid: equinor:equinor-ims-metadata-api-api
+  name: Equinor IMS Metadata API
+  description: The IMS Metadata API API from Equinor — 3 operation(s) for ims metadata api.
+  humanURL: https://api.equinor.com/api-details#api=iiot-ae-api-v1
+  baseURL: https://api.gateway.equinor.com/iiot/ae
+  tags:
+  - IMS Metadata API
+  properties:
+  - type: OpenAPI
+    url: openapi/equinor-ims-metadata-api-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/equinor-event-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-count-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-message-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-source-model-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-destination-set-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-summary-response-table-a1-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-create-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscriptions-complete-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-rt-subscriptions-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-uid-post-request-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-paged-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-item-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-facet-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-27-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-28-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-29-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-put-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-patch-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-raw-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-paged-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-point-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-forecast-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-allowedlocations-schema.json
+- aid: equinor:equinor-locations-api
+  name: Equinor Locations API
+  description: The Locations API from Equinor — 5 operation(s) for locations.
+  humanURL: https://api.equinor.com/api-details#api=iiot-ae-api-v1
+  baseURL: https://api.gateway.equinor.com/iiot/ae
+  tags:
+  - Locations
+  properties:
+  - type: OpenAPI
+    url: openapi/equinor-locations-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/equinor-event-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-count-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-message-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-source-model-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-destination-set-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-summary-response-table-a1-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-create-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscriptions-complete-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-rt-subscriptions-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-uid-post-request-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-paged-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-item-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-facet-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-27-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-28-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-29-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-put-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-patch-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-raw-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-paged-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-point-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-forecast-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-allowedlocations-schema.json
+- aid: equinor:equinor-parameter-sets-api
+  name: Equinor Parameter Sets API
+  description: The Parameter Sets API from Equinor — 2 operation(s) for parameter sets.
+  humanURL: https://api.equinor.com/api-details#api=iiot-ae-api-v1
+  baseURL: https://api.gateway.equinor.com/iiot/ae
+  tags:
+  - Parameter Sets
+  properties:
+  - type: OpenAPI
+    url: openapi/equinor-parameter-sets-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/equinor-event-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-count-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-message-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-source-model-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-destination-set-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-summary-response-table-a1-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-create-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscriptions-complete-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-rt-subscriptions-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-uid-post-request-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-paged-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-item-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-facet-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-27-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-28-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-29-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-put-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-patch-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-raw-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-paged-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-point-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-forecast-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-allowedlocations-schema.json
+- aid: equinor:equinor-parameters-api
+  name: Equinor Parameters API
+  description: The Parameters API from Equinor — 2 operation(s) for parameters.
+  humanURL: https://api.equinor.com/api-details#api=iiot-ae-api-v1
+  baseURL: https://api.gateway.equinor.com/iiot/ae
+  tags:
+  - Parameters
+  properties:
+  - type: OpenAPI
+    url: openapi/equinor-parameters-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/equinor-event-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-count-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-message-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-source-model-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-destination-set-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-summary-response-table-a1-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-create-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscriptions-complete-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-rt-subscriptions-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-uid-post-request-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-paged-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-item-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-facet-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-27-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-28-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-29-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-put-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-patch-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-raw-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-paged-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-point-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-forecast-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-allowedlocations-schema.json
+- aid: equinor:equinor-query-api
+  name: Equinor Query API
+  description: The Query API from Equinor — 3 operation(s) for query.
+  humanURL: https://api.equinor.com/api-details#api=iiot-ae-api-v1
+  baseURL: https://api.gateway.equinor.com/iiot/ae
+  tags:
+  - Query
+  properties:
+  - type: OpenAPI
+    url: openapi/equinor-query-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/equinor-event-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-count-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-message-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-source-model-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-destination-set-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-summary-response-table-a1-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-create-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscriptions-complete-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-rt-subscriptions-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-uid-post-request-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-paged-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-item-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-facet-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-27-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-28-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-29-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-put-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-patch-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-raw-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-paged-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-point-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-forecast-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-allowedlocations-schema.json
+- aid: equinor:equinor-realtime-api
+  name: Equinor Realtime API
+  description: The Realtime API from Equinor — 4 operation(s) for realtime.
+  humanURL: https://api.equinor.com/api-details#api=iiot-ae-api-v1
+  baseURL: https://api.gateway.equinor.com/iiot/ae
+  tags:
+  - Realtime
+  properties:
+  - type: OpenAPI
+    url: openapi/equinor-realtime-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/equinor-event-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-count-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-message-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-source-model-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-destination-set-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-summary-response-table-a1-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-create-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscriptions-complete-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-rt-subscriptions-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-uid-post-request-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-paged-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-item-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-facet-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-27-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-28-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-29-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-put-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-patch-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-raw-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-paged-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-point-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-forecast-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-allowedlocations-schema.json
+- aid: equinor:equinor-search-api
+  name: Equinor Search API
+  description: The Search API from Equinor — 4 operation(s) for search.
+  humanURL: https://api.equinor.com/api-details#api=iiot-ae-api-v1
+  baseURL: https://api.gateway.equinor.com/iiot/ae
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/equinor-search-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/equinor-event-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-count-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-message-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-source-model-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-destination-set-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-summary-response-table-a1-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-create-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscriptions-complete-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-rt-subscriptions-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-uid-post-request-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-paged-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-item-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-facet-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-27-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-28-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-29-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-put-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-patch-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-raw-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-paged-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-point-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-forecast-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-allowedlocations-schema.json
+- aid: equinor:equinor-sources-api
+  name: Equinor Sources API
+  description: The Sources API from Equinor — 1 operation(s) for sources.
+  humanURL: https://api.equinor.com/api-details#api=iiot-ae-api-v1
+  baseURL: https://api.gateway.equinor.com/iiot/ae
+  tags:
+  - Sources
+  properties:
+  - type: OpenAPI
+    url: openapi/equinor-sources-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/equinor-event-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-count-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-message-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-source-model-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-destination-set-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-summary-response-table-a1-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-create-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscriptions-complete-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-rt-subscriptions-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-uid-post-request-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-paged-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-item-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-facet-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-27-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-28-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-29-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-put-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-patch-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-raw-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-paged-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-point-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-forecast-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-allowedlocations-schema.json
+- aid: equinor:equinor-streaming-api
+  name: Equinor Streaming API
+  description: The Streaming API from Equinor — 4 operation(s) for streaming.
+  humanURL: https://api.equinor.com/api-details#api=iiot-ae-api-v1
+  baseURL: https://api.gateway.equinor.com/iiot/ae
+  tags:
+  - Streaming
+  properties:
+  - type: OpenAPI
+    url: openapi/equinor-streaming-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/equinor-event-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-count-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-message-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-source-model-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-destination-set-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-summary-response-table-a1-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-create-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscriptions-complete-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-rt-subscriptions-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-uid-post-request-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-paged-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-item-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-facet-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-27-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-28-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-29-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-put-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-patch-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-raw-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-paged-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-point-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-forecast-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-allowedlocations-schema.json
+- aid: equinor:equinor-table-a1s-api
+  name: Equinor Table A1s API
+  description: The Table A1s API from Equinor — 3 operation(s) for table a1s.
+  humanURL: https://api.equinor.com/api-details#api=iiot-ae-api-v1
+  baseURL: https://api.gateway.equinor.com/iiot/ae
+  tags:
+  - Table A1s
+  properties:
+  - type: OpenAPI
+    url: openapi/equinor-table-a1s-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/equinor-event-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-count-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-message-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-source-model-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-destination-set-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-summary-response-table-a1-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-create-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscriptions-complete-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-rt-subscriptions-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-uid-post-request-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-paged-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-item-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-facet-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-27-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-28-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-29-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-put-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-patch-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-raw-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-paged-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-point-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-forecast-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-allowedlocations-schema.json
+- aid: equinor:equinor-threshold-api
+  name: Equinor Threshold API
+  description: The Threshold API from Equinor — 2 operation(s) for threshold.
+  humanURL: https://api.equinor.com/api-details#api=iiot-ae-api-v1
+  baseURL: https://api.gateway.equinor.com/iiot/ae
+  tags:
+  - Threshold
+  properties:
+  - type: OpenAPI
+    url: openapi/equinor-threshold-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/equinor-event-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-count-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-message-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-source-model-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-destination-set-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-summary-response-table-a1-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-create-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscriptions-complete-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-rt-subscriptions-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-uid-post-request-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-paged-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-item-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-facet-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-27-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-28-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-29-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-put-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-patch-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-raw-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-paged-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-point-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-forecast-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-allowedlocations-schema.json
+- aid: equinor:equinor-timeseries-api-api
+  name: Equinor Timeseries API
+  description: The Timeseries API API from Equinor — 2 operation(s) for timeseries api.
+  humanURL: https://api.equinor.com/api-details#api=iiot-ae-api-v1
+  baseURL: https://api.gateway.equinor.com/iiot/ae
+  tags:
+  - Timeseries API
+  properties:
+  - type: OpenAPI
+    url: openapi/equinor-timeseries-api-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/equinor-event-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-count-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-message-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-source-model-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-destination-set-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-summary-response-table-a1-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-create-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscriptions-complete-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-rt-subscriptions-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-uid-post-request-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-paged-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-item-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-facet-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-27-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-28-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-29-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-put-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-patch-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-raw-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-paged-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-point-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-forecast-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-allowedlocations-schema.json
+- aid: equinor:equinor-timeseriesid-api
+  name: Equinor Timeseriesid API
+  description: The Timeseriesid API from Equinor — 1 operation(s) for timeseriesid.
+  humanURL: https://api.equinor.com/api-details#api=iiot-ae-api-v1
+  baseURL: https://api.gateway.equinor.com/iiot/ae
+  tags:
+  - Timeseriesid
+  properties:
+  - type: OpenAPI
+    url: openapi/equinor-timeseriesid-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/equinor-event-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-count-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-message-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-source-model-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-destination-set-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-summary-response-table-a1-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-create-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscriptions-complete-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-rt-subscriptions-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-uid-post-request-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-paged-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-item-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-facet-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-27-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-28-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-29-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-put-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-patch-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-raw-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-paged-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-point-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-forecast-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-allowedlocations-schema.json
+- aid: equinor:equinor-uid-api
+  name: Equinor Uid API
+  description: The Uid API from Equinor — 3 operation(s) for uid.
+  humanURL: https://api.equinor.com/api-details#api=iiot-ae-api-v1
+  baseURL: https://api.gateway.equinor.com/iiot/ae
+  tags:
+  - Uid
+  properties:
+  - type: OpenAPI
+    url: openapi/equinor-uid-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/equinor-event-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-count-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-message-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-source-model-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-destination-set-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-summary-response-table-a1-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-create-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscriptions-complete-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-rt-subscriptions-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-uid-post-request-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-paged-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-item-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-facet-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-27-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-28-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-29-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-put-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-patch-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-raw-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-paged-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-point-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-forecast-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-allowedlocations-schema.json
+- aid: equinor:equinor-unit-profiles-api
+  name: Equinor Unit Profiles API
+  description: The Unit Profiles API from Equinor — 2 operation(s) for unit profiles.
+  humanURL: https://api.equinor.com/api-details#api=iiot-ae-api-v1
+  baseURL: https://api.gateway.equinor.com/iiot/ae
+  tags:
+  - Unit Profiles
+  properties:
+  - type: OpenAPI
+    url: openapi/equinor-unit-profiles-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/equinor-event-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-count-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-message-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-source-model-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-destination-set-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-summary-response-table-a1-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-create-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscriptions-complete-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-rt-subscriptions-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-uid-post-request-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-paged-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-item-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-facet-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-27-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-28-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-29-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-put-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-patch-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-raw-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-paged-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-point-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-forecast-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-allowedlocations-schema.json
+- aid: equinor:equinor-units-api
+  name: Equinor Units API
+  description: The Units API from Equinor — 2 operation(s) for units.
+  humanURL: https://api.equinor.com/api-details#api=iiot-ae-api-v1
+  baseURL: https://api.gateway.equinor.com/iiot/ae
+  tags:
+  - Units
+  properties:
+  - type: OpenAPI
+    url: openapi/equinor-units-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/equinor-event-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-count-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-message-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-source-model-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-destination-set-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-summary-response-table-a1-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-create-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscriptions-complete-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-rt-subscriptions-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-uid-post-request-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-paged-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-item-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-facet-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-27-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-28-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-29-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-put-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-patch-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-raw-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-paged-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-point-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-forecast-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-allowedlocations-schema.json
+- aid: equinor:equinor-weather-api
+  name: Equinor Weather API
+  description: The Weather API from Equinor — 2 operation(s) for weather.
+  humanURL: https://api.equinor.com/api-details#api=iiot-ae-api-v1
+  baseURL: https://api.gateway.equinor.com/iiot/ae
+  tags:
+  - Weather
+  properties:
+  - type: OpenAPI
+    url: openapi/equinor-weather-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/equinor-event-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-count-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-message-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-source-model-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-destination-set-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-table-a1-summary-response-table-a1-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscription-create-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-subscriptions-complete-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-rt-subscriptions-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-uid-post-request-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-paged-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-metadata-item-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-facet-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-27-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-28-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-post-request-29-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-put-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-patch-request-model-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-raw-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-datapoints-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-timeseries-paged-response-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-point-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-forecast-schema.json
+  - type: JSONSchema
+    url: json-schema/equinor-allowedlocations-schema.json
+x-enrichment:
+  date: '2026-10-09'
+  status: enriched
+  artifacts_added: 84
+  pass: modular-v1
+  engine: identity=anthropic,contract=anthropic,surfaces=anthropic,docs=anthropic,regulatory=anthropic

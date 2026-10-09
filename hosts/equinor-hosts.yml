@@ -1,0 +1,104 @@
+generated: '2026-10-09'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 6
+  own: 5
+  other_domain: 0
+  platform: 1
+  roles:
+  - api
+  - data
+  - docs
+  - portal
+  - source
+  - website
+hosts:
+- host: api.equinor.com
+  found_by:
+  - pointer
+  - apis[]
+  - probed
+  - site-links
+  - contract-discovery
+  - well-known
+  types:
+  - DeveloperPortal
+  - APIReference
+  - Login
+  serves:
+  - docs
+  registrable_domain: equinor.com
+  role: portal
+  relation: own
+- host: api.gateway.equinor.com
+  found_by:
+  - apis[]
+  - vendor-detect
+  types: []
+  serves:
+  - api
+  - api-gateway
+  vendor: azure-apim
+  registrable_domain: equinor.com
+  role: api
+  relation: own
+- host: data.equinor.com
+  found_by:
+  - probed
+  - site-links
+  - namespace-probe
+  - contract-discovery
+  - well-known
+  types: []
+  serves: []
+  status: 200
+  registrable_domain: equinor.com
+  role: data
+  relation: own
+- host: docs.equinor.com
+  found_by:
+  - pointer
+  - probed
+  - site-links
+  - docs-index
+  - contract-discovery
+  - well-known
+  types:
+  - Documentation
+  serves:
+  - docs
+  registrable_domain: equinor.com
+  role: docs
+  relation: own
+- host: github.com
+  found_by:
+  - pointer
+  - apis[]
+  types:
+  - APIDesignGuidelines
+  - GitHubOrganization
+  - SpectralRules
+  serves:
+  - docs
+  registrable_domain: github.com
+  role: source
+  relation: platform
+- host: www.equinor.com
+  found_by:
+  - pointer
+  - probed
+  - contract-discovery
+  - well-known
+  types:
+  - Website
+  - News
+  - Support
+  - OpenData
+  - TermsOfService
+  - PrivacyPolicy
+  serves: []
+  registrable_domain: equinor.com
+  role: website
+  relation: own

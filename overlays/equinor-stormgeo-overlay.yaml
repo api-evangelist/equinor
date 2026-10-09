@@ -1,0 +1,129 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Equinor StormGeo
+  version: 1.0.0
+extends: ../openapi/_original/equinor-stormgeo-openapi.yml
+actions:
+- target: $.info
+  description: API Evangelist provenance metadata
+  update:
+    x-apievangelist-provider: equinor
+    x-apievangelist-profiled: '2026-10-09'
+- target: $
+  description: Declare derived tags
+  update:
+    tags:
+    - name: locations
+      description: Operations under /locations
+    - name: forecasts
+      description: Operations under /forecasts
+    - name: threshold
+      description: Operations under /threshold
+    - name: parameters
+      description: Operations under /parameters
+    - name: parameter-sets
+      description: Operations under /parameter-sets
+    - name: unit-profiles
+      description: Operations under /unit-profiles
+    - name: units
+      description: Operations under /units
+    - name: allowed-locations
+      description: Operations under /allowed-locations
+- target: $.paths['/locations'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - locations
+- target: $.paths['/locations/{id}'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - locations
+- target: $.paths['/locations/{id}/forecasts'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - locations
+- target: $.paths['/locations/{id}/forecasts/{forecastType}'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - locations
+- target: $.paths['/locations/{id}/threshold/{thresholdId}'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - locations
+- target: $.paths['/forecasts'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - forecasts
+- target: $.paths['/forecasts/{forecastType}'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - forecasts
+- target: $.paths['/threshold'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - threshold
+- target: $.paths['/parameters'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - parameters
+- target: $.paths['/parameters/{name}'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - parameters
+- target: $.paths['/parameter-sets'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - parameter-sets
+- target: $.paths['/parameter-sets/{id}'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - parameter-sets
+- target: $.paths['/unit-profiles'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - unit-profiles
+- target: $.paths['/unit-profiles/{id}'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - unit-profiles
+- target: $.paths['/units'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - units
+- target: $.paths['/units/{name}'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - units
+- target: $.paths['/threshold/{id}'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - threshold
+- target: $.paths['/allowed-locations'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - allowed-locations
+- target: $.paths['/allowed-locations'].get
+  description: Source operation has no operationId; add one derived from method and path
+  update:
+    operationId: get-allowed-locations
+- target: $.info
+  description: Flag absent security declaration (not invented)
+  update:
+    x-apievangelist-note: The source spec declares no securitySchemes; the auth method is not stated in the contract.

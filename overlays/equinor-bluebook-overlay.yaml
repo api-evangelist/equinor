@@ -1,0 +1,32 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Equinor BlueBook Public API
+  version: 1.0.0
+extends: ../openapi/_original/equinor-bluebook-openapi.yml
+actions:
+- target: $.info
+  description: API Evangelist provenance metadata
+  update:
+    x-apievangelist-provider: equinor
+    x-apievangelist-profiled: '2026-10-09'
+- target: $
+  description: Declare derived tags
+  update:
+    tags:
+    - name: table-a1s
+      description: Operations under /table-a1s
+- target: $.paths['/table-a1s'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - table-a1s
+- target: $.paths['/table-a1s/{version}'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - table-a1s
+- target: $.paths['/table-a1s/latest'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - table-a1s

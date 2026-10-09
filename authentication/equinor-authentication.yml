@@ -1,0 +1,51 @@
+generated: '2026-10-09'
+method: searched
+source: https://github.com/equinor/OmniaPlant/wiki/Authentication-&-Authorization
+docs: https://github.com/equinor/OmniaPlant/wiki/Authentication-&-Authorization
+derived_from:
+- openapi/equinor-alarm-events-openapi.yml
+- openapi/equinor-bluebook-openapi.yml
+- openapi/equinor-ims-export-subscriptions-openapi.yml
+- openapi/equinor-ims-metadata-openapi.yml
+- openapi/equinor-timeseries-openapi.yml
+summary:
+  types:
+  - apiKey
+  - oauth2
+  api_key_in:
+  - header
+  - query
+  identity_provider: Azure AD (Microsoft Entra ID)
+schemes:
+- name: azureAdOAuth2
+  type: oauth2
+  source: docs
+  description: >-
+    "The Omnia Timeseries API uses OAuth 2.0 and Azure AD as identity provider." Tested flows are Client Credentials Grant (service-to-service with shared secret) and Authorization Code (user impersonation, native/public client). Managed Service Identity is also supported for Equinor applications in Azure. Not declared as a securityScheme in the OpenAPI exports.
+  flows:
+  - clientCredentials
+  - authorizationCode
+  token_lifetime: >-
+    access token "has an expiration time (e.g. 1 hour)"; the client must renew it.
+  onboarding: Access is granted on request (OmniaIndIoT@equinor.com or ServiceNow request); roles/API permissions such as Timeseries.Read and AE.Read are assigned by the Omnia Ind IoT team.
+- name: apiKeyHeader
+  type: apiKey
+  in: header
+  parameter: Ocp-Apim-Subscription-Key
+  sources: [openapi/equinor-alarm-events-openapi.yml, openapi/equinor-bluebook-openapi.yml, openapi/equinor-ims-metadata-openapi.yml]
+- name: apiKeyQuery
+  type: apiKey
+  in: query
+  parameter: subscription-key
+  sources: [openapi/equinor-alarm-events-openapi.yml, openapi/equinor-bluebook-openapi.yml, openapi/equinor-ims-metadata-openapi.yml]
+- name: apiKeyHeader
+  type: apiKey
+  in: header
+  parameter: sub
+  sources: [openapi/equinor-ims-export-subscriptions-openapi.yml, openapi/equinor-timeseries-openapi.yml]
+- name: apiKeyQuery
+  type: apiKey
+  in: query
+  parameter: sub
+  sources: [openapi/equinor-ims-export-subscriptions-openapi.yml, openapi/equinor-timeseries-openapi.yml]
+note: The apiKey schemes are the Azure API Management subscription-key schemes from the api.equinor.com portal exports; the StormGeo contract declares no securitySchemes.

@@ -1,0 +1,617 @@
+openapi: 3.2.0
+info:
+  title: IMS Export Subscriptions Realtime API
+  description: API for viewing and creating subscriptions. Subscriptions deliver data from plant IMS's to Omnia TSDB
+  contact:
+    name: PlantTeam
+    email: OmniaIndIoT@equinor.com
+  version: v1.2
+servers:
+- url: https://api.gateway.equinor.com/plant/ims-subscriptions
+- url: https://api-ncc.gateway.equinor.com/plant/ims-subscriptions
+security:
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: Realtime
+paths:
+  /realtime:
+    post:
+      operationId: CreateRealTimeSubscription
+      summary: Create a real-time data subscription on ims system
+      description: Create a real-time data subscription on ims system.
+      parameters:
+      - name: lifeTime
+        in: query
+        required: false
+        description: 'The lifetime of the real time subscription. The default is ''10m''. Max is ''35d''. Valid examples: 60s, 10m, 24h, 15d.'
+        schema:
+          type: string
+      - name: expirationTime
+        in: query
+        required: false
+        description: Format - date-time (as date-time in RFC3339). The expiration time of the subscription in utc time. Max is 35 days from request time. If given takes priority over 'lifetime' parameter.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubscriptionCreateModel'
+            example:
+              uId: string
+              name: string
+              systemId: string
+              terminal: string
+              backfillTo: string
+          text/json:
+            schema:
+              $ref: '#/components/schemas/SubscriptionCreateModel'
+            example:
+              uId: string
+              name: string
+              systemId: string
+              terminal: string
+              backfillTo: string
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/SubscriptionCreateModel'
+            example:
+              uId: string
+              name: string
+              systemId: string
+              terminal: string
+              backfillTo: string
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RtSubscriptionsDto'
+              example:
+                data:
+                  items:
+                  - timeseriesId: string
+                    expiration: string
+                    customerId: string
+                continuationToken: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/ims-export-subscriptions-v1-2/operations/CreateRealTimeSubscription?api-version=2022-04-01-preview
+      tags:
+      - Realtime
+    get:
+      operationId: ListRealTimeSubscriptions
+      summary: List all subscriptions belonging to calling customer
+      description: List all subscriptions belonging to calling customer.
+      parameters:
+      - name: excludeExpired
+        in: query
+        required: false
+        description: Return only subscriptions that have not expired.
+        schema:
+          type: boolean
+      - name: limit
+        in: query
+        required: false
+        description: Format - int32. Maximum number of subscriptions to return in a single response.
+        schema:
+          type: integer
+      - name: continuationToken
+        in: query
+        required: false
+        description: Token used for getting the continuation of a response.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RtSubscriptionsDto'
+              example:
+                data:
+                  items:
+                  - timeseriesId: string
+                    expiration: string
+                    customerId: string
+                continuationToken: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/ims-export-subscriptions-v1-2/operations/ListRealTimeSubscriptions?api-version=2022-04-01-preview
+      tags:
+      - Realtime
+  /realtime/timeseriesid/{timeseriesId}:
+    delete:
+      operationId: DeleteRealTimeSubscription
+      summary: Delete a real-time data subscription
+      description: Delete a real-time data subscription.
+      parameters:
+      - name: timeseriesId
+        in: path
+        required: true
+        description: Format - uuid. Unique timeseries ID to delete realtime subscription for
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/ims-export-subscriptions-v1-2/operations/DeleteRealTimeSubscription?api-version=2022-04-01-preview
+      tags:
+      - Realtime
+    get:
+      operationId: GetRealTimeSubscription
+      summary: Retrieve subscription on a specific sensor-tag belonging to calling customer
+      description: Retrieve subscription on a specific sensor-tag belonging to calling customer.
+      parameters:
+      - name: timeseriesId
+        in: path
+        required: true
+        description: Format - uuid. The timeseries ID to get the realtime subscription for
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RtSubscriptionsDto'
+              example:
+                data:
+                  items:
+                  - timeseriesId: string
+                    expiration: string
+                    customerId: string
+                continuationToken: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/ims-export-subscriptions-v1-2/operations/GetRealTimeSubscription?api-version=2022-04-01-preview
+      tags:
+      - Realtime
+  /realtime/uid/{uId}:
+    delete:
+      operationId: DeleteRealTimeSubscriptionByUid
+      summary: Delete a real-time data subscription
+      description: Delete a real-time data subscription.
+      parameters:
+      - name: uId
+        in: path
+        required: true
+        description: Unique ID to delete realtime subscription for
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/ims-export-subscriptions-v1-2/operations/DeleteRealTimeSubscriptionByUid?api-version=2022-04-01-preview
+      tags:
+      - Realtime
+  /realtime/destination:
+    post:
+      operationId: SetRealTimeDestination
+      summary: Set event hub destination for real time data
+      description: Set event hub destination for real time data.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DestinationSetModel'
+            example:
+              connectionString: string
+          text/json:
+            schema:
+              $ref: '#/components/schemas/DestinationSetModel'
+            example:
+              connectionString: string
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/DestinationSetModel'
+            example:
+              connectionString: string
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/ims-export-subscriptions-v1-2/operations/SetRealTimeDestination?api-version=2022-04-01-preview
+      tags:
+      - Realtime
+components:
+  schemas:
+    RtSubscriptionsDto:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/RtSubscriptionItems'
+        continuationToken:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    MessageModel:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+        message:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    SubscriptionCreateModel:
+      type: object
+      properties:
+        uId:
+          type:
+          - string
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+        systemId:
+          type:
+          - string
+          - 'null'
+        terminal:
+          type:
+          - string
+          - 'null'
+        backfillTo:
+          type:
+          - string
+          - 'null'
+          format: date-time
+      additionalProperties: false
+    DestinationSetModel:
+      type: object
+      properties:
+        connectionString:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    RtSubscriptionBase:
+      type: object
+      properties:
+        timeseriesId:
+          type: string
+          format: uuid
+        expiration:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        customerId:
+          type: string
+          format: uuid
+      additionalProperties: false
+    RtSubscriptionItems:
+      type: object
+      properties:
+        items:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/RtSubscriptionBase'
+      additionalProperties: false
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      name: sub
+      in: header
+    apiKeyQuery:
+      type: apiKey
+      name: sub
+      in: query
+x-generated-from: apim-developer-portal-data
+x-source: https://api.equinor.com/api-details#api=ims-export-subscriptions-v1-2
+x-generated-note: The anonymous APIM export at https://api.equinor.com/developer/apis/ims-export-subscriptions-v1-2?export=true&format=openapi%2Bjson returns this document with empty paths; paths were assembled verbatim (by script) from the same portal's anonymous operations and schemas endpoints, saved in openapi/_original/.

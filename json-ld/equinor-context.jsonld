@@ -1,0 +1,749 @@
+{
+  "@context": {
+    "@vocab": "https://equinor.com/schema#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "equinor": "https://equinor.com/schema#",
+    "CountDto": "equinor:CountDto",
+    "statusCode": {
+      "@id": "equinor:statusCode",
+      "@type": "xsd:integer"
+    },
+    "message": {
+      "@id": "equinor:message",
+      "@type": "xsd:string"
+    },
+    "traceId": {
+      "@id": "equinor:traceId",
+      "@type": "xsd:string"
+    },
+    "items": {
+      "@id": "equinor:items",
+      "@container": "@list"
+    },
+    "CountModel": "equinor:CountModel",
+    "timestamp": {
+      "@id": "equinor:timestamp",
+      "@type": "xsd:dateTime"
+    },
+    "count": {
+      "@id": "equinor:count",
+      "@type": "xsd:integer"
+    },
+    "priority": {
+      "@id": "equinor:priority",
+      "@type": "xsd:integer"
+    },
+    "DestinationSetModel": "equinor:DestinationSetModel",
+    "connectionString": {
+      "@id": "equinor:connectionString",
+      "@type": "xsd:string"
+    },
+    "EventDto": "equinor:EventDto",
+    "totalCount": {
+      "@id": "equinor:totalCount",
+      "@type": "xsd:integer"
+    },
+    "continuationToken": {
+      "@id": "equinor:continuationToken",
+      "@type": "xsd:string"
+    },
+    "EventModel": "equinor:EventModel",
+    "sourceName": {
+      "@id": "equinor:sourceName",
+      "@type": "xsd:string"
+    },
+    "description": {
+      "@id": "equinor:description",
+      "@type": "xsd:string"
+    },
+    "eventType": {
+      "@id": "equinor:eventType",
+      "@type": "xsd:string"
+    },
+    "eventCategory": {
+      "@id": "equinor:eventCategory",
+      "@type": "xsd:string"
+    },
+    "severity": {
+      "@id": "equinor:severity",
+      "@type": "xsd:integer"
+    },
+    "condition": {
+      "@id": "equinor:condition",
+      "@type": "xsd:string"
+    },
+    "alarmState": {
+      "@id": "equinor:alarmState",
+      "@type": "xsd:string"
+    },
+    "ackedState": {
+      "@id": "equinor:ackedState",
+      "@type": "xsd:boolean"
+    },
+    "activeState": {
+      "@id": "equinor:activeState",
+      "@type": "xsd:boolean"
+    },
+    "suppressedOrShelved": {
+      "@id": "equinor:suppressedOrShelved",
+      "@type": "xsd:boolean"
+    },
+    "node": {
+      "@id": "equinor:node",
+      "@type": "xsd:string"
+    },
+    "processArea": {
+      "@id": "equinor:processArea",
+      "@type": "xsd:string"
+    },
+    "actiontime": {
+      "@id": "equinor:actiontime",
+      "@type": "xsd:dateTime"
+    },
+    "otherFields": {
+      "@id": "equinor:otherFields"
+    },
+    "MessageModel": "equinor:MessageModel",
+    "Sort": "equinor:Sort",
+    "SourceModel": "equinor:SourceModel",
+    "facility": {
+      "@id": "equinor:facility",
+      "@type": "xsd:string"
+    },
+    "SourceModelDto": "equinor:SourceModelDto",
+    "SubscriptionItem": "equinor:SubscriptionItem",
+    "SubscriptionList": "equinor:SubscriptionList",
+    "SubscriptionListResponse": "equinor:SubscriptionListResponse",
+    "data": {
+      "@id": "equinor:data",
+      "@type": "@id"
+    },
+    "DatasetResponse": "equinor:DatasetResponse",
+    "datasetId": {
+      "@id": "equinor:datasetId",
+      "@type": "xsd:string"
+    },
+    "npdRequirement": {
+      "@id": "equinor:npdRequirement",
+      "@type": "xsd:string"
+    },
+    "dataset": {
+      "@id": "equinor:dataset",
+      "@type": "xsd:string"
+    },
+    "definition": {
+      "@id": "equinor:definition",
+      "@type": "xsd:string"
+    },
+    "unloadFilePath": {
+      "@id": "equinor:unloadFilePath",
+      "@type": "xsd:string"
+    },
+    "title": {
+      "@id": "equinor:title",
+      "@container": "@list"
+    },
+    "exampleOfFilenames": {
+      "@id": "equinor:exampleOfFilenames",
+      "@container": "@list"
+    },
+    "explanationOrExamples": {
+      "@id": "equinor:explanationOrExamples",
+      "@type": "xsd:string"
+    },
+    "infoItemGroupType": {
+      "@id": "equinor:infoItemGroupType",
+      "@type": "xsd:string"
+    },
+    "infoItemType": {
+      "@id": "equinor:infoItemType",
+      "@type": "xsd:string"
+    },
+    "logTitle": {
+      "@id": "equinor:logTitle",
+      "@type": "xsd:string"
+    },
+    "creationProcess": {
+      "@id": "equinor:creationProcess",
+      "@type": "xsd:string"
+    },
+    "dataDomain": {
+      "@id": "equinor:dataDomain",
+      "@container": "@list"
+    },
+    "dataOrganisation": {
+      "@id": "equinor:dataOrganisation",
+      "@type": "xsd:string"
+    },
+    "publicAccess": {
+      "@id": "equinor:publicAccess",
+      "@type": "xsd:string"
+    },
+    "publicCalculationBasedOn": {
+      "@id": "equinor:publicCalculationBasedOn",
+      "@type": "xsd:string"
+    },
+    "ProblemDetails": "equinor:ProblemDetails",
+    "type": {
+      "@id": "equinor:type",
+      "@type": "xsd:string"
+    },
+    "status": {
+      "@id": "equinor:status",
+      "@type": "xsd:integer"
+    },
+    "detail": {
+      "@id": "equinor:detail",
+      "@type": "xsd:string"
+    },
+    "instance": {
+      "@id": "equinor:instance",
+      "@type": "xsd:string"
+    },
+    "TableA1Response": "equinor:TableA1Response",
+    "version": {
+      "@id": "equinor:version",
+      "@type": "xsd:string"
+    },
+    "date": {
+      "@id": "equinor:date",
+      "@type": "xsd:date"
+    },
+    "datasets": {
+      "@id": "equinor:datasets",
+      "@container": "@list"
+    },
+    "TableA1SummaryResponse": "equinor:TableA1SummaryResponse",
+    "TableA1SummaryResponseTableA1ListResponse": "equinor:TableA1SummaryResponseTableA1ListResponse",
+    "RtSubscriptionBase": "equinor:RtSubscriptionBase",
+    "timeseriesId": {
+      "@id": "equinor:timeseriesId",
+      "@type": "xsd:string"
+    },
+    "expiration": {
+      "@id": "equinor:expiration",
+      "@type": "xsd:dateTime"
+    },
+    "customerId": {
+      "@id": "equinor:customerId",
+      "@type": "xsd:string"
+    },
+    "RtSubscriptionItems": "equinor:RtSubscriptionItems",
+    "RtSubscriptionsDto": "equinor:RtSubscriptionsDto",
+    "SubscriptionCompleteItems": "equinor:SubscriptionCompleteItems",
+    "SubscriptionCompleteModel": "equinor:SubscriptionCompleteModel",
+    "uId": {
+      "@id": "equinor:uId",
+      "@type": "xsd:string"
+    },
+    "name": {
+      "@id": "equinor:name",
+      "@type": "xsd:string"
+    },
+    "plantSapCode": {
+      "@id": "equinor:plantSapCode",
+      "@type": "xsd:integer"
+    },
+    "plantStidCode": {
+      "@id": "equinor:plantStidCode",
+      "@type": "xsd:string"
+    },
+    "terminal": {
+      "@id": "equinor:terminal",
+      "@type": "xsd:string"
+    },
+    "fieldId": {
+      "@id": "equinor:fieldId",
+      "@type": "xsd:string"
+    },
+    "createdBy": {
+      "@id": "equinor:createdBy",
+      "@type": "xsd:string"
+    },
+    "created": {
+      "@id": "equinor:created",
+      "@type": "xsd:dateTime"
+    },
+    "tsdbExportEnabled": {
+      "@id": "equinor:tsdbExportEnabled",
+      "@type": "xsd:boolean"
+    },
+    "tsdbBackfilled": {
+      "@id": "equinor:tsdbBackfilled",
+      "@type": "xsd:boolean"
+    },
+    "tsdbEventsExported": {
+      "@id": "equinor:tsdbEventsExported",
+      "@type": "xsd:integer"
+    },
+    "tsdbFirstExportedTime": {
+      "@id": "equinor:tsdbFirstExportedTime",
+      "@type": "xsd:dateTime"
+    },
+    "tsdbLastExportedTime": {
+      "@id": "equinor:tsdbLastExportedTime",
+      "@type": "xsd:dateTime"
+    },
+    "dlExportEnabled": {
+      "@id": "equinor:dlExportEnabled",
+      "@type": "xsd:boolean"
+    },
+    "dlBackfilled": {
+      "@id": "equinor:dlBackfilled",
+      "@type": "xsd:boolean"
+    },
+    "dlEventsExported": {
+      "@id": "equinor:dlEventsExported",
+      "@type": "xsd:integer"
+    },
+    "dlFirstExportedTime": {
+      "@id": "equinor:dlFirstExportedTime",
+      "@type": "xsd:dateTime"
+    },
+    "dlLastExportedTime": {
+      "@id": "equinor:dlLastExportedTime",
+      "@type": "xsd:dateTime"
+    },
+    "dlParquetFirstExportedTime": {
+      "@id": "equinor:dlParquetFirstExportedTime",
+      "@type": "xsd:dateTime"
+    },
+    "dlParquetLastExportedTime": {
+      "@id": "equinor:dlParquetLastExportedTime",
+      "@type": "xsd:dateTime"
+    },
+    "sourceFirstCountedTime": {
+      "@id": "equinor:sourceFirstCountedTime",
+      "@type": "xsd:dateTime"
+    },
+    "sourceLastCountedTime": {
+      "@id": "equinor:sourceLastCountedTime",
+      "@type": "xsd:dateTime"
+    },
+    "rtLastExpirationDate": {
+      "@id": "equinor:rtLastExpirationDate",
+      "@type": "xsd:dateTime"
+    },
+    "SubscriptionCreateModel": "equinor:SubscriptionCreateModel",
+    "systemId": {
+      "@id": "equinor:systemId",
+      "@type": "xsd:string"
+    },
+    "backfillTo": {
+      "@id": "equinor:backfillTo",
+      "@type": "xsd:dateTime"
+    },
+    "SubscriptionSearchRequestModel": "equinor:SubscriptionSearchRequestModel",
+    "SubscriptionType": "equinor:SubscriptionType",
+    "SubscriptionsCompleteDto": "equinor:SubscriptionsCompleteDto",
+    "errors": {
+      "@id": "equinor:errors"
+    },
+    "ErrorDetails": "equinor:ErrorDetails",
+    "FacetItem": "equinor:FacetItem",
+    "FacetList": "equinor:FacetList",
+    "FacetResponse": "equinor:FacetResponse",
+    "Hyperlink": "equinor:Hyperlink",
+    "relationship": {
+      "@id": "equinor:relationship",
+      "@type": "xsd:string"
+    },
+    "reference": {
+      "@id": "equinor:reference",
+      "@type": "@id"
+    },
+    "MetadataItemResponse_v2": "equinor:MetadataItemResponse_v2",
+    "links": {
+      "@id": "equinor:links",
+      "@container": "@list"
+    },
+    "MetadataItem_v2": "equinor:MetadataItem_v2",
+    "id": {
+      "@id": "equinor:id",
+      "@type": "xsd:string"
+    },
+    "uid": {
+      "@id": "equinor:uid",
+      "@type": "xsd:string"
+    },
+    "imsType": {
+      "@id": "equinor:imsType",
+      "@type": "xsd:string"
+    },
+    "systemCode": {
+      "@id": "equinor:systemCode",
+      "@type": "xsd:string"
+    },
+    "recordID": {
+      "@id": "equinor:recordID",
+      "@type": "xsd:string"
+    },
+    "plantSAPCode": {
+      "@id": "equinor:plantSAPCode",
+      "@type": "xsd:string"
+    },
+    "plantSTIDCode": {
+      "@id": "equinor:plantSTIDCode",
+      "@type": "xsd:string"
+    },
+    "denyDataShare": {
+      "@id": "equinor:denyDataShare",
+      "@type": "xsd:string"
+    },
+    "tag": {
+      "@id": "equinor:tag",
+      "@type": "xsd:string"
+    },
+    "isDefaultTerminal": {
+      "@id": "equinor:isDefaultTerminal",
+      "@type": "xsd:boolean"
+    },
+    "engUnits": {
+      "@id": "equinor:engUnits",
+      "@type": "xsd:string"
+    },
+    "standardUnit": {
+      "@id": "equinor:standardUnit",
+      "@type": "xsd:string"
+    },
+    "source": {
+      "@id": "equinor:source",
+      "@type": "xsd:string"
+    },
+    "sourceTag": {
+      "@id": "equinor:sourceTag",
+      "@type": "xsd:string"
+    },
+    "stepped": {
+      "@id": "equinor:stepped",
+      "@type": "xsd:boolean"
+    },
+    "changeDate": {
+      "@id": "equinor:changeDate",
+      "@type": "xsd:dateTime"
+    },
+    "creationDate": {
+      "@id": "equinor:creationDate",
+      "@type": "xsd:dateTime"
+    },
+    "currentValueDate": {
+      "@id": "equinor:currentValueDate",
+      "@type": "xsd:dateTime"
+    },
+    "plantArea": {
+      "@id": "equinor:plantArea",
+      "@type": "xsd:string"
+    },
+    "significantDigit": {
+      "@id": "equinor:significantDigit",
+      "@type": "xsd:string"
+    },
+    "maxTimeInterval": {
+      "@id": "equinor:maxTimeInterval",
+      "@type": "xsd:string"
+    },
+    "MetadataList_v2": "equinor:MetadataList_v2",
+    "MetadataPagedResponse_v2": "equinor:MetadataPagedResponse_v2",
+    "MetadataSearchModel": "equinor:MetadataSearchModel",
+    "recordId": {
+      "@id": "equinor:recordId",
+      "@type": "xsd:string"
+    },
+    "isDeleted": {
+      "@id": "equinor:isDeleted",
+      "@type": "xsd:boolean"
+    },
+    "Forecast": "equinor:Forecast",
+    "timeResolution": {
+      "@id": "equinor:timeResolution",
+      "@type": "xsd:string"
+    },
+    "latitude": {
+      "@id": "equinor:latitude",
+      "@type": "xsd:decimal"
+    },
+    "longitude": {
+      "@id": "equinor:longitude",
+      "@type": "xsd:decimal"
+    },
+    "issueTime": {
+      "@id": "equinor:issueTime",
+      "@type": "xsd:dateTime"
+    },
+    "units": {
+      "@id": "equinor:units"
+    },
+    "Point": "equinor:Point",
+    "timeZone": {
+      "@id": "equinor:timeZone",
+      "@type": "xsd:string"
+    },
+    "expiry": {
+      "@id": "equinor:expiry",
+      "@type": "xsd:dateTime"
+    },
+    "lastUpdatedForecast": {
+      "@id": "equinor:lastUpdatedForecast",
+      "@type": "xsd:dateTime"
+    },
+    "ParameterDto": "equinor:ParameterDto",
+    "unit": {
+      "@id": "equinor:unit",
+      "@type": "xsd:string"
+    },
+    "ParameterSetDto": "equinor:ParameterSetDto",
+    "parameters": {
+      "@id": "equinor:parameters",
+      "@container": "@list"
+    },
+    "ParameterSetPostDto": "equinor:ParameterSetPostDto",
+    "UnitDto": "equinor:UnitDto",
+    "baseUnit": {
+      "@id": "equinor:baseUnit",
+      "@type": "xsd:string"
+    },
+    "UnitProfileDto": "equinor:UnitProfileDto",
+    "parameterUnits": {
+      "@id": "equinor:parameterUnits"
+    },
+    "UnitProfilePostDto": "equinor:UnitProfilePostDto",
+    "Parameter": "equinor:Parameter",
+    "Threshold": "equinor:Threshold",
+    "levels": {
+      "@id": "equinor:levels",
+      "@container": "@list"
+    },
+    "ThresholdItem": "equinor:ThresholdItem",
+    "parameter": {
+      "@id": "equinor:parameter",
+      "@type": "@id"
+    },
+    "operator": {
+      "@id": "equinor:operator",
+      "@type": "xsd:string"
+    },
+    "value": {
+      "@id": "equinor:value",
+      "@type": "xsd:decimal"
+    },
+    "valueEnd": {
+      "@id": "equinor:valueEnd",
+      "@type": "xsd:decimal"
+    },
+    "ThresholdItemPostDto": "equinor:ThresholdItemPostDto",
+    "ThresholdLevel": "equinor:ThresholdLevel",
+    "thresholdId": {
+      "@id": "equinor:thresholdId",
+      "@type": "xsd:integer"
+    },
+    "colour": {
+      "@id": "equinor:colour",
+      "@type": "xsd:string"
+    },
+    "groups": {
+      "@id": "equinor:groups",
+      "@container": "@list"
+    },
+    "ThresholdLevelGroup": "equinor:ThresholdLevelGroup",
+    "ThresholdLevelGroupPostDto": "equinor:ThresholdLevelGroupPostDto",
+    "ThresholdLevelPostDto": "equinor:ThresholdLevelPostDto",
+    "ThresholdPostDto": "equinor:ThresholdPostDto",
+    "Unit": "equinor:Unit",
+    "Allowedlocations": "equinor:Allowedlocations",
+    "LocationId": {
+      "@id": "equinor:LocationId",
+      "@type": "xsd:integer"
+    },
+    "Description": {
+      "@id": "equinor:Description",
+      "@type": "xsd:string"
+    },
+    "Datapoint": "equinor:Datapoint",
+    "time": {
+      "@id": "equinor:time",
+      "@type": "xsd:dateTime"
+    },
+    "avg": {
+      "@id": "equinor:avg",
+      "@type": "xsd:decimal"
+    },
+    "min": {
+      "@id": "equinor:min",
+      "@type": "xsd:decimal"
+    },
+    "max": {
+      "@id": "equinor:max",
+      "@type": "xsd:decimal"
+    },
+    "sum": {
+      "@id": "equinor:sum",
+      "@type": "xsd:decimal"
+    },
+    "first": {
+      "@id": "equinor:first",
+      "@type": "xsd:decimal"
+    },
+    "last": {
+      "@id": "equinor:last",
+      "@type": "xsd:decimal"
+    },
+    "stddev": {
+      "@id": "equinor:stddev",
+      "@type": "xsd:decimal"
+    },
+    "median": {
+      "@id": "equinor:median",
+      "@type": "xsd:decimal"
+    },
+    "DatapointItemsWriteRequestModel": "equinor:DatapointItemsWriteRequestModel",
+    "DatapointsReadItem": "equinor:DatapointsReadItem",
+    "startTime": {
+      "@id": "equinor:startTime",
+      "@type": "xsd:dateTime"
+    },
+    "endTime": {
+      "@id": "equinor:endTime",
+      "@type": "xsd:dateTime"
+    },
+    "statusFilter": {
+      "@id": "equinor:statusFilter",
+      "@container": "@list"
+    },
+    "processingInterval": {
+      "@id": "equinor:processingInterval",
+      "@type": "xsd:string"
+    },
+    "aggregateFunctions": {
+      "@id": "equinor:aggregateFunctions",
+      "@container": "@list"
+    },
+    "fill": {
+      "@id": "equinor:fill",
+      "@type": "xsd:string"
+    },
+    "includeOutsidePoints": {
+      "@id": "equinor:includeOutsidePoints",
+      "@type": "xsd:boolean"
+    },
+    "limit": {
+      "@id": "equinor:limit",
+      "@type": "xsd:integer"
+    },
+    "DatapointsReadItemBase": "equinor:DatapointsReadItemBase",
+    "DatapointsResponseDto": "equinor:DatapointsResponseDto",
+    "DatapointsResponseItem": "equinor:DatapointsResponseItem",
+    "datapoints": {
+      "@id": "equinor:datapoints",
+      "@container": "@list"
+    },
+    "error": {
+      "@id": "equinor:error",
+      "@type": "xsd:string"
+    },
+    "DatapointsResponseItems": "equinor:DatapointsResponseItems",
+    "DatapointsWriteDatapoint": "equinor:DatapointsWriteDatapoint",
+    "DatapointsWriteRequestModel": "equinor:DatapointsWriteRequestModel",
+    "DocumentPropertyChange": "equinor:DocumentPropertyChange",
+    "from": {
+      "@id": "equinor:from",
+      "@type": "xsd:string"
+    },
+    "to": {
+      "@id": "equinor:to",
+      "@type": "xsd:string"
+    },
+    "FacilityItem": "equinor:FacilityItem",
+    "totalImsSubscriptions": {
+      "@id": "equinor:totalImsSubscriptions",
+      "@type": "xsd:integer"
+    },
+    "FacilityList": "equinor:FacilityList",
+    "FacilityResponse": "equinor:FacilityResponse",
+    "MetadataChangesData": "equinor:MetadataChangesData",
+    "MetadataChangesItem": "equinor:MetadataChangesItem",
+    "changedBy": {
+      "@id": "equinor:changedBy",
+      "@type": "xsd:string"
+    },
+    "changedTime": {
+      "@id": "equinor:changedTime",
+      "@type": "xsd:dateTime"
+    },
+    "changes": {
+      "@id": "equinor:changes"
+    },
+    "MetadataChangesResponse": "equinor:MetadataChangesResponse",
+    "RawDatapoint": "equinor:RawDatapoint",
+    "RawDatapointsResponseDto": "equinor:RawDatapointsResponseDto",
+    "RawDatapointsResponseItem": "equinor:RawDatapointsResponseItem",
+    "RawDatapointsResponseItems": "equinor:RawDatapointsResponseItems",
+    "StringOptional": "equinor:StringOptional",
+    "isSupplied": {
+      "@id": "equinor:isSupplied",
+      "@type": "xsd:boolean"
+    },
+    "StringStringDictionaryOptional": "equinor:StringStringDictionaryOptional",
+    "SubscriptionRequestModel": "equinor:SubscriptionRequestModel",
+    "contentFormat": {
+      "@id": "equinor:contentFormat",
+      "@type": "xsd:string"
+    },
+    "contentSchema": {
+      "@id": "equinor:contentSchema",
+      "@type": "xsd:string"
+    },
+    "contentCompression": {
+      "@id": "equinor:contentCompression",
+      "@type": "xsd:string"
+    },
+    "TimeseriesItem": "equinor:TimeseriesItem",
+    "step": {
+      "@id": "equinor:step",
+      "@type": "xsd:boolean"
+    },
+    "assetId": {
+      "@id": "equinor:assetId",
+      "@type": "xsd:string"
+    },
+    "externalId": {
+      "@id": "equinor:externalId",
+      "@type": "xsd:string"
+    },
+    "createdTime": {
+      "@id": "equinor:createdTime",
+      "@type": "xsd:dateTime"
+    },
+    "metadata": {
+      "@id": "equinor:metadata"
+    },
+    "TimeseriesList": "equinor:TimeseriesList",
+    "TimeseriesPagedResponse": "equinor:TimeseriesPagedResponse",
+    "TimeseriesPatchRequestModel": "equinor:TimeseriesPatchRequestModel",
+    "TimeseriesPutRequestModel": "equinor:TimeseriesPutRequestModel",
+    "TimeseriesRequestModel": "equinor:TimeseriesRequestModel",
+    "TimeseriesResponse": "equinor:TimeseriesResponse",
+    "WriteDatapointsItem": "equinor:WriteDatapointsItem",
+    "QueryDataGetRequest-9": "equinor:QueryDataGetRequest-9",
+    "QueryDataPostRequest-1": "equinor:QueryDataPostRequest-1",
+    "id-DataFirstGetRequest-4": "equinor:id-DataFirstGetRequest-4",
+    "id-DataLatestGetRequest-4": "equinor:id-DataLatestGetRequest-4",
+    "id-DataAggregatesGetRequest-6": "equinor:id-DataAggregatesGetRequest-6",
+    "id-DataAggregatesGetRequest-9": "equinor:id-DataAggregatesGetRequest-9",
+    "QueryDataLatestPostRequest": "equinor:QueryDataLatestPostRequest",
+    "QueryDataFirstPostRequest": "equinor:QueryDataFirstPostRequest",
+    "id-DataGetRequest-7": "equinor:id-DataGetRequest-7"
+  },
+  "@type": "schema:Dataset",
+  "schema:name": "Equinor API JSON-LD context",
+  "schema:description": "A JSON-LD @context for the objects Equinor's own API contract declares: one class per component schema, one property per declared field, typed from the contract. Derived by script (derive-json-ld.py, 2026-10-09) from openapi/equinor-alarm-events-openapi.yml, openapi/equinor-bluebook-openapi.yml, openapi/equinor-ims-export-subscriptions-openapi.yml.",
+  "dcterms:created": "2026-10-09",
+  "dcterms:source": [
+    "openapi/equinor-alarm-events-openapi.yml",
+    "openapi/equinor-bluebook-openapi.yml",
+    "openapi/equinor-ims-export-subscriptions-openapi.yml",
+    "openapi/equinor-ims-metadata-openapi.yml",
+    "openapi/equinor-stormgeo-openapi.yml"
+  ]
+}

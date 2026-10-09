@@ -1,0 +1,20 @@
+generated: '2026-10-09'
+method: searched
+source: https://github.com/equinor/OmniaPlant/wiki/Postman
+docs: https://github.com/equinor/OmniaPlant/wiki/Postman
+description: The Omnia Timeseries API runs a Beta (test / non-production) environment beside Production (GA). The wiki provides separate Postman environments for Beta and Production, and a separate Azure AD public client and resource id for the non-production API. Data in Beta is not a mirror of production (a timeseries does not keep the same id across Beta/Test and GA/Prod), and the Beta timeseries database has had hard retention applied.
+environments:
+- name: Beta
+  description: "plant-timeseries-api-public-plant-non-production with clientId = 675bd975-260f-498e-82cd-65f67b34fe7d for Omnia Timeseries API in beta with resource id = 32f2a909-8a98-4eb8-b22d-1208d9350cb0"
+  postman_environment: https://raw.githubusercontent.com/equinor/OmniaPlant/master/.attachments/Omnia%20Timeseries%20Beta.postman_environment
+- name: Production
+  description: "plant-timeseries-api-public-plant-production with clientId = 67da184b-6bde-43fd-a155-30ed4ff162d2 for Omnia Timeseries API in production with resource id = 141369bd-3dca-4b55-825b-56ad4a69b1fc"
+tooling:
+- name: Omnia Timeseries Postman collection
+  url: https://raw.githubusercontent.com/equinor/OmniaPlant/master/.attachments/Omnia%20Timeseries.postman_collection.json
+sources:
+- https://github.com/equinor/OmniaPlant/wiki/Postman
+- https://github.com/equinor/OmniaPlant/wiki/Authentication-&-Authorization
+- https://github.com/equinor/OmniaPlant/wiki/FAQ
+- https://github.com/equinor/OmniaPlant/wiki/Support
+note: No test keys, test data fixtures or time simulation are published. Access to Beta still requires onboarding by the Omnia Ind IoT team.

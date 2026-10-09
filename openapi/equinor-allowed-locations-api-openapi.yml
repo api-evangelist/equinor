@@ -1,0 +1,70 @@
+openapi: 3.2.0
+info:
+  title: Equinor Allowed Locations API
+  version: v1
+  description: 'Operations tagged Allowed Locations across 2 of this provider''s published API definitions: equinor-stormgeo-api-contract.yaml, equinor-stormgeo-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.gateway.equinor.com/stormgeo/v1
+tags:
+- name: Allowed Locations
+paths:
+  /allowed-locations:
+    get:
+      summary: Returns a list of locations for a specific vendor
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items: null
+                $ref: '#/components/schemas/Allowedlocations'
+              examples:
+                default:
+                  value:
+                    vendorname:
+                    - LocationId: 0
+                      Description: string
+            application/json:
+              schema:
+                type: array
+                items: null
+                $ref: '#/components/schemas/Allowedlocations'
+              example:
+                vendorname:
+                - LocationId: 0
+                  Description: string
+            text/json:
+              schema:
+                type: array
+                items: null
+                $ref: '#/components/schemas/Allowedlocations'
+              example:
+                vendorname:
+                - LocationId: 0
+                  Description: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      tags:
+      - Allowed Locations
+      operationId: getAllowedLocations
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.gateway.equinor.com/stormgeo/v1
+components:
+  schemas:
+    Allowedlocations:
+      type: object
+      properties:
+        LocationId:
+          type: integer
+          format: int32
+        Description:
+          type: string
+      additionalProperties: false
+x-refined-from:
+- equinor-stormgeo-api-contract.yaml
+- equinor-stormgeo-openapi.yml

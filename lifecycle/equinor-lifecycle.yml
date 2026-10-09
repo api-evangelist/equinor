@@ -1,0 +1,25 @@
+generated: '2026-10-09'
+method: searched
+source: https://github.com/equinor/OmniaPlant/wiki/API-Versioning
+sources:
+- https://github.com/equinor/OmniaPlant/wiki/API-Versioning
+- https://github.com/equinor/OmniaPlant/blob/master/README.md
+- https://github.com/equinor/api-strategy/blob/master/docs/rest_guidelines.md
+- https://github.com/equinor/OmniaPlant/wiki/Support
+versioning:
+  scheme: major.minor
+  text: "The API versioning is following a [major.minor] schema. A major release includes breaking changes from the previous release."
+  location: URI path segment (e.g. GET /plant/timeseries/{version}/ in the API examples; servers such as /iiot/ae/v1)
+  phases: Alpha, Beta, General Available (GA) and Deprecation (OmniaPlant README)
+deprecation:
+  policy: "When a major version is released, the previous one will automatically be set to deprecated which means the previous version will be available for 12 months before its being shut down."
+  notice_period: 12 months (verbatim policy above)
+  headers_guideline: 'All endpoints containing deprecated elements should return the `Deprecation: <deprecation date>|"true"` and `Sunset: <sunset date>` HTTP headers. (Equinor REST API Guidelines; an organisation-wide guideline, not verified on these APIs)'
+  guideline_notice: 'A sunset date should be published at least _6 months_ in advance. (Equinor REST API Guidelines)'
+  history:
+  - Timeseries API v1.5 shut down 2021-04-12, one year after v1.6 was introduced (Support page).
+  - Timeseries API v1.6 removed from week 34.2022 (Support page, 2022.08.15).
+deprecated_operations: []
+status_page: null
+status_note: No status page found; outages and changes are announced on the OmniaPlant wiki Support page (https://github.com/equinor/OmniaPlant/wiki/Support).
+sla: null

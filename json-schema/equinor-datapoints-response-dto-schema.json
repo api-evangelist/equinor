@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/equinor/main/json-schema/equinor-datapoints-response-dto-schema.json",
+  "title": "DatapointsResponseDto",
+  "description": "Datapoints return model",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/equinor-timeseries-openapi.yml#/components/schemas/DatapointsResponseDto",
+  "type": "object",
+  "properties": {
+    "statusCode": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "format": "int32"
+    },
+    "message": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "traceId": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "data": {
+      "$ref": "#/$defs/DatapointsResponseItems"
+    },
+    "continuationToken": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "Datapoint": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "value": {
+          "type": "number",
+          "format": "double"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "avg": {
+          "type": "number",
+          "format": "double"
+        },
+        "min": {
+          "type": "number",
+          "format": "double"
+        },
+        "max": {
+          "type": "number",
+          "format": "double"
+        },
+        "sum": {
+          "type": "number",
+          "format": "double"
+        },
+        "first": {
+          "type": "number",
+          "format": "double"
+        },
+        "last": {
+          "type": "number",
+          "format": "double"
+        },
+        "stddev": {
+          "type": "number",
+          "format": "double"
+        },
+        "median": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "additionalProperties": false
+    },
+    "DatapointsResponseItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "facility": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "terminal": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "datapoints": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/$defs/Datapoint"
+          }
+        },
+        "totalCount": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "int64"
+        },
+        "error": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "statusCode": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "int32"
+        }
+      },
+      "additionalProperties": false
+    },
+    "DatapointsResponseItems": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/$defs/DatapointsResponseItem"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

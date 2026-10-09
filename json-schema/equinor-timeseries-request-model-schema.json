@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/equinor/main/json-schema/equinor-timeseries-request-model-schema.json",
+  "title": "TimeseriesRequestModel",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/equinor-timeseries-openapi.yml#/components/schemas/TimeseriesRequestModel",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "unit": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "step": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "externalId": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "assetId": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "facility": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "metadata": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    }
+  },
+  "additionalProperties": false
+}

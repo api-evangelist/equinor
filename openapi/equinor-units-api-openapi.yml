@@ -1,0 +1,71 @@
+openapi: 3.2.0
+info:
+  title: Equinor Units API
+  version: v1
+  description: 'Operations tagged Units across 2 of this provider''s published API definitions: equinor-stormgeo-api-contract.yaml, equinor-stormgeo-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.gateway.equinor.com/stormgeo/v1
+tags:
+- name: Units
+paths:
+  /units:
+    get:
+      summary: Retruns available units
+      operationId: get-units
+      parameters:
+      - name: Filters
+        in: query
+        description: "Filters is a comma-delimited list of {Name}{Operator}{Value} where \n- {Name} is the name of the property. Multiple names (logial OR) can be entered pipe delimited, eg. \"(value1|value2)>10\" will filter items where value1 or value2 is greater than 10.\n- {Value} is the value used for filtering. Multiple values (logial OR) can be entered pipe delimited, eg. \"value@=foo|bar\" will filter items where value contains either \"foo\" or \"bar\".\n- {Operator} is one of the following operators:\n\n| Operator | Name |\n|-|---|\n| == | Equals | \n| != | Not equal | \n| > | Greater than | \n| < | Less than | \n| >= | Greater than or equal to | \n| <= | Less than or equal to | \n| @= | Contains | \n| _= | Starts with | \n| !@= | Does not contain | \n| !_= | Does not start with |"
+        schema:
+          type: string
+      - name: Sorts
+        in: query
+        description: Sorts is a comma delimited ordered list of proprty names to sort by. Prefix with "-" to sort descending.
+        schema:
+          type: string
+      - name: PageSize
+        in: query
+        description: Number of items per page. Default no limit.
+        schema:
+          type: string
+      - name: Page
+        in: query
+        description: Number of page to return. Default 1.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      tags:
+      - Units
+    servers:
+    - url: https://api.gateway.equinor.com/stormgeo/v1
+  /units/{name}:
+    get:
+      summary: Returns a specific unit
+      operationId: get-units-name
+      parameters:
+      - name: name
+        in: path
+        description: The name of the unit
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      tags:
+      - Units
+    servers:
+    - url: https://api.gateway.equinor.com/stormgeo/v1
+x-refined-from:
+- equinor-stormgeo-api-contract.yaml
+- equinor-stormgeo-openapi.yml

@@ -1,0 +1,3012 @@
+{
+ "api": {
+  "id": "ims-export-subscriptions-v1-2",
+  "name": "IMS Export Subscriptions API",
+  "description": "API for viewing and creating subscriptions. Subscriptions deliver data from plant IMS's to Omnia TSDB",
+  "subscriptionRequired": false,
+  "path": "plant/ims-subscriptions",
+  "protocols": [
+   "https"
+  ],
+  "tagDescriptions": [],
+  "authenticationSettings": {
+   "oAuth2AuthenticationSettings": [
+    {
+     "authorizationServerId": "iiot-public-client-imssubscriptions",
+     "scope": "",
+     "authorizationServer": {
+      "id": "iiot-public-client-imssubscriptions",
+      "name": "iiot-public-client-imssubscriptions",
+      "description": "Public client for Omnia IIoT IMS Subscriptions API",
+      "clientRegistrationEndpoint": "https://localhost",
+      "authorizationEndpoint": "https://login.microsoftonline.com/3aa4a235-b6e2-48d5-9195-7fcf05b459b0/oauth2/v2.0/authorize",
+      "authorizationMethods": [
+       "GET"
+      ],
+      "clientAuthenticationMethod": [
+       "Body"
+      ],
+      "tokenBodyParameters": null,
+      "tokenEndpoint": "https://login.microsoftonline.com/3aa4a235-b6e2-48d5-9195-7fcf05b459b0/oauth2/v2.0/token",
+      "useInTestConsole": true,
+      "useInApiDocumentation": false,
+      "supportState": false,
+      "defaultScope": "cae23674-f25d-40a2-b9e4-81649b33b957/user_impersonation",
+      "grantTypes": [
+       "implicit"
+      ],
+      "bearerTokenSendingMethods": [
+       "authorizationHeader"
+      ],
+      "clientId": "67da184b-6bde-43fd-a155-30ed4ff162d2"
+     }
+    }
+   ],
+   "openidAuthenticationSettings": [],
+   "subscriptionKeyRequired": false
+  },
+  "subscriptionKeyParameterNames": {
+   "header": "sub",
+   "query": "sub",
+   "bearer": null
+  },
+  "contact": {
+   "name": "PlantTeam",
+   "url": null,
+   "email": "OmniaIndIoT@equinor.com"
+  },
+  "apiVersion": "v1.2",
+  "apiVersionSetId": "5d1200f0b0d8f2e8401a943a"
+ },
+ "operations": [
+  {
+   "id": "CreateSubscription",
+   "name": "Create a new subscription.",
+   "method": "POST",
+   "urlTemplate": "/",
+   "templateParameters": [],
+   "description": "Create a new subscription.",
+   "request": {
+    "description": "Either UId or System Id of IMS and IMS tag name of sensor for which to create subscription.",
+    "queryParameters": [
+     {
+      "name": "destination",
+      "description": "The destination for subscription. Default is timeseries DB. (tsdb, datalake, all). Choosing tsdb as destination will create a subscription for datalake as well. The converse however, does not apply.",
+      "type": "string",
+      "values": [
+       "Tsdb",
+       "DataLake",
+       "All",
+       "Realtime"
+      ],
+      "schemaId": "67064f20445a9613547a320a",
+      "typeName": "SubscriptionType"
+     }
+    ],
+    "headers": [],
+    "representations": [
+     {
+      "contentType": "application/json",
+      "examples": {
+       "default": {
+        "value": {
+         "uId": "string",
+         "name": "string",
+         "systemId": "string",
+         "terminal": "string",
+         "backfillTo": "string"
+        }
+       }
+      },
+      "schemaId": "67064f20445a9613547a320a",
+      "typeName": "SubscriptionCreateModel"
+     },
+     {
+      "contentType": "text/json",
+      "examples": {
+       "default": {
+        "value": {
+         "uId": "string",
+         "name": "string",
+         "systemId": "string",
+         "terminal": "string",
+         "backfillTo": "string"
+        }
+       }
+      },
+      "schemaId": "67064f20445a9613547a320a",
+      "typeName": "SubscriptionCreateModel"
+     },
+     {
+      "contentType": "application/*+json",
+      "examples": {
+       "default": {
+        "value": {
+         "uId": "string",
+         "name": "string",
+         "systemId": "string",
+         "terminal": "string",
+         "backfillTo": "string"
+        }
+       }
+      },
+      "schemaId": "67064f20445a9613547a320a",
+      "typeName": "SubscriptionCreateModel"
+     }
+    ]
+   },
+   "responses": [
+    {
+     "statusCode": 200,
+     "description": "OK",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "data": {
+           "items": [
+            {
+             "uId": "string",
+             "timeseriesId": "string",
+             "name": "string",
+             "plantSapCode": 0,
+             "plantStidCode": "string",
+             "terminal": "string",
+             "fieldId": "string",
+             "createdBy": "string",
+             "created": "string",
+             "tsdbExportEnabled": true,
+             "tsdbBackfilled": true,
+             "tsdbEventsExported": 0,
+             "tsdbFirstExportedTime": "string",
+             "tsdbLastExportedTime": "string",
+             "dlExportEnabled": true,
+             "dlBackfilled": true,
+             "dlEventsExported": 0,
+             "dlFirstExportedTime": "string",
+             "dlLastExportedTime": "string",
+             "dlParquetFirstExportedTime": "string",
+             "dlParquetLastExportedTime": "string",
+             "sourceFirstCountedTime": "string",
+             "sourceLastCountedTime": "string",
+             "rtLastExpirationDate": "string"
+            }
+           ]
+          },
+          "errors": {},
+          "continuationToken": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "SubscriptionsCompleteDto"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 201,
+     "description": "Created",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "data": {
+           "items": [
+            {
+             "uId": "string",
+             "timeseriesId": "string",
+             "name": "string",
+             "plantSapCode": 0,
+             "plantStidCode": "string",
+             "terminal": "string",
+             "fieldId": "string",
+             "createdBy": "string",
+             "created": "string",
+             "tsdbExportEnabled": true,
+             "tsdbBackfilled": true,
+             "tsdbEventsExported": 0,
+             "tsdbFirstExportedTime": "string",
+             "tsdbLastExportedTime": "string",
+             "dlExportEnabled": true,
+             "dlBackfilled": true,
+             "dlEventsExported": 0,
+             "dlFirstExportedTime": "string",
+             "dlLastExportedTime": "string",
+             "dlParquetFirstExportedTime": "string",
+             "dlParquetLastExportedTime": "string",
+             "sourceFirstCountedTime": "string",
+             "sourceLastCountedTime": "string",
+             "rtLastExpirationDate": "string"
+            }
+           ]
+          },
+          "errors": {},
+          "continuationToken": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "SubscriptionsCompleteDto"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 400,
+     "description": "Bad Request",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 401,
+     "description": "Unauthorized",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 403,
+     "description": "Forbidden",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 404,
+     "description": "Not Found",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 409,
+     "description": "Conflict",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 500,
+     "description": "Internal Server Error",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    }
+   ]
+  },
+  {
+   "id": "CreateRealTimeSubscription",
+   "name": "Create a real-time data subscription on ims system.",
+   "method": "POST",
+   "urlTemplate": "/realtime",
+   "templateParameters": [],
+   "description": "Create a real-time data subscription on ims system.",
+   "request": {
+    "description": ">System Id of IMS and IMS tag name of sensor for which to create subscription.",
+    "queryParameters": [
+     {
+      "name": "lifeTime",
+      "description": "The lifetime of the real time subscription. The default is '10m'. Max is '35d'. Valid examples: 60s, 10m, 24h, 15d.",
+      "type": "string",
+      "values": [],
+      "schemaId": "67064f20445a9613547a320a",
+      "typeName": "RealtimePostRequest"
+     },
+     {
+      "name": "expirationTime",
+      "description": "Format - date-time (as date-time in RFC3339). The expiration time of the subscription in utc time. Max is 35 days from request time. If given takes priority over 'lifetime' parameter.",
+      "type": "string",
+      "values": [],
+      "schemaId": "67064f20445a9613547a320a",
+      "typeName": "RealtimePostRequest-1"
+     }
+    ],
+    "headers": [],
+    "representations": [
+     {
+      "contentType": "application/json",
+      "examples": {
+       "default": {
+        "value": {
+         "uId": "string",
+         "name": "string",
+         "systemId": "string",
+         "terminal": "string",
+         "backfillTo": "string"
+        }
+       }
+      },
+      "schemaId": "67064f20445a9613547a320a",
+      "typeName": "SubscriptionCreateModel"
+     },
+     {
+      "contentType": "text/json",
+      "examples": {
+       "default": {
+        "value": {
+         "uId": "string",
+         "name": "string",
+         "systemId": "string",
+         "terminal": "string",
+         "backfillTo": "string"
+        }
+       }
+      },
+      "schemaId": "67064f20445a9613547a320a",
+      "typeName": "SubscriptionCreateModel"
+     },
+     {
+      "contentType": "application/*+json",
+      "examples": {
+       "default": {
+        "value": {
+         "uId": "string",
+         "name": "string",
+         "systemId": "string",
+         "terminal": "string",
+         "backfillTo": "string"
+        }
+       }
+      },
+      "schemaId": "67064f20445a9613547a320a",
+      "typeName": "SubscriptionCreateModel"
+     }
+    ]
+   },
+   "responses": [
+    {
+     "statusCode": 201,
+     "description": "Created",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "data": {
+           "items": [
+            {
+             "timeseriesId": "string",
+             "expiration": "string",
+             "customerId": "string"
+            }
+           ]
+          },
+          "continuationToken": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "RtSubscriptionsDto"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 400,
+     "description": "Bad Request",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 401,
+     "description": "Unauthorized",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 403,
+     "description": "Forbidden",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 404,
+     "description": "Not Found",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 500,
+     "description": "Internal Server Error",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    }
+   ]
+  },
+  {
+   "id": "DeleteRealTimeSubscription",
+   "name": "Delete a real-time data subscription.",
+   "method": "DELETE",
+   "urlTemplate": "/realtime/timeseriesid/{timeseriesId}",
+   "templateParameters": [
+    {
+     "name": "timeseriesId",
+     "description": "Format - uuid. Unique timeseries ID to delete realtime subscription for",
+     "type": "string",
+     "required": true,
+     "values": [],
+     "schemaId": "67064f20445a9613547a320a",
+     "typeName": "RealtimeTimeseriesid-timeseriesId-DeleteRequest"
+    }
+   ],
+   "description": "Delete a real-time data subscription.",
+   "request": {
+    "queryParameters": [],
+    "headers": [],
+    "representations": []
+   },
+   "responses": [
+    {
+     "statusCode": 200,
+     "description": "OK",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 400,
+     "description": "Bad Request",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 401,
+     "description": "Unauthorized",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 403,
+     "description": "Forbidden",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 404,
+     "description": "Not Found",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 500,
+     "description": "Internal Server Error",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    }
+   ]
+  },
+  {
+   "id": "DeleteRealTimeSubscriptionByUid",
+   "name": "Delete a real-time data subscription.",
+   "method": "DELETE",
+   "urlTemplate": "/realtime/uid/{uId}",
+   "templateParameters": [
+    {
+     "name": "uId",
+     "description": "Unique ID to delete realtime subscription for",
+     "type": "string",
+     "required": true,
+     "values": [],
+     "schemaId": "67064f20445a9613547a320a",
+     "typeName": "RealtimeUid-uId-DeleteRequest"
+    }
+   ],
+   "description": "Delete a real-time data subscription.",
+   "request": {
+    "queryParameters": [],
+    "headers": [],
+    "representations": []
+   },
+   "responses": [
+    {
+     "statusCode": 200,
+     "description": "OK",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 400,
+     "description": "Bad Request",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 401,
+     "description": "Unauthorized",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 403,
+     "description": "Forbidden",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 404,
+     "description": "Not Found",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 500,
+     "description": "Internal Server Error",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    }
+   ]
+  },
+  {
+   "id": "GetSubscriptionByUIds",
+   "name": "Get a specific subscription by Multiple unique Id.",
+   "method": "POST",
+   "urlTemplate": "/uid",
+   "templateParameters": [],
+   "description": "Get a specific subscription by Multiple unique Id.",
+   "request": {
+    "description": "Multiple search requests",
+    "queryParameters": [
+     {
+      "name": "destination",
+      "description": "The destination filter for subscriptions, default is all. (tsdb, datalake, all).",
+      "type": "string",
+      "values": [
+       "Tsdb",
+       "DataLake",
+       "All",
+       "Realtime"
+      ],
+      "schemaId": "67064f20445a9613547a320a",
+      "typeName": "SubscriptionType"
+     }
+    ],
+    "headers": [],
+    "representations": [
+     {
+      "contentType": "application/json",
+      "examples": {
+       "default": {
+        "value": [
+         {
+          "uId": "string"
+         }
+        ]
+       }
+      },
+      "schemaId": "67064f20445a9613547a320a",
+      "typeName": "UidPostRequest"
+     },
+     {
+      "contentType": "text/json",
+      "examples": {
+       "default": {
+        "value": [
+         {
+          "uId": "string"
+         }
+        ]
+       }
+      },
+      "schemaId": "67064f20445a9613547a320a",
+      "typeName": "UidPostRequest-1"
+     },
+     {
+      "contentType": "application/*+json",
+      "examples": {
+       "default": {
+        "value": [
+         {
+          "uId": "string"
+         }
+        ]
+       }
+      },
+      "schemaId": "67064f20445a9613547a320a",
+      "typeName": "UidPostRequest-2"
+     }
+    ]
+   },
+   "responses": [
+    {
+     "statusCode": 200,
+     "description": "OK",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "data": {
+           "items": [
+            {
+             "uId": "string",
+             "timeseriesId": "string",
+             "name": "string",
+             "plantSapCode": 0,
+             "plantStidCode": "string",
+             "terminal": "string",
+             "fieldId": "string",
+             "createdBy": "string",
+             "created": "string",
+             "tsdbExportEnabled": true,
+             "tsdbBackfilled": true,
+             "tsdbEventsExported": 0,
+             "tsdbFirstExportedTime": "string",
+             "tsdbLastExportedTime": "string",
+             "dlExportEnabled": true,
+             "dlBackfilled": true,
+             "dlEventsExported": 0,
+             "dlFirstExportedTime": "string",
+             "dlLastExportedTime": "string",
+             "dlParquetFirstExportedTime": "string",
+             "dlParquetLastExportedTime": "string",
+             "sourceFirstCountedTime": "string",
+             "sourceLastCountedTime": "string",
+             "rtLastExpirationDate": "string"
+            }
+           ]
+          },
+          "errors": {},
+          "continuationToken": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "SubscriptionsCompleteDto"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 400,
+     "description": "Bad Request",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 401,
+     "description": "Unauthorized",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 403,
+     "description": "Forbidden",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 404,
+     "description": "Not Found",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 500,
+     "description": "Internal Server Error",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    }
+   ]
+  },
+  {
+   "id": "GetSubscriptionByTimeseriesId",
+   "name": "Get a specific subscription by timeseries timeseriesId.",
+   "method": "GET",
+   "urlTemplate": "/timeseriesid/{timeseriesId}",
+   "templateParameters": [
+    {
+     "name": "timeseriesId",
+     "description": "Format - uuid. Timeseries timeseriesId from the Timeseries API",
+     "type": "string",
+     "required": true,
+     "values": [],
+     "schemaId": "67064f20445a9613547a320a",
+     "typeName": "Timeseriesid-timeseriesId-GetRequest"
+    }
+   ],
+   "description": "Get a specific subscription by timeseries timeseriesId.",
+   "request": {
+    "queryParameters": [
+     {
+      "name": "destination",
+      "description": "The destination filter for subscriptions, default is all. (tsdb, datalake, all).",
+      "type": "string",
+      "values": [
+       "Tsdb",
+       "DataLake",
+       "All",
+       "Realtime"
+      ],
+      "schemaId": "67064f20445a9613547a320a",
+      "typeName": "SubscriptionType"
+     }
+    ],
+    "headers": [],
+    "representations": []
+   },
+   "responses": [
+    {
+     "statusCode": 200,
+     "description": "OK",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "data": {
+           "items": [
+            {
+             "uId": "string",
+             "timeseriesId": "string",
+             "name": "string",
+             "plantSapCode": 0,
+             "plantStidCode": "string",
+             "terminal": "string",
+             "fieldId": "string",
+             "createdBy": "string",
+             "created": "string",
+             "tsdbExportEnabled": true,
+             "tsdbBackfilled": true,
+             "tsdbEventsExported": 0,
+             "tsdbFirstExportedTime": "string",
+             "tsdbLastExportedTime": "string",
+             "dlExportEnabled": true,
+             "dlBackfilled": true,
+             "dlEventsExported": 0,
+             "dlFirstExportedTime": "string",
+             "dlLastExportedTime": "string",
+             "dlParquetFirstExportedTime": "string",
+             "dlParquetLastExportedTime": "string",
+             "sourceFirstCountedTime": "string",
+             "sourceLastCountedTime": "string",
+             "rtLastExpirationDate": "string"
+            }
+           ]
+          },
+          "errors": {},
+          "continuationToken": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "SubscriptionsCompleteDto"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 400,
+     "description": "Bad Request",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 401,
+     "description": "Unauthorized",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 403,
+     "description": "Forbidden",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 404,
+     "description": "Not Found",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 500,
+     "description": "Internal Server Error",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    }
+   ]
+  },
+  {
+   "id": "GetSubscriptionByUId",
+   "name": "Get a specific subscription by unique Id.",
+   "method": "GET",
+   "urlTemplate": "/uid/{uId}",
+   "templateParameters": [
+    {
+     "name": "uId",
+     "description": "Unique Id from the IMS Metadata API",
+     "type": "string",
+     "required": true,
+     "values": [],
+     "schemaId": "67064f20445a9613547a320a",
+     "typeName": "Uid-uId-GetRequest"
+    }
+   ],
+   "description": "Get a specific subscription by unique Id.",
+   "request": {
+    "queryParameters": [
+     {
+      "name": "destination",
+      "description": "The destination filter for subscriptions, default is all. (tsdb, datalake, all).",
+      "type": "string",
+      "values": [
+       "Tsdb",
+       "DataLake",
+       "All",
+       "Realtime"
+      ],
+      "schemaId": "67064f20445a9613547a320a",
+      "typeName": "SubscriptionType"
+     }
+    ],
+    "headers": [],
+    "representations": []
+   },
+   "responses": [
+    {
+     "statusCode": 200,
+     "description": "OK",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "data": {
+           "items": [
+            {
+             "uId": "string",
+             "timeseriesId": "string",
+             "name": "string",
+             "plantSapCode": 0,
+             "plantStidCode": "string",
+             "terminal": "string",
+             "fieldId": "string",
+             "createdBy": "string",
+             "created": "string",
+             "tsdbExportEnabled": true,
+             "tsdbBackfilled": true,
+             "tsdbEventsExported": 0,
+             "tsdbFirstExportedTime": "string",
+             "tsdbLastExportedTime": "string",
+             "dlExportEnabled": true,
+             "dlBackfilled": true,
+             "dlEventsExported": 0,
+             "dlFirstExportedTime": "string",
+             "dlLastExportedTime": "string",
+             "dlParquetFirstExportedTime": "string",
+             "dlParquetLastExportedTime": "string",
+             "sourceFirstCountedTime": "string",
+             "sourceLastCountedTime": "string",
+             "rtLastExpirationDate": "string"
+            }
+           ]
+          },
+          "errors": {},
+          "continuationToken": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "SubscriptionsCompleteDto"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 400,
+     "description": "Bad Request",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 401,
+     "description": "Unauthorized",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 403,
+     "description": "Forbidden",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 404,
+     "description": "Not Found",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 500,
+     "description": "Internal Server Error",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    }
+   ]
+  },
+  {
+   "id": "GetOrAddSubscriptions",
+   "name": "Get or Create new subscriptions.",
+   "method": "POST",
+   "urlTemplate": "/create",
+   "templateParameters": [],
+   "description": "Get or Create new subscriptions.",
+   "request": {
+    "description": "Either UId or System Id of IMS and IMS tag name of sensor for which to create subscription.",
+    "queryParameters": [
+     {
+      "name": "destination",
+      "description": "The destination for subscription. Default is timeseries DB. (tsdb, datalake, all). Choosing tsdb as destination will create a subscription for datalake as well. The converse however, does not apply.",
+      "type": "string",
+      "values": [
+       "Tsdb",
+       "DataLake",
+       "All",
+       "Realtime"
+      ],
+      "schemaId": "67064f20445a9613547a320a",
+      "typeName": "SubscriptionType"
+     }
+    ],
+    "headers": [],
+    "representations": [
+     {
+      "contentType": "application/json",
+      "examples": {
+       "default": {
+        "value": [
+         {
+          "uId": "string",
+          "name": "string",
+          "systemId": "string",
+          "terminal": "string",
+          "backfillTo": "string"
+         }
+        ]
+       }
+      },
+      "schemaId": "67064f20445a9613547a320a",
+      "typeName": "CreatePostRequest"
+     },
+     {
+      "contentType": "text/json",
+      "examples": {
+       "default": {
+        "value": [
+         {
+          "uId": "string",
+          "name": "string",
+          "systemId": "string",
+          "terminal": "string",
+          "backfillTo": "string"
+         }
+        ]
+       }
+      },
+      "schemaId": "67064f20445a9613547a320a",
+      "typeName": "CreatePostRequest-1"
+     },
+     {
+      "contentType": "application/*+json",
+      "examples": {
+       "default": {
+        "value": [
+         {
+          "uId": "string",
+          "name": "string",
+          "systemId": "string",
+          "terminal": "string",
+          "backfillTo": "string"
+         }
+        ]
+       }
+      },
+      "schemaId": "67064f20445a9613547a320a",
+      "typeName": "CreatePostRequest-2"
+     }
+    ]
+   },
+   "responses": [
+    {
+     "statusCode": 200,
+     "description": "OK",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "data": {
+           "items": [
+            {
+             "uId": "string",
+             "timeseriesId": "string",
+             "name": "string",
+             "plantSapCode": 0,
+             "plantStidCode": "string",
+             "terminal": "string",
+             "fieldId": "string",
+             "createdBy": "string",
+             "created": "string",
+             "tsdbExportEnabled": true,
+             "tsdbBackfilled": true,
+             "tsdbEventsExported": 0,
+             "tsdbFirstExportedTime": "string",
+             "tsdbLastExportedTime": "string",
+             "dlExportEnabled": true,
+             "dlBackfilled": true,
+             "dlEventsExported": 0,
+             "dlFirstExportedTime": "string",
+             "dlLastExportedTime": "string",
+             "dlParquetFirstExportedTime": "string",
+             "dlParquetLastExportedTime": "string",
+             "sourceFirstCountedTime": "string",
+             "sourceLastCountedTime": "string",
+             "rtLastExpirationDate": "string"
+            }
+           ]
+          },
+          "errors": {},
+          "continuationToken": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "SubscriptionsCompleteDto"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 400,
+     "description": "Bad Request",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 401,
+     "description": "Unauthorized",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 403,
+     "description": "Forbidden",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 404,
+     "description": "Not Found",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 409,
+     "description": "Conflict",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 500,
+     "description": "Internal Server Error",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    }
+   ]
+  },
+  {
+   "id": "ListRealTimeSubscriptions",
+   "name": "List all subscriptions belonging to calling customer.",
+   "method": "GET",
+   "urlTemplate": "/realtime",
+   "templateParameters": [],
+   "description": "List all subscriptions belonging to calling customer.",
+   "request": {
+    "queryParameters": [
+     {
+      "name": "excludeExpired",
+      "description": "Return only subscriptions that have not expired.",
+      "type": "boolean",
+      "defaultValue": "false",
+      "values": [],
+      "schemaId": "67064f20445a9613547a320a",
+      "typeName": "RealtimeGetRequest"
+     },
+     {
+      "name": "limit",
+      "description": "Format - int32. Maximum number of subscriptions to return in a single response.",
+      "type": "integer",
+      "defaultValue": "1000",
+      "values": [],
+      "schemaId": "67064f20445a9613547a320a",
+      "typeName": "RealtimeGetRequest-1"
+     },
+     {
+      "name": "continuationToken",
+      "description": "Token used for getting the continuation of a response.",
+      "type": "string",
+      "values": [],
+      "schemaId": "67064f20445a9613547a320a",
+      "typeName": "RealtimeGetRequest-2"
+     }
+    ],
+    "headers": [],
+    "representations": []
+   },
+   "responses": [
+    {
+     "statusCode": 200,
+     "description": "OK",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "data": {
+           "items": [
+            {
+             "timeseriesId": "string",
+             "expiration": "string",
+             "customerId": "string"
+            }
+           ]
+          },
+          "continuationToken": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "RtSubscriptionsDto"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 400,
+     "description": "Bad Request",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 401,
+     "description": "Unauthorized",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 403,
+     "description": "Forbidden",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 404,
+     "description": "Not Found",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 500,
+     "description": "Internal Server Error",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    }
+   ]
+  },
+  {
+   "id": "ListSubscriptionsBySystem",
+   "name": "List all subscriptions on a specified IMS system, or retrieve specific subscription from system by name.",
+   "method": "GET",
+   "urlTemplate": "/{systemId}",
+   "templateParameters": [
+    {
+     "name": "systemId",
+     "description": "System id of the IMS where the data is located. E.g. ONO-IMS, GRA...",
+     "type": "string",
+     "required": true,
+     "values": [],
+     "schemaId": "67064f20445a9613547a320a",
+     "typeName": "systemId-GetRequest"
+    }
+   ],
+   "description": "List all subscriptions on a specified IMS system, or retrieve specific subscription from system by name.",
+   "request": {
+    "queryParameters": [
+     {
+      "name": "name",
+      "description": "Optional parameter for finding a specific subscription by name",
+      "type": "string",
+      "values": [],
+      "schemaId": "67064f20445a9613547a320a",
+      "typeName": "systemId-GetRequest-1"
+     },
+     {
+      "name": "limit",
+      "description": "Format - int32. Maximum number of subscriptions to return in a single response.",
+      "type": "integer",
+      "defaultValue": "1000",
+      "values": [],
+      "schemaId": "67064f20445a9613547a320a",
+      "typeName": "systemId-GetRequest-2"
+     },
+     {
+      "name": "destination",
+      "description": "The destination filter for subscriptions, default is all. (tsdb, datalake, all).",
+      "type": "string",
+      "values": [
+       "Tsdb",
+       "DataLake",
+       "All",
+       "Realtime"
+      ],
+      "schemaId": "67064f20445a9613547a320a",
+      "typeName": "SubscriptionType"
+     },
+     {
+      "name": "continuationToken",
+      "description": "Token used for getting the continuation of a response.",
+      "type": "string",
+      "values": [],
+      "schemaId": "67064f20445a9613547a320a",
+      "typeName": "systemId-GetRequest-3"
+     }
+    ],
+    "headers": [],
+    "representations": []
+   },
+   "responses": [
+    {
+     "statusCode": 200,
+     "description": "OK",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "data": {
+           "items": [
+            {
+             "uId": "string",
+             "timeseriesId": "string",
+             "name": "string",
+             "plantSapCode": 0,
+             "plantStidCode": "string",
+             "terminal": "string",
+             "fieldId": "string",
+             "createdBy": "string",
+             "created": "string",
+             "tsdbExportEnabled": true,
+             "tsdbBackfilled": true,
+             "tsdbEventsExported": 0,
+             "tsdbFirstExportedTime": "string",
+             "tsdbLastExportedTime": "string",
+             "dlExportEnabled": true,
+             "dlBackfilled": true,
+             "dlEventsExported": 0,
+             "dlFirstExportedTime": "string",
+             "dlLastExportedTime": "string",
+             "dlParquetFirstExportedTime": "string",
+             "dlParquetLastExportedTime": "string",
+             "sourceFirstCountedTime": "string",
+             "sourceLastCountedTime": "string",
+             "rtLastExpirationDate": "string"
+            }
+           ]
+          },
+          "errors": {},
+          "continuationToken": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "SubscriptionsCompleteDto"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 400,
+     "description": "Bad Request",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 401,
+     "description": "Unauthorized",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 403,
+     "description": "Forbidden",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 500,
+     "description": "Internal Server Error",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    }
+   ]
+  },
+  {
+   "id": "ListSubscriptions",
+   "name": "List all subscriptions.",
+   "method": "GET",
+   "urlTemplate": "/",
+   "templateParameters": [],
+   "description": "List all subscriptions.",
+   "request": {
+    "queryParameters": [
+     {
+      "name": "limit",
+      "description": "Format - int32. Maximum number of subscriptions to return in a single response.",
+      "type": "integer",
+      "defaultValue": "1000",
+      "values": [],
+      "schemaId": "67064f20445a9613547a320a",
+      "typeName": "GetRequest"
+     },
+     {
+      "name": "continuationToken",
+      "description": "Token used for getting the continuation of a response.",
+      "type": "string",
+      "values": [],
+      "schemaId": "67064f20445a9613547a320a",
+      "typeName": "GetRequest-1"
+     },
+     {
+      "name": "destination",
+      "description": "The destination filter for subscriptions, default is all. (tsdb, datalake, all).",
+      "type": "string",
+      "values": [
+       "Tsdb",
+       "DataLake",
+       "All",
+       "Realtime"
+      ],
+      "schemaId": "67064f20445a9613547a320a",
+      "typeName": "SubscriptionType"
+     }
+    ],
+    "headers": [],
+    "representations": []
+   },
+   "responses": [
+    {
+     "statusCode": 200,
+     "description": "OK",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "data": {
+           "items": [
+            {
+             "uId": "string",
+             "timeseriesId": "string",
+             "name": "string",
+             "plantSapCode": 0,
+             "plantStidCode": "string",
+             "terminal": "string",
+             "fieldId": "string",
+             "createdBy": "string",
+             "created": "string",
+             "tsdbExportEnabled": true,
+             "tsdbBackfilled": true,
+             "tsdbEventsExported": 0,
+             "tsdbFirstExportedTime": "string",
+             "tsdbLastExportedTime": "string",
+             "dlExportEnabled": true,
+             "dlBackfilled": true,
+             "dlEventsExported": 0,
+             "dlFirstExportedTime": "string",
+             "dlLastExportedTime": "string",
+             "dlParquetFirstExportedTime": "string",
+             "dlParquetLastExportedTime": "string",
+             "sourceFirstCountedTime": "string",
+             "sourceLastCountedTime": "string",
+             "rtLastExpirationDate": "string"
+            }
+           ]
+          },
+          "errors": {},
+          "continuationToken": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "SubscriptionsCompleteDto"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 400,
+     "description": "Bad Request",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 401,
+     "description": "Unauthorized",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 403,
+     "description": "Forbidden",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 500,
+     "description": "Internal Server Error",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    }
+   ]
+  },
+  {
+   "id": "GetRealTimeSubscription",
+   "name": "Retrieve subscription on a specific sensor-tag belonging to calling customer.",
+   "method": "GET",
+   "urlTemplate": "/realtime/timeseriesid/{timeseriesId}",
+   "templateParameters": [
+    {
+     "name": "timeseriesId",
+     "description": "Format - uuid. The timeseries ID to get the realtime subscription for",
+     "type": "string",
+     "required": true,
+     "values": [],
+     "schemaId": "67064f20445a9613547a320a",
+     "typeName": "RealtimeTimeseriesid-timeseriesId-GetRequest"
+    }
+   ],
+   "description": "Retrieve subscription on a specific sensor-tag belonging to calling customer.",
+   "request": {
+    "queryParameters": [],
+    "headers": [],
+    "representations": []
+   },
+   "responses": [
+    {
+     "statusCode": 200,
+     "description": "OK",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "data": {
+           "items": [
+            {
+             "timeseriesId": "string",
+             "expiration": "string",
+             "customerId": "string"
+            }
+           ]
+          },
+          "continuationToken": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "RtSubscriptionsDto"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 400,
+     "description": "Bad Request",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 401,
+     "description": "Unauthorized",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 403,
+     "description": "Forbidden",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 404,
+     "description": "Not Found",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 500,
+     "description": "Internal Server Error",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    }
+   ]
+  },
+  {
+   "id": "SetRealTimeDestination",
+   "name": "Set event hub destination for real time data.",
+   "method": "POST",
+   "urlTemplate": "/realtime/destination",
+   "templateParameters": [],
+   "description": "Set event hub destination for real time data.",
+   "request": {
+    "description": "Connection string of event hub. Must be a write policy.",
+    "queryParameters": [],
+    "headers": [],
+    "representations": [
+     {
+      "contentType": "application/json",
+      "examples": {
+       "default": {
+        "value": {
+         "connectionString": "string"
+        }
+       }
+      },
+      "schemaId": "67064f20445a9613547a320a",
+      "typeName": "DestinationSetModel"
+     },
+     {
+      "contentType": "text/json",
+      "examples": {
+       "default": {
+        "value": {
+         "connectionString": "string"
+        }
+       }
+      },
+      "schemaId": "67064f20445a9613547a320a",
+      "typeName": "DestinationSetModel"
+     },
+     {
+      "contentType": "application/*+json",
+      "examples": {
+       "default": {
+        "value": {
+         "connectionString": "string"
+        }
+       }
+      },
+      "schemaId": "67064f20445a9613547a320a",
+      "typeName": "DestinationSetModel"
+     }
+    ]
+   },
+   "responses": [
+    {
+     "statusCode": 200,
+     "description": "OK",
+     "representations": [],
+     "headers": []
+    },
+    {
+     "statusCode": 400,
+     "description": "Bad Request",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 401,
+     "description": "Unauthorized",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 403,
+     "description": "Forbidden",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    },
+    {
+     "statusCode": 500,
+     "description": "Internal Server Error",
+     "representations": [
+      {
+       "contentType": "application/json",
+       "examples": {
+        "default": {
+         "value": {
+          "statusCode": 0,
+          "message": "string",
+          "traceId": "string"
+         }
+        }
+       },
+       "schemaId": "67064f20445a9613547a320a",
+       "typeName": "MessageModel"
+      }
+     ],
+     "headers": []
+    }
+   ]
+  }
+ ],
+ "schemas": [
+  {
+   "id": "67064f20445a9613547a320a",
+   "contentType": "application/vnd.oai.openapi.components+json",
+   "document": {
+    "components": {
+     "schemas": {
+      "DestinationSetModel": {
+       "type": "object",
+       "properties": {
+        "connectionString": {
+         "type": "string",
+         "nullable": true
+        }
+       },
+       "additionalProperties": false
+      },
+      "MessageModel": {
+       "type": "object",
+       "properties": {
+        "statusCode": {
+         "type": "integer",
+         "format": "int32"
+        },
+        "message": {
+         "type": "string",
+         "nullable": true
+        },
+        "traceId": {
+         "type": "string",
+         "nullable": true
+        }
+       },
+       "additionalProperties": false
+      },
+      "RtSubscriptionBase": {
+       "type": "object",
+       "properties": {
+        "timeseriesId": {
+         "type": "string",
+         "format": "uuid"
+        },
+        "expiration": {
+         "type": "string",
+         "format": "date-time",
+         "nullable": true
+        },
+        "customerId": {
+         "type": "string",
+         "format": "uuid"
+        }
+       },
+       "additionalProperties": false
+      },
+      "RtSubscriptionItems": {
+       "type": "object",
+       "properties": {
+        "items": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/RtSubscriptionBase"
+         },
+         "nullable": true
+        }
+       },
+       "additionalProperties": false
+      },
+      "RtSubscriptionsDto": {
+       "type": "object",
+       "properties": {
+        "data": {
+         "$ref": "#/components/schemas/RtSubscriptionItems"
+        },
+        "continuationToken": {
+         "type": "string",
+         "nullable": true
+        }
+       },
+       "additionalProperties": false
+      },
+      "SubscriptionCompleteItems": {
+       "type": "object",
+       "properties": {
+        "items": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/SubscriptionCompleteModel"
+         },
+         "nullable": true
+        }
+       },
+       "additionalProperties": false
+      },
+      "SubscriptionCompleteModel": {
+       "type": "object",
+       "properties": {
+        "uId": {
+         "type": "string",
+         "nullable": true
+        },
+        "timeseriesId": {
+         "type": "string",
+         "format": "uuid"
+        },
+        "name": {
+         "type": "string",
+         "nullable": true
+        },
+        "plantSapCode": {
+         "type": "integer",
+         "format": "int32",
+         "nullable": true
+        },
+        "plantStidCode": {
+         "type": "string",
+         "nullable": true
+        },
+        "terminal": {
+         "type": "string",
+         "nullable": true
+        },
+        "fieldId": {
+         "type": "string",
+         "nullable": true
+        },
+        "createdBy": {
+         "type": "string",
+         "nullable": true
+        },
+        "created": {
+         "type": "string",
+         "format": "date-time"
+        },
+        "tsdbExportEnabled": {
+         "type": "boolean"
+        },
+        "tsdbBackfilled": {
+         "type": "boolean"
+        },
+        "tsdbEventsExported": {
+         "type": "integer",
+         "format": "int64"
+        },
+        "tsdbFirstExportedTime": {
+         "type": "string",
+         "format": "date-time",
+         "nullable": true
+        },
+        "tsdbLastExportedTime": {
+         "type": "string",
+         "format": "date-time",
+         "nullable": true
+        },
+        "dlExportEnabled": {
+         "type": "boolean"
+        },
+        "dlBackfilled": {
+         "type": "boolean"
+        },
+        "dlEventsExported": {
+         "type": "integer",
+         "format": "int64"
+        },
+        "dlFirstExportedTime": {
+         "type": "string",
+         "format": "date-time",
+         "nullable": true
+        },
+        "dlLastExportedTime": {
+         "type": "string",
+         "format": "date-time",
+         "nullable": true
+        },
+        "dlParquetFirstExportedTime": {
+         "type": "string",
+         "format": "date-time",
+         "nullable": true
+        },
+        "dlParquetLastExportedTime": {
+         "type": "string",
+         "format": "date-time",
+         "nullable": true
+        },
+        "sourceFirstCountedTime": {
+         "type": "string",
+         "format": "date-time",
+         "nullable": true
+        },
+        "sourceLastCountedTime": {
+         "type": "string",
+         "format": "date-time",
+         "nullable": true
+        },
+        "rtLastExpirationDate": {
+         "type": "string",
+         "format": "date-time",
+         "nullable": true
+        }
+       },
+       "additionalProperties": false
+      },
+      "SubscriptionCreateModel": {
+       "type": "object",
+       "properties": {
+        "uId": {
+         "type": "string",
+         "nullable": true
+        },
+        "name": {
+         "type": "string",
+         "nullable": true
+        },
+        "systemId": {
+         "type": "string",
+         "nullable": true
+        },
+        "terminal": {
+         "type": "string",
+         "nullable": true
+        },
+        "backfillTo": {
+         "type": "string",
+         "format": "date-time",
+         "nullable": true
+        }
+       },
+       "additionalProperties": false
+      },
+      "SubscriptionSearchRequestModel": {
+       "type": "object",
+       "properties": {
+        "uId": {
+         "type": "string",
+         "nullable": true
+        }
+       },
+       "additionalProperties": false
+      },
+      "SubscriptionType": {
+       "enum": [
+        "Tsdb",
+        "DataLake",
+        "All",
+        "Realtime"
+       ],
+       "type": "string"
+      },
+      "SubscriptionsCompleteDto": {
+       "type": "object",
+       "properties": {
+        "data": {
+         "$ref": "#/components/schemas/SubscriptionCompleteItems"
+        },
+        "errors": {
+         "type": "object",
+         "additionalProperties": {
+          "type": "string",
+          "nullable": true
+         },
+         "nullable": true
+        },
+        "continuationToken": {
+         "type": "string",
+         "nullable": true
+        }
+       },
+       "additionalProperties": false
+      },
+      "Uid-uId-GetRequest": {
+       "type": "string",
+       "x-apim-inline": true
+      },
+      "systemId-GetRequest": {
+       "type": "string",
+       "x-apim-inline": true
+      },
+      "systemId-GetRequest-1": {
+       "type": "string",
+       "x-apim-inline": true
+      },
+      "systemId-GetRequest-2": {
+       "maximum": 1000,
+       "minimum": 1,
+       "type": "integer",
+       "format": "int32",
+       "default": 1000,
+       "x-apim-inline": true
+      },
+      "systemId-GetRequest-3": {
+       "type": "string",
+       "x-apim-inline": true
+      },
+      "UidPostRequest": {
+       "type": "array",
+       "items": {
+        "$ref": "#/components/schemas/SubscriptionSearchRequestModel"
+       },
+       "x-apim-inline": true
+      },
+      "UidPostRequest-1": {
+       "type": "array",
+       "items": {
+        "$ref": "#/components/schemas/SubscriptionSearchRequestModel"
+       },
+       "x-apim-inline": true
+      },
+      "UidPostRequest-2": {
+       "type": "array",
+       "items": {
+        "$ref": "#/components/schemas/SubscriptionSearchRequestModel"
+       },
+       "x-apim-inline": true
+      },
+      "Timeseriesid-timeseriesId-GetRequest": {
+       "type": "string",
+       "format": "uuid",
+       "x-apim-inline": true
+      },
+      "CreatePostRequest": {
+       "type": "array",
+       "items": {
+        "$ref": "#/components/schemas/SubscriptionCreateModel"
+       },
+       "x-apim-inline": true
+      },
+      "CreatePostRequest-1": {
+       "type": "array",
+       "items": {
+        "$ref": "#/components/schemas/SubscriptionCreateModel"
+       },
+       "x-apim-inline": true
+      },
+      "CreatePostRequest-2": {
+       "type": "array",
+       "items": {
+        "$ref": "#/components/schemas/SubscriptionCreateModel"
+       },
+       "x-apim-inline": true
+      },
+      "RealtimeGetRequest": {
+       "type": "boolean",
+       "default": false,
+       "x-apim-inline": true
+      },
+      "RealtimeGetRequest-1": {
+       "maximum": 1000,
+       "minimum": 1,
+       "type": "integer",
+       "format": "int32",
+       "default": 1000,
+       "x-apim-inline": true
+      },
+      "RealtimeGetRequest-2": {
+       "type": "string",
+       "x-apim-inline": true
+      },
+      "RealtimePostRequest": {
+       "type": "string",
+       "x-apim-inline": true
+      },
+      "RealtimePostRequest-1": {
+       "type": "string",
+       "format": "date-time",
+       "x-apim-inline": true
+      },
+      "RealtimeTimeseriesid-timeseriesId-GetRequest": {
+       "type": "string",
+       "format": "uuid",
+       "x-apim-inline": true
+      },
+      "RealtimeTimeseriesid-timeseriesId-DeleteRequest": {
+       "type": "string",
+       "format": "uuid",
+       "x-apim-inline": true
+      },
+      "RealtimeUid-uId-DeleteRequest": {
+       "type": "string",
+       "x-apim-inline": true
+      },
+      "GetRequest": {
+       "maximum": 1000,
+       "minimum": 1,
+       "type": "integer",
+       "format": "int32",
+       "default": 1000,
+       "x-apim-inline": true
+      },
+      "GetRequest-1": {
+       "type": "string",
+       "x-apim-inline": true
+      }
+     }
+    }
+   }
+  }
+ ]
+}

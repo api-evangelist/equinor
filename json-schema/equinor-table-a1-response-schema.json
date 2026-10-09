@@ -1,0 +1,181 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/equinor/main/json-schema/equinor-table-a1-response-schema.json",
+  "title": "TableA1Response",
+  "description": "Represents a versioned snapshot of Blue Book Table A-1, containing all dataset definitions\nfor digital well data reporting to the Diskos National Data Repository (NDR).",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/equinor-bluebook-openapi.yml#/components/schemas/TableA1Response",
+  "required": [
+    "version"
+  ],
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The version number of this Table A-1 release (e.g., \"16.0\")."
+    },
+    "date": {
+      "type": "string",
+      "description": "The release date of this version, and the date from which it is applicable for well data reporting.",
+      "format": "date"
+    },
+    "datasets": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/$defs/DatasetResponse"
+      },
+      "description": "The list of dataset definitions included in this version of Table A-1.\nEach entry describes a specific well data deliverable, its Diskos naming conventions,\nfile formats, and NPD requirements."
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "DatasetResponse": {
+      "required": [
+        "dataset",
+        "datasetId",
+        "unloadFilePath"
+      ],
+      "type": "object",
+      "properties": {
+        "datasetId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Unique identifier for the dataset as defined in Blue Book Table A-1 (e.g., \"01.01\", \"02.03\")."
+        },
+        "npdRequirement": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Indicates whether this dataset is \"Mandatory\" or \"Optional\" per NPD regulations."
+        },
+        "dataset": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The short name of the dataset type (e.g., \"Composite\", \"Raw Core (Conventional)\")."
+        },
+        "definition": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "A description of what the dataset contains and its purpose within the Diskos NDR."
+        },
+        "unloadFilePath": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The folder path template used when uploading to Diskos."
+        },
+        "title": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "description": "Accepted file name patterns and formats for this dataset.\nNPD prioritizes the first listed format; other formats will not be checked for readability."
+        },
+        "exampleOfFilenames": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "description": "Concrete examples of valid filenames for this dataset."
+        },
+        "explanationOrExamples": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Additional explanation or examples clarifying naming conventions, depth references,\nunits, or special conditions."
+        },
+        "infoItemGroupType": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The Diskos INFO ITEM GROUP TYPE."
+        },
+        "infoItemType": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The Diskos INFO ITEM TYPE."
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The dataset description template as it appears in the Diskos NDR, typically including\na wellbore name placeholder."
+        },
+        "logTitle": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The log curve title used for live \"ONLINE\" logs in Diskos.\nOnly applicable for log-type datasets."
+        },
+        "creationProcess": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The dataset creation process code in Diskos."
+        },
+        "dataDomain": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "description": "The Diskos data domain classification."
+        },
+        "dataOrganisation": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The data organisation type in Diskos."
+        },
+        "publicAccess": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The public access confidentiality period after which NOD releases the data (e.g., \"2 years\", \"5 years\")."
+        },
+        "publicCalculationBasedOn": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The reference date used to calculate when the dataset becomes public."
+        }
+      },
+      "additionalProperties": false,
+      "description": "Represents a dataset entry from the Norwegian Offshore Directorate (NOD) Blue Book Table A-1,\ndescribing attributes for digital well data reporting to the Diskos National Data Repository (NDR).\n            \nEach dataset corresponds to a specific type of well data deliverable and defines how it should be named, \nstructured, and reported to Diskos."
+    }
+  }
+}

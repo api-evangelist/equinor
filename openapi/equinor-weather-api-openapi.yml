@@ -1,0 +1,319 @@
+openapi: 3.2.0
+info:
+  title: Equinor Weather API
+  version: v1
+  description: 'Operations tagged Weather across 2 of this provider''s published API definitions: equinor-stormgeo-api-contract.yaml, equinor-stormgeo-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.gateway.equinor.com/stormgeo/v1
+tags:
+- name: Weather
+paths:
+  /forecasts:
+    get:
+      tags:
+      - Weather
+      summary: Returns all forecasts for a specific location
+      description: Returns all forecasts for a specific location.
+      operationId: get-forecasts
+      parameters:
+      - name: longitude
+        in: query
+        required: true
+        description: Format - double. Format - double. The longitude of the location
+        schema:
+          type: number
+          format: double
+      - name: latitude
+        in: query
+        required: true
+        description: Format - double. Format - double. The latitude of the location
+        schema:
+          type: number
+          format: double
+      - name: parameterSetId
+        in: query
+        description: Format - int32. Format - int32. The id of the parameter set to use. Default temperature and wind speed and dirction.
+        schema:
+          type: integer
+          format: int32
+      - name: unitProfileId
+        in: query
+        description: Format - int32. Format - int32. The id of the unit profile to use. Default metric units.
+        schema:
+          type: integer
+          format: int32
+      - name: timeResolution
+        in: query
+        description: Timeresoltion for the forecast. Defines how many timesteps of each duration is returned. Eg. "1=48,3=24" means 48 x 1 hour steps, then 24 x 3 hour steps. Available step sizes are 1,3,6,12 and 24. Just 1 means 1 hour timesteps until 66 hours, just 3 means then 3 hour timesteps until 120 hours, just 6 means then 6 hour timesteps until 168 hours. Eg. "3=24,6" means 24 x 3 hour timesteps, then 16 x 6 hour timesteps (total 168 hours).
+        schema:
+          type: string
+          default: 1,3,6
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Forecast'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Forecast'
+              example:
+              - data: {}
+                type: string
+                timeResolution: string
+                latitude: 0
+                longitude: 0
+                issueTime: string
+                units: {}
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Forecast'
+              example:
+              - data: {}
+                type: string
+                timeResolution: string
+                latitude: 0
+                longitude: 0
+                issueTime: string
+                units: {}
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: string
+                title: string
+                status: 0
+                detail: string
+                instance: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: string
+                title: string
+                status: 0
+                detail: string
+                instance: string
+    servers:
+    - url: https://api.gateway.equinor.com/stormgeo/v1
+  /forecasts/{forecastType}:
+    get:
+      tags:
+      - Weather
+      summary: Returns all forecasts for a specific location
+      description: Returns all forecasts for a specific location.
+      operationId: get-weather-api-forecasts-forecasttype
+      parameters:
+      - name: forecastType
+        in: path
+        description: 'The type forecast. Available types: "model".'
+        required: true
+        schema:
+          type: string
+      - name: longitude
+        in: query
+        description: Format - double. Format - double. The longitude of the location
+        required: true
+        schema:
+          type: number
+          format: double
+      - name: latitude
+        in: query
+        description: Format - double. Format - double. The latitude of the location
+        required: true
+        schema:
+          type: number
+          format: double
+      - name: parameterSetId
+        in: query
+        description: Format - int32. Format - int32. The id of the parameter set to use. Default temperature and wind speed and dirction.
+        schema:
+          type: integer
+          format: int32
+      - name: unitProfileId
+        in: query
+        description: Format - int32. Format - int32. The id of the unit profile to use. Default metric units.
+        schema:
+          type: integer
+          format: int32
+      - name: timeResolution
+        in: query
+        description: Timeresolution for the forecast. Defines how many timesteps of each duration is returned. Eg. "1=48,3=24" means 48 x 1 hour steps, then 24 x 3 hour steps. Available step sizes are 1,3,6,12 and 24. Just 1 means 1 hour timesteps until 66 hours, just 3 means then 3 hour timesteps until 120 hours, just 6 means then 6 hour timesteps until 168 hours. Eg. "3=24,6" means 24 x 3 hour timesteps, then 16 x 6 hour timesteps (total 168 hours).
+        schema:
+          type: string
+          default: 1,3,6
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Forecast'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forecast'
+              example:
+                data: {}
+                type: string
+                timeResolution: string
+                latitude: 0
+                longitude: 0
+                issueTime: string
+                units: {}
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Forecast'
+              example:
+                data: {}
+                type: string
+                timeResolution: string
+                latitude: 0
+                longitude: 0
+                issueTime: string
+                units: {}
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: string
+                title: string
+                status: 0
+                detail: string
+                instance: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: string
+                title: string
+                status: 0
+                detail: string
+                instance: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: string
+                title: string
+                status: 0
+                detail: string
+                instance: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: string
+                title: string
+                status: 0
+                detail: string
+                instance: string
+    servers:
+    - url: https://api.gateway.equinor.com/stormgeo/v1
+components:
+  schemas:
+    Forecast:
+      type: object
+      properties:
+        data: {}
+        type:
+          type:
+          - string
+          - 'null'
+        timeResolution:
+          type:
+          - string
+          - 'null'
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        issueTime:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        units:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+x-refined-from:
+- equinor-stormgeo-api-contract.yaml
+- equinor-stormgeo-openapi.yml

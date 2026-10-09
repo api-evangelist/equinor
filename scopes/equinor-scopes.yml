@@ -1,0 +1,19 @@
+generated: '2026-10-09'
+method: searched
+source: https://github.com/equinor/OmniaPlant/wiki/Authentication-&-Authorization
+docs: https://github.com/equinor/OmniaPlant/wiki/Authentication-&-Authorization
+provider: Azure AD (app-role / delegated permissions on Equinor API app registrations)
+scopes:
+- name: Timeseries.Read
+  api: omnia-iiot-timeseries-api-production
+  description: API permission required to read timeseries; also needed to create streaming subscriptions.
+  sources: [https://github.com/equinor/OmniaPlant/wiki/Authentication-&-Authorization, https://github.com/equinor/OmniaPlant/wiki/Streaming-API]
+- name: AE.Read
+  api: omnia-iiot-ae-api-production
+  description: API permission needed to access the Alarm & Events API.
+  sources: [https://github.com/equinor/OmniaPlant/wiki/Alarm-&-Events-API]
+- name: user_impersonation
+  api: Omnia Timeseries API
+  description: Delegated permission a client needs to call the Timeseries API on behalf of a signed-in user (public clients plant-timeseries-api-public-plant-production / -non-production are provided).
+  sources: [https://github.com/equinor/OmniaPlant/wiki/Authentication-&-Authorization]
+note: The OpenAPI exports declare no oauth2 securityScheme; these permissions come from the OmniaPlant wiki.

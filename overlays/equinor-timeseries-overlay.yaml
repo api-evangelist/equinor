@@ -1,0 +1,178 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Equinor Timeseries API
+  version: 1.0.0
+extends: ../openapi/_original/equinor-timeseries-openapi.yml
+actions:
+- target: $.info
+  description: API Evangelist provenance metadata
+  update:
+    x-apievangelist-provider: equinor
+    x-apievangelist-profiled: '2026-10-09'
+- target: $
+  description: Declare derived tags
+  update:
+    tags:
+    - name: data
+      description: Operations under /data
+    - name: streaming
+      description: Operations under /streaming
+    - name: root
+      description: Operations on the API root
+    - name: facets
+      description: Operations under /facets
+    - name: getoradd
+      description: Operations under /getoradd
+    - name: facility
+      description: Operations under /facility
+    - name: query
+      description: Operations under /query
+    - name: history
+      description: Operations under /history
+    - name: search
+      description: Operations under /search
+- target: $.paths['/{id}/data'].post
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - data
+- target: $.paths['/{id}/data'].delete
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - data
+- target: $.paths['/{id}/data'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - data
+- target: $.paths['/data'].post
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - data
+- target: $.paths['/streaming/subscriptions'].post
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - streaming
+- target: $.paths['/streaming/subscriptions'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - streaming
+- target: $.paths['/'].post
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - root
+- target: $.paths['/'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - root
+- target: $.paths['/streaming/subscriptions/{id}'].delete
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - streaming
+- target: $.paths['/{id}'].delete
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - root
+- target: $.paths['/{id}'].patch
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - root
+- target: $.paths['/{id}'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - root
+- target: $.paths['/{id}'].put
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - root
+- target: $.paths['/facets/{facet}'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - facets
+- target: $.paths['/getoradd'].post
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - getoradd
+- target: $.paths['/facility/counters'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - facility
+- target: $.paths['/{id}/data/aggregates'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - data
+- target: $.paths['/query/data'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - query
+- target: $.paths['/query/data'].post
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - query
+- target: $.paths['/facility/{name}/counters'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - facility
+- target: $.paths['/{id}/data/first'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - data
+- target: $.paths['/query/data/first'].post
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - query
+- target: $.paths['/{id}/history'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - history
+- target: $.paths['/history'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - history
+- target: $.paths['/{id}/data/latest'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - data
+- target: $.paths['/query/data/latest'].post
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - query
+- target: $.paths['/search'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - search
+- target: $.paths['/search/{query}'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - search
+- target: $.paths['/streaming/destination'].post
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - streaming

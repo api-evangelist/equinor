@@ -1,0 +1,56 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Equinor Alarm & Events API
+  version: 1.0.0
+extends: ../openapi/_original/equinor-alarm-events-openapi.yml
+actions:
+- target: $.info
+  description: API Evangelist provenance metadata
+  update:
+    x-apievangelist-provider: equinor
+    x-apievangelist-profiled: '2026-10-09'
+- target: $
+  description: Declare derived tags
+  update:
+    tags:
+    - name: streaming
+      description: Operations under /streaming
+    - name: events
+      description: Operations under /events
+    - name: sources
+      description: Operations under /sources
+- target: $.paths['/streaming/subscriptions/{facility}'].post
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - streaming
+- target: $.paths['/streaming/subscriptions/{facility}'].delete
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - streaming
+- target: $.paths['/events/{facility}'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - events
+- target: $.paths['/sources'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - sources
+- target: $.paths['/streaming/subscriptions'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - streaming
+- target: $.paths['/events/{facility}/count'].get
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - events
+- target: $.paths['/streaming/destination'].post
+  description: Tag derived from the first literal path segment (no tags in the source spec)
+  update:
+    tags:
+    - streaming

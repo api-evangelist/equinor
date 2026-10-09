@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/equinor/main/json-schema/equinor-forecast-schema.json",
+  "title": "Forecast",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/equinor-stormgeo-openapi.yml#/components/schemas/Forecast",
+  "type": "object",
+  "properties": {
+    "data": {
+      "nullable": true
+    },
+    "type": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "timeResolution": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "latitude": {
+      "type": "number",
+      "format": "double"
+    },
+    "longitude": {
+      "type": "number",
+      "format": "double"
+    },
+    "issueTime": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "units": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": false
+}

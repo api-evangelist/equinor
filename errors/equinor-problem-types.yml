@@ -1,0 +1,95 @@
+generated: '2026-10-09'
+method: derived
+generator: derive-problem-types.py
+source:
+- openapi/equinor-alarm-events-openapi.yml
+- openapi/equinor-bluebook-openapi.yml
+- openapi/equinor-ims-export-subscriptions-openapi.yml
+- openapi/equinor-ims-metadata-openapi.yml
+- openapi/equinor-stormgeo-openapi.yml
+- openapi/equinor-timeseries-openapi.yml
+format: custom
+envelope:
+  media_type: application/json
+  schema: MessageModel
+coverage:
+  operations: 79
+  statuses_declared: 9
+problems:
+- status: 400
+  title: Bad Request
+  description: Bad Request
+  operations: 60
+  media_types:
+  - application/json
+  - application/protobuf
+  - application/x-protobuf
+  schema: MessageModel
+- status: 401
+  title: Unauthorized
+  description: Unauthorized
+  operations: 74
+  media_types:
+  - application/json
+  - application/protobuf
+  - application/x-protobuf
+  schema: MessageModel
+- status: 403
+  title: Forbidden
+  description: Forbidden
+  operations: 68
+  media_types:
+  - application/json
+  - text/plain
+  - text/json
+  schema: MessageModel
+- status: 404
+  title: Not Found
+  description: Not Found
+  operations: 62
+  media_types:
+  - application/json
+  - application/protobuf
+  - application/x-protobuf
+  schema: MessageModel
+- status: 409
+  title: Conflict
+  description: Conflict
+  operations: 6
+  media_types:
+  - application/json
+  schema: MessageModel
+- status: 429
+  title: Too Many Requests
+  description: Too Many Requests
+  operations: 23
+  media_types:
+  - application/json
+  - application/protobuf
+  - application/x-protobuf
+  schema: MessageModel
+- status: 500
+  title: Internal Server Error
+  description: Internal Server Error
+  operations: 57
+  media_types:
+  - application/json
+  - application/protobuf
+  - application/x-protobuf
+  schema: MessageModel
+- status: 501
+  title: Not Implemented
+  description: Not Implemented
+  operations: 3
+  media_types:
+  - application/json
+  schema: MessageModel
+- status: 504
+  title: Gateway Timeout
+  description: Gateway Timeout
+  operations: 33
+  media_types:
+  - application/json
+  - application/protobuf
+  - application/x-protobuf
+  schema: MessageModel

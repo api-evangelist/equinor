@@ -1,0 +1,8 @@
+generated: '2026-10-09'
+method: none
+source: https://github.com/equinor/OmniaPlant/wiki/Timeseries-Data
+name: Equinor Rate Limits
+limit_count: 0
+limits: []
+status_on_exhaustion: 429
+note: No numeric rate limits are published. The Timeseries API changelog lists "Rate limiting" as added in v1.7.5 (https://github.com/equinor/OmniaPlant/blob/master/Omnia%20Timeseries%20API/CHANGELOG.md) and the Timeseries and Alarm & Events contracts declare 429 Too Many Requests responses, but no limit values or rate-limit headers are documented. Query-shape limits that are documented (page size 1-100 000, federation time spans of 7 days raw / 30 days aggregated) are not request-rate limits and are recorded in conventions/.

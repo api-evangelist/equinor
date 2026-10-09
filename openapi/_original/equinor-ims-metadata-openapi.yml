@@ -1,0 +1,3053 @@
+# x-archived-from: equinor-ims-metadata-openapi.yml
+# x-archived-on: 2026-10-09
+openapi: 3.0.1
+info:
+  title: IMS Metadata API
+  description: This API returns information about IMS tags and the values that they measure.
+  contact:
+    name: Omnia Plant Team
+    email: omniaindiot@equinor.com
+  version: v1.3
+servers:
+- url: https://api.gateway.equinor.com/plant/ims-metadata
+- url: https://api-ncc.gateway.equinor.com/plant/ims-metadata
+paths:
+  /facets/{facet}:
+    get:
+      operationId: get-facets-facet
+      summary: Get tags count specified by facet (plantSapCode or plantStidCode).
+      description: Get tags count specified by facet (plantSapCode or plantStidCode).
+      parameters:
+      - name: facet
+        in: path
+        required: true
+        description: Searches for tags matching this facet.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FacetResponse'
+              example:
+                data:
+                  items:
+                  - count: 0
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: string
+                title: string
+                status: 0
+                detail: string
+                instance: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: string
+                title: string
+                status: 0
+                detail: string
+                instance: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: string
+                title: string
+                status: 0
+                detail: string
+                instance: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: string
+                title: string
+                status: 0
+                detail: string
+                instance: string
+      x-source: https://api.equinor.com/developer/apis/ims-metadata-api-v1-3/operations/get-facets-facet?api-version=2022-04-01-preview
+  /{plant}/{tag}:
+    get:
+      operationId: get-plant-tag
+      summary: Gets a specific tag specified by plant and tag name.
+      description: Gets a specific tag specified by plant and tag name.
+      parameters:
+      - name: plant
+        in: path
+        required: true
+        description: The name of the plant
+        schema:
+          type: string
+      - name: tag
+        in: path
+        required: true
+        description: The name of the tag
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetadataItemResponse_v2'
+              example:
+                links:
+                - relationship: string
+                  reference: string
+                data:
+                  id: string
+                  uid: string
+                  imsType: string
+                  systemCode: string
+                  recordID: string
+                  plantSAPCode: string
+                  plantSTIDCode: string
+                  denyDataShare: string
+                  tag: string
+                  terminal: string
+                  isDefaultTerminal: true
+                  description: string
+                  engUnits: string
+                  standardUnit: string
+                  source: string
+                  type: string
+                  sourceTag: string
+                  stepped: true
+                  changeDate: string
+                  creationDate: string
+                  currentValueDate: string
+                  plantArea: string
+                  significantDigit: string
+                  maxTimeInterval: string
+                  fieldId: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetails'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetails'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetails'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetails'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetails'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/ims-metadata-api-v1-3/operations/get-plant-tag?api-version=2022-04-01-preview
+  /uid/{uid}:
+    get:
+      operationId: get-uid-uid
+      summary: Gets a specific tag specified by tag unique identifier.
+      description: Gets a specific tag specified by tag unique identifier.
+      parameters:
+      - name: uid
+        in: path
+        required: true
+        description: The unique identifier of the tag
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetadataItemResponse_v2'
+              example:
+                links:
+                - relationship: string
+                  reference: string
+                data:
+                  id: string
+                  uid: string
+                  imsType: string
+                  systemCode: string
+                  recordID: string
+                  plantSAPCode: string
+                  plantSTIDCode: string
+                  denyDataShare: string
+                  tag: string
+                  terminal: string
+                  isDefaultTerminal: true
+                  description: string
+                  engUnits: string
+                  standardUnit: string
+                  source: string
+                  type: string
+                  sourceTag: string
+                  stepped: true
+                  changeDate: string
+                  creationDate: string
+                  currentValueDate: string
+                  plantArea: string
+                  significantDigit: string
+                  maxTimeInterval: string
+                  fieldId: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetails'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetails'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetails'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetails'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetails'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/ims-metadata-api-v1-3/operations/get-uid-uid?api-version=2022-04-01-preview
+  /{plant}:
+    get:
+      operationId: get-plant
+      summary: List tags for the specified plant.
+      description: List tags for the specified plant.
+      parameters:
+      - name: plant
+        in: path
+        required: true
+        description: The plant whose tags to list.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        required: false
+        description: Specifies how many records you want returned. Cannot be more than 1000.
+        schema:
+          type: number
+      - name: continuationToken
+        in: query
+        required: false
+        description: Can be passed to retrieve the next page of results if there are any.
+        schema:
+          type: string
+      - name: id
+        in: query
+        required: false
+        description: Filters the tag result on the 'id' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: uid
+        in: query
+        required: false
+        description: Filters the tag result on the 'uid' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: imsType
+        in: query
+        required: false
+        description: Filters the tag result on the 'imsType' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: systemCode
+        in: query
+        required: false
+        description: Filters the tag result on the 'systemCode' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: recordId
+        in: query
+        required: false
+        description: Filters the tag result on the 'recordId' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: plantSapCode
+        in: query
+        required: false
+        description: Filters the tag result on the 'plantSapCode' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: plantStidCode
+        in: query
+        required: false
+        description: Filters the tag result on the 'plantStidCode' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: denyDataShare
+        in: query
+        required: false
+        description: Filters the tag result on the 'denyDataShare' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: tag
+        in: query
+        required: false
+        description: Filters the tag result on the 'tag' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: terminal
+        in: query
+        required: false
+        description: Filters the tag result on the 'terminal' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: isDefaultTerminal
+        in: query
+        required: false
+        description: Filters the tag result on the 'isDefaultTerminal' field. Can be specified multiple times to include more matches.
+        schema:
+          type: boolean
+      - name: description
+        in: query
+        required: false
+        description: Filters the tag result on the 'description' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: engUnits
+        in: query
+        required: false
+        description: Filters the tag result on the 'engUnits' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: standardUnit
+        in: query
+        required: false
+        description: Filters the tag result on the 'standardUnit' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: source
+        in: query
+        required: false
+        description: Filters the tag result on the 'source' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: type
+        in: query
+        required: false
+        description: Filters the tag result on the 'type' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: sourceTag
+        in: query
+        required: false
+        description: Filters the tag result on the 'sourceTag' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: stepped
+        in: query
+        required: false
+        description: Filters the tag result on the 'stepped' field. Can be specified multiple times to include more matches.
+        schema:
+          type: boolean
+      - name: changeDate
+        in: query
+        required: false
+        description: Format - date-time (as date-time in RFC3339). Filters the tag result on the 'changeDate' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: creationDate
+        in: query
+        required: false
+        description: Format - date-time (as date-time in RFC3339). Filters the tag result on the 'creationDate' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: currentValueDate
+        in: query
+        required: false
+        description: Format - date-time (as date-time in RFC3339). Filters the tag result on the 'currentValueDate' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: plantArea
+        in: query
+        required: false
+        description: Filters the tag result on the 'plantArea' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: significantDigit
+        in: query
+        required: false
+        description: Filters the tag result on the 'significantDigit' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: maxTimeInterval
+        in: query
+        required: false
+        description: Filters the tag result on the 'maxTimeInterval' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: fieldId
+        in: query
+        required: false
+        description: Filters the tag result on the 'fieldId' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetadataPagedResponse_v2'
+              example:
+                links:
+                - relationship: string
+                  reference: string
+                data:
+                  items:
+                  - id: string
+                    uid: string
+                    imsType: string
+                    systemCode: string
+                    recordID: string
+                    plantSAPCode: string
+                    plantSTIDCode: string
+                    denyDataShare: string
+                    tag: string
+                    terminal: string
+                    isDefaultTerminal: true
+                    description: string
+                    engUnits: string
+                    standardUnit: string
+                    source: string
+                    type: string
+                    sourceTag: string
+                    stepped: true
+                    changeDate: string
+                    creationDate: string
+                    currentValueDate: string
+                    plantArea: string
+                    significantDigit: string
+                    maxTimeInterval: string
+                    fieldId: string
+                count: 0
+                continuationToken: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetails'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetails'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetails'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetails'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetails'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/ims-metadata-api-v1-3/operations/get-plant?api-version=2022-04-01-preview
+  /:
+    get:
+      operationId: get
+      summary: Lists all tags for all plants.
+      description: Lists all tags for all plants.
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        description: Specifies how many records you want returned. Cannot be more than 1000.
+        schema:
+          type: number
+      - name: continuationToken
+        in: query
+        required: false
+        description: Can be passed to retrieve the next page of results if there are any.
+        schema:
+          type: string
+      - name: id
+        in: query
+        required: false
+        description: Filters the tag result on the 'id' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: uid
+        in: query
+        required: false
+        description: Filters the tag result on the 'uid' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: imsType
+        in: query
+        required: false
+        description: Filters the tag result on the 'imsType' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: systemCode
+        in: query
+        required: false
+        description: Filters the tag result on the 'systemCode' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: recordId
+        in: query
+        required: false
+        description: Filters the tag result on the 'recordId' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: plantSapCode
+        in: query
+        required: false
+        description: Filters the tag result on the 'plantSapCode' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: plantStidCode
+        in: query
+        required: false
+        description: Filters the tag result on the 'plantStidCode' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: denyDataShare
+        in: query
+        required: false
+        description: Filters the tag result on the 'denyDataShare' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: tag
+        in: query
+        required: false
+        description: Filters the tag result on the 'tag' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: terminal
+        in: query
+        required: false
+        description: Filters the tag result on the 'terminal' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: isDefaultTerminal
+        in: query
+        required: false
+        description: Filters the tag result on the 'isDefaultTerminal' field. Can be specified multiple times to include more matches.
+        schema:
+          type: boolean
+      - name: description
+        in: query
+        required: false
+        description: Filters the tag result on the 'description' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: engUnits
+        in: query
+        required: false
+        description: Filters the tag result on the 'engUnits' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: standardUnit
+        in: query
+        required: false
+        description: Filters the tag result on the 'standardUnit' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: source
+        in: query
+        required: false
+        description: Filters the tag result on the 'source' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: type
+        in: query
+        required: false
+        description: Filters the tag result on the 'type' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: sourceTag
+        in: query
+        required: false
+        description: Filters the tag result on the 'sourceTag' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: stepped
+        in: query
+        required: false
+        description: Filters the tag result on the 'stepped' field. Can be specified multiple times to include more matches.
+        schema:
+          type: boolean
+      - name: changeDate
+        in: query
+        required: false
+        description: Format - date-time (as date-time in RFC3339). Filters the tag result on the 'changeDate' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: creationDate
+        in: query
+        required: false
+        description: Format - date-time (as date-time in RFC3339). Filters the tag result on the 'creationDate' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: currentValueDate
+        in: query
+        required: false
+        description: Format - date-time (as date-time in RFC3339). Filters the tag result on the 'currentValueDate' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: plantArea
+        in: query
+        required: false
+        description: Filters the tag result on the 'plantArea' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: significantDigit
+        in: query
+        required: false
+        description: Filters the tag result on the 'significantDigit' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: maxTimeInterval
+        in: query
+        required: false
+        description: Filters the tag result on the 'maxTimeInterval' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: fieldId
+        in: query
+        required: false
+        description: Filters the tag result on the 'fieldId' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetadataPagedResponse_v2'
+              example:
+                links:
+                - relationship: string
+                  reference: string
+                data:
+                  items:
+                  - id: string
+                    uid: string
+                    imsType: string
+                    systemCode: string
+                    recordID: string
+                    plantSAPCode: string
+                    plantSTIDCode: string
+                    denyDataShare: string
+                    tag: string
+                    terminal: string
+                    isDefaultTerminal: true
+                    description: string
+                    engUnits: string
+                    standardUnit: string
+                    source: string
+                    type: string
+                    sourceTag: string
+                    stepped: true
+                    changeDate: string
+                    creationDate: string
+                    currentValueDate: string
+                    plantArea: string
+                    significantDigit: string
+                    maxTimeInterval: string
+                    fieldId: string
+                count: 0
+                continuationToken: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetails'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetails'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetails'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetails'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetails'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/ims-metadata-api-v1-3/operations/get?api-version=2022-04-01-preview
+    post:
+      operationId: post
+      summary: Provides endpoint to search for and list metadata by a list of tags, uid etc.
+      description: Provides endpoint to search for and list metadata by a list of tags, uid etc.
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        description: Specifies how many records you want returned. Cannot be more than 1000.
+        schema:
+          type: number
+      - name: continuationToken
+        in: query
+        required: false
+        description: Can be passed to retrieve the next page of results if there are any.
+        schema:
+          type: string
+      - name: id
+        in: query
+        required: false
+        description: Filters the tag result on the 'id' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: uid
+        in: query
+        required: false
+        description: Filters the tag result on the 'uid' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: imsType
+        in: query
+        required: false
+        description: Filters the tag result on the 'imsType' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: systemCode
+        in: query
+        required: false
+        description: Filters the tag result on the 'systemCode' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: recordId
+        in: query
+        required: false
+        description: Filters the tag result on the 'recordId' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: plantSapCode
+        in: query
+        required: false
+        description: Filters the tag result on the 'plantSapCode' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: plantStidCode
+        in: query
+        required: false
+        description: Filters the tag result on the 'plantStidCode' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: denyDataShare
+        in: query
+        required: false
+        description: Filters the tag result on the 'denyDataShare' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: tag
+        in: query
+        required: false
+        description: Filters the tag result on the 'tag' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: terminal
+        in: query
+        required: false
+        description: Filters the tag result on the 'terminal' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: isDefaultTerminal
+        in: query
+        required: false
+        description: Filters the tag result on the 'isDefaultTerminal' field. Can be specified multiple times to include more matches.
+        schema:
+          type: boolean
+      - name: description
+        in: query
+        required: false
+        description: Filters the tag result on the 'description' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: engUnits
+        in: query
+        required: false
+        description: Filters the tag result on the 'engUnits' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: standardUnit
+        in: query
+        required: false
+        description: Filters the tag result on the 'standardUnit' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: source
+        in: query
+        required: false
+        description: Filters the tag result on the 'source' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: type
+        in: query
+        required: false
+        description: Filters the tag result on the 'type' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: sourceTag
+        in: query
+        required: false
+        description: Filters the tag result on the 'sourceTag' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: stepped
+        in: query
+        required: false
+        description: Filters the tag result on the 'stepped' field. Can be specified multiple times to include more matches.
+        schema:
+          type: boolean
+      - name: changeDate
+        in: query
+        required: false
+        description: Format - date-time (as date-time in RFC3339). Filters the tag result on the 'changeDate' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: creationDate
+        in: query
+        required: false
+        description: Format - date-time (as date-time in RFC3339). Filters the tag result on the 'creationDate' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: currentValueDate
+        in: query
+        required: false
+        description: Format - date-time (as date-time in RFC3339). Filters the tag result on the 'currentValueDate' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: plantArea
+        in: query
+        required: false
+        description: Filters the tag result on the 'plantArea' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: significantDigit
+        in: query
+        required: false
+        description: Filters the tag result on the 'significantDigit' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: maxTimeInterval
+        in: query
+        required: false
+        description: Filters the tag result on the 'maxTimeInterval' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: fieldId
+        in: query
+        required: false
+        description: Filters the tag result on the 'fieldId' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/PostRequest-27'
+            example:
+            - id: string
+              uid: string
+              imsType: string
+              systemCode: string
+              recordId: string
+              plantSapCode: string
+              plantStidCode: string
+              denyDataShare: string
+              tag: string
+              terminal: string
+              isDefaultTerminal: true
+              description: string
+              engUnits: string
+              standardUnit: string
+              source: string
+              type: string
+              sourceTag: string
+              stepped: true
+              changeDate: string
+              creationDate: string
+              currentValueDate: string
+              plantArea: string
+              significantDigit: string
+              maxTimeInterval: string
+              fieldId: string
+              isDeleted: true
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostRequest-28'
+            example:
+            - id: string
+              uid: string
+              imsType: string
+              systemCode: string
+              recordId: string
+              plantSapCode: string
+              plantStidCode: string
+              denyDataShare: string
+              tag: string
+              terminal: string
+              isDefaultTerminal: true
+              description: string
+              engUnits: string
+              standardUnit: string
+              source: string
+              type: string
+              sourceTag: string
+              stepped: true
+              changeDate: string
+              creationDate: string
+              currentValueDate: string
+              plantArea: string
+              significantDigit: string
+              maxTimeInterval: string
+              fieldId: string
+              isDeleted: true
+          text/json:
+            schema:
+              $ref: '#/components/schemas/PostRequest-29'
+            example:
+            - id: string
+              uid: string
+              imsType: string
+              systemCode: string
+              recordId: string
+              plantSapCode: string
+              plantStidCode: string
+              denyDataShare: string
+              tag: string
+              terminal: string
+              isDefaultTerminal: true
+              description: string
+              engUnits: string
+              standardUnit: string
+              source: string
+              type: string
+              sourceTag: string
+              stepped: true
+              changeDate: string
+              creationDate: string
+              currentValueDate: string
+              plantArea: string
+              significantDigit: string
+              maxTimeInterval: string
+              fieldId: string
+              isDeleted: true
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/PostRequest-30'
+            example:
+            - id: string
+              uid: string
+              imsType: string
+              systemCode: string
+              recordId: string
+              plantSapCode: string
+              plantStidCode: string
+              denyDataShare: string
+              tag: string
+              terminal: string
+              isDefaultTerminal: true
+              description: string
+              engUnits: string
+              standardUnit: string
+              source: string
+              type: string
+              sourceTag: string
+              stepped: true
+              changeDate: string
+              creationDate: string
+              currentValueDate: string
+              plantArea: string
+              significantDigit: string
+              maxTimeInterval: string
+              fieldId: string
+              isDeleted: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetadataPagedResponse_v2'
+              example:
+                links:
+                - relationship: string
+                  reference: string
+                data:
+                  items:
+                  - id: string
+                    uid: string
+                    imsType: string
+                    systemCode: string
+                    recordID: string
+                    plantSAPCode: string
+                    plantSTIDCode: string
+                    denyDataShare: string
+                    tag: string
+                    terminal: string
+                    isDefaultTerminal: true
+                    description: string
+                    engUnits: string
+                    standardUnit: string
+                    source: string
+                    type: string
+                    sourceTag: string
+                    stepped: true
+                    changeDate: string
+                    creationDate: string
+                    currentValueDate: string
+                    plantArea: string
+                    significantDigit: string
+                    maxTimeInterval: string
+                    fieldId: string
+                count: 0
+                continuationToken: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetails'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetails'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetails'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetails'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetails'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/ims-metadata-api-v1-3/operations/post?api-version=2022-04-01-preview
+  /search/{tag}:
+    get:
+      operationId: get-search-tag
+      summary: Searches for tags independent of plant.
+      description: Searches for tags independent of plant.
+      parameters:
+      - name: tag
+        in: path
+        required: true
+        description: Searches for tags matching this value. Wildcard (*) can be used.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        required: false
+        description: Specifies how many records you want returned. Cannot be more than 1000.
+        schema:
+          type: number
+      - name: continuationToken
+        in: query
+        required: false
+        description: Can be passed to retrieve the next page of results if there are any.
+        schema:
+          type: string
+      - name: id
+        in: query
+        required: false
+        description: Filters the tag result on the 'id' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: uid
+        in: query
+        required: false
+        description: Filters the tag result on the 'uid' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: imsType
+        in: query
+        required: false
+        description: Filters the tag result on the 'imsType' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: systemCode
+        in: query
+        required: false
+        description: Filters the tag result on the 'systemCode' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: recordId
+        in: query
+        required: false
+        description: Filters the tag result on the 'recordId' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: plantSapCode
+        in: query
+        required: false
+        description: Filters the tag result on the 'plantSapCode' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: plantStidCode
+        in: query
+        required: false
+        description: Filters the tag result on the 'plantStidCode' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: denyDataShare
+        in: query
+        required: false
+        description: Filters the tag result on the 'denyDataShare' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: tag
+        in: query
+        required: false
+        description: Filters the tag result on the 'tag' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: terminal
+        in: query
+        required: false
+        description: Filters the tag result on the 'terminal' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: isDefaultTerminal
+        in: query
+        required: false
+        description: Filters the tag result on the 'isDefaultTerminal' field. Can be specified multiple times to include more matches.
+        schema:
+          type: boolean
+      - name: description
+        in: query
+        required: false
+        description: Filters the tag result on the 'description' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: engUnits
+        in: query
+        required: false
+        description: Filters the tag result on the 'engUnits' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: standardUnit
+        in: query
+        required: false
+        description: Filters the tag result on the 'standardUnit' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: source
+        in: query
+        required: false
+        description: Filters the tag result on the 'source' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: type
+        in: query
+        required: false
+        description: Filters the tag result on the 'type' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: sourceTag
+        in: query
+        required: false
+        description: Filters the tag result on the 'sourceTag' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: stepped
+        in: query
+        required: false
+        description: Filters the tag result on the 'stepped' field. Can be specified multiple times to include more matches.
+        schema:
+          type: boolean
+      - name: changeDate
+        in: query
+        required: false
+        description: Format - date-time (as date-time in RFC3339). Filters the tag result on the 'changeDate' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: creationDate
+        in: query
+        required: false
+        description: Format - date-time (as date-time in RFC3339). Filters the tag result on the 'creationDate' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: currentValueDate
+        in: query
+        required: false
+        description: Format - date-time (as date-time in RFC3339). Filters the tag result on the 'currentValueDate' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: plantArea
+        in: query
+        required: false
+        description: Filters the tag result on the 'plantArea' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: significantDigit
+        in: query
+        required: false
+        description: Filters the tag result on the 'significantDigit' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: maxTimeInterval
+        in: query
+        required: false
+        description: Filters the tag result on the 'maxTimeInterval' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: fieldId
+        in: query
+        required: false
+        description: Filters the tag result on the 'fieldId' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetadataPagedResponse_v2'
+              example:
+                links:
+                - relationship: string
+                  reference: string
+                data:
+                  items:
+                  - id: string
+                    uid: string
+                    imsType: string
+                    systemCode: string
+                    recordID: string
+                    plantSAPCode: string
+                    plantSTIDCode: string
+                    denyDataShare: string
+                    tag: string
+                    terminal: string
+                    isDefaultTerminal: true
+                    description: string
+                    engUnits: string
+                    standardUnit: string
+                    source: string
+                    type: string
+                    sourceTag: string
+                    stepped: true
+                    changeDate: string
+                    creationDate: string
+                    currentValueDate: string
+                    plantArea: string
+                    significantDigit: string
+                    maxTimeInterval: string
+                    fieldId: string
+                count: 0
+                continuationToken: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetails'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetails'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetails'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetails'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetails'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/ims-metadata-api-v1-3/operations/get-search-tag?api-version=2022-04-01-preview
+  /search:
+    post:
+      operationId: post-search
+      summary: Searches for tags independent of plant.
+      description: Searches for tags independent of plant.
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        description: Specifies how many records you want returned. Cannot be more than 1000.
+        schema:
+          type: number
+      - name: continuationToken
+        in: query
+        required: false
+        description: Can be passed to retrieve the next page of results if there are any.
+        schema:
+          type: string
+      - name: id
+        in: query
+        required: false
+        description: Filters the tag result on the 'id' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: uid
+        in: query
+        required: false
+        description: Filters the tag result on the 'uid' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: imsType
+        in: query
+        required: false
+        description: Filters the tag result on the 'imsType' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: systemCode
+        in: query
+        required: false
+        description: Filters the tag result on the 'systemCode' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: recordId
+        in: query
+        required: false
+        description: Filters the tag result on the 'recordId' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: plantSapCode
+        in: query
+        required: false
+        description: Filters the tag result on the 'plantSapCode' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: plantStidCode
+        in: query
+        required: false
+        description: Filters the tag result on the 'plantStidCode' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: denyDataShare
+        in: query
+        required: false
+        description: Filters the tag result on the 'denyDataShare' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: tag
+        in: query
+        required: false
+        description: Filters the tag result on the 'tag' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: terminal
+        in: query
+        required: false
+        description: Filters the tag result on the 'terminal' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: isDefaultTerminal
+        in: query
+        required: false
+        description: Filters the tag result on the 'isDefaultTerminal' field. Can be specified multiple times to include more matches.
+        schema:
+          type: boolean
+      - name: description
+        in: query
+        required: false
+        description: Filters the tag result on the 'description' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: engUnits
+        in: query
+        required: false
+        description: Filters the tag result on the 'engUnits' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: standardUnit
+        in: query
+        required: false
+        description: Filters the tag result on the 'standardUnit' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: source
+        in: query
+        required: false
+        description: Filters the tag result on the 'source' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: type
+        in: query
+        required: false
+        description: Filters the tag result on the 'type' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: sourceTag
+        in: query
+        required: false
+        description: Filters the tag result on the 'sourceTag' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: stepped
+        in: query
+        required: false
+        description: Filters the tag result on the 'stepped' field. Can be specified multiple times to include more matches.
+        schema:
+          type: boolean
+      - name: changeDate
+        in: query
+        required: false
+        description: Format - date-time (as date-time in RFC3339). Filters the tag result on the 'changeDate' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: creationDate
+        in: query
+        required: false
+        description: Format - date-time (as date-time in RFC3339). Filters the tag result on the 'creationDate' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: currentValueDate
+        in: query
+        required: false
+        description: Format - date-time (as date-time in RFC3339). Filters the tag result on the 'currentValueDate' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: plantArea
+        in: query
+        required: false
+        description: Filters the tag result on the 'plantArea' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: significantDigit
+        in: query
+        required: false
+        description: Filters the tag result on the 'significantDigit' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: maxTimeInterval
+        in: query
+        required: false
+        description: Filters the tag result on the 'maxTimeInterval' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: fieldId
+        in: query
+        required: false
+        description: Filters the tag result on the 'fieldId' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/SearchPostRequest-27'
+            example:
+            - id: string
+              uid: string
+              imsType: string
+              systemCode: string
+              recordId: string
+              plantSapCode: string
+              plantStidCode: string
+              denyDataShare: string
+              tag: string
+              terminal: string
+              isDefaultTerminal: true
+              description: string
+              engUnits: string
+              standardUnit: string
+              source: string
+              type: string
+              sourceTag: string
+              stepped: true
+              changeDate: string
+              creationDate: string
+              currentValueDate: string
+              plantArea: string
+              significantDigit: string
+              maxTimeInterval: string
+              fieldId: string
+              isDeleted: true
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchPostRequest-28'
+            example:
+            - id: string
+              uid: string
+              imsType: string
+              systemCode: string
+              recordId: string
+              plantSapCode: string
+              plantStidCode: string
+              denyDataShare: string
+              tag: string
+              terminal: string
+              isDefaultTerminal: true
+              description: string
+              engUnits: string
+              standardUnit: string
+              source: string
+              type: string
+              sourceTag: string
+              stepped: true
+              changeDate: string
+              creationDate: string
+              currentValueDate: string
+              plantArea: string
+              significantDigit: string
+              maxTimeInterval: string
+              fieldId: string
+              isDeleted: true
+          text/json:
+            schema:
+              $ref: '#/components/schemas/SearchPostRequest-29'
+            example:
+            - id: string
+              uid: string
+              imsType: string
+              systemCode: string
+              recordId: string
+              plantSapCode: string
+              plantStidCode: string
+              denyDataShare: string
+              tag: string
+              terminal: string
+              isDefaultTerminal: true
+              description: string
+              engUnits: string
+              standardUnit: string
+              source: string
+              type: string
+              sourceTag: string
+              stepped: true
+              changeDate: string
+              creationDate: string
+              currentValueDate: string
+              plantArea: string
+              significantDigit: string
+              maxTimeInterval: string
+              fieldId: string
+              isDeleted: true
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/SearchPostRequest-30'
+            example:
+            - id: string
+              uid: string
+              imsType: string
+              systemCode: string
+              recordId: string
+              plantSapCode: string
+              plantStidCode: string
+              denyDataShare: string
+              tag: string
+              terminal: string
+              isDefaultTerminal: true
+              description: string
+              engUnits: string
+              standardUnit: string
+              source: string
+              type: string
+              sourceTag: string
+              stepped: true
+              changeDate: string
+              creationDate: string
+              currentValueDate: string
+              plantArea: string
+              significantDigit: string
+              maxTimeInterval: string
+              fieldId: string
+              isDeleted: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetadataPagedResponse_v2'
+              example:
+                links:
+                - relationship: string
+                  reference: string
+                data:
+                  items:
+                  - id: string
+                    uid: string
+                    imsType: string
+                    systemCode: string
+                    recordID: string
+                    plantSAPCode: string
+                    plantSTIDCode: string
+                    denyDataShare: string
+                    tag: string
+                    terminal: string
+                    isDefaultTerminal: true
+                    description: string
+                    engUnits: string
+                    standardUnit: string
+                    source: string
+                    type: string
+                    sourceTag: string
+                    stepped: true
+                    changeDate: string
+                    creationDate: string
+                    currentValueDate: string
+                    plantArea: string
+                    significantDigit: string
+                    maxTimeInterval: string
+                    fieldId: string
+                count: 0
+                continuationToken: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetails'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetails'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetails'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetails'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetails'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/ims-metadata-api-v1-3/operations/post-search?api-version=2022-04-01-preview
+  /{plant}/search/{tag}:
+    get:
+      operationId: get-plant-search-tag
+      summary: Searches for tags within a specific plant
+      description: Searches for tags within a specific plant
+      parameters:
+      - name: plant
+        in: path
+        required: true
+        description: The name of the plant
+        schema:
+          type: string
+      - name: tag
+        in: path
+        required: true
+        description: The name of the tag to search for
+        schema:
+          type: string
+      - name: limit
+        in: query
+        required: false
+        description: Specifies how many records you want returned. Cannot be more than 1000.
+        schema:
+          type: number
+      - name: continuationToken
+        in: query
+        required: false
+        description: Can be passed to retrieve the next page of results if there are any.
+        schema:
+          type: string
+      - name: id
+        in: query
+        required: false
+        description: Filters the tag result on the 'id' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: uid
+        in: query
+        required: false
+        description: Filters the tag result on the 'uid' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: imsType
+        in: query
+        required: false
+        description: Filters the tag result on the 'imsType' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: systemCode
+        in: query
+        required: false
+        description: Filters the tag result on the 'systemCode' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: recordId
+        in: query
+        required: false
+        description: Filters the tag result on the 'recordId' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: plantSapCode
+        in: query
+        required: false
+        description: Filters the tag result on the 'plantSapCode' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: plantStidCode
+        in: query
+        required: false
+        description: Filters the tag result on the 'plantStidCode' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: denyDataShare
+        in: query
+        required: false
+        description: Filters the tag result on the 'denyDataShare' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: tag
+        in: query
+        required: false
+        description: Filters the tag result on the 'tag' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: terminal
+        in: query
+        required: false
+        description: Filters the tag result on the 'terminal' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: isDefaultTerminal
+        in: query
+        required: false
+        description: Filters the tag result on the 'isDefaultTerminal' field. Can be specified multiple times to include more matches.
+        schema:
+          type: boolean
+      - name: description
+        in: query
+        required: false
+        description: Filters the tag result on the 'description' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: engUnits
+        in: query
+        required: false
+        description: Filters the tag result on the 'engUnits' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: standardUnit
+        in: query
+        required: false
+        description: Filters the tag result on the 'standardUnit' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: source
+        in: query
+        required: false
+        description: Filters the tag result on the 'source' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: type
+        in: query
+        required: false
+        description: Filters the tag result on the 'type' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: sourceTag
+        in: query
+        required: false
+        description: Filters the tag result on the 'sourceTag' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: stepped
+        in: query
+        required: false
+        description: Filters the tag result on the 'stepped' field. Can be specified multiple times to include more matches.
+        schema:
+          type: boolean
+      - name: changeDate
+        in: query
+        required: false
+        description: Format - date-time (as date-time in RFC3339). Filters the tag result on the 'changeDate' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: creationDate
+        in: query
+        required: false
+        description: Format - date-time (as date-time in RFC3339). Filters the tag result on the 'creationDate' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: currentValueDate
+        in: query
+        required: false
+        description: Format - date-time (as date-time in RFC3339). Filters the tag result on the 'currentValueDate' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: plantArea
+        in: query
+        required: false
+        description: Filters the tag result on the 'plantArea' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: significantDigit
+        in: query
+        required: false
+        description: Filters the tag result on the 'significantDigit' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: maxTimeInterval
+        in: query
+        required: false
+        description: Filters the tag result on the 'maxTimeInterval' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: fieldId
+        in: query
+        required: false
+        description: Filters the tag result on the 'fieldId' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetadataPagedResponse_v2'
+              example:
+                links:
+                - relationship: string
+                  reference: string
+                data:
+                  items:
+                  - id: string
+                    uid: string
+                    imsType: string
+                    systemCode: string
+                    recordID: string
+                    plantSAPCode: string
+                    plantSTIDCode: string
+                    denyDataShare: string
+                    tag: string
+                    terminal: string
+                    isDefaultTerminal: true
+                    description: string
+                    engUnits: string
+                    standardUnit: string
+                    source: string
+                    type: string
+                    sourceTag: string
+                    stepped: true
+                    changeDate: string
+                    creationDate: string
+                    currentValueDate: string
+                    plantArea: string
+                    significantDigit: string
+                    maxTimeInterval: string
+                    fieldId: string
+                count: 0
+                continuationToken: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetails'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetails'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetails'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetails'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetails'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/ims-metadata-api-v1-3/operations/get-plant-search-tag?api-version=2022-04-01-preview
+components:
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      name: Ocp-Apim-Subscription-Key
+      in: header
+    apiKeyQuery:
+      type: apiKey
+      name: subscription-key
+      in: query
+  schemas:
+    ErrorDetails:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          description: The HTTP status code
+          format: int32
+        message:
+          type: string
+          description: The error message
+          nullable: true
+        traceId:
+          type: string
+          description: Trace ID that can be used by support to determine root cause
+          nullable: true
+      additionalProperties: false
+      description: Describes the error returned by the server
+    FacetItem:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int64
+          readOnly: true
+      additionalProperties: false
+    FacetList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/FacetItem'
+          nullable: true
+      additionalProperties: false
+    FacetResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/FacetList'
+      additionalProperties: false
+    Hyperlink:
+      type: object
+      properties:
+        relationship:
+          type: string
+          description: The relationship the current resource has to the reference resource
+          nullable: true
+        reference:
+          type: string
+          description: The reference resource hyperlink
+          format: uri
+          nullable: true
+      additionalProperties: false
+      description: Holds a hyperlink to a resource and what relationship the current resource has to it
+    MetadataItemResponse_v2:
+      type: object
+      properties:
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Hyperlink'
+          description: Links that can be used to get related resources
+          nullable: true
+        data:
+          $ref: '#/components/schemas/MetadataItem_v2'
+      additionalProperties: false
+      description: Metadata list response model
+    MetadataItem_v2:
+      type: object
+      properties:
+        id:
+          type: string
+          description: SHA1 hash of the UId
+          nullable: true
+        uid:
+          type: string
+          description: A unique id of the tag (plant + a counter)
+          nullable: true
+        imsType:
+          type: string
+          description: The type of this IMS tag
+          nullable: true
+        systemCode:
+          type: string
+          description: The name of the IMS System
+          nullable: true
+        recordID:
+          type: string
+          description: The ID of the record from the IMS system
+          nullable: true
+        plantSAPCode:
+          type: string
+          description: The SAP code of the plant
+          nullable: true
+        plantSTIDCode:
+          type: string
+          description: The STID code of the plant
+          nullable: true
+        denyDataShare:
+          type: string
+          description: Reason for denied access where null means access allowed
+          nullable: true
+        tag:
+          type: string
+          description: The name of the tag
+          nullable: true
+        terminal:
+          type: string
+          description: The name of the terminal
+          nullable: true
+        isDefaultTerminal:
+          type: boolean
+          description: Is the terminal default
+          nullable: true
+        description:
+          type: string
+          description: The description of the tag
+          nullable: true
+        engUnits:
+          type: string
+          description: The measurement unit of the tag in English
+          nullable: true
+        standardUnit:
+          type: string
+          description: The standard unit of measurement from commonlib
+          nullable: true
+        source:
+          type: string
+          description: The source of the data
+          nullable: true
+        type:
+          type: string
+          description: The type of the signal data
+          nullable: true
+        sourceTag:
+          type: string
+          description: The original tag name if the signal data comes from another tag
+          nullable: true
+        stepped:
+          type: boolean
+          description: Whether or not the signal data is stepped or raw
+          nullable: true
+        changeDate:
+          type: string
+          description: The date/time when this tag was last changed
+          format: date-time
+          nullable: true
+        creationDate:
+          type: string
+          description: The date/time when this tag was created
+          format: date-time
+          nullable: true
+        currentValueDate:
+          type: string
+          description: The date/time of the last/current value of the tag
+          format: date-time
+          nullable: true
+        plantArea:
+          type: string
+          description: The area of the plant
+          nullable: true
+        significantDigit:
+          type: string
+          description: A string specifying the significant digits of the data-points
+          nullable: true
+        maxTimeInterval:
+          type: string
+          description: The maximum time interval in which the data-points are valid
+          nullable: true
+        fieldId:
+          type: string
+          description: The field ID
+          nullable: true
+      additionalProperties: false
+      description: The metadata information of a tag
+    MetadataList_v2:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MetadataItem_v2'
+          description: The metadata result items
+          nullable: true
+      additionalProperties: false
+      description: The metadata result
+    MetadataPagedResponse_v2:
+      type: object
+      properties:
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Hyperlink'
+          description: Links that can be used to get related resources
+          nullable: true
+        data:
+          $ref: '#/components/schemas/MetadataList_v2'
+        count:
+          type: integer
+          description: Total amount of results in the query
+          format: int64
+          nullable: true
+        continuationToken:
+          type: string
+          description: Continuation token used to get the next page
+          nullable: true
+      additionalProperties: false
+      description: Metadata response model with continuation token
+    MetadataSearchModel:
+      type: object
+      properties:
+        id:
+          type: string
+          description: SHA1 hash of the UId
+          nullable: true
+        uid:
+          type: string
+          description: A unique id of the tag (plant + a counter + map)
+          nullable: true
+        imsType:
+          type: string
+          description: The type of this IMS tag
+          nullable: true
+        systemCode:
+          type: string
+          description: The name of the IMS System
+          nullable: true
+        recordId:
+          type: string
+          description: The ID of the record from the IMS system
+          nullable: true
+        plantSapCode:
+          type: string
+          description: The SAP code of the plant
+          nullable: true
+        plantStidCode:
+          type: string
+          description: The STID code of the plant
+          nullable: true
+        denyDataShare:
+          type: string
+          description: Reason for denied access where null means access allowed
+          nullable: true
+        tag:
+          type: string
+          description: The name of the tag
+          nullable: true
+        terminal:
+          type: string
+          description: The name of the map
+          nullable: true
+        isDefaultTerminal:
+          type: boolean
+          description: Whether or not the map is default
+          nullable: true
+        description:
+          type: string
+          description: The description of the tag
+          nullable: true
+        engUnits:
+          type: string
+          description: The measurement unit of the tag in English
+          nullable: true
+        standardUnit:
+          type: string
+          description: The standard unit of measurement from commonlib
+          nullable: true
+        source:
+          type: string
+          description: The source of the data
+          nullable: true
+        type:
+          type: string
+          description: The type of the signal data
+          nullable: true
+        sourceTag:
+          type: string
+          description: The original tag name if the signal data comes from another tag
+          nullable: true
+        stepped:
+          type: boolean
+          description: Whether or not the signal data is stepped or raw
+          nullable: true
+        changeDate:
+          type: string
+          description: The date/time when this tag was last changed
+          format: date-time
+          nullable: true
+        creationDate:
+          type: string
+          description: The date/time when this tag was created
+          format: date-time
+          nullable: true
+        currentValueDate:
+          type: string
+          description: The date/time when this tag was created
+          format: date-time
+          nullable: true
+        plantArea:
+          type: string
+          description: The area of the plant
+          nullable: true
+        significantDigit:
+          type: string
+          description: A string specifying the significant digits of the data-points
+          nullable: true
+        maxTimeInterval:
+          type: string
+          description: The maximum time interval in which the data-points are valid
+          nullable: true
+        fieldId:
+          type: string
+          description: The field ID
+          nullable: true
+        isDeleted:
+          type: boolean
+          nullable: true
+      additionalProperties: false
+      description: The metadata information of a tag
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        status:
+          type: integer
+          format: int32
+          nullable: true
+        detail:
+          type: string
+          nullable: true
+        instance:
+          type: string
+          nullable: true
+      additionalProperties: {}
+    plant-GetRequest:
+      pattern: ^[a-z]*$
+      type: string
+      x-apim-inline: true
+    plant-GetRequest-1:
+      maximum: 1000
+      minimum: 1
+      type: number
+      x-apim-inline: true
+    plant-GetRequest-2:
+      type: string
+      x-apim-inline: true
+    plant-GetRequest-3:
+      type: string
+      x-apim-inline: true
+    plant-GetRequest-4:
+      type: string
+      x-apim-inline: true
+    plant-GetRequest-5:
+      type: string
+      x-apim-inline: true
+    plant-GetRequest-6:
+      type: string
+      x-apim-inline: true
+    plant-GetRequest-7:
+      type: string
+      x-apim-inline: true
+    plant-GetRequest-8:
+      type: string
+      x-apim-inline: true
+    plant-GetRequest-9:
+      type: string
+      x-apim-inline: true
+    plant-GetRequest-10:
+      type: string
+      x-apim-inline: true
+    plant-GetRequest-11:
+      type: string
+      x-apim-inline: true
+    plant-GetRequest-12:
+      type: string
+      x-apim-inline: true
+    plant-GetRequest-13:
+      type: boolean
+      x-apim-inline: true
+    plant-GetRequest-14:
+      type: string
+      x-apim-inline: true
+    plant-GetRequest-15:
+      type: string
+      x-apim-inline: true
+    plant-GetRequest-16:
+      type: string
+      x-apim-inline: true
+    plant-GetRequest-17:
+      type: string
+      x-apim-inline: true
+    plant-GetRequest-18:
+      type: string
+      x-apim-inline: true
+    plant-GetRequest-19:
+      type: string
+      x-apim-inline: true
+    plant-GetRequest-20:
+      type: boolean
+      x-apim-inline: true
+    plant-GetRequest-21:
+      type: string
+      format: date-time
+      x-apim-inline: true
+    plant-GetRequest-22:
+      type: string
+      format: date-time
+      x-apim-inline: true
+    plant-GetRequest-23:
+      type: string
+      format: date-time
+      x-apim-inline: true
+    plant-GetRequest-24:
+      type: string
+      x-apim-inline: true
+    plant-GetRequest-25:
+      type: string
+      x-apim-inline: true
+    plant-GetRequest-26:
+      type: string
+      x-apim-inline: true
+    plant-GetRequest-27:
+      type: string
+      x-apim-inline: true
+    Search-tag-GetRequest:
+      type: string
+      x-apim-inline: true
+    Search-tag-GetRequest-1:
+      maximum: 1000
+      minimum: 1
+      type: number
+      x-apim-inline: true
+    Search-tag-GetRequest-2:
+      type: string
+      x-apim-inline: true
+    Search-tag-GetRequest-3:
+      type: string
+      x-apim-inline: true
+    Search-tag-GetRequest-4:
+      type: string
+      x-apim-inline: true
+    Search-tag-GetRequest-5:
+      type: string
+      x-apim-inline: true
+    Search-tag-GetRequest-6:
+      type: string
+      x-apim-inline: true
+    Search-tag-GetRequest-7:
+      type: string
+      x-apim-inline: true
+    Search-tag-GetRequest-8:
+      type: string
+      x-apim-inline: true
+    Search-tag-GetRequest-9:
+      type: string
+      x-apim-inline: true
+    Search-tag-GetRequest-10:
+      type: string
+      x-apim-inline: true
+    Search-tag-GetRequest-11:
+      type: string
+      x-apim-inline: true
+    Search-tag-GetRequest-12:
+      type: string
+      x-apim-inline: true
+    Search-tag-GetRequest-13:
+      type: boolean
+      x-apim-inline: true
+    Search-tag-GetRequest-14:
+      type: string
+      x-apim-inline: true
+    Search-tag-GetRequest-15:
+      type: string
+      x-apim-inline: true
+    Search-tag-GetRequest-16:
+      type: string
+      x-apim-inline: true
+    Search-tag-GetRequest-17:
+      type: string
+      x-apim-inline: true
+    Search-tag-GetRequest-18:
+      type: string
+      x-apim-inline: true
+    Search-tag-GetRequest-19:
+      type: string
+      x-apim-inline: true
+    Search-tag-GetRequest-20:
+      type: boolean
+      x-apim-inline: true
+    Search-tag-GetRequest-21:
+      type: string
+      format: date-time
+      x-apim-inline: true
+    Search-tag-GetRequest-22:
+      type: string
+      format: date-time
+      x-apim-inline: true
+    Search-tag-GetRequest-23:
+      type: string
+      format: date-time
+      x-apim-inline: true
+    Search-tag-GetRequest-24:
+      type: string
+      x-apim-inline: true
+    Search-tag-GetRequest-25:
+      type: string
+      x-apim-inline: true
+    Search-tag-GetRequest-26:
+      type: string
+      x-apim-inline: true
+    Search-tag-GetRequest-27:
+      type: string
+      x-apim-inline: true
+    SearchPostRequest:
+      maximum: 1000
+      minimum: 1
+      type: number
+      x-apim-inline: true
+    SearchPostRequest-1:
+      type: string
+      x-apim-inline: true
+    SearchPostRequest-2:
+      type: string
+      x-apim-inline: true
+    SearchPostRequest-3:
+      type: string
+      x-apim-inline: true
+    SearchPostRequest-4:
+      type: string
+      x-apim-inline: true
+    SearchPostRequest-5:
+      type: string
+      x-apim-inline: true
+    SearchPostRequest-6:
+      type: string
+      x-apim-inline: true
+    SearchPostRequest-7:
+      type: string
+      x-apim-inline: true
+    SearchPostRequest-8:
+      type: string
+      x-apim-inline: true
+    SearchPostRequest-9:
+      type: string
+      x-apim-inline: true
+    SearchPostRequest-10:
+      type: string
+      x-apim-inline: true
+    SearchPostRequest-11:
+      type: string
+      x-apim-inline: true
+    SearchPostRequest-12:
+      type: boolean
+      x-apim-inline: true
+    SearchPostRequest-13:
+      type: string
+      x-apim-inline: true
+    SearchPostRequest-14:
+      type: string
+      x-apim-inline: true
+    SearchPostRequest-15:
+      type: string
+      x-apim-inline: true
+    SearchPostRequest-16:
+      type: string
+      x-apim-inline: true
+    SearchPostRequest-17:
+      type: string
+      x-apim-inline: true
+    SearchPostRequest-18:
+      type: string
+      x-apim-inline: true
+    SearchPostRequest-19:
+      type: boolean
+      x-apim-inline: true
+    SearchPostRequest-20:
+      type: string
+      format: date-time
+      x-apim-inline: true
+    SearchPostRequest-21:
+      type: string
+      format: date-time
+      x-apim-inline: true
+    SearchPostRequest-22:
+      type: string
+      format: date-time
+      x-apim-inline: true
+    SearchPostRequest-23:
+      type: string
+      x-apim-inline: true
+    SearchPostRequest-24:
+      type: string
+      x-apim-inline: true
+    SearchPostRequest-25:
+      type: string
+      x-apim-inline: true
+    SearchPostRequest-26:
+      type: string
+      x-apim-inline: true
+    SearchPostRequest-27:
+      type: array
+      items:
+        $ref: '#/components/schemas/MetadataSearchModel'
+      x-apim-inline: true
+    SearchPostRequest-28:
+      type: array
+      items:
+        $ref: '#/components/schemas/MetadataSearchModel'
+      x-apim-inline: true
+    SearchPostRequest-29:
+      type: array
+      items:
+        $ref: '#/components/schemas/MetadataSearchModel'
+      x-apim-inline: true
+    SearchPostRequest-30:
+      type: array
+      items:
+        $ref: '#/components/schemas/MetadataSearchModel'
+      x-apim-inline: true
+    plant-Search-tag-GetRequest:
+      pattern: ^[a-z]*$
+      type: string
+      x-apim-inline: true
+    plant-Search-tag-GetRequest-1:
+      type: string
+      x-apim-inline: true
+    plant-Search-tag-GetRequest-2:
+      maximum: 1000
+      minimum: 1
+      type: number
+      x-apim-inline: true
+    plant-Search-tag-GetRequest-3:
+      type: string
+      x-apim-inline: true
+    plant-Search-tag-GetRequest-4:
+      type: string
+      x-apim-inline: true
+    plant-Search-tag-GetRequest-5:
+      type: string
+      x-apim-inline: true
+    plant-Search-tag-GetRequest-6:
+      type: string
+      x-apim-inline: true
+    plant-Search-tag-GetRequest-7:
+      type: string
+      x-apim-inline: true
+    plant-Search-tag-GetRequest-8:
+      type: string
+      x-apim-inline: true
+    plant-Search-tag-GetRequest-9:
+      type: string
+      x-apim-inline: true
+    plant-Search-tag-GetRequest-10:
+      type: string
+      x-apim-inline: true
+    plant-Search-tag-GetRequest-11:
+      type: string
+      x-apim-inline: true
+    plant-Search-tag-GetRequest-12:
+      type: string
+      x-apim-inline: true
+    plant-Search-tag-GetRequest-13:
+      type: string
+      x-apim-inline: true
+    plant-Search-tag-GetRequest-14:
+      type: boolean
+      x-apim-inline: true
+    plant-Search-tag-GetRequest-15:
+      type: string
+      x-apim-inline: true
+    plant-Search-tag-GetRequest-16:
+      type: string
+      x-apim-inline: true
+    plant-Search-tag-GetRequest-17:
+      type: string
+      x-apim-inline: true
+    plant-Search-tag-GetRequest-18:
+      type: string
+      x-apim-inline: true
+    plant-Search-tag-GetRequest-19:
+      type: string
+      x-apim-inline: true
+    plant-Search-tag-GetRequest-20:
+      type: string
+      x-apim-inline: true
+    plant-Search-tag-GetRequest-21:
+      type: boolean
+      x-apim-inline: true
+    plant-Search-tag-GetRequest-22:
+      type: string
+      format: date-time
+      x-apim-inline: true
+    plant-Search-tag-GetRequest-23:
+      type: string
+      format: date-time
+      x-apim-inline: true
+    plant-Search-tag-GetRequest-24:
+      type: string
+      format: date-time
+      x-apim-inline: true
+    plant-Search-tag-GetRequest-25:
+      type: string
+      x-apim-inline: true
+    plant-Search-tag-GetRequest-26:
+      type: string
+      x-apim-inline: true
+    plant-Search-tag-GetRequest-27:
+      type: string
+      x-apim-inline: true
+    plant-Search-tag-GetRequest-28:
+      type: string
+      x-apim-inline: true
+    plant-tag-GetRequest:
+      pattern: ^[a-z]*$
+      type: string
+      x-apim-inline: true
+    plant-tag-GetRequest-1:
+      type: string
+      x-apim-inline: true
+    Uid-uid-GetRequest:
+      type: string
+      x-apim-inline: true
+    Facets-facet-GetRequest:
+      type: string
+      x-apim-inline: true
+    GetRequest:
+      maximum: 1000
+      minimum: 1
+      type: number
+      x-apim-inline: true
+    GetRequest-1:
+      type: string
+      x-apim-inline: true
+    GetRequest-2:
+      type: string
+      x-apim-inline: true
+    GetRequest-3:
+      type: string
+      x-apim-inline: true
+    GetRequest-4:
+      type: string
+      x-apim-inline: true
+    GetRequest-5:
+      type: string
+      x-apim-inline: true
+    GetRequest-6:
+      type: string
+      x-apim-inline: true
+    GetRequest-7:
+      type: string
+      x-apim-inline: true
+    GetRequest-8:
+      type: string
+      x-apim-inline: true
+    GetRequest-9:
+      type: string
+      x-apim-inline: true
+    GetRequest-10:
+      type: string
+      x-apim-inline: true
+    GetRequest-11:
+      type: string
+      x-apim-inline: true
+    GetRequest-12:
+      type: boolean
+      x-apim-inline: true
+    GetRequest-13:
+      type: string
+      x-apim-inline: true
+    GetRequest-14:
+      type: string
+      x-apim-inline: true
+    GetRequest-15:
+      type: string
+      x-apim-inline: true
+    GetRequest-16:
+      type: string
+      x-apim-inline: true
+    GetRequest-17:
+      type: string
+      x-apim-inline: true
+    GetRequest-18:
+      type: string
+      x-apim-inline: true
+    GetRequest-19:
+      type: boolean
+      x-apim-inline: true
+    GetRequest-20:
+      type: string
+      format: date-time
+      x-apim-inline: true
+    GetRequest-21:
+      type: string
+      format: date-time
+      x-apim-inline: true
+    GetRequest-22:
+      type: string
+      format: date-time
+      x-apim-inline: true
+    GetRequest-23:
+      type: string
+      x-apim-inline: true
+    GetRequest-24:
+      type: string
+      x-apim-inline: true
+    GetRequest-25:
+      type: string
+      x-apim-inline: true
+    GetRequest-26:
+      type: string
+      x-apim-inline: true
+    PostRequest:
+      maximum: 1000
+      minimum: 1
+      type: number
+      x-apim-inline: true
+    PostRequest-1:
+      type: string
+      x-apim-inline: true
+    PostRequest-2:
+      type: string
+      x-apim-inline: true
+    PostRequest-3:
+      type: string
+      x-apim-inline: true
+    PostRequest-4:
+      type: string
+      x-apim-inline: true
+    PostRequest-5:
+      type: string
+      x-apim-inline: true
+    PostRequest-6:
+      type: string
+      x-apim-inline: true
+    PostRequest-7:
+      type: string
+      x-apim-inline: true
+    PostRequest-8:
+      type: string
+      x-apim-inline: true
+    PostRequest-9:
+      type: string
+      x-apim-inline: true
+    PostRequest-10:
+      type: string
+      x-apim-inline: true
+    PostRequest-11:
+      type: string
+      x-apim-inline: true
+    PostRequest-12:
+      type: boolean
+      x-apim-inline: true
+    PostRequest-13:
+      type: string
+      x-apim-inline: true
+    PostRequest-14:
+      type: string
+      x-apim-inline: true
+    PostRequest-15:
+      type: string
+      x-apim-inline: true
+    PostRequest-16:
+      type: string
+      x-apim-inline: true
+    PostRequest-17:
+      type: string
+      x-apim-inline: true
+    PostRequest-18:
+      type: string
+      x-apim-inline: true
+    PostRequest-19:
+      type: boolean
+      x-apim-inline: true
+    PostRequest-20:
+      type: string
+      format: date-time
+      x-apim-inline: true
+    PostRequest-21:
+      type: string
+      format: date-time
+      x-apim-inline: true
+    PostRequest-22:
+      type: string
+      format: date-time
+      x-apim-inline: true
+    PostRequest-23:
+      type: string
+      x-apim-inline: true
+    PostRequest-24:
+      type: string
+      x-apim-inline: true
+    PostRequest-25:
+      type: string
+      x-apim-inline: true
+    PostRequest-26:
+      type: string
+      x-apim-inline: true
+    PostRequest-27:
+      type: array
+      items:
+        $ref: '#/components/schemas/MetadataSearchModel'
+      x-apim-inline: true
+    PostRequest-28:
+      type: array
+      items:
+        $ref: '#/components/schemas/MetadataSearchModel'
+      x-apim-inline: true
+    PostRequest-29:
+      type: array
+      items:
+        $ref: '#/components/schemas/MetadataSearchModel'
+      x-apim-inline: true
+    PostRequest-30:
+      type: array
+      items:
+        $ref: '#/components/schemas/MetadataSearchModel'
+      x-apim-inline: true
+security:
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+x-generated-from: apim-developer-portal-data
+x-source: https://api.equinor.com/api-details#api=ims-metadata-api-v1-3
+x-generated-note: The anonymous APIM export at https://api.equinor.com/developer/apis/ims-metadata-api-v1-3?export=true&format=openapi%2Bjson returns this document with empty paths; paths were assembled verbatim (by script) from the same portal's anonymous operations and schemas endpoints, saved in openapi/_original/.

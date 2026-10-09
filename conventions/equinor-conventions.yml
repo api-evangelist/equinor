@@ -1,0 +1,47 @@
+generated: '2026-10-09'
+method: searched
+source: https://github.com/equinor/OmniaPlant/wiki/Timeseries-Data
+sources:
+- https://github.com/equinor/OmniaPlant/wiki/Timeseries-Data
+- https://github.com/equinor/OmniaPlant/wiki/API-examples
+- https://github.com/equinor/OmniaPlant/wiki/API-Versioning
+- https://github.com/equinor/api-strategy/blob/master/docs/rest_guidelines.md
+- openapi/equinor-timeseries-openapi.yml
+- openapi/equinor-stormgeo-openapi.yml
+auth:
+  style: Azure AD OAuth 2.0 bearer tokens (client credentials, authorization code, managed identity) plus Azure API Management subscription key (Ocp-Apim-Subscription-Key / subscription-key, or sub on Timeseries and IMS subscriptions)
+  see: authentication/equinor-authentication.yml
+pagination:
+  style: cursor (continuationToken)
+  params: [limit, continuationToken]
+  apis: Timeseries, IMS Metadata, IMS Export Subscriptions, Alarm & Events
+  text: '"When requesting raw data points within a given time window, the default limit in the response is 1000." / "For timeseries data, this specified limit must be between 1 and 100 000."'
+  example: GET /plant/timeseries/{version}/?limit=2&continuationToken={continuationToken}
+  other: The StormGeo API uses page-number pagination (Page, PageSize query parameters) per its OpenAPI contract.
+errors:
+  envelope: JSON MessageModel {statusCode, message, traceId} on 4xx/5xx in the Timeseries contract
+  see: errors/
+request_id:
+  field: traceId (in the error body)
+versioning:
+  scheme: major.minor in the URI path
+  see: lifecycle/equinor-lifecycle.yml
+rate_limit_signaling:
+  status: 429 Too Many Requests (declared on Timeseries and Alarm & Events read operations)
+  headers: not documented
+  see: rate-limits/equinor-rate-limits.yml
+idempotency:
+  coverage: none
+  mechanism: none documented
+  note: No Idempotency-Key or equivalent replay protection is documented. The Timeseries API offers GetOrAddTimeseries (POST /getoradd) and IMS Export Subscriptions offers GetOrAddSubscriptions (POST /create), which return an existing resource instead of creating a duplicate; that is a get-or-create semantic, not a request-replay mechanism.
+reversibility:
+  status: none
+  write_surfaces:
+  - surface: Timeseries data and metadata (writeData, writeMultipleData, postTimeseries, puttimeseries, patchTimeseries, deleteData, DeleteTimeseries)
+    reversal: none documented
+    window: null
+  - surface: Streaming / IMS export subscriptions (CreateSubscriptions, DeleteSubscriptions, CreateSubscription, DeleteRealTimeSubscription)
+    reversal: none documented (a deleted subscription can be created again, but no undo/restore operation is published)
+    window: null
+  read_only_apis: [Equinor BlueBook Public API, Equinor IMS Metadata API, Equinor StormGeo API]
+dry_run: none documented

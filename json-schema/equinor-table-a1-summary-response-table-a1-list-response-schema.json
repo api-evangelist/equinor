@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/equinor/main/json-schema/equinor-table-a1-summary-response-table-a1-list-response-schema.json",
+  "title": "TableA1SummaryResponseTableA1ListResponse",
+  "description": "A generic wrapper for list responses returned by the Blue Book API.",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/equinor-bluebook-openapi.yml#/components/schemas/TableA1SummaryResponseTableA1ListResponse",
+  "required": [
+    "items"
+  ],
+  "type": "object",
+  "properties": {
+    "items": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/$defs/TableA1SummaryResponse"
+      },
+      "description": "The list of items returned by the API."
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "TableA1SummaryResponse": {
+      "required": [
+        "version"
+      ],
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The version number of this Table A-1 release (e.g., \"16.0\")."
+        },
+        "date": {
+          "type": "string",
+          "description": "The release date of this version, and the date from which it is applicable for well data reporting.",
+          "format": "date"
+        }
+      },
+      "additionalProperties": false,
+      "description": "A lightweight summary of a Blue Book Table A-1 version, used when listing available versions\nwithout returning the full dataset definitions."
+    }
+  }
+}

@@ -1,0 +1,1301 @@
+openapi: 3.2.0
+info:
+  title: Timeseries API
+  description: This API returns information about Timeseries metadata and datapoints.
+  contact:
+    name: Omnia industrial IOT team
+    email: OmniaIndIoT@equinor.com
+  version: v1.7
+servers:
+- url: https://api.gateway.equinor.com/plant/timeseries
+- url: https://api-ncc.gateway.equinor.com/plant/timeseries
+security:
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: Timeseries API
+paths:
+  /:
+    post:
+      operationId: postTimeseries
+      summary: Creates timeseries metadata
+      description: Creates timeseries metadata.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TimeseriesRequestModel'
+            example:
+              name: string
+              description: string
+              unit: string
+              step: true
+              externalId: string
+              assetId: string
+              facility: string
+              metadata: {}
+          text/json:
+            schema:
+              $ref: '#/components/schemas/TimeseriesRequestModel'
+            example:
+              name: string
+              description: string
+              unit: string
+              step: true
+              externalId: string
+              assetId: string
+              facility: string
+              metadata: {}
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/TimeseriesRequestModel'
+            example:
+              name: string
+              description: string
+              unit: string
+              step: true
+              externalId: string
+              assetId: string
+              facility: string
+              metadata: {}
+          application/x-protobuf:
+            schema:
+              $ref: '#/components/schemas/TimeseriesRequestModel'
+          application/protobuf:
+            schema:
+              $ref: '#/components/schemas/TimeseriesRequestModel'
+          application/x-google-protobuf:
+            schema:
+              $ref: '#/components/schemas/TimeseriesRequestModel'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeseriesResponse'
+              example:
+                data:
+                  items:
+                  - id: string
+                    name: string
+                    description: string
+                    step: true
+                    unit: string
+                    standardUnit: string
+                    assetId: string
+                    facility: string
+                    externalId: string
+                    source: string
+                    changedTime: string
+                    createdTime: string
+                    metadata: {}
+                links:
+                - rel: string
+                  href: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/Timeseries-api-v1-7/operations/postTimeseries?api-version=2022-04-01-preview
+      tags:
+      - Timeseries API
+    get:
+      operationId: Getall
+      summary: Retrieves a list of all timeseries.
+      description: Retrieves a list of all timeseries. Parameters can be used to select a subset of timeseries.Note that maximum result set size is 100.000 items.
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        description: Specifies how many records you want returned. Cannot be more than 1000.
+        schema:
+          type: number
+      - name: continuationToken
+        in: query
+        required: false
+        description: Can be passed to retrieve the next page of results if there are any.
+        schema:
+          type: string
+      - name: name
+        in: query
+        required: false
+        description: Filters the tag result on the 'name' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: description
+        in: query
+        required: false
+        description: Filters the tag result on the 'description' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: unit
+        in: query
+        required: false
+        description: Filters the tag result on the 'unit' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: standardUnit
+        in: query
+        required: false
+        description: Filters the tag result on the 'standardUnit' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: assetId
+        in: query
+        required: false
+        description: Filters the tag result on the 'assetId' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: facility
+        in: query
+        required: false
+        description: Filters the tag result on the 'facility' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: externalId
+        in: query
+        required: false
+        description: Filters the tag result on the 'externalId' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: source
+        in: query
+        required: false
+        description: Filters the tag result on the 'source' field. Can be specified multiple times to include more matches.
+        schema:
+          type: string
+      - name: metadata
+        in: query
+        required: false
+        description: Filters the tag result on the 'metadata' field. Can be specified multiple times to include more matches.
+        schema:
+          type: object
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeseriesPagedResponse'
+              example:
+                data:
+                  items:
+                  - id: string
+                    name: string
+                    description: string
+                    step: true
+                    unit: string
+                    standardUnit: string
+                    assetId: string
+                    facility: string
+                    externalId: string
+                    source: string
+                    changedTime: string
+                    createdTime: string
+                    metadata: {}
+                links:
+                - rel: string
+                  href: string
+                count: 0
+                continuationToken: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/Timeseries-api-v1-7/operations/Getall?api-version=2022-04-01-preview
+      tags:
+      - Timeseries API
+  /{id}:
+    delete:
+      operationId: DeleteTimeseries
+      summary: Delete a timeseries metadata with given id
+      description: Delete a timeseries metadata with given id.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Format - uuid.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+            application/x-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-google-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+            application/x-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-google-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+        '401':
+          description: Unauthorized
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+            application/x-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-google-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+        '403':
+          description: Forbidden
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+            application/x-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-google-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+            application/x-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-google-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+        '429':
+          description: Too Many Requests
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+            application/x-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-google-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+        '500':
+          description: Internal Server Error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+            application/x-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-google-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+        '504':
+          description: Gateway Timeout
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+            application/x-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+            application/x-google-protobuf:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+      x-source: https://api.equinor.com/developer/apis/Timeseries-api-v1-7/operations/DeleteTimeseries?api-version=2022-04-01-preview
+      tags:
+      - Timeseries API
+    patch:
+      operationId: patchTimeseries
+      summary: Partial update of a timeseries metadata with given id.
+      description: Partial update of a timeseries metadata with given id. Fields not specified in request are left unchanged.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Format - uuid.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TimeseriesPatchRequestModel'
+            example:
+              name: string
+              description: string
+              unit: string
+              step: true
+              externalId: string
+              assetId: string
+              facility: string
+              metadata: {}
+          text/json:
+            schema:
+              $ref: '#/components/schemas/TimeseriesPatchRequestModel'
+            example:
+              name: string
+              description: string
+              unit: string
+              step: true
+              externalId: string
+              assetId: string
+              facility: string
+              metadata: {}
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/TimeseriesPatchRequestModel'
+            example:
+              name: string
+              description: string
+              unit: string
+              step: true
+              externalId: string
+              assetId: string
+              facility: string
+              metadata: {}
+          application/x-protobuf:
+            schema:
+              $ref: '#/components/schemas/TimeseriesPatchRequestModel'
+          application/protobuf:
+            schema:
+              $ref: '#/components/schemas/TimeseriesPatchRequestModel'
+          application/x-google-protobuf:
+            schema:
+              $ref: '#/components/schemas/TimeseriesPatchRequestModel'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeseriesResponse'
+              example:
+                data:
+                  items:
+                  - id: string
+                    name: string
+                    description: string
+                    step: true
+                    unit: string
+                    standardUnit: string
+                    assetId: string
+                    facility: string
+                    externalId: string
+                    source: string
+                    changedTime: string
+                    createdTime: string
+                    metadata: {}
+                links:
+                - rel: string
+                  href: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/Timeseries-api-v1-7/operations/patchTimeseries?api-version=2022-04-01-preview
+      tags:
+      - Timeseries API
+    get:
+      operationId: getTimeseriesById
+      summary: Retrieves the details of an existing timeseries given the unique timeseries id…
+      description: Retrieves the details of an existing timeseries given the unique timeseries id generated when the timeseries was created
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Format - uuid.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeseriesResponse'
+              example:
+                data:
+                  items:
+                  - id: string
+                    name: string
+                    description: string
+                    step: true
+                    unit: string
+                    standardUnit: string
+                    assetId: string
+                    facility: string
+                    externalId: string
+                    source: string
+                    changedTime: string
+                    createdTime: string
+                    metadata: {}
+                links:
+                - rel: string
+                  href: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/Timeseries-api-v1-7/operations/getTimeseriesById?api-version=2022-04-01-preview
+      tags:
+      - Timeseries API
+    put:
+      operationId: puttimeseries
+      summary: Update all fields of a timeseries metadata, no partial updates.
+      description: Update all fields of a timeseries metadata, no partial updates. All fields on the object will be overwritten.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Format - uuid.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TimeseriesPutRequestModel'
+            example:
+              name: string
+              description: string
+              unit: string
+              step: true
+              externalId: string
+              assetId: string
+              facility: string
+              metadata: {}
+          text/json:
+            schema:
+              $ref: '#/components/schemas/TimeseriesPutRequestModel'
+            example:
+              name: string
+              description: string
+              unit: string
+              step: true
+              externalId: string
+              assetId: string
+              facility: string
+              metadata: {}
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/TimeseriesPutRequestModel'
+            example:
+              name: string
+              description: string
+              unit: string
+              step: true
+              externalId: string
+              assetId: string
+              facility: string
+              metadata: {}
+          application/x-protobuf:
+            schema:
+              $ref: '#/components/schemas/TimeseriesPutRequestModel'
+          application/protobuf:
+            schema:
+              $ref: '#/components/schemas/TimeseriesPutRequestModel'
+          application/x-google-protobuf:
+            schema:
+              $ref: '#/components/schemas/TimeseriesPutRequestModel'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeseriesResponse'
+              example:
+                data:
+                  items:
+                  - id: string
+                    name: string
+                    description: string
+                    step: true
+                    unit: string
+                    standardUnit: string
+                    assetId: string
+                    facility: string
+                    externalId: string
+                    source: string
+                    changedTime: string
+                    createdTime: string
+                    metadata: {}
+                links:
+                - rel: string
+                  href: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageModel'
+              example:
+                statusCode: 0
+                message: string
+                traceId: string
+      x-source: https://api.equinor.com/developer/apis/Timeseries-api-v1-7/operations/puttimeseries?api-version=2022-04-01-preview
+      tags:
+      - Timeseries API
+components:
+  schemas:
+    TimeseriesItem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        step:
+          type:
+          - boolean
+          - 'null'
+        unit:
+          type:
+          - string
+          - 'null'
+        standardUnit:
+          type:
+          - string
+          - 'null'
+        assetId:
+          type:
+          - string
+          - 'null'
+        facility:
+          type:
+          - string
+          - 'null'
+        externalId:
+          type:
+          - string
+          - 'null'
+        source:
+          type:
+          - string
+          - 'null'
+        changedTime:
+          type: string
+          format: date-time
+        createdTime:
+          type: string
+          format: date-time
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      additionalProperties: false
+    TimeseriesRequestModel:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        unit:
+          type:
+          - string
+          - 'null'
+        step:
+          type:
+          - boolean
+          - 'null'
+        externalId:
+          type:
+          - string
+          - 'null'
+        assetId:
+          type:
+          - string
+          - 'null'
+        facility:
+          type:
+          - string
+          - 'null'
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      additionalProperties: false
+    TimeseriesResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/TimeseriesList'
+        links:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Hyperlink'
+      additionalProperties: false
+    MessageModel:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+        message:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    TimeseriesPutRequestModel:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        unit:
+          type:
+          - string
+          - 'null'
+        step:
+          type:
+          - boolean
+          - 'null'
+        externalId:
+          type:
+          - string
+          - 'null'
+        assetId:
+          type:
+          - string
+          - 'null'
+        facility:
+          type:
+          - string
+          - 'null'
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      additionalProperties: false
+    TimeseriesList:
+      type: object
+      properties:
+        items:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/TimeseriesItem'
+      additionalProperties: false
+    Hyperlink:
+      type: object
+      properties:
+        rel:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+          format: uri
+      additionalProperties: false
+    TimeseriesPatchRequestModel:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        unit:
+          type:
+          - string
+          - 'null'
+        step:
+          type:
+          - boolean
+          - 'null'
+        externalId:
+          type:
+          - string
+          - 'null'
+        assetId:
+          type:
+          - string
+          - 'null'
+        facility:
+          type:
+          - string
+          - 'null'
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+      additionalProperties: false
+    TimeseriesPagedResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/TimeseriesList'
+        links:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Hyperlink'
+        count:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        continuationToken:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      name: sub
+      in: header
+    apiKeyQuery:
+      type: apiKey
+      name: sub
+      in: query
+x-generated-from: apim-developer-portal-data
+x-source: https://api.equinor.com/api-details#api=Timeseries-api-v1-7
+x-generated-note: The anonymous APIM export at https://api.equinor.com/developer/apis/Timeseries-api-v1-7?export=true&format=openapi%2Bjson returns this document with empty paths; paths were assembled verbatim (by script) from the same portal's anonymous operations and schemas endpoints, saved in openapi/_original/.

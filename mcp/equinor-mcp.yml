@@ -1,0 +1,435 @@
+generated: '2026-10-09'
+method: derived
+status: candidate
+source: Derived one-tool-per-operationId from the six OpenAPI files under openapi/. No Equinor-hosted or packaged MCP server
+  for its API-portal APIs was found.
+deployment:
+  mode: none
+  auth: api-key
+  verified: searched
+search_evidence:
+- probe: https://mcp.equinor.com/
+  result: no DNS / connection (status 000)
+- probe: pre-flight contract_discovery on www.equinor.com, api.equinor.com, docs.equinor.com, data.equinor.com
+  result: 'mcp: absent'
+- probe: GitHub search mcp org:equinor
+  result: '1 repo: equinor/osdu-mcp-poc (see related_projects)'
+- probe: web search "Equinor MCP server"
+  result: no Equinor server; results were for Equinix and other unrelated projects
+related_projects:
+- name: osdu-discovery (equinor/osdu-mcp-poc)
+  url: https://github.com/equinor/osdu-mcp-poc
+  note: Proof of concept in the Equinor GitHub org. It is a local stdio MCP server (started with `osdu-mcp --db ./chroma_db
+    --schemas ./schemas` via uv) that runs semantic search over OSDU (Open Group) OpenAPI specs and schemas. It does not wrap
+    any Equinor API-portal API, ships no published package, and is not a hosted endpoint.
+  documented_tools:
+  - search_osdu
+  - get_schema
+  transport: stdio
+  evidence: https://raw.githubusercontent.com/equinor/osdu-mcp-poc/main/README.md
+server:
+  name: equinor
+auth_note: Tools would inherit Azure API Management subscription-key auth (Ocp-Apim-Subscription-Key or sub header/query,
+  per each spec). The StormGeo spec declares no securitySchemes.
+tools:
+- name: alarm_events_create_subscriptions
+  description: Creates stream subscriptions
+  source_operation: openapi/equinor-alarm-events-openapi.yml#CreateSubscriptions
+  method: POST
+  path: /streaming/subscriptions/{facility}
+- name: alarm_events_delete_subscription
+  description: Delete a streaming subscription.
+  source_operation: openapi/equinor-alarm-events-openapi.yml#DeleteSubscription
+  method: DELETE
+  path: /streaming/subscriptions/{facility}
+- name: alarm_events_get_events
+  description: Retrieves a list of all events. Parameters can be used to select a subset of events. Note that maximum result
+    set size is 100.000 items.
+  source_operation: openapi/equinor-alarm-events-openapi.yml#GetEvents
+  method: GET
+  path: /events/{facility}
+- name: alarm_events_get_sources
+  description: Retrieves a list of all facilies enabled for Alarm and Events.
+  source_operation: openapi/equinor-alarm-events-openapi.yml#GetSources
+  method: GET
+  path: /sources
+- name: alarm_events_get_subscriptions
+  description: Retrieves a list of all streaming subscriptions.
+  source_operation: openapi/equinor-alarm-events-openapi.yml#GetSubscriptions
+  method: GET
+  path: /streaming/subscriptions
+- name: alarm_events_get_counts
+  description: Retrieves a list of count for events by priority. Parameters can be used to select a subset of events. Max
+    6 months timewindow.
+  source_operation: openapi/equinor-alarm-events-openapi.yml#GetCounts
+  method: GET
+  path: /events/{facility}/count
+- name: alarm_events_set_real_time_destination
+  description: Set stream destination (Azure EventHub only)
+  source_operation: openapi/equinor-alarm-events-openapi.yml#SetRealTimeDestination
+  method: POST
+  path: /streaming/destination
+- name: bluebook_get_table_a1versions
+  description: /table-a1s
+  source_operation: openapi/equinor-bluebook-openapi.yml#GetTableA1Versions
+  method: GET
+  path: /table-a1s
+- name: bluebook_get_table_a1
+  description: /table-a1s/{version}
+  source_operation: openapi/equinor-bluebook-openapi.yml#GetTableA1
+  method: GET
+  path: /table-a1s/{version}
+- name: bluebook_get_latest_table_a1
+  description: /table-a1s/latest
+  source_operation: openapi/equinor-bluebook-openapi.yml#GetLatestTableA1
+  method: GET
+  path: /table-a1s/latest
+- name: ims_export_subscriptions_create_subscription
+  description: Create a new subscription.
+  source_operation: openapi/equinor-ims-export-subscriptions-openapi.yml#CreateSubscription
+  method: POST
+  path: /
+- name: ims_export_subscriptions_list_subscriptions
+  description: List all subscriptions.
+  source_operation: openapi/equinor-ims-export-subscriptions-openapi.yml#ListSubscriptions
+  method: GET
+  path: /
+- name: ims_export_subscriptions_create_real_time_subscription
+  description: Create a real-time data subscription on ims system.
+  source_operation: openapi/equinor-ims-export-subscriptions-openapi.yml#CreateRealTimeSubscription
+  method: POST
+  path: /realtime
+- name: ims_export_subscriptions_list_real_time_subscriptions
+  description: List all subscriptions belonging to calling customer.
+  source_operation: openapi/equinor-ims-export-subscriptions-openapi.yml#ListRealTimeSubscriptions
+  method: GET
+  path: /realtime
+- name: ims_export_subscriptions_delete_real_time_subscription
+  description: Delete a real-time data subscription.
+  source_operation: openapi/equinor-ims-export-subscriptions-openapi.yml#DeleteRealTimeSubscription
+  method: DELETE
+  path: /realtime/timeseriesid/{timeseriesId}
+- name: ims_export_subscriptions_get_real_time_subscription
+  description: Retrieve subscription on a specific sensor-tag belonging to calling customer.
+  source_operation: openapi/equinor-ims-export-subscriptions-openapi.yml#GetRealTimeSubscription
+  method: GET
+  path: /realtime/timeseriesid/{timeseriesId}
+- name: ims_export_subscriptions_delete_real_time_subscription_by_uid
+  description: Delete a real-time data subscription.
+  source_operation: openapi/equinor-ims-export-subscriptions-openapi.yml#DeleteRealTimeSubscriptionByUid
+  method: DELETE
+  path: /realtime/uid/{uId}
+- name: ims_export_subscriptions_get_subscription_by_uids
+  description: Get a specific subscription by Multiple unique Id.
+  source_operation: openapi/equinor-ims-export-subscriptions-openapi.yml#GetSubscriptionByUIds
+  method: POST
+  path: /uid
+- name: ims_export_subscriptions_get_subscription_by_timeseries_id
+  description: Get a specific subscription by timeseries timeseriesId.
+  source_operation: openapi/equinor-ims-export-subscriptions-openapi.yml#GetSubscriptionByTimeseriesId
+  method: GET
+  path: /timeseriesid/{timeseriesId}
+- name: ims_export_subscriptions_get_subscription_by_uid
+  description: Get a specific subscription by unique Id.
+  source_operation: openapi/equinor-ims-export-subscriptions-openapi.yml#GetSubscriptionByUId
+  method: GET
+  path: /uid/{uId}
+- name: ims_export_subscriptions_get_or_add_subscriptions
+  description: Get or Create new subscriptions.
+  source_operation: openapi/equinor-ims-export-subscriptions-openapi.yml#GetOrAddSubscriptions
+  method: POST
+  path: /create
+- name: ims_export_subscriptions_list_subscriptions_by_system
+  description: List all subscriptions on a specified IMS system, or retrieve specific subscription from system by name.
+  source_operation: openapi/equinor-ims-export-subscriptions-openapi.yml#ListSubscriptionsBySystem
+  method: GET
+  path: /{systemId}
+- name: ims_export_subscriptions_set_real_time_destination
+  description: Set event hub destination for real time data.
+  source_operation: openapi/equinor-ims-export-subscriptions-openapi.yml#SetRealTimeDestination
+  method: POST
+  path: /realtime/destination
+- name: ims_metadata_get_facets_facet
+  description: Get tags count specified by facet (plantSapCode or plantStidCode).
+  source_operation: openapi/equinor-ims-metadata-openapi.yml#get-facets-facet
+  method: GET
+  path: /facets/{facet}
+- name: ims_metadata_get_plant_tag
+  description: Gets a specific tag specified by plant and tag name.
+  source_operation: openapi/equinor-ims-metadata-openapi.yml#get-plant-tag
+  method: GET
+  path: /{plant}/{tag}
+- name: ims_metadata_get_uid_uid
+  description: Gets a specific tag specified by tag unique identifier.
+  source_operation: openapi/equinor-ims-metadata-openapi.yml#get-uid-uid
+  method: GET
+  path: /uid/{uid}
+- name: ims_metadata_get_plant
+  description: List tags for the specified plant.
+  source_operation: openapi/equinor-ims-metadata-openapi.yml#get-plant
+  method: GET
+  path: /{plant}
+- name: ims_metadata_get
+  description: Lists all tags for all plants.
+  source_operation: openapi/equinor-ims-metadata-openapi.yml#get
+  method: GET
+  path: /
+- name: ims_metadata_post
+  description: Provides endpoint to search for and list metadata by a list of tags, uid etc.
+  source_operation: openapi/equinor-ims-metadata-openapi.yml#post
+  method: POST
+  path: /
+- name: ims_metadata_get_search_tag
+  description: Searches for tags independent of plant.
+  source_operation: openapi/equinor-ims-metadata-openapi.yml#get-search-tag
+  method: GET
+  path: /search/{tag}
+- name: ims_metadata_post_search
+  description: Searches for tags independent of plant.
+  source_operation: openapi/equinor-ims-metadata-openapi.yml#post-search
+  method: POST
+  path: /search
+- name: ims_metadata_get_plant_search_tag
+  description: Searches for tags within a specific plant
+  source_operation: openapi/equinor-ims-metadata-openapi.yml#get-plant-search-tag
+  method: GET
+  path: /{plant}/search/{tag}
+- name: stormgeo_get_locations
+  description: Returns a list of available locations.
+  source_operation: openapi/equinor-stormgeo-openapi.yml#get-locations
+  method: GET
+  path: /locations
+- name: stormgeo_get_locations_id
+  description: Returns  information on a specific location.
+  source_operation: openapi/equinor-stormgeo-openapi.yml#get-locations-id
+  method: GET
+  path: /locations/{id}
+- name: stormgeo_get_locations_id_forecasts
+  description: Returns all forecasts for a specific location.
+  source_operation: openapi/equinor-stormgeo-openapi.yml#get-locations-id-forecasts
+  method: GET
+  path: /locations/{id}/forecasts
+- name: stormgeo_get_locations_id_forecasts_forecasttype
+  description: Returns a specific forecast for a specific location.
+  source_operation: openapi/equinor-stormgeo-openapi.yml#get-locations-id-forecasts-forecasttype
+  method: GET
+  path: /locations/{id}/forecasts/{forecastType}
+- name: stormgeo_get_locations_id_threshold_thresholdid
+  description: Returns asset state based on location and threshold
+  source_operation: openapi/equinor-stormgeo-openapi.yml#get-locations-id-threshold-thresholdid
+  method: GET
+  path: /locations/{id}/threshold/{thresholdId}
+- name: stormgeo_get_forecasts
+  description: Returns all forecasts for a specific location.
+  source_operation: openapi/equinor-stormgeo-openapi.yml#get-forecasts
+  method: GET
+  path: /forecasts
+- name: stormgeo_get_weather_api_forecasts_forecasttype
+  description: Returns all forecasts for a specific location.
+  source_operation: openapi/equinor-stormgeo-openapi.yml#get-weather-api-forecasts-forecasttype
+  method: GET
+  path: /forecasts/{forecastType}
+- name: stormgeo_get_threshold
+  description: /threshold - get
+  source_operation: openapi/equinor-stormgeo-openapi.yml#get-threshold
+  method: GET
+  path: /threshold
+- name: stormgeo_get_parameters
+  description: Returns a list of available parameters to use with parameter sets.
+  source_operation: openapi/equinor-stormgeo-openapi.yml#get-parameters
+  method: GET
+  path: /parameters
+- name: stormgeo_get_parameters_name
+  description: Retruns information on a specific parameter
+  source_operation: openapi/equinor-stormgeo-openapi.yml#get-parameters-name
+  method: GET
+  path: /parameters/{name}
+- name: stormgeo_get_parameter_sets
+  description: Retruns available parameter sets
+  source_operation: openapi/equinor-stormgeo-openapi.yml#get-parameter-sets
+  method: GET
+  path: /parameter-sets
+- name: stormgeo_get_parameter_sets_id
+  description: Retruns information on a specific parameter set
+  source_operation: openapi/equinor-stormgeo-openapi.yml#get-parameter-sets-id
+  method: GET
+  path: /parameter-sets/{id}
+- name: stormgeo_get_unit_profiles
+  description: Retruns available unit profiles
+  source_operation: openapi/equinor-stormgeo-openapi.yml#get-unit-profiles
+  method: GET
+  path: /unit-profiles
+- name: stormgeo_get_unit_profiles_id
+  description: Returns a specific unit profile
+  source_operation: openapi/equinor-stormgeo-openapi.yml#get-unit-profiles-id
+  method: GET
+  path: /unit-profiles/{id}
+- name: stormgeo_get_units
+  description: Retruns available units
+  source_operation: openapi/equinor-stormgeo-openapi.yml#get-units
+  method: GET
+  path: /units
+- name: stormgeo_get_units_name
+  description: Returns a specific unit
+  source_operation: openapi/equinor-stormgeo-openapi.yml#get-units-name
+  method: GET
+  path: /units/{name}
+- name: stormgeo_get_threshold_id
+  description: /threshold/{id} - get
+  source_operation: openapi/equinor-stormgeo-openapi.yml#get-threshold-id
+  method: GET
+  path: /threshold/{id}
+- name: timeseries_write_data
+  description: Adds or updates a timeseries' datapoints.
+  source_operation: openapi/equinor-timeseries-openapi.yml#writeData
+  method: POST
+  path: /{id}/data
+- name: timeseries_delete_data
+  description: Delete timeseries datapoints by id from a given time window.
+  source_operation: openapi/equinor-timeseries-openapi.yml#deleteData
+  method: DELETE
+  path: /{id}/data
+- name: timeseries_get_data
+  description: Retrieves datapoints by id from a given time window, according to applied parameters.
+  source_operation: openapi/equinor-timeseries-openapi.yml#GetData
+  method: GET
+  path: /{id}/data
+- name: timeseries_write_multiple_data
+  description: Adds or updates multiple timeseries' datapoints.
+  source_operation: openapi/equinor-timeseries-openapi.yml#writeMultipleData
+  method: POST
+  path: /data
+- name: timeseries_create_subscriptions
+  description: Creates stream subscriptions
+  source_operation: openapi/equinor-timeseries-openapi.yml#CreateSubscriptions
+  method: POST
+  path: /streaming/subscriptions
+- name: timeseries_get_subscriptions
+  description: Retrieves a list of all streaming subscriptions.
+  source_operation: openapi/equinor-timeseries-openapi.yml#GetSubscriptions
+  method: GET
+  path: /streaming/subscriptions
+- name: timeseries_post_timeseries
+  description: Creates timeseries metadata.
+  source_operation: openapi/equinor-timeseries-openapi.yml#postTimeseries
+  method: POST
+  path: /
+- name: timeseries_getall
+  description: Retrieves a list of all timeseries. Parameters can be used to select a subset of timeseries.Note that maximum
+    result set size is 100.000 items.
+  source_operation: openapi/equinor-timeseries-openapi.yml#Getall
+  method: GET
+  path: /
+- name: timeseries_delete_subscriptions
+  description: Delete a streaming subscription.
+  source_operation: openapi/equinor-timeseries-openapi.yml#DeleteSubscriptions
+  method: DELETE
+  path: /streaming/subscriptions/{id}
+- name: timeseries_delete_timeseries
+  description: Delete a timeseries metadata with given id.
+  source_operation: openapi/equinor-timeseries-openapi.yml#DeleteTimeseries
+  method: DELETE
+  path: /{id}
+- name: timeseries_patch_timeseries
+  description: Partial update of a timeseries metadata with given id. Fields not specified in request are left unchanged.
+  source_operation: openapi/equinor-timeseries-openapi.yml#patchTimeseries
+  method: PATCH
+  path: /{id}
+- name: timeseries_get_timeseries_by_id
+  description: Retrieves the details of an existing timeseries given the unique timeseries id generated when the timeseries
+    was created
+  source_operation: openapi/equinor-timeseries-openapi.yml#getTimeseriesById
+  method: GET
+  path: /{id}
+- name: timeseries_puttimeseries
+  description: Update all fields of a timeseries metadata, no partial updates. All fields on the object will be overwritten.
+  source_operation: openapi/equinor-timeseries-openapi.yml#puttimeseries
+  method: PUT
+  path: /{id}
+- name: timeseries_get_facets
+  description: Get facets by source or facility.
+  source_operation: openapi/equinor-timeseries-openapi.yml#GetFacets
+  method: GET
+  path: /facets/{facet}
+- name: timeseries_get_or_add_timeseries
+  description: Get or create timeseries metadata. Note that maximum result set size is 100.000 items.
+  source_operation: openapi/equinor-timeseries-openapi.yml#GetOrAddTimeseries
+  method: POST
+  path: /getoradd
+- name: timeseries_get_all_facilities
+  description: Retrieves a list of all facilities.
+  source_operation: openapi/equinor-timeseries-openapi.yml#GetAllFacilities
+  method: GET
+  path: /facility/counters
+- name: timeseries_get_aggregated_data
+  description: Retrieves aggregated datapoints by id from a given time window and applied parameters.
+  source_operation: openapi/equinor-timeseries-openapi.yml#GetAggregatedData
+  method: GET
+  path: /{id}/data/aggregates
+- name: timeseries_get_data_by_name
+  description: Retrieves datapoints by name from a given time window, according to applied parameters.
+  source_operation: openapi/equinor-timeseries-openapi.yml#getDataByName
+  method: GET
+  path: /query/data
+- name: timeseries_get_multiple_data
+  description: Retrieves datapoints from multiple timeseries (max 100), according to applied request body. For aggregated
+    datapoints apply aggregateFunctions to request body.
+  source_operation: openapi/equinor-timeseries-openapi.yml#GetMultipleData
+  method: POST
+  path: /query/data
+- name: timeseries_get_facility_by_name
+  description: Retrieves the details of an existing facility given the unique facility name
+  source_operation: openapi/equinor-timeseries-openapi.yml#getFacilityByName
+  method: GET
+  path: /facility/{name}/counters
+- name: timeseries_get_first
+  description: Retrieves the first datapoint of a timeseries. When parameter 'afterTime' is included the first point immediately
+    following this time is returned.
+  source_operation: openapi/equinor-timeseries-openapi.yml#GetFirst
+  method: GET
+  path: /{id}/data/first
+- name: timeseries_get_multiple_first
+  description: Retrieves the first datapoint of multiple timeseries (max 100), according to applied request body. When applying
+    'endTime' to request body the first point immediately following this time is returned.
+  source_operation: openapi/equinor-timeseries-openapi.yml#GetMultipleFirst
+  method: POST
+  path: /query/data/first
+- name: timeseries_history_timeseries
+  description: Retrieves the history details of an existing timeseries given the unique timeseries id generated when the timeseries
+    was created.
+  source_operation: openapi/equinor-timeseries-openapi.yml#HistoryTimeseries
+  method: GET
+  path: /{id}/history
+- name: timeseries_history_all_timeseries
+  description: Retrieves the history details of existing timeseries and name changes. Parameters can be used to select a subset
+    of timeseries. Note that maximum result set size is 100.000 items.
+  source_operation: openapi/equinor-timeseries-openapi.yml#HistoryAllTimeseries
+  method: GET
+  path: /history
+- name: timeseries_get_latest
+  description: Retrieves the last datapoint of a timeseries. When parameter 'beforeTime' is included the last point immediately
+    prior to this time is returned.
+  source_operation: openapi/equinor-timeseries-openapi.yml#GetLatest
+  method: GET
+  path: /{id}/data/latest
+- name: timeseries_get_multiple_latest
+  description: Retrieves the last datapoint of multiple timeseries (max 100), according to applied request body. When applying
+    'endTime' to request body the last point immediately prior to this time is returned.
+  source_operation: openapi/equinor-timeseries-openapi.yml#GetMultipleLatest
+  method: POST
+  path: /query/data/latest
+- name: timeseries_get_search
+  description: Search all timeseries. Note that maximum result set size is 100.000 items.
+  source_operation: openapi/equinor-timeseries-openapi.yml#GetSearch
+  method: GET
+  path: /search
+- name: timeseries_get_search_by_query
+  description: Search all timeseries. Note that maximum result set size is 100.000 items.
+  source_operation: openapi/equinor-timeseries-openapi.yml#GetSearchByQuery
+  method: GET
+  path: /search/{query}
+- name: timeseries_set_real_time_destination
+  description: Set stream destination (Azure EventHub only)
+  source_operation: openapi/equinor-timeseries-openapi.yml#SetRealTimeDestination
+  method: POST
+  path: /streaming/destination

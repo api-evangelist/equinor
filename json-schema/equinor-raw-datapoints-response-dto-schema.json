@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/equinor/main/json-schema/equinor-raw-datapoints-response-dto-schema.json",
+  "title": "RawDatapointsResponseDto",
+  "description": "Datapoints return model",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/equinor-timeseries-openapi.yml#/components/schemas/RawDatapointsResponseDto",
+  "type": "object",
+  "properties": {
+    "statusCode": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "format": "int32"
+    },
+    "message": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "traceId": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "data": {
+      "$ref": "#/$defs/RawDatapointsResponseItems"
+    },
+    "continuationToken": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "RawDatapoint": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "value": {
+          "type": "number",
+          "format": "double"
+        },
+        "status": {
+          "type": "integer",
+          "description": "Status codes: https://github.com/equinor/OmniaPlant/wiki/Timeseries-Data#status-codes",
+          "format": "int32"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RawDatapointsResponseItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "facility": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "terminal": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "datapoints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/RawDatapoint"
+          }
+        },
+        "totalCount": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "int64"
+        },
+        "error": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "statusCode": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "int32"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RawDatapointsResponseItems": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/RawDatapointsResponseItem"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

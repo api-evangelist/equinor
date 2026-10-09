@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/equinor/main/json-schema/equinor-rt-subscriptions-dto-schema.json",
+  "title": "RtSubscriptionsDto",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/equinor-ims-export-subscriptions-openapi.yml#/components/schemas/RtSubscriptionsDto",
+  "type": "object",
+  "properties": {
+    "data": {
+      "$ref": "#/$defs/RtSubscriptionItems"
+    },
+    "continuationToken": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "RtSubscriptionBase": {
+      "type": "object",
+      "properties": {
+        "timeseriesId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "expiration": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "customerId": {
+          "type": "string",
+          "format": "uuid"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RtSubscriptionItems": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/$defs/RtSubscriptionBase"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
