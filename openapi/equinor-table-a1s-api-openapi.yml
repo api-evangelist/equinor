@@ -191,6 +191,40 @@ paths:
       - Table A1s
 components:
   schemas:
+    TableA1SummaryResponseTableA1ListResponse:
+      required:
+      - items
+      type: object
+      properties:
+        items:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/TableA1SummaryResponse'
+          description: The list of items returned by the API.
+      additionalProperties: false
+      description: A generic wrapper for list responses returned by the Blue Book API.
+    TableA1SummaryResponse:
+      required:
+      - version
+      type: object
+      properties:
+        version:
+          type:
+          - string
+          - 'null'
+          description: The version number of this Table A-1 release (e.g., "16.0").
+          example: FINAL V16.0_2025-09-15
+        date:
+          type: string
+          description: The release date of this version, and the date from which it is applicable for well data reporting.
+          format: date
+          example: '2025-09-15'
+      additionalProperties: false
+      description: 'A lightweight summary of a Blue Book Table A-1 version, used when listing available versions
+
+        without returning the full dataset definitions.'
     DatasetResponse:
       required:
       - dataset
@@ -346,40 +380,6 @@ components:
       description: 'Represents a versioned snapshot of Blue Book Table A-1, containing all dataset definitions
 
         for digital well data reporting to the Diskos National Data Repository (NDR).'
-    TableA1SummaryResponseTableA1ListResponse:
-      required:
-      - items
-      type: object
-      properties:
-        items:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/TableA1SummaryResponse'
-          description: The list of items returned by the API.
-      additionalProperties: false
-      description: A generic wrapper for list responses returned by the Blue Book API.
-    TableA1SummaryResponse:
-      required:
-      - version
-      type: object
-      properties:
-        version:
-          type:
-          - string
-          - 'null'
-          description: The version number of this Table A-1 release (e.g., "16.0").
-          example: FINAL V16.0_2025-09-15
-        date:
-          type: string
-          description: The release date of this version, and the date from which it is applicable for well data reporting.
-          format: date
-          example: '2025-09-15'
-      additionalProperties: false
-      description: 'A lightweight summary of a Blue Book Table A-1 version, used when listing available versions
-
-        without returning the full dataset definitions.'
     ProblemDetails:
       type: object
       properties:

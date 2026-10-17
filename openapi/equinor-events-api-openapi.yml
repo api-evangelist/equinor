@@ -372,44 +372,6 @@ paths:
       - Events
 components:
   schemas:
-    MessageModel:
-      type: object
-      properties:
-        statusCode:
-          type: integer
-          format: int32
-        message:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    CountDto:
-      type: object
-      properties:
-        statusCode:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        message:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-        items:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/CountModel'
-      additionalProperties: false
     EventModel:
       type: object
       properties:
@@ -487,6 +449,29 @@ components:
           - 'null'
           additionalProperties: {}
       additionalProperties: false
+    CountDto:
+      type: object
+      properties:
+        statusCode:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        message:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        items:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/CountModel'
+      additionalProperties: false
     CountModel:
       type: object
       properties:
@@ -505,6 +490,21 @@ components:
           - integer
           - 'null'
           format: int32
+      additionalProperties: false
+    MessageModel:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+        message:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
     EventDto:
       type: object

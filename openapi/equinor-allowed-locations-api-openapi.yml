@@ -1,8 +1,10 @@
 openapi: 3.2.0
 info:
-  title: Equinor Allowed Locations API
+  title: StormGeo Allowed Locations API
+  description: '# Introduction
+
+    The StormGeo API exposes functionality related to the weather of predefined locations, or given coordinates.'
   version: v1
-  description: 'Operations tagged Allowed Locations across 2 of this provider''s published API definitions: equinor-stormgeo-api-contract.yaml, equinor-stormgeo-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.gateway.equinor.com/stormgeo/v1
 tags:
@@ -52,8 +54,6 @@ paths:
       - Allowed Locations
       operationId: getAllowedLocations
       x-operation-id-source: derived
-    servers:
-    - url: https://api.gateway.equinor.com/stormgeo/v1
 components:
   schemas:
     Allowedlocations:
@@ -65,6 +65,3 @@ components:
         Description:
           type: string
       additionalProperties: false
-x-refined-from:
-- equinor-stormgeo-api-contract.yaml
-- equinor-stormgeo-openapi.yml

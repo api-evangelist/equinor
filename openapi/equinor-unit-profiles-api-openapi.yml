@@ -1,8 +1,10 @@
 openapi: 3.2.0
 info:
-  title: Equinor Unit Profiles API
+  title: StormGeo Unit Profiles API
+  description: '# Introduction
+
+    The StormGeo API exposes functionality related to the weather of predefined locations, or given coordinates.'
   version: v1
-  description: 'Operations tagged Unit Profiles across 2 of this provider''s published API definitions: equinor-stormgeo-api-contract.yaml, equinor-stormgeo-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.gateway.equinor.com/stormgeo/v1
 tags:
@@ -42,8 +44,6 @@ paths:
           description: Forbidden
       tags:
       - Unit Profiles
-    servers:
-    - url: https://api.gateway.equinor.com/stormgeo/v1
   /unit-profiles/{id}:
     get:
       summary: Returns a specific unit profile
@@ -64,8 +64,3 @@ paths:
           description: Forbidden
       tags:
       - Unit Profiles
-    servers:
-    - url: https://api.gateway.equinor.com/stormgeo/v1
-x-refined-from:
-- equinor-stormgeo-api-contract.yaml
-- equinor-stormgeo-openapi.yml

@@ -179,63 +179,11 @@ paths:
       - Getoradd
 components:
   schemas:
-    TimeseriesItem:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type:
-          - string
-          - 'null'
-        description:
-          type:
-          - string
-          - 'null'
-        step:
-          type:
-          - boolean
-          - 'null'
-        unit:
-          type:
-          - string
-          - 'null'
-        standardUnit:
-          type:
-          - string
-          - 'null'
-        assetId:
-          type:
-          - string
-          - 'null'
-        facility:
-          type:
-          - string
-          - 'null'
-        externalId:
-          type:
-          - string
-          - 'null'
-        source:
-          type:
-          - string
-          - 'null'
-        changedTime:
-          type: string
-          format: date-time
-        createdTime:
-          type: string
-          format: date-time
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type:
-            - string
-            - 'null'
-      additionalProperties: false
+    GetoraddPostRequest-2:
+      type: array
+      items:
+        $ref: '#/components/schemas/TimeseriesRequestModel'
+      x-apim-inline: true
     TimeseriesRequestModel:
       type: object
       properties:
@@ -303,32 +251,69 @@ components:
           items:
             $ref: '#/components/schemas/Hyperlink'
       additionalProperties: false
-    GetoraddPostRequest-5:
-      type: array
-      items:
-        $ref: '#/components/schemas/TimeseriesRequestModel'
-      x-apim-inline: true
+    TimeseriesItem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        step:
+          type:
+          - boolean
+          - 'null'
+        unit:
+          type:
+          - string
+          - 'null'
+        standardUnit:
+          type:
+          - string
+          - 'null'
+        assetId:
+          type:
+          - string
+          - 'null'
+        facility:
+          type:
+          - string
+          - 'null'
+        externalId:
+          type:
+          - string
+          - 'null'
+        source:
+          type:
+          - string
+          - 'null'
+        changedTime:
+          type: string
+          format: date-time
+        createdTime:
+          type: string
+          format: date-time
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      additionalProperties: false
     GetoraddPostRequest-3:
       type: array
       items:
         $ref: '#/components/schemas/TimeseriesRequestModel'
       x-apim-inline: true
-    TimeseriesList:
-      type: object
-      properties:
-        items:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/TimeseriesItem'
-      additionalProperties: false
-    GetoraddPostRequest-1:
-      type: array
-      items:
-        $ref: '#/components/schemas/TimeseriesRequestModel'
-      x-apim-inline: true
-    GetoraddPostRequest-2:
+    GetoraddPostRequest-4:
       type: array
       items:
         $ref: '#/components/schemas/TimeseriesRequestModel'
@@ -346,16 +331,31 @@ components:
           - 'null'
           format: uri
       additionalProperties: false
-    GetoraddPostRequest-4:
-      type: array
-      items:
-        $ref: '#/components/schemas/TimeseriesRequestModel'
-      x-apim-inline: true
     GetoraddPostRequest:
       type: array
       items:
         $ref: '#/components/schemas/TimeseriesRequestModel'
       x-apim-inline: true
+    GetoraddPostRequest-5:
+      type: array
+      items:
+        $ref: '#/components/schemas/TimeseriesRequestModel'
+      x-apim-inline: true
+    GetoraddPostRequest-1:
+      type: array
+      items:
+        $ref: '#/components/schemas/TimeseriesRequestModel'
+      x-apim-inline: true
+    TimeseriesList:
+      type: object
+      properties:
+        items:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/TimeseriesItem'
+      additionalProperties: false
   securitySchemes:
     apiKeyHeader:
       type: apiKey

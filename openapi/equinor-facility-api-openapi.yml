@@ -188,6 +188,16 @@ paths:
       - Facility
 components:
   schemas:
+    FacilityList:
+      type: object
+      properties:
+        items:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/FacilityItem'
+      additionalProperties: false
     FacilityItem:
       type: object
       properties:
@@ -211,22 +221,6 @@ components:
           - 'null'
           format: int32
       additionalProperties: false
-    FacilityResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/FacilityList'
-      additionalProperties: false
-    FacilityList:
-      type: object
-      properties:
-        items:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/FacilityItem'
-      additionalProperties: false
     MessageModel:
       type: object
       properties:
@@ -241,6 +235,12 @@ components:
           type:
           - string
           - 'null'
+      additionalProperties: false
+    FacilityResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/FacilityList'
       additionalProperties: false
   securitySchemes:
     apiKeyHeader:

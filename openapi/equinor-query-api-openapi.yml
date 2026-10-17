@@ -1182,58 +1182,11 @@ paths:
       - Query
 components:
   schemas:
-    DatapointsReadItemBase:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-        facility:
-          type:
-          - string
-          - 'null'
-        name:
-          type:
-          - string
-          - 'null'
-        terminal:
-          type:
-          - string
-          - 'null'
-        startTime:
-          type: string
-          format: date-time
-        endTime:
-          type: string
-          format: date-time
-        statusFilter:
-          type:
-          - array
-          - 'null'
-          items:
-            type: integer
-            format: int32
-          description: 'Status codes: https://github.com/equinor/OmniaPlant/wiki/Timeseries-Data#status-codes'
-          example:
-          - 192
-      additionalProperties: false
-    MessageModel:
-      type: object
-      properties:
-        statusCode:
-          type: integer
-          format: int32
-        message:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
+    QueryDataPostRequest-3:
+      type: array
+      items:
+        $ref: '#/components/schemas/DatapointsReadItem'
+      x-apim-inline: true
     DatapointsResponseItem:
       type: object
       properties:
@@ -1273,96 +1226,69 @@ components:
           - 'null'
           format: int32
       additionalProperties: false
-    QueryDataLatestPostRequest-1:
-      type: array
-      items:
-        $ref: '#/components/schemas/DatapointsReadItemBase'
-      x-apim-inline: true
-    QueryDataPostRequest-4:
-      type: array
-      items:
-        $ref: '#/components/schemas/DatapointsReadItem'
-      x-apim-inline: true
-    Datapoint:
+    DatapointsReadItemBase:
       type: object
       properties:
-        time:
+        id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        facility:
+          type:
+          - string
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+        terminal:
+          type:
+          - string
+          - 'null'
+        startTime:
           type: string
           format: date-time
-        value:
-          type: number
-          format: double
-        status:
-          type: integer
-          format: int32
-        count:
-          type: integer
-          format: int64
-        avg:
-          type: number
-          format: double
-        min:
-          type: number
-          format: double
-        max:
-          type: number
-          format: double
-        sum:
-          type: number
-          format: double
-        first:
-          type: number
-          format: double
-        last:
-          type: number
-          format: double
-        stddev:
-          type: number
-          format: double
-        median:
-          type: number
-          format: double
+        endTime:
+          type: string
+          format: date-time
+        statusFilter:
+          type:
+          - array
+          - 'null'
+          items:
+            type: integer
+            format: int32
+          description: 'Status codes: https://github.com/equinor/OmniaPlant/wiki/Timeseries-Data#status-codes'
+          example:
+          - 192
       additionalProperties: false
-    QueryDataFirstPostRequest-6:
-      type: array
-      items:
-        $ref: '#/components/schemas/DatapointsReadItemBase'
-      x-apim-inline: true
-    RawDatapointsResponseDto:
-      type: object
-      properties:
-        statusCode:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        message:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-        data:
-          $ref: '#/components/schemas/RawDatapointsResponseItems'
-        continuationToken:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-      description: Datapoints return model
-    QueryDataFirstPostRequest-3:
-      type: array
-      items:
-        $ref: '#/components/schemas/DatapointsReadItemBase'
-      x-apim-inline: true
     QueryDataLatestPostRequest-6:
       type: array
       items:
         $ref: '#/components/schemas/DatapointsReadItemBase'
       x-apim-inline: true
+    QueryDataPostRequest-5:
+      type: array
+      items:
+        $ref: '#/components/schemas/DatapointsReadItem'
+      x-apim-inline: true
     QueryDataPostRequest-2:
+      type: array
+      items:
+        $ref: '#/components/schemas/DatapointsReadItem'
+      x-apim-inline: true
+    DatapointsResponseItems:
+      type: object
+      properties:
+        items:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DatapointsResponseItem'
+      additionalProperties: false
+    QueryDataPostRequest-4:
       type: array
       items:
         $ref: '#/components/schemas/DatapointsReadItem'
@@ -1391,6 +1317,35 @@ components:
           - 'null'
       additionalProperties: false
       description: Datapoints return model
+    RawDatapointsResponseDto:
+      type: object
+      properties:
+        statusCode:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        message:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        data:
+          $ref: '#/components/schemas/RawDatapointsResponseItems'
+        continuationToken:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+      description: Datapoints return model
+    QueryDataLatestPostRequest-1:
+      type: array
+      items:
+        $ref: '#/components/schemas/DatapointsReadItemBase'
+      x-apim-inline: true
     RawDatapoint:
       type: object
       properties:
@@ -1406,6 +1361,68 @@ components:
           description: 'Status codes: https://github.com/equinor/OmniaPlant/wiki/Timeseries-Data#status-codes'
           format: int32
           example: 192
+      additionalProperties: false
+    QueryDataLatestPostRequest-4:
+      type: array
+      items:
+        $ref: '#/components/schemas/DatapointsReadItemBase'
+      x-apim-inline: true
+    QueryDataFirstPostRequest-1:
+      type: array
+      items:
+        $ref: '#/components/schemas/DatapointsReadItemBase'
+      x-apim-inline: true
+    RawDatapointsResponseItem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        facility:
+          type:
+          - string
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+        terminal:
+          type:
+          - string
+          - 'null'
+        datapoints:
+          type: array
+          items:
+            $ref: '#/components/schemas/RawDatapoint'
+        totalCount:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        error:
+          type:
+          - string
+          - 'null'
+        statusCode:
+          type:
+          - integer
+          - 'null'
+          format: int32
+      additionalProperties: false
+    MessageModel:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+        message:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
     DatapointsReadItem:
       type: object
@@ -1486,107 +1503,47 @@ components:
           format: int32
           example: 1000
       additionalProperties: false
-    RawDatapointsResponseItem:
+    Datapoint:
       type: object
       properties:
-        id:
+        time:
           type: string
-          format: uuid
-        facility:
-          type:
-          - string
-          - 'null'
-        name:
-          type:
-          - string
-          - 'null'
-        terminal:
-          type:
-          - string
-          - 'null'
-        datapoints:
-          type: array
-          items:
-            $ref: '#/components/schemas/RawDatapoint'
-        totalCount:
-          type:
-          - integer
-          - 'null'
-          format: int64
-        error:
-          type:
-          - string
-          - 'null'
-        statusCode:
-          type:
-          - integer
-          - 'null'
+          format: date-time
+        value:
+          type: number
+          format: double
+        status:
+          type: integer
           format: int32
+        count:
+          type: integer
+          format: int64
+        avg:
+          type: number
+          format: double
+        min:
+          type: number
+          format: double
+        max:
+          type: number
+          format: double
+        sum:
+          type: number
+          format: double
+        first:
+          type: number
+          format: double
+        last:
+          type: number
+          format: double
+        stddev:
+          type: number
+          format: double
+        median:
+          type: number
+          format: double
       additionalProperties: false
-    QueryDataLatestPostRequest-5:
-      type: array
-      items:
-        $ref: '#/components/schemas/DatapointsReadItemBase'
-      x-apim-inline: true
-    QueryDataFirstPostRequest-2:
-      type: array
-      items:
-        $ref: '#/components/schemas/DatapointsReadItemBase'
-      x-apim-inline: true
-    QueryDataFirstPostRequest-1:
-      type: array
-      items:
-        $ref: '#/components/schemas/DatapointsReadItemBase'
-      x-apim-inline: true
-    QueryDataLatestPostRequest-3:
-      type: array
-      items:
-        $ref: '#/components/schemas/DatapointsReadItemBase'
-      x-apim-inline: true
-    QueryDataPostRequest-6:
-      type: array
-      items:
-        $ref: '#/components/schemas/DatapointsReadItem'
-      x-apim-inline: true
-    QueryDataPostRequest-5:
-      type: array
-      items:
-        $ref: '#/components/schemas/DatapointsReadItem'
-      x-apim-inline: true
-    QueryDataLatestPostRequest-2:
-      type: array
-      items:
-        $ref: '#/components/schemas/DatapointsReadItemBase'
-      x-apim-inline: true
-    QueryDataPostRequest-3:
-      type: array
-      items:
-        $ref: '#/components/schemas/DatapointsReadItem'
-      x-apim-inline: true
-    QueryDataLatestPostRequest-4:
-      type: array
-      items:
-        $ref: '#/components/schemas/DatapointsReadItemBase'
-      x-apim-inline: true
-    DatapointsResponseItems:
-      type: object
-      properties:
-        items:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/DatapointsResponseItem'
-      additionalProperties: false
-    RawDatapointsResponseItems:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/RawDatapointsResponseItem'
-      additionalProperties: false
-    QueryDataFirstPostRequest-4:
+    QueryDataFirstPostRequest-3:
       type: array
       items:
         $ref: '#/components/schemas/DatapointsReadItemBase'
@@ -1596,7 +1553,50 @@ components:
       items:
         $ref: '#/components/schemas/DatapointsReadItem'
       x-apim-inline: true
+    QueryDataFirstPostRequest-4:
+      type: array
+      items:
+        $ref: '#/components/schemas/DatapointsReadItemBase'
+      x-apim-inline: true
+    QueryDataFirstPostRequest-6:
+      type: array
+      items:
+        $ref: '#/components/schemas/DatapointsReadItemBase'
+      x-apim-inline: true
+    QueryDataPostRequest-6:
+      type: array
+      items:
+        $ref: '#/components/schemas/DatapointsReadItem'
+      x-apim-inline: true
+    QueryDataLatestPostRequest-5:
+      type: array
+      items:
+        $ref: '#/components/schemas/DatapointsReadItemBase'
+      x-apim-inline: true
+    QueryDataLatestPostRequest-2:
+      type: array
+      items:
+        $ref: '#/components/schemas/DatapointsReadItemBase'
+      x-apim-inline: true
+    RawDatapointsResponseItems:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/RawDatapointsResponseItem'
+      additionalProperties: false
     QueryDataFirstPostRequest-5:
+      type: array
+      items:
+        $ref: '#/components/schemas/DatapointsReadItemBase'
+      x-apim-inline: true
+    QueryDataFirstPostRequest-2:
+      type: array
+      items:
+        $ref: '#/components/schemas/DatapointsReadItemBase'
+      x-apim-inline: true
+    QueryDataLatestPostRequest-3:
       type: array
       items:
         $ref: '#/components/schemas/DatapointsReadItemBase'

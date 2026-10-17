@@ -106,24 +106,6 @@ paths:
       - Sources
 components:
   schemas:
-    SourceModelDto:
-      type: object
-      properties:
-        items:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/SourceModel'
-      additionalProperties: false
-    SourceModel:
-      type: object
-      properties:
-        facility:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
     MessageModel:
       type: object
       properties:
@@ -138,6 +120,24 @@ components:
           type:
           - string
           - 'null'
+      additionalProperties: false
+    SourceModel:
+      type: object
+      properties:
+        facility:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    SourceModelDto:
+      type: object
+      properties:
+        items:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SourceModel'
       additionalProperties: false
   securitySchemes:
     apiKeyHeader:

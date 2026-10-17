@@ -520,16 +520,6 @@ paths:
       - Realtime
 components:
   schemas:
-    RtSubscriptionsDto:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/RtSubscriptionItems'
-        continuationToken:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
     MessageModel:
       type: object
       properties:
@@ -541,6 +531,31 @@ components:
           - string
           - 'null'
         traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    RtSubscriptionBase:
+      type: object
+      properties:
+        timeseriesId:
+          type: string
+          format: uuid
+        expiration:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        customerId:
+          type: string
+          format: uuid
+      additionalProperties: false
+    RtSubscriptionsDto:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/RtSubscriptionItems'
+        continuationToken:
           type:
           - string
           - 'null'
@@ -577,21 +592,6 @@ components:
           type:
           - string
           - 'null'
-      additionalProperties: false
-    RtSubscriptionBase:
-      type: object
-      properties:
-        timeseriesId:
-          type: string
-          format: uuid
-        expiration:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        customerId:
-          type: string
-          format: uuid
       additionalProperties: false
     RtSubscriptionItems:
       type: object

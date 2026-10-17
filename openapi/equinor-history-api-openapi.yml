@@ -228,6 +228,50 @@ paths:
       - History
 components:
   schemas:
+    MetadataChangesResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/MetadataChangesData'
+      additionalProperties: false
+    MessageModel:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+        message:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    MetadataChangesData:
+      type: object
+      properties:
+        items:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/MetadataChangesItem'
+      additionalProperties: false
+    DocumentPropertyChange:
+      required:
+      - from
+      - to
+      type: object
+      properties:
+        from:
+          minLength: 1
+          type: string
+        to:
+          minLength: 1
+          type: string
+      additionalProperties: false
     MetadataChangesItem:
       type: object
       properties:
@@ -246,50 +290,6 @@ components:
           - 'null'
           additionalProperties:
             $ref: '#/components/schemas/DocumentPropertyChange'
-      additionalProperties: false
-    MessageModel:
-      type: object
-      properties:
-        statusCode:
-          type: integer
-          format: int32
-        message:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    DocumentPropertyChange:
-      required:
-      - from
-      - to
-      type: object
-      properties:
-        from:
-          minLength: 1
-          type: string
-        to:
-          minLength: 1
-          type: string
-      additionalProperties: false
-    MetadataChangesResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/MetadataChangesData'
-      additionalProperties: false
-    MetadataChangesData:
-      type: object
-      properties:
-        items:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/MetadataChangesItem'
       additionalProperties: false
   securitySchemes:
     apiKeyHeader:

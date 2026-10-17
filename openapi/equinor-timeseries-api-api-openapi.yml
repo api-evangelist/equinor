@@ -1043,6 +1043,149 @@ paths:
       - Timeseries API
 components:
   schemas:
+    TimeseriesPutRequestModel:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        unit:
+          type:
+          - string
+          - 'null'
+        step:
+          type:
+          - boolean
+          - 'null'
+        externalId:
+          type:
+          - string
+          - 'null'
+        assetId:
+          type:
+          - string
+          - 'null'
+        facility:
+          type:
+          - string
+          - 'null'
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      additionalProperties: false
+    TimeseriesPatchRequestModel:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        unit:
+          type:
+          - string
+          - 'null'
+        step:
+          type:
+          - boolean
+          - 'null'
+        externalId:
+          type:
+          - string
+          - 'null'
+        assetId:
+          type:
+          - string
+          - 'null'
+        facility:
+          type:
+          - string
+          - 'null'
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+      additionalProperties: false
+    TimeseriesRequestModel:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        unit:
+          type:
+          - string
+          - 'null'
+        step:
+          type:
+          - boolean
+          - 'null'
+        externalId:
+          type:
+          - string
+          - 'null'
+        assetId:
+          type:
+          - string
+          - 'null'
+        facility:
+          type:
+          - string
+          - 'null'
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      additionalProperties: false
+    MessageModel:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+        message:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    TimeseriesResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/TimeseriesList'
+        links:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Hyperlink'
+      additionalProperties: false
     TimeseriesItem:
       type: object
       properties:
@@ -1100,172 +1243,6 @@ components:
             - string
             - 'null'
       additionalProperties: false
-    TimeseriesRequestModel:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-        description:
-          type:
-          - string
-          - 'null'
-        unit:
-          type:
-          - string
-          - 'null'
-        step:
-          type:
-          - boolean
-          - 'null'
-        externalId:
-          type:
-          - string
-          - 'null'
-        assetId:
-          type:
-          - string
-          - 'null'
-        facility:
-          type:
-          - string
-          - 'null'
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type:
-            - string
-            - 'null'
-      additionalProperties: false
-    TimeseriesResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/TimeseriesList'
-        links:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/Hyperlink'
-      additionalProperties: false
-    MessageModel:
-      type: object
-      properties:
-        statusCode:
-          type: integer
-          format: int32
-        message:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    TimeseriesPutRequestModel:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-        description:
-          type:
-          - string
-          - 'null'
-        unit:
-          type:
-          - string
-          - 'null'
-        step:
-          type:
-          - boolean
-          - 'null'
-        externalId:
-          type:
-          - string
-          - 'null'
-        assetId:
-          type:
-          - string
-          - 'null'
-        facility:
-          type:
-          - string
-          - 'null'
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type:
-            - string
-            - 'null'
-      additionalProperties: false
-    TimeseriesList:
-      type: object
-      properties:
-        items:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/TimeseriesItem'
-      additionalProperties: false
-    Hyperlink:
-      type: object
-      properties:
-        rel:
-          type:
-          - string
-          - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-          format: uri
-      additionalProperties: false
-    TimeseriesPatchRequestModel:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-        description:
-          type:
-          - string
-          - 'null'
-        unit:
-          type:
-          - string
-          - 'null'
-        step:
-          type:
-          - boolean
-          - 'null'
-        externalId:
-          type:
-          - string
-          - 'null'
-        assetId:
-          type:
-          - string
-          - 'null'
-        facility:
-          type:
-          - string
-          - 'null'
-        metadata:
-          type: object
-          additionalProperties:
-            type: string
-      additionalProperties: false
     TimeseriesPagedResponse:
       type: object
       properties:
@@ -1286,6 +1263,29 @@ components:
           type:
           - string
           - 'null'
+      additionalProperties: false
+    Hyperlink:
+      type: object
+      properties:
+        rel:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+          format: uri
+      additionalProperties: false
+    TimeseriesList:
+      type: object
+      properties:
+        items:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/TimeseriesItem'
       additionalProperties: false
   securitySchemes:
     apiKeyHeader:

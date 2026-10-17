@@ -410,16 +410,6 @@ paths:
       - IMS Export Subscriptions API
 components:
   schemas:
-    SubscriptionCompleteItems:
-      type: object
-      properties:
-        items:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/SubscriptionCompleteModel'
-      additionalProperties: false
     MessageModel:
       type: object
       properties:
@@ -431,49 +421,6 @@ components:
           - string
           - 'null'
         traceId:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    SubscriptionCreateModel:
-      type: object
-      properties:
-        uId:
-          type:
-          - string
-          - 'null'
-        name:
-          type:
-          - string
-          - 'null'
-        systemId:
-          type:
-          - string
-          - 'null'
-        terminal:
-          type:
-          - string
-          - 'null'
-        backfillTo:
-          type:
-          - string
-          - 'null'
-          format: date-time
-      additionalProperties: false
-    SubscriptionsCompleteDto:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/SubscriptionCompleteItems'
-        errors:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type:
-            - string
-            - 'null'
-        continuationToken:
           type:
           - string
           - 'null'
@@ -571,6 +518,59 @@ components:
           - 'null'
           format: date-time
         rtLastExpirationDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+      additionalProperties: false
+    SubscriptionCompleteItems:
+      type: object
+      properties:
+        items:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SubscriptionCompleteModel'
+      additionalProperties: false
+    SubscriptionsCompleteDto:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/SubscriptionCompleteItems'
+        errors:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+        continuationToken:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    SubscriptionCreateModel:
+      type: object
+      properties:
+        uId:
+          type:
+          - string
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+        systemId:
+          type:
+          - string
+          - 'null'
+        terminal:
+          type:
+          - string
+          - 'null'
+        backfillTo:
           type:
           - string
           - 'null'

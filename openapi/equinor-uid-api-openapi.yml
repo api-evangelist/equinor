@@ -353,60 +353,20 @@ paths:
     - url: https://api-ncc.gateway.equinor.com/plant/ims-metadata
 components:
   schemas:
-    SubscriptionCompleteItems:
-      type: object
-      properties:
-        items:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/SubscriptionCompleteModel'
-      additionalProperties: false
-    MessageModel:
-      type: object
-      properties:
-        statusCode:
-          type: integer
-          format: int32
-        message:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    UidPostRequest-1:
-      type: array
-      items:
-        $ref: '#/components/schemas/SubscriptionSearchRequestModel'
-      x-apim-inline: true
-    UidPostRequest-2:
-      type: array
-      items:
-        $ref: '#/components/schemas/SubscriptionSearchRequestModel'
-      x-apim-inline: true
-    SubscriptionsCompleteDto:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/SubscriptionCompleteItems'
-        errors:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type:
-            - string
-            - 'null'
-        continuationToken:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
     UidPostRequest:
+      type: array
+      items:
+        $ref: '#/components/schemas/SubscriptionSearchRequestModel'
+      x-apim-inline: true
+    SubscriptionSearchRequestModel:
+      type: object
+      properties:
+        uId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    UidPostRequest-2:
       type: array
       items:
         $ref: '#/components/schemas/SubscriptionSearchRequestModel'
@@ -509,33 +469,54 @@ components:
           - 'null'
           format: date-time
       additionalProperties: false
-    SubscriptionSearchRequestModel:
+    SubscriptionCompleteItems:
       type: object
       properties:
-        uId:
+        items:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SubscriptionCompleteModel'
+      additionalProperties: false
+    SubscriptionsCompleteDto:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/SubscriptionCompleteItems'
+        errors:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+        continuationToken:
           type:
           - string
           - 'null'
       additionalProperties: false
-    ErrorDetails:
+    MessageModel:
       type: object
       properties:
         statusCode:
           type: integer
-          description: The HTTP status code
           format: int32
         message:
           type:
           - string
           - 'null'
-          description: The error message
         traceId:
           type:
           - string
           - 'null'
-          description: Trace ID that can be used by support to determine root cause
       additionalProperties: false
-      description: Describes the error returned by the server
+    UidPostRequest-1:
+      type: array
+      items:
+        $ref: '#/components/schemas/SubscriptionSearchRequestModel'
+      x-apim-inline: true
     Hyperlink:
       type: object
       properties:
@@ -552,6 +533,20 @@ components:
           format: uri
       additionalProperties: false
       description: Holds a hyperlink to a resource and what relationship the current resource has to it
+    MetadataItemResponse_v2:
+      type: object
+      properties:
+        links:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Hyperlink'
+          description: Links that can be used to get related resources
+        data:
+          $ref: '#/components/schemas/MetadataItem_v2'
+      additionalProperties: false
+      description: Metadata list response model
     MetadataItem_v2:
       type: object
       properties:
@@ -685,20 +680,25 @@ components:
           description: The field ID
       additionalProperties: false
       description: The metadata information of a tag
-    MetadataItemResponse_v2:
+    ErrorDetails:
       type: object
       properties:
-        links:
+        statusCode:
+          type: integer
+          description: The HTTP status code
+          format: int32
+        message:
           type:
-          - array
+          - string
           - 'null'
-          items:
-            $ref: '#/components/schemas/Hyperlink'
-          description: Links that can be used to get related resources
-        data:
-          $ref: '#/components/schemas/MetadataItem_v2'
+          description: The error message
+        traceId:
+          type:
+          - string
+          - 'null'
+          description: Trace ID that can be used by support to determine root cause
       additionalProperties: false
-      description: Metadata list response model
+      description: Describes the error returned by the server
   securitySchemes:
     apiKeyHeader:
       type: apiKey

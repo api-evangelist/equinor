@@ -94,20 +94,6 @@ paths:
     - url: https://api-ncc.gateway.equinor.com/plant/ims-metadata
 components:
   schemas:
-    FacetItem:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int64
-          readOnly: true
-      additionalProperties: false
-    FacetResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/FacetList'
-      additionalProperties: false
     ProblemDetails:
       type: object
       properties:
@@ -133,6 +119,12 @@ components:
           - string
           - 'null'
       additionalProperties: {}
+    FacetResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/FacetList'
+      additionalProperties: false
     FacetList:
       type: object
       properties:
@@ -143,16 +135,13 @@ components:
           items:
             $ref: '#/components/schemas/FacetItem'
       additionalProperties: false
-    FacetItem_2:
+    FacetItem:
       type: object
       properties:
         count:
           type: integer
           format: int64
-        source:
-          type: string
-        facility:
-          type: string
+          readOnly: true
       additionalProperties: false
     MessageModel:
       type: object
@@ -168,6 +157,17 @@ components:
           type:
           - string
           - 'null'
+      additionalProperties: false
+    FacetItem_2:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int64
+        source:
+          type: string
+        facility:
+          type: string
       additionalProperties: false
   securitySchemes:
     apiKeyHeader:

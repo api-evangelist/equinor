@@ -1,8 +1,10 @@
 openapi: 3.2.0
 info:
-  title: Equinor Locations API
+  title: StormGeo Locations API
+  description: '# Introduction
+
+    The StormGeo API exposes functionality related to the weather of predefined locations, or given coordinates.'
   version: v1
-  description: 'Operations tagged Locations across 2 of this provider''s published API definitions: equinor-stormgeo-api-contract.yaml, equinor-stormgeo-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.gateway.equinor.com/stormgeo/v1
 tags:
@@ -84,8 +86,6 @@ paths:
           description: Unauthorized
         '403':
           description: Forbidden
-    servers:
-    - url: https://api.gateway.equinor.com/stormgeo/v1
   /locations/{id}:
     get:
       tags:
@@ -168,8 +168,6 @@ paths:
                 status: 0
                 detail: string
                 instance: string
-    servers:
-    - url: https://api.gateway.equinor.com/stormgeo/v1
   /locations/{id}/forecasts:
     get:
       tags:
@@ -272,8 +270,6 @@ paths:
                 status: 0
                 detail: string
                 instance: string
-    servers:
-    - url: https://api.gateway.equinor.com/stormgeo/v1
   /locations/{id}/forecasts/{forecastType}:
     get:
       tags:
@@ -376,8 +372,6 @@ paths:
                 status: 0
                 detail: string
                 instance: string
-    servers:
-    - url: https://api.gateway.equinor.com/stormgeo/v1
   /locations/{id}/threshold/{thresholdId}:
     get:
       tags:
@@ -417,8 +411,6 @@ paths:
           description: Unauthorized
         '403':
           description: Forbidden
-    servers:
-    - url: https://api.gateway.equinor.com/stormgeo/v1
 components:
   schemas:
     Forecast:
@@ -512,6 +504,3 @@ components:
           - string
           - 'null'
       additionalProperties: {}
-x-refined-from:
-- equinor-stormgeo-api-contract.yaml
-- equinor-stormgeo-openapi.yml

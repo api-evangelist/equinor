@@ -1404,6 +1404,24 @@ paths:
       - Data
 components:
   schemas:
+    RawDatapointsResponseItems:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/RawDatapointsResponseItem'
+      additionalProperties: false
+    DatapointsResponseItems:
+      type: object
+      properties:
+        items:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DatapointsResponseItem'
+      additionalProperties: false
     RawDatapointsResponseItem:
       type: object
       properties:
@@ -1440,32 +1458,6 @@ components:
           - integer
           - 'null'
           format: int32
-      additionalProperties: false
-    RawDatapointsResponseItems:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/RawDatapointsResponseItem'
-      additionalProperties: false
-    DatapointsResponseItems:
-      type: object
-      properties:
-        items:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/DatapointsResponseItem'
-      additionalProperties: false
-    DatapointsWriteRequestModel:
-      type: object
-      properties:
-        datapoints:
-          type: array
-          items:
-            $ref: '#/components/schemas/RawDatapoint'
       additionalProperties: false
     DatapointsResponseItem:
       type: object
@@ -1545,43 +1537,30 @@ components:
           - 'null'
       additionalProperties: false
       description: Datapoints return model
-    RawDatapoint:
+    RawDatapointsResponseDto:
       type: object
       properties:
-        time:
-          type: string
-          format: date-time
-        value:
-          type: number
-          format: double
-          example: 10.3
-        status:
-          type: integer
-          description: 'Status codes: https://github.com/equinor/OmniaPlant/wiki/Timeseries-Data#status-codes'
-          format: int32
-          example: 192
-      additionalProperties: false
-    WriteDatapointsItem:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        datapoints:
-          type: array
-          items:
-            $ref: '#/components/schemas/RawDatapoint'
-      additionalProperties: false
-    DatapointItemsWriteRequestModel:
-      type: object
-      properties:
-        items:
+        statusCode:
           type:
-          - array
+          - integer
           - 'null'
-          items:
-            $ref: '#/components/schemas/WriteDatapointsItem'
+          format: int32
+        message:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        data:
+          $ref: '#/components/schemas/RawDatapointsResponseItems'
+        continuationToken:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
+      description: Datapoints return model
     Datapoint:
       type: object
       properties:
@@ -1622,30 +1601,51 @@ components:
           type: number
           format: double
       additionalProperties: false
-    RawDatapointsResponseDto:
+    RawDatapoint:
       type: object
       properties:
-        statusCode:
-          type:
-          - integer
-          - 'null'
+        time:
+          type: string
+          format: date-time
+        value:
+          type: number
+          format: double
+          example: 10.3
+        status:
+          type: integer
+          description: 'Status codes: https://github.com/equinor/OmniaPlant/wiki/Timeseries-Data#status-codes'
           format: int32
-        message:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-        data:
-          $ref: '#/components/schemas/RawDatapointsResponseItems'
-        continuationToken:
-          type:
-          - string
-          - 'null'
+          example: 192
       additionalProperties: false
-      description: Datapoints return model
+    DatapointsWriteRequestModel:
+      type: object
+      properties:
+        datapoints:
+          type: array
+          items:
+            $ref: '#/components/schemas/RawDatapoint'
+      additionalProperties: false
+    DatapointItemsWriteRequestModel:
+      type: object
+      properties:
+        items:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/WriteDatapointsItem'
+      additionalProperties: false
+    WriteDatapointsItem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        datapoints:
+          type: array
+          items:
+            $ref: '#/components/schemas/RawDatapoint'
+      additionalProperties: false
   securitySchemes:
     apiKeyHeader:
       type: apiKey

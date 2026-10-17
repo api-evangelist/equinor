@@ -1,8 +1,10 @@
 openapi: 3.2.0
 info:
-  title: Equinor Weather API
+  title: StormGeo Weather API
+  description: '# Introduction
+
+    The StormGeo API exposes functionality related to the weather of predefined locations, or given coordinates.'
   version: v1
-  description: 'Operations tagged Weather across 2 of this provider''s published API definitions: equinor-stormgeo-api-contract.yaml, equinor-stormgeo-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.gateway.equinor.com/stormgeo/v1
 tags:
@@ -117,8 +119,6 @@ paths:
                 status: 0
                 detail: string
                 instance: string
-    servers:
-    - url: https://api.gateway.equinor.com/stormgeo/v1
   /forecasts/{forecastType}:
     get:
       tags:
@@ -255,10 +255,33 @@ paths:
                 status: 0
                 detail: string
                 instance: string
-    servers:
-    - url: https://api.gateway.equinor.com/stormgeo/v1
 components:
   schemas:
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
     Forecast:
       type: object
       properties:
@@ -289,31 +312,3 @@ components:
           additionalProperties:
             type: string
       additionalProperties: false
-    ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
-x-refined-from:
-- equinor-stormgeo-api-contract.yaml
-- equinor-stormgeo-openapi.yml

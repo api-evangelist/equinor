@@ -573,14 +573,6 @@ paths:
     - url: https://api-ncc.gateway.equinor.com/plant/timeseries
 components:
   schemas:
-    SubscriptionItem:
-      type: object
-      properties:
-        facility:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
     MessageModel:
       type: object
       properties:
@@ -596,11 +588,13 @@ components:
           - string
           - 'null'
       additionalProperties: false
-    SubscriptionListResponse:
+    SubscriptionItem:
       type: object
       properties:
-        data:
-          $ref: '#/components/schemas/SubscriptionList'
+        facility:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
     DestinationSetModel:
       required:
@@ -610,6 +604,12 @@ components:
         connectionString:
           minLength: 1
           type: string
+      additionalProperties: false
+    SubscriptionListResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/SubscriptionList'
       additionalProperties: false
     SubscriptionList:
       type: object
@@ -621,6 +621,36 @@ components:
           items:
             $ref: '#/components/schemas/SubscriptionItem'
       additionalProperties: false
+    StreamingSubscriptionsPostRequest-1:
+      type: array
+      items:
+        $ref: '#/components/schemas/SubscriptionRequestModel'
+      x-apim-inline: true
+    StreamingSubscriptionsPostRequest-5:
+      type: array
+      items:
+        $ref: '#/components/schemas/SubscriptionRequestModel'
+      x-apim-inline: true
+    StreamingSubscriptionsPostRequest-2:
+      type: array
+      items:
+        $ref: '#/components/schemas/SubscriptionRequestModel'
+      x-apim-inline: true
+    StreamingSubscriptionsPostRequest:
+      type: array
+      items:
+        $ref: '#/components/schemas/SubscriptionRequestModel'
+      x-apim-inline: true
+    StreamingSubscriptionsPostRequest-3:
+      type: array
+      items:
+        $ref: '#/components/schemas/SubscriptionRequestModel'
+      x-apim-inline: true
+    StreamingSubscriptionsPostRequest-4:
+      type: array
+      items:
+        $ref: '#/components/schemas/SubscriptionRequestModel'
+      x-apim-inline: true
     SubscriptionItem_2:
       type: object
       properties:
@@ -631,36 +661,6 @@ components:
           type: string
           format: uuid
       additionalProperties: false
-    StreamingSubscriptionsPostRequest-5:
-      type: array
-      items:
-        $ref: '#/components/schemas/SubscriptionRequestModel'
-      x-apim-inline: true
-    StreamingSubscriptionsPostRequest:
-      type: array
-      items:
-        $ref: '#/components/schemas/SubscriptionRequestModel'
-      x-apim-inline: true
-    StreamingSubscriptionsPostRequest-4:
-      type: array
-      items:
-        $ref: '#/components/schemas/SubscriptionRequestModel'
-      x-apim-inline: true
-    StreamingSubscriptionsPostRequest-1:
-      type: array
-      items:
-        $ref: '#/components/schemas/SubscriptionRequestModel'
-      x-apim-inline: true
-    StreamingSubscriptionsPostRequest-3:
-      type: array
-      items:
-        $ref: '#/components/schemas/SubscriptionRequestModel'
-      x-apim-inline: true
-    StreamingSubscriptionsPostRequest-2:
-      type: array
-      items:
-        $ref: '#/components/schemas/SubscriptionRequestModel'
-      x-apim-inline: true
     DestinationSetModel_2:
       type: object
       properties:

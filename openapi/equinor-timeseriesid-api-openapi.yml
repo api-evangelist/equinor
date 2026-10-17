@@ -125,33 +125,20 @@ paths:
       - Timeseriesid
 components:
   schemas:
-    SubscriptionsCompleteDto:
+    MessageModel:
       type: object
       properties:
-        data:
-          $ref: '#/components/schemas/SubscriptionCompleteItems'
-        errors:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type:
-            - string
-            - 'null'
-        continuationToken:
+        statusCode:
+          type: integer
+          format: int32
+        message:
           type:
           - string
           - 'null'
-      additionalProperties: false
-    SubscriptionCompleteItems:
-      type: object
-      properties:
-        items:
+        traceId:
           type:
-          - array
+          - string
           - 'null'
-          items:
-            $ref: '#/components/schemas/SubscriptionCompleteModel'
       additionalProperties: false
     SubscriptionCompleteModel:
       type: object
@@ -251,17 +238,30 @@ components:
           - 'null'
           format: date-time
       additionalProperties: false
-    MessageModel:
+    SubscriptionCompleteItems:
       type: object
       properties:
-        statusCode:
-          type: integer
-          format: int32
-        message:
+        items:
           type:
-          - string
+          - array
           - 'null'
-        traceId:
+          items:
+            $ref: '#/components/schemas/SubscriptionCompleteModel'
+      additionalProperties: false
+    SubscriptionsCompleteDto:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/SubscriptionCompleteItems'
+        errors:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+        continuationToken:
           type:
           - string
           - 'null'
