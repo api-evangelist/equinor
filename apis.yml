@@ -191,7 +191,8 @@ apis:
   description: The Create API from Equinor — 1 operation(s) for create.
   humanURL: https://api.equinor.com/api-details#api=iiot-ae-api-v1
   baseURL: https://api.gateway.equinor.com/iiot/ae
-  tags:
+  tags: []
+  tags_raw:
   - Create
   properties:
   - type: OpenAPI
@@ -320,6 +321,8 @@ apis:
   humanURL: https://api.equinor.com/api-details#api=iiot-ae-api-v1
   baseURL: https://api.gateway.equinor.com/iiot/ae
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
@@ -448,6 +451,8 @@ apis:
   humanURL: https://api.equinor.com/api-details#api=iiot-ae-api-v1
   baseURL: https://api.gateway.equinor.com/iiot/ae
   tags:
+  - Facilities
+  tags_raw:
   - Facility
   properties:
   - type: OpenAPI
@@ -769,6 +774,8 @@ apis:
   humanURL: https://api.equinor.com/api-details#api=iiot-ae-api-v1
   baseURL: https://api.gateway.equinor.com/iiot/ae
   tags:
+  - Location
+  tags_raw:
   - Locations
   properties:
   - type: OpenAPI
@@ -1025,6 +1032,8 @@ apis:
   humanURL: https://api.equinor.com/api-details#api=iiot-ae-api-v1
   baseURL: https://api.gateway.equinor.com/iiot/ae
   tags:
+  - Real-Time
+  tags_raw:
   - Realtime
   properties:
   - type: OpenAPI
