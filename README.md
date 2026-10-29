@@ -64,5 +64,203 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Equinor is a company surfaced via the API Evangelist harvest backlog (source: spectral-ruleset-github) and added to the network as a stub for full-pipeline profiling.
-- https://www.equinor.com/
+Equinor ASA is an international energy company headquartered in Norway, with around 25,000 employees and offices in more than 20 countries (per equinor.com). It operates oil, gas, renewables and low-carbon businesses, runs a public Equinor API portal at api.equinor.com (built on Azure API Management) listing its APIs and products, publishes REST API guidelines in its api-strategy GitHub repository, shares open energy data, and maintains a large open-source presence at github.com/equinor.
+
+**Areas:** Company · Energy · Oil and Gas · Renewables · Norway · Open Data · Open Source
+
+## Equinor on APIs.io
+
+Everything profiled for Equinor is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/equinor/](https://apis.io/providers/equinor/)** — or go straight to one of the APIs or properties below.
+
+### APIs (26)
+
+- [Equinor Allowed Locations API](https://apis.io/apis/equinor/equinor-allowed-locations-api/) — The Allowed Locations API from Equinor — 1 operation(s) for allowed locations.
+- [Equinor Create API](https://apis.io/apis/equinor/equinor-create-api/) — The Create API from Equinor — 1 operation(s) for create.
+- [Equinor Data API](https://apis.io/apis/equinor/equinor-data-api/) — The Data API from Equinor — 5 operation(s) for data.
+- [Equinor Events API](https://apis.io/apis/equinor/equinor-events-api/) — The Events API from Equinor — 2 operation(s) for events.
+- [Equinor Facets API](https://apis.io/apis/equinor/equinor-facets-api/) — The Facets API from Equinor — 1 operation(s) for facets.
+- [Equinor Facility API](https://apis.io/apis/equinor/equinor-facility-api/) — The Facility API from Equinor — 2 operation(s) for facility.
+- [Equinor Getoradd API](https://apis.io/apis/equinor/equinor-getoradd-api/) — The Getoradd API from Equinor — 1 operation(s) for getoradd.
+- [Equinor History API](https://apis.io/apis/equinor/equinor-history-api/) — The History API from Equinor — 2 operation(s) for history.
+- [Equinor IMS Export Subscriptions API](https://apis.io/apis/equinor/equinor-ims-export-subscriptions-api-api/) — The IMS Export Subscriptions API API from Equinor — 2 operation(s) for ims export subscriptions api.
+- [Equinor IMS Metadata API](https://apis.io/apis/equinor/equinor-ims-metadata-api-api/) — The IMS Metadata API API from Equinor — 3 operation(s) for ims metadata api.
+- [Equinor Locations API](https://apis.io/apis/equinor/equinor-locations-api/) — The Locations API from Equinor — 5 operation(s) for locations.
+- [Equinor Parameter Sets API](https://apis.io/apis/equinor/equinor-parameter-sets-api/) — The Parameter Sets API from Equinor — 2 operation(s) for parameter sets.
+- [Equinor Parameters API](https://apis.io/apis/equinor/equinor-parameters-api/) — The Parameters API from Equinor — 2 operation(s) for parameters.
+- [Equinor Query API](https://apis.io/apis/equinor/equinor-query-api/) — The Query API from Equinor — 3 operation(s) for query.
+- [Equinor Realtime API](https://apis.io/apis/equinor/equinor-realtime-api/) — The Realtime API from Equinor — 4 operation(s) for realtime.
+- [Equinor Search API](https://apis.io/apis/equinor/equinor-search-api/) — The Search API from Equinor — 4 operation(s) for search.
+- [Equinor Sources API](https://apis.io/apis/equinor/equinor-sources-api/) — The Sources API from Equinor — 1 operation(s) for sources.
+- [Equinor Streaming API](https://apis.io/apis/equinor/equinor-streaming-api/) — The Streaming API from Equinor — 4 operation(s) for streaming.
+- [Equinor Table A1s API](https://apis.io/apis/equinor/equinor-table-a1s-api/) — The Table A1s API from Equinor — 3 operation(s) for table a1s.
+- [Equinor Threshold API](https://apis.io/apis/equinor/equinor-threshold-api/) — The Threshold API from Equinor — 2 operation(s) for threshold.
+- [Equinor Timeseries API](https://apis.io/apis/equinor/equinor-timeseries-api-api/) — The Timeseries API API from Equinor — 2 operation(s) for timeseries api.
+- [Equinor Timeseriesid API](https://apis.io/apis/equinor/equinor-timeseriesid-api/) — The Timeseriesid API from Equinor — 1 operation(s) for timeseriesid.
+- [Equinor Uid API](https://apis.io/apis/equinor/equinor-uid-api/) — The Uid API from Equinor — 3 operation(s) for uid.
+- [Equinor Unit Profiles API](https://apis.io/apis/equinor/equinor-unit-profiles-api/) — The Unit Profiles API from Equinor — 2 operation(s) for unit profiles.
+- [Equinor Units API](https://apis.io/apis/equinor/equinor-units-api/) — The Units API from Equinor — 2 operation(s) for units.
+- [Equinor Weather API](https://apis.io/apis/equinor/equinor-weather-api/) — The Weather API from Equinor — 2 operation(s) for weather.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [equinor](https://apis.io/servers/equinor/equinor/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Equinor Agentic Access](https://apis.io/agentic-access/equinor/equinor-agentic-access/)
+
+#### JSON Schema (27)
+
+The data models the API reads and writes.
+
+- [Allowedlocations](https://apis.io/schemas/equinor/equinor-allowedlocations/)
+- [CountDto](https://apis.io/schemas/equinor/equinor-count-dto/)
+- [DatapointsResponseDto](https://apis.io/schemas/equinor/equinor-datapoints-response-dto/)
+- [DestinationSetModel](https://apis.io/schemas/equinor/equinor-destination-set-model/)
+- [EventDto](https://apis.io/schemas/equinor/equinor-event-dto/)
+- [FacetResponse](https://apis.io/schemas/equinor/equinor-facet-response/)
+- [Forecast](https://apis.io/schemas/equinor/equinor-forecast/)
+- [MessageModel](https://apis.io/schemas/equinor/equinor-message-model/)
+- [MetadataItemResponse_v2](https://apis.io/schemas/equinor/equinor-metadata-item-response-v2/)
+- [MetadataPagedResponse_v2](https://apis.io/schemas/equinor/equinor-metadata-paged-response-v2/)
+- [Point](https://apis.io/schemas/equinor/equinor-point/)
+- [PostRequest-27](https://apis.io/schemas/equinor/equinor-post-request-27/)
+- [PostRequest-28](https://apis.io/schemas/equinor/equinor-post-request-28/)
+- [PostRequest-29](https://apis.io/schemas/equinor/equinor-post-request-29/)
+- [RawDatapointsResponseDto](https://apis.io/schemas/equinor/equinor-raw-datapoints-response-dto/)
+- [RtSubscriptionsDto](https://apis.io/schemas/equinor/equinor-rt-subscriptions-dto/)
+- [SourceModelDto](https://apis.io/schemas/equinor/equinor-source-model-dto/)
+- [SubscriptionCreateModel](https://apis.io/schemas/equinor/equinor-subscription-create-model/)
+- [SubscriptionListResponse](https://apis.io/schemas/equinor/equinor-subscription-list-response/)
+- [SubscriptionsCompleteDto](https://apis.io/schemas/equinor/equinor-subscriptions-complete-dto/)
+- [TableA1Response](https://apis.io/schemas/equinor/equinor-table-a1-response/)
+- [TableA1SummaryResponseTableA1ListResponse](https://apis.io/schemas/equinor/equinor-table-a1-summary-response-table-a1-list-response/)
+- [TimeseriesPagedResponse](https://apis.io/schemas/equinor/equinor-timeseries-paged-response/)
+- [TimeseriesPatchRequestModel](https://apis.io/schemas/equinor/equinor-timeseries-patch-request-model/)
+- [TimeseriesPutRequestModel](https://apis.io/schemas/equinor/equinor-timeseries-put-request-model/)
+- …and 2 more published on APIs.io
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Equinor Context](https://apis.io/jsonld/equinor/equinor-context/)
+
+#### Overlays (6)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Equinor Alarm Events Overlay](https://apis.io/overlays/equinor/equinor-alarm-events-overlay/)
+- [Equinor Bluebook Overlay](https://apis.io/overlays/equinor/equinor-bluebook-overlay/)
+- [Equinor Ims Export Subscriptions Overlay](https://apis.io/overlays/equinor/equinor-ims-export-subscriptions-overlay/)
+- [Equinor Ims Metadata Overlay](https://apis.io/overlays/equinor/equinor-ims-metadata-overlay/)
+- [Equinor Stormgeo Overlay](https://apis.io/overlays/equinor/equinor-stormgeo-overlay/)
+- [Equinor Timeseries Overlay](https://apis.io/overlays/equinor/equinor-timeseries-overlay/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Equinor API Rules](https://apis.io/rules/equinor/equinor-rules/)
+- [Equinor — stormgeo api docs rules](https://apis.io/rules/equinor/equinor-stormgeo-api-docs-spectral-rules/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Equinor Authentication](https://apis.io/security/equinor/equinor-authentication/)
+- [Equinor Domain Security](https://apis.io/security/equinor/equinor-domain-security/)
+- [Equinor Vulnerability Disclosure](https://apis.io/security/equinor/equinor-vulnerability-disclosure/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Equinor Scopes](https://apis.io/scopes/equinor/equinor-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Equinor Plans Pricing](https://apis.io/plans/equinor/equinor-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Equinor Rate Limits](https://apis.io/rate-limits/equinor/equinor-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.equinor.com/)
+- [Documentation](https://docs.equinor.com/)
+- [API reference](https://api.equinor.com/apis)
+- [Support](https://www.equinor.com/about-us/contact-us)
+- [Terms of service](https://www.equinor.com/about-us/terms-and-conditions)
+- [Privacy policy](https://www.equinor.com/about-us/privacy-policy)
+- [GitHub](https://github.com/equinor)
+
+## API Evangelist rating
+
+**Kin Score 57.2** — strong · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 63.4 |
+| Contract governance | 35.6 |
+| Operational transparency | 39.5 |
+| Developer ergonomics | 58.9 |
+| Access clarity | 34.2 |
+
+**Agent readiness 32.5** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | yes |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | — |
+
+**Regulatory alignment 39.3** — Energy & Utilities
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/equinor/](https://apis.io/providers/equinor/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Equinor: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/equinor/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
