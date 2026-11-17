@@ -72,13 +72,12 @@ Equinor ASA is an international energy company headquartered in Norway, with aro
 
 Everything profiled for Equinor is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/equinor/](https://apis.io/providers/equinor/)** — or go straight to one of the APIs or properties below.
 
-### APIs (26)
+### APIs (37)
 
 - [Equinor Allowed Locations API](https://apis.io/apis/equinor/equinor-allowed-locations-api/) — The Allowed Locations API from Equinor — 1 operation(s) for allowed locations.
 - [Equinor Create API](https://apis.io/apis/equinor/equinor-create-api/) — The Create API from Equinor — 1 operation(s) for create.
 - [Equinor Data API](https://apis.io/apis/equinor/equinor-data-api/) — The Data API from Equinor — 5 operation(s) for data.
 - [Equinor Events API](https://apis.io/apis/equinor/equinor-events-api/) — The Events API from Equinor — 2 operation(s) for events.
-- [Equinor Facets API](https://apis.io/apis/equinor/equinor-facets-api/) — The Facets API from Equinor — 1 operation(s) for facets.
 - [Equinor Facility API](https://apis.io/apis/equinor/equinor-facility-api/) — The Facility API from Equinor — 2 operation(s) for facility.
 - [Equinor Getoradd API](https://apis.io/apis/equinor/equinor-getoradd-api/) — The Getoradd API from Equinor — 1 operation(s) for getoradd.
 - [Equinor History API](https://apis.io/apis/equinor/equinor-history-api/) — The History API from Equinor — 2 operation(s) for history.
@@ -89,17 +88,29 @@ Everything profiled for Equinor is published on APIs.io rather than in this repo
 - [Equinor Parameters API](https://apis.io/apis/equinor/equinor-parameters-api/) — The Parameters API from Equinor — 2 operation(s) for parameters.
 - [Equinor Query API](https://apis.io/apis/equinor/equinor-query-api/) — The Query API from Equinor — 3 operation(s) for query.
 - [Equinor Realtime API](https://apis.io/apis/equinor/equinor-realtime-api/) — The Realtime API from Equinor — 4 operation(s) for realtime.
-- [Equinor Search API](https://apis.io/apis/equinor/equinor-search-api/) — The Search API from Equinor — 4 operation(s) for search.
 - [Equinor Sources API](https://apis.io/apis/equinor/equinor-sources-api/) — The Sources API from Equinor — 1 operation(s) for sources.
-- [Equinor Streaming API](https://apis.io/apis/equinor/equinor-streaming-api/) — The Streaming API from Equinor — 4 operation(s) for streaming.
 - [Equinor Table A1s API](https://apis.io/apis/equinor/equinor-table-a1s-api/) — The Table A1s API from Equinor — 3 operation(s) for table a1s.
 - [Equinor Threshold API](https://apis.io/apis/equinor/equinor-threshold-api/) — The Threshold API from Equinor — 2 operation(s) for threshold.
 - [Equinor Timeseries API](https://apis.io/apis/equinor/equinor-timeseries-api-api/) — The Timeseries API API from Equinor — 2 operation(s) for timeseries api.
 - [Equinor Timeseriesid API](https://apis.io/apis/equinor/equinor-timeseriesid-api/) — The Timeseriesid API from Equinor — 1 operation(s) for timeseriesid.
-- [Equinor Uid API](https://apis.io/apis/equinor/equinor-uid-api/) — The Uid API from Equinor — 3 operation(s) for uid.
 - [Equinor Unit Profiles API](https://apis.io/apis/equinor/equinor-unit-profiles-api/) — The Unit Profiles API from Equinor — 2 operation(s) for unit profiles.
 - [Equinor Units API](https://apis.io/apis/equinor/equinor-units-api/) — The Units API from Equinor — 2 operation(s) for units.
 - [Equinor Weather API](https://apis.io/apis/equinor/equinor-weather-api/) — The Weather API from Equinor — 2 operation(s) for weather.
+- [Equinor Log Recognition API](https://apis.io/apis/equinor/equinor-log-recognition-api/) — The log-recognition API from Equinor — 2 operation(s) for log-recognition.
+- [Equinor Marker API](https://apis.io/apis/equinor/equinor-marker-api/) — The Marker API from Equinor — 4 operation(s) for marker.
+- [Equinor PPFGDataset v3 API](https://apis.io/apis/equinor/equinor-ppfgdataset-v3-api/) — The PPFGDataset v3 API from Equinor — 9 operation(s) for ppfgdataset v3.
+- [Equinor Trajectory v3 API](https://apis.io/apis/equinor/equinor-trajectory-v3-api/) — The Trajectory v3 API from Equinor — 9 operation(s) for trajectory v3.
+- [Equinor Well API](https://apis.io/apis/equinor/equinor-well-api/) — The Well API from Equinor — 4 operation(s) for well.
+- [Equinor Wellbore API](https://apis.io/apis/equinor/equinor-wellbore-api/) — The Wellbore API from Equinor — 4 operation(s) for wellbore.
+- [Equinor Wellbore DDMS API](https://apis.io/apis/equinor/equinor-wellbore-ddms-api/) — The Wellbore DDMS API from Equinor — 3 operation(s) for wellbore ddms.
+- [Equinor Wellbore IntervalSet API](https://apis.io/apis/equinor/equinor-wellbore-intervalset-api/) — The Wellbore IntervalSet API from Equinor — 4 operation(s) for wellbore intervalset.
+- [Equinor WellLog Acquisition API](https://apis.io/apis/equinor/equinor-welllog-acquisition-api/) — The WellLog Acquisition API from Equinor — 4 operation(s) for welllog acquisition.
+- [Equinor Well Log API](https://apis.io/apis/equinor/equinor-welllog-api/) — The WellLog API from Equinor — 11 operation(s) for welllog.
+- [Equinor WellPressureTestRawMeasurement v3 API](https://apis.io/apis/equinor/equinor-wellpressuretestrawmeasurement-v3-api/) — The WellPressureTestRawMeasurement v3 API from Equinor — 9 operation(s) for wellpressuretestrawmeasurement v3.
+- [Equinor Facets API](https://apis.io/apis/equinor/equinor-facets-api/) — The Facets API from Equinor — 1 operation(s) for facets.
+- [Equinor Search API](https://apis.io/apis/equinor/equinor-search-api/) — The Search API from Equinor — 4 operation(s) for search.
+- [Equinor Streaming API](https://apis.io/apis/equinor/equinor-streaming-api/) — The Streaming API from Equinor — 4 operation(s) for streaming.
+- [Equinor Uid API](https://apis.io/apis/equinor/equinor-uid-api/) — The Uid API from Equinor — 3 operation(s) for uid.
 
 ### Published properties
 
@@ -154,7 +165,7 @@ Linked-data contexts for the provider's vocabulary.
 
 - [Equinor Context](https://apis.io/jsonld/equinor/equinor-context/)
 
-#### Overlays (6)
+#### Overlays (7)
 
 OpenAPI overlays, including conversational phrasing for each operation.
 
@@ -162,6 +173,7 @@ OpenAPI overlays, including conversational phrasing for each operation.
 - [Equinor Bluebook Overlay](https://apis.io/overlays/equinor/equinor-bluebook-overlay/)
 - [Equinor Ims Export Subscriptions Overlay](https://apis.io/overlays/equinor/equinor-ims-export-subscriptions-overlay/)
 - [Equinor Ims Metadata Overlay](https://apis.io/overlays/equinor/equinor-ims-metadata-overlay/)
+- [Equinor Locations Api Certification Overlay](https://apis.io/overlays/equinor/equinor-locations-api-certification-overlay/)
 - [Equinor Stormgeo Overlay](https://apis.io/overlays/equinor/equinor-stormgeo-overlay/)
 - [Equinor Timeseries Overlay](https://apis.io/overlays/equinor/equinor-timeseries-overlay/)
 
